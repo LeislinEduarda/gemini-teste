@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planilha do Breno – aprenda a fazer sobrar dinheiro, construir patrimônio e ter paz.</title>
-    <meta name="description" content="Controle seus gastos, planeje metas e tire a ansiedade do seu dinheiro com a Planilha do Breno. Simples, visual e eficaz.">
-    <meta property="og:title" content="Planilha do Breno – Faça seu dinheiro sobrar e construa patrimônio.">
-    <meta property="og:description" content="O método simples para você organizar suas finanças, planejar metas e conquistar a paz financeira.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
-    <meta property="og:url" content="https://planilhadobreno.com">
+    <title>Comunidade Conteúdo Infinito com IA - Seu conteúdo 100% feito com IA.</title>
+    <meta name="description" content="Tudo o que você vê aqui foi criado com a Inteligência Artificial. Aprenda a gerar conteúdo de alta qualidade sem esforço.">
+    <meta property="og:title" content="Comunidade Conteúdo Infinito com IA - Seu Conteúdo 100% feito com IA">
+    <meta property="og:description" content="Aprenda a criar conteúdo de alta qualidade, de forma simples e escalável, usando a Inteligência Artificial.">
+    <meta property="og:image" content="http://googleusercontent.com/image_generation_content/0">
+    <meta property="og:url" content="https://conteudoinfinitocomia.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-bg: #F8F8F8;
             --color-text: #111;
-            --color-highlight: #28a745;
+            --color-highlight: #A083FF; /* Cor de destaque para um toque moderno/tecnológico */
             --color-border: #E0E0E0;
             --color-neutral-subtle: #F0F0F0;
             --spacing-unit: 8px;
@@ -42,6 +42,7 @@
         }
 
         h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
             line-height: 1.2;
             font-weight: 700;
         }
@@ -70,12 +71,11 @@
             transform: translateY(20px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-
         .section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Buttons */
         .btn {
             display: inline-flex;
@@ -104,8 +104,9 @@
             border-color: var(--color-text);
         }
         .btn-secondary:hover {
-            border-color: var(--color-highlight);
-            color: var(--color-highlight);
+            background-color: var(--color-text);
+            color: white;
+            border-color: var(--color-text);
         }
 
         /* Navigation */
@@ -132,8 +133,9 @@
             width: 100%;
         }
         .logo {
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
         }
         .nav-links {
             display: none;
@@ -217,21 +219,30 @@
 
         /* Hero */
         .hero {
-            padding: calc(var(--header-height) + var(--spacing-unit) * 12) 0 calc(var(--spacing-unit) * 12) 0;
+            position: relative;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
+            padding-top: var(--header-height);
+            color: white;
+            overflow: hidden;
         }
-        .hero .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(0.7);
         }
         .hero-content {
-            padding-top: calc(var(--spacing-unit) * 4);
-            max-width: 800px;
+            z-index: 1;
+            max-width: 900px;
+            padding: calc(var(--spacing-unit) * 4);
         }
         .hero-badge {
             display: inline-block;
@@ -242,80 +253,87 @@
             font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: calc(var(--spacing-unit) * 4);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-fade-in 1s ease-out forwards;
         }
         .hero-headline {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
             margin-bottom: calc(var(--spacing-unit) * 4);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-fade-in 1s ease-out 0.2s forwards;
         }
         .hero-subheadline {
             font-size: 1.25rem;
             font-weight: 400;
-            color: #555;
             margin-bottom: calc(var(--spacing-unit) * 6);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-fade-in 1s ease-out 0.4s forwards;
         }
         .hero-ctas {
             display: flex;
             flex-direction: column;
             gap: calc(var(--spacing-unit) * 2);
             margin-bottom: calc(var(--spacing-unit) * 4);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-fade-in 1s ease-out 0.6s forwards;
         }
-        .hero-trust {
+        .hero-social-metric {
             font-size: 0.875rem;
-            color: #777;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: hero-fade-in 1s ease-out 0.8s forwards;
         }
-        .hero-image {
-            margin-top: calc(var(--spacing-unit) * 8);
-            border-radius: calc(var(--spacing-unit) * 4);
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            background-color: #f0f0f0;
-            max-width: 90%;
+        @keyframes hero-fade-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
         @media (min-width: 768px) {
             .hero-headline {
-                font-size: 4rem;
+                font-size: 5rem;
             }
             .hero-subheadline {
                 font-size: 1.5rem;
             }
             .hero-ctas {
                 flex-direction: row;
+                gap: calc(var(--spacing-unit) * 4);
+                justify-content: center;
             }
         }
 
-        /* Trust Logos */
-        .trust-logos {
+        /* Credibility Logos */
+        .credibility-logos {
             padding: calc(var(--spacing-unit) * 6) 0;
             border-top: 1px solid var(--color-border);
             border-bottom: 1px solid var(--color-border);
+            background-color: white;
         }
-        .trust-logos-list {
+        .credibility-logos-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             gap: calc(var(--spacing-unit) * 6);
         }
-        .trust-logo {
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 1);
-            color: #555;
-            font-size: 0.875rem;
+        .credibility-logo {
+            height: 40px;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
         }
-        .trust-logo svg {
-            width: 24px;
-            height: 24px;
-            color: var(--color-highlight);
+        .credibility-logo:hover {
+            filter: grayscale(0%);
         }
 
         /* Features Section */
         .features-title {
             text-align: center;
             font-size: 2.5rem;
-            font-weight: 700;
             margin-bottom: calc(var(--spacing-unit) * 8);
         }
         .full-width-card {
@@ -357,40 +375,25 @@
             }
         }
 
-        /* Benefits Section */
-        .benefits-grid {
+        /* Why Choose Section */
+        .why-choose-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: calc(var(--spacing-unit) * 6);
         }
-        .benefit-item {
+        .why-choose-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
-        .benefit-icon {
-            background-color: var(--color-neutral-subtle);
-            width: 80px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            margin-bottom: calc(var(--spacing-unit) * 2);
-        }
-        .benefit-icon svg {
-            width: 40px;
-            height: 40px;
-            color: var(--color-highlight);
-        }
-        .benefit-item h4 {
+        .why-choose-item h4 {
             font-size: 1.25rem;
             margin-bottom: calc(var(--spacing-unit) * 1);
         }
 
         @media (min-width: 768px) {
-            .benefits-grid {
+            .why-choose-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
@@ -435,49 +438,10 @@
             font-weight: 600;
         }
 
-        @media (min-width: 768px) {
-            .testimonials-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Offer & Guarantee */
-        .offer-block {
-            background-color: var(--color-neutral-subtle);
-            padding: calc(var(--spacing-unit) * 8);
-            border-radius: calc(var(--spacing-unit) * 4);
-            text-align: center;
-        }
-        .offer-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: calc(var(--spacing-unit) * 4);
-        }
-        .offer-bullets {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 2);
-            font-size: 1.125rem;
-            margin-bottom: calc(var(--spacing-unit) * 4);
-        }
-        .offer-bullet {
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 2);
-        }
-        .offer-bullet svg {
-            color: var(--color-highlight);
-            width: 24px;
-            height: 24px;
-        }
-
         /* FAQ */
         .faq-title {
             text-align: center;
             font-size: 2.5rem;
-            font-weight: 700;
             margin-bottom: calc(var(--spacing-unit) * 8);
         }
         .accordion-item {
@@ -493,6 +457,7 @@
             background: none;
             border: none;
             cursor: pointer;
+            font-family: 'Poppins', sans-serif;
             font-size: 1.25rem;
             font-weight: 600;
             padding: 0;
@@ -519,60 +484,25 @@
             flex-direction: column;
             gap: calc(var(--spacing-unit) * 8);
             text-align: center;
+            background-color: var(--color-neutral-subtle);
+            padding: calc(var(--spacing-unit) * 8) 0;
         }
         .cta-left {
-            padding: calc(var(--spacing-unit) * 8) 0;
+            padding: calc(var(--spacing-unit) * 4) 0;
         }
         .cta-heading {
             font-size: 2.5rem;
-            font-weight: 700;
             margin-bottom: calc(var(--spacing-unit) * 4);
-        }
-        .cta-bullets {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 2);
-            margin-bottom: calc(var(--spacing-unit) * 4);
-            font-size: 1rem;
-            color: #555;
-        }
-        .cta-bullets li {
-            position: relative;
-            padding-left: calc(var(--spacing-unit) * 4);
-        }
-        .cta-bullets li::before {
-            content: '•';
-            color: var(--color-highlight);
-            position: absolute;
-            left: 0;
-            font-size: 1.5rem;
         }
         .cta-buttons {
             display: flex;
             flex-direction: column;
             gap: calc(var(--spacing-unit) * 2);
         }
-        .cta-right {
-            background-color: var(--color-neutral-subtle);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: calc(var(--spacing-unit) * 4);
-            overflow: hidden;
+        .cta-right img {
+            border-radius: calc(var(--spacing-unit) * 2);
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            position: relative;
         }
-        .cta-mockup {
-            transform: translateY(0);
-            transition: transform 0.4s ease-in-out;
-            max-width: 80%;
-            height: auto;
-            display: block;
-        }
-
         @media (min-width: 768px) {
             .final-cta {
                 flex-direction: row;
@@ -587,11 +517,6 @@
             }
             .cta-heading {
                 font-size: 3rem;
-            }
-            .cta-bullets {
-                flex-direction: row;
-                justify-content: flex-start;
-                gap: calc(var(--spacing-unit) * 4);
             }
         }
 
@@ -631,16 +556,16 @@
 
     <header class="header" role="navigation">
         <div class="container navbar">
-            <a href="#" class="logo">Planilha do Breno</a>
+            <a href="#" class="logo">Comunidade Conteúdo Infinito com IA</a>
             <nav class="navbar-desktop-center">
                 <ul class="nav-links">
-                    <li><a href="#como-funciona" class="nav-link">Como Funciona</a></li>
-                    <li><a href="#beneficios" class="nav-link">Benefícios</a></li>
-                    <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#why-choose" class="nav-link">Why Choose</a></li>
+                    <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                     <li><a href="#faq" class="nav-link">FAQ</a></li>
                 </ul>
             </nav>
-            <a href="#hero-cta" class="btn btn-primary nav-cta">Quero a Planilha</a>
+            <a href="#final-cta" class="btn btn-primary nav-cta">Quero fazer parte</a>
             <div class="hamburger" aria-controls="drawer-menu" aria-expanded="false" role="button" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -648,283 +573,135 @@
             </div>
         </div>
         <div class="drawer" id="drawer-menu">
-            <a href="#" class="btn btn-primary nav-cta">Quero a Planilha</a>
             <ul class="nav-links">
-                <li><a href="#como-funciona" class="nav-link">Como Funciona</a></li>
-                <li><a href="#beneficios" class="nav-link">Benefícios</a></li>
-                <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#why-choose" class="nav-link">Why Choose</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
             </ul>
+            <a href="#final-cta" class="btn btn-primary nav-cta">Quero fazer parte</a>
         </div>
     </header>
 
     <main role="main">
         <section class="hero" id="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <span class="hero-badge">Método simples, zero complicação</span>
-                    <h1 class="hero-headline">Faça sobrar dinheiro e construa patrimônio com uma planilha que você realmente usa</h1>
-                    <p class="hero-subheadline">Controle seus gastos, planeje metas e tire a ansiedade do seu dinheiro — em minutos por dia.</p>
-                    <div class="hero-ctas">
-                        <a href="#hero-cta" class="btn btn-primary">Quero a Planilha</a>
-                        <a href="#como-funciona" class="btn btn-secondary">Ver como funciona</a>
-                    </div>
-                    <p class="hero-trust">Sem mensalidade. Atualizações incluídas.</p>
+            <img src="http://googleusercontent.com/image_generation_content/0" alt="Imagem cinemática e luxuosa de uma pessoa criando conteúdo com IA" class="hero-image">
+            <div class="hero-content">
+                <span class="hero-badge">+14000 infinitos</span>
+                <h1 class="hero-headline">Seu Conteúdo 100% feito com IA</h1>
+                <p class="hero-subheadline">Tudo que você vê aqui foi criado com a Inteligência Artificial. E não, não parece IA.</p>
+                <div class="hero-ctas">
+                    <a href="#final-cta" class="btn btn-primary">Quero fazer parte</a>
+                    <a href="#features" class="btn btn-secondary">Entrar na comunidade</a>
                 </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Clean spreadsheet mockup on a laptop and phone" loading="eager">
-                </div>
+                <p class="hero-social-metric">200 mil seguidores gerados sem surtar</p>
             </div>
         </section>
 
-        <section class="trust-logos">
+        <section class="credibility-logos">
             <div class="container">
-                <ul class="trust-logos-list">
-                    <li class="trust-logo">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <span>Checkout seguro</span>
-                    </li>
-                    <li class="trust-logo">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9.75h19.5M12 21.75v-2.25m0-13.5v-2.25M12 21.75a9 9 0 01-9-9c0-1.879.742-3.676 2.05-5.004L3.75 3.75m16.5 16.5a9 9 0 009-9c0-1.879-.742-3.676-2.05-5.004L20.25 3.75M9.75 6a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM14.25 6a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM9.75 14.25a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM14.25 14.25a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
-                        </svg>
-                        <span>Pix / Cartão / Boleto</span>
-                    </li>
-                    <li class="trust-logo">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 3h.01m-6.938 4.25c-.9.18-1.8-.188-2.585-.884a2.25 2.25 0 010-3.15L7.5 7.5m9 9a2.25 2.25 0 00-3.15-3.15L12 9.75l-4.25 4.25m9 9a2.25 2.25 0 00-3.15-3.15L12 9.75l-4.25 4.25m9 9" />
-                        </svg>
-                        <span>Garantia de 7 dias</span>
-                    </li>
+                <ul class="credibility-logos-list">
+                    <li><img src="https://logodownload.org/wp-content/uploads/2023/11/openai-logo.svg" alt="OpenAI Logo" class="credibility-logo" loading="lazy"></li>
+                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Freepik_logo.svg/1200px-Freepik_logo.svg.png" alt="Freepik Logo" class="credibility-logo" loading="lazy"></li>
+                    <li><img src="https://www.heygen.com/heygen-logo-white-background.png" alt="HeyGen Logo" class="credibility-logo" loading="lazy"></li>
+                    <li><img src="https://www.higgsfield.com/images/logo.png" alt="Higgsfield Logo" class="credibility-logo" loading="lazy"></li>
                 </ul>
             </div>
         </section>
 
-        <section id="como-funciona" class="section">
+        <section id="features" class="section">
             <div class="container">
-                <h2 class="features-title">Como funciona na prática</h2>
+                <h2 class="features-title">Features</h2>
                 <div class="full-width-card">
-                    <h3>Configuração guiada</h3>
-                    <p>Você abre, preenche poucos campos essenciais e já enxerga para onde o dinheiro vai.</p>
+                    <h3>10 Funcionários Não Humanos</h3>
                 </div>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <h4>Visão Clara do Mês</h4>
-                        <p>Veja entradas, saídas e saldo em um só lugar.</p>
+                        <h4>Conteúdo Escrito</h4>
+                        <p>Ferramentas de IA para gerar textos, artigos e roteiros de forma eficiente e criativa.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Metas & Reservas</h4>
-                        <p>Planeje objetivos (emergência, viagens, dívidas) e acompanhe o progresso.</p>
+                        <h4>Criação Visual</h4>
+                        <p>Plataformas que criam imagens e vídeos a partir de descrições textuais.</p>
                     </div>
                     <div class="feature-card">
-                        <h4>Relatórios Automáticos</h4>
-                        <p>Gráficos e métricas para decisões rápidas, sem fórmulas complicadas.</p>
+                        <h4>Edição Inteligente</h4>
+                        <p>Ferramentas que automatizam a edição de conteúdo, otimizando seu tempo.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="beneficios" class="section">
+        <section id="why-choose" class="section">
             <div class="container">
-                <div class="benefits-grid">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.5h3.75m-3.75 0V12m0 4.5v-4.5m-1.5-6a2.25 2.25 0 00-2.25 2.25v1.5a2.25 2.25 0 002.25 2.25h1.5a2.25 2.25 0 002.25-2.25v-1.5a2.25 2.25 0 00-2.25-2.25H9zM3.75 7.5h.008v.008H3.75V7.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12 12a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" />
-                            </svg>
-                        </div>
-                        <h4>Simplicidade Real</h4>
-                        <p>Nada de abas infinitas. Só o que importa.</p>
+                <div class="why-choose-grid">
+                    <div class="why-choose-item">
+                        <h4>Aulas novas todos os meses</h4>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </div>
-                        <h4>Paz Financeira</h4>
-                        <p>Reduza a ansiedade ao ver números e próximos passos.</p>
+                    <div class="why-choose-item">
+                        <h4>Chat comigo aberto todos os dias</h4>
                     </div>
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l6 6 9-9.75" />
-                            </svg>
-                        </div>
-                        <h4>Evolução Constante</h4>
-                        <p>Atualizações e melhorias baseadas no que os alunos pedem.</p>
+                    <div class="why-choose-item">
+                        <h4>Minha Equipe Não Humana</h4>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="depoimentos" class="section">
+        <section id="testimonials" class="section">
             <div class="container">
-                <h2 class="features-title">O que as pessoas dizem</h2>
+                <h2 class="features-title">Depoimentos</h2>
                 <div class="testimonials-grid">
                     <div class="testimonial-card">
                         <div class="testimonial-header">
-                            <img src="https://via.placeholder.com/60/ccc/fff" alt="Avatar da Maria S." class="testimonial-avatar" loading="lazy">
+                            <img src="https://via.placeholder.com/60/ccc/fff" alt="Avatar de Carol Argôlo" class="testimonial-avatar" loading="lazy">
                             <div class="testimonial-stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
                             </div>
                         </div>
-                        <p class="testimonial-text">“Finalmente entendi para onde meu dinheiro vai e comecei a guardar todo mês.”</p>
-                        <p class="testimonial-author">— Maria S.</p>
+                        <p class="testimonial-text">“Eu to meses a fio namorando essa compra e falando pra mim, espera, você não precisa disso. Mas eu preciso sim, pq parece incrível e to louca pra imergir aqui e gerar muito valor e conhecimento para mim.”</p>
+                        <p class="testimonial-author">— Carol Argôlo, Brasil</p>
                     </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="https://via.placeholder.com/60/ccc/fff" alt="Avatar do João L." class="testimonial-avatar" loading="lazy">
-                            <div class="testimonial-stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <p class="testimonial-text">“Organizei dívidas e metas. Hoje invisto com clareza.”</p>
-                        <p class="testimonial-author">— João L.</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="https://via.placeholder.com/60/ccc/fff" alt="Avatar da Carla M." class="testimonial-avatar" loading="lazy">
-                            <div class="testimonial-stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <p class="testimonial-text">“A planilha me deu paz e rotina simples de acompanhamento.”</p>
-                        <p class="testimonial-author">— Carla M.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="offer" class="section">
-            <div class="container">
-                <div class="offer-block">
-                    <h3 class="offer-title">O que você recebe</h3>
-                    <ul class="offer-bullets">
-                        <li class="offer-bullet">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>Acesso vitalício à planilha + atualizações</span>
-                        </li>
-                        <li class="offer-bullet">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>Suporte básico por e-mail</span>
-                        </li>
-                        <li class="offer-bullet">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>Garantia incondicional de 7 dias: se não for para você, devolvemos</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </section>
 
         <section id="faq" class="section">
             <div class="container">
-                <h2 class="faq-title">Dúvidas frequentes</h2>
+                <h2 class="faq-title">Dúvidas Frequentes</h2>
                 <div class="accordion">
                     <div class="accordion-item">
                         <h3>
                             <button class="accordion-button" aria-expanded="false" aria-controls="faq1">
-                                Preciso saber Excel?
+                                Quanto custa as ferramentas?
                                 <span class="icon">+</span>
                             </button>
                         </h3>
                         <div id="faq1" class="accordion-content">
-                            <p>Não. A planilha é passo a passo, com campos prontos e instruções simples. Você não precisa criar fórmulas ou configurar nada.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h3>
-                            <button class="accordion-button" aria-expanded="false" aria-controls="faq2">
-                                Funciona no Google Sheets?
-                                <span class="icon">+</span>
-                            </button>
-                        </h3>
-                        <div id="faq2" class="accordion-content">
-                            <p>Sim. A planilha é compatível tanto com o Google Sheets quanto com o Microsoft Excel, garantindo que você possa usá-la em qualquer dispositivo.</p>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h3>
-                            <button class="accordion-button" aria-expanded="false" aria-controls="faq3">
-                                Quanto tempo preciso por semana?
-                                <span class="icon">+</span>
-                            </button>
-                        </h3>
-                        <div id="faq3" class="accordion-content">
-                            <p>São apenas alguns minutos. Uma revisão rápida por semana é suficiente para manter tudo sob controle e organizado.</p>
+                            <p>Você pode começar com a versão grátis do ChatGPT para testar os funcionários. Depois no plano PRO vai gastar 120 reais por mês e ele vai ser responsável por 87% do seu conteúdo com IA.</p>
+                            <p>Feito isso pode partir para criação das suas fotos e vídeos feitos pela sua gêmea digital usando as plataformas do HiggsField e Freepik. Investindo 80 à 120 reais por mês.</p>
+                            <p>Ai seu conteúdo chegou nos 100% e o restante vai vendo ao longo do tempo.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="hero-cta">
+        <section class="section" id="final-cta">
             <div class="container final-cta">
                 <div class="cta-left">
-                    <h2 class="cta-heading">Pronto para sentir leveza com seu dinheiro?</h2>
-                    <ul class="cta-bullets">
-                        <li>Acesso vitalício</li>
-                        <li>Atualizações inclusas</li>
-                        <li>Garantia 7 dias</li>
-                    </ul>
+                    <h2 class="cta-heading">Quero fazer parte</h2>
                     <div class="cta-buttons">
-                        <a href="#" class="btn btn-primary">Quero a Planilha</a>
-                        <a href="#como-funciona" class="btn btn-secondary">Ver como funciona</a>
+                        <a href="#" class="btn btn-primary">Quero fazer parte</a>
+                        <a href="#features" class="btn btn-secondary">Entrar na comunidade</a>
                     </div>
                 </div>
                 <div class="cta-right">
-                    <img src="https://images.unsplash.com/photo-1620500133486-077b94998797?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Planilha do Breno em um smartphone" class="cta-mockup" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1620500133486-077b94998797?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mockup do aplicativo em um celular" class="cta-mockup" loading="lazy">
                 </div>
             </div>
         </section>
@@ -932,24 +709,11 @@
 
     <footer class="footer" role="contentinfo">
         <div class="container">
-            <div class="footer-links">
-                <span>Planilha do Breno © 2025</span>
-                <a href="#">Suporte</a>
-                <a href="#">Privacidade</a>
-                <a href="#">Termos</a>
-            </div>
+            <span>Comunidade Conteúdo Infinito com IA © 2025</span>
             <div class="footer-socials">
                 <a href="#" class="social-icon" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.75a9.75 9.75 0 009.75-9.75V12a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v9.75a9.75 9.75 0 009.75 9.75z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12h-3v3h3z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 7.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                    </svg>
-                </a>
-                <a href="#" class="social-icon" aria-label="YouTube">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" d="M19.5 7.5L12 15M12 15L4.5 7.5" />
-                        <path stroke-linecap="round" d="M19.5 7.5L12 15" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.272.15 4.908 1.785 5.05 5.05.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.15 3.272-1.785 4.908-5.05 5.05-.058.012-1.266.07-4.85.07s-3.584-.012-4.85-.07c-3.272-.15-4.908-1.785-5.05-5.05-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.15-3.272 1.785-4.908 5.05-5.05.058-.012 1.266-.07 4.85-.07zm0-2.163c-3.259 0-3.667.012-4.947.07c-4.407.2-6.643 2.438-6.845 6.845-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.202 4.407 2.438 6.643 6.845 6.845 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c4.407-.2 6.643-2.438 6.845-6.845.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.202-4.407-2.438-6.643-6.845-6.845-1.28-.058-1.688-.07-4.947-.07zm-2.5 7.5c0 1.381 1.119 2.5 2.5 2.5s2.5-1.119 2.5-2.5-1.119-2.5-2.5-2.5-2.5 1.119-2.5 2.5zm0 2.5a.75.75 0 100-1.5.75.75 0 000 1.5zm6.5-2.5c0 1.381 1.119 2.5 2.5 2.5s2.5-1.119 2.5-2.5-1.119-2.5-2.5-2.5-2.5 1.119-2.5 2.5z" fill="currentColor"/>
                     </svg>
                 </a>
             </div>
@@ -1011,14 +775,12 @@
                     const content = document.getElementById(button.getAttribute('aria-controls'));
 
                     if (!expanded) {
-                        // Collapse any other open accordions
                         accordionButtons.forEach(otherButton => {
                             if (otherButton !== button && otherButton.getAttribute('aria-expanded') === 'true') {
                                 otherButton.setAttribute('aria-expanded', 'false');
                                 document.getElementById(otherButton.getAttribute('aria-controls')).style.maxHeight = null;
                             }
                         });
-
                         button.setAttribute('aria-expanded', 'true');
                         content.style.maxHeight = content.scrollHeight + 'px';
                     } else {
@@ -1029,6 +791,5 @@
             });
         });
     </script>
-
 </body>
 </html>
