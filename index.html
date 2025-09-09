@@ -32,8 +32,8 @@
             --step--1: clamp(12px, 0.72vw + 9px, 14px);  /* legenda */
             --step-0:  clamp(14px, 0.85vw + 10px, 16px); /* corpo */
             --step-1:  clamp(18px, 1.2vw + 12px, 22px);  /* H3 */
-            --step-2:  clamp(22px, 1.8vw + 14px, 30px);  /* H2 (ligeiro up) */
-            --step-3:  clamp(36px, 3.5vw + 16px, 52px);  /* H1 (ligeiro up) */
+            --step-2:  clamp(22px, 1.8vw + 14px, 30px);  /* H2 */
+            --step-3:  clamp(36px, 3.5vw + 16px, 52px);  /* H1 */
         }
 
         body{
@@ -50,7 +50,7 @@
 
         /* ===== Utilitários ===== */
         .container{ max-width: var(--container); margin-inline: auto; padding: 24px; }
-        .section{ padding: 68px 0; }              /* + respiro */
+        .section{ padding: 68px 0; }
         .section--soft{ background: var(--bg-soft); }
         .stack { display:flex; flex-direction:column; }
         .stack > * + *{ margin-top: 16px; }
@@ -72,11 +72,11 @@
             border-radius: var(--radius);
             padding: 20px;
             box-shadow: var(--shadow);
-            display:flex; flex-direction:column;            /* equal-height */
+            display:flex; flex-direction:column;
             transition: transform .18s ease, box-shadow .18s ease;
         }
         .card:hover{ transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-        .spacer{ flex:1 1 auto; }                      /* empurra o conteúdo para igualar alturas */
+        .spacer{ flex:1 1 auto; }
 
         /* Tipografia (tags semânticas) */
         h1{ font-size: var(--step-3); font-weight: 800; color: var(--brand-primary); letter-spacing: -0.02em; line-height:1.1; }
@@ -85,7 +85,7 @@
         .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink); }
         .muted{ color: var(--muted); font-size: var(--step--1); }
 
-        /* Botões / CTAs (mín. 44x44) */
+        /* Botões / CTAs */
         .cta{
             display: inline-flex; align-items: center; justify-content: center;
             min-height: 48px; min-width: 44px; padding: 0 22px; border-radius: 999px;
@@ -118,6 +118,7 @@
             padding: 16px;
             user-select:none;
         }
+        .img-slot:not(.img-slot--hero){ aspect-ratio: 4 / 3; }
         .img-slot--small{ min-height: 120px; }
         .img-slot--hero{ min-height: 380px; border-radius: var(--radius-lg); }
 
@@ -163,15 +164,17 @@
         /* Rodapé */
         footer{ background: #0E0F2B; color: #EDEDED; }
         .footer-link{ color: #EDEDED; text-decoration: underline; text-underline-offset: 2px; }
+        .footer-link:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
         .social{ display: flex; gap: 10px; flex-wrap: wrap; }
         .icon{
-            width: 48px; height: 48px; border-radius: 999px;             /* + target size */
+            width: 48px; height: 48px; border-radius: 999px;
             background: var(--brand-primary);
             display: grid; place-items: center;
             color: #FFF; font-weight: 900;
             transition: transform .15s ease;
         }
         .icon:hover{ transform: translateY(-1px); }
+
         .footer-heading { color: #FFF; }
         .footer-muted { color: #D2D2D2; }
         .footer-legal-container { padding-top: 8px; }
@@ -188,20 +191,28 @@
         }
 
         /* Títulos e notas */
-        .grid-title{ margin-bottom: 16px; }
-        .grid-note{ margin-top: 14px; color: var(--muted); }
+        .grid-title{ margin-bottom: 8px; }
+        .grid-note{ margin-top: 8px; color: var(--muted); }
 
         /* Sticky CTA (mobile): mantém ação sempre visível */
         .sticky-cta{
             position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 999;
             display: none;
-            background: #FFF; border: 1px solid rgba(0,0,0,.06);
-            box-shadow: var(--shadow-lg); padding: 12px;
+            background: #FFFFFFE6;
+            border: 1px solid rgba(0,0,0,.06);
+            padding: 12px;
             border-radius: 999px; display: flex; justify-content: center;
+            box-shadow: var(--shadow-lg);
         }
         .sticky-cta .cta{ width: 100%; }
+
         @media (max-width: 768px){
-            .sticky-cta{ display: flex; }
+            .sticky-cta{
+                display: flex;
+                padding-bottom: calc(12px + env(safe-area-inset-bottom));
+                backdrop-filter: blur(8px);
+                background: color-mix(in oklab, #ffffff 85%, transparent);
+            }
         }
 
         @media (min-width: 1440px){
@@ -265,7 +276,10 @@
 
         <section class="section">
             <div class="container">
-                <h2 class="grid-title">GRID DE ÍCONES/CARDS (H2)</h2>
+                <div class="stack">
+                    <h2 class="grid-title">GRID DE ÍCONES/CARDS (H2)</h2>
+                    <p class="grid-note">Legenda breve do grid (placeholder).</p>
+                </div>
                 <div class="grid grid--4">
                     <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
                     <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
@@ -298,20 +312,25 @@
 
         <section class="section">
             <div class="container">
-                <h2 class="grid-title">TRILHA DE CONTEÚDOS (H2)</h2>
+                <div class="stack">
+                    <h2 class="grid-title">TRILHA DE CONTEÚDOS (H2)</h2>
+                    <p class="grid-note">Legenda breve da trilha (placeholder).</p>
+                </div>
                 <div class="grid grid--4">
                     <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
                     <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
                     <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
                     <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
                 </div>
-                <p class="grid-note">Parágrafo explicativo (curto).</p>
             </div>
         </section>
 
         <section class="section section--soft">
             <div class="container">
-                <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
+                <div class="stack">
+                    <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
+                    <p class="grid-note">Legenda breve do grid (placeholder).</p>
+                </div>
                 <div class="grid grid--4">
                     <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
                     <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
@@ -397,6 +416,7 @@
         <section class="section section--soft">
             <div class="container">
                 <h2 class="grid-title">DEPOIMENTOS VISUAIS (H2)</h2>
+                <p class="grid-note">Legenda breve dos depoimentos (placeholder).</p>
                 <div class="grid grid--3">
                     <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
                     <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
@@ -454,5 +474,21 @@
             <p class="muted footer-muted">© 2025 Sua Marca. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        (function(){
+            const containers = document.querySelectorAll('#faq .container');
+            containers.forEach(container => {
+                const items = container.querySelectorAll('details');
+                items.forEach(d => {
+                    d.addEventListener('toggle', () => {
+                        if (d.open) {
+                            items.forEach(other => { if (other !== d) other.removeAttribute('open'); });
+                        }
+                    });
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
