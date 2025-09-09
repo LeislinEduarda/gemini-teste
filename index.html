@@ -1,795 +1,408 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!doctype html>
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade Conteúdo Infinito com IA - Seu conteúdo 100% feito com IA.</title>
-    <meta name="description" content="Tudo o que você vê aqui foi criado com a Inteligência Artificial. Aprenda a gerar conteúdo de alta qualidade sem esforço.">
-    <meta property="og:title" content="Comunidade Conteúdo Infinito com IA - Seu Conteúdo 100% feito com IA">
-    <meta property="og:description" content="Aprenda a criar conteúdo de alta qualidade, de forma simples e escalável, usando a Inteligência Artificial.">
-    <meta property="og:image" content="http://googleusercontent.com/image_generation_content/0">
-    <meta property="og:url" content="https://conteudoinfinitocomia.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --color-bg: #F8F8F8;
-            --color-text: #111;
-            --color-highlight: #A083FF; /* Cor de destaque para um toque moderno/tecnológico */
-            --color-border: #E0E0E0;
-            --color-neutral-subtle: #F0F0F0;
-            --spacing-unit: 8px;
-            --header-height: 80px;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Landing – Estrutura com Placeholders</title>
+  <style>
+    /* ===== Reset leve (inspirado em resets modernos) ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    img, picture, svg, video { display: block; max-width: 100%; height: auto; }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    ul { margin: 0; padding-left: 1rem; }
+    h1, h2, h3, p { margin: 0; }
 
-        /* General & Reset */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    /* ===== Tokens ===== */
+    :root{
+      --brand-primary: #6769FF;   /* predominante */
+      --brand-accent:  #FEF700;   /* CTAs / destaques */
+      --ink-strong:    #111111;   /* contraste alto em bg claro ou accent */
+      --ink:           #2A2A2A;   /* corpo do texto */
+      --muted:         #6B6B6B;
+      --bg:            #FFFFFF;
+      --bg-soft:       #F7F8FF;   /* leve banho de primária no fundo */
+      --radius:        14px;
+      --shadow:        0 6px 24px rgba(0,0,0,.06);
+      --container:     1120px;
+      --step--1: clamp(12px, 0.72vw + 9px, 14px);  /* legenda */
+      --step-0:  clamp(14px, 0.85vw + 10px, 16px); /* corpo */
+      --step-1:  clamp(18px, 1.2vw + 12px, 22px);  /* H3 */
+      --step-2:  clamp(22px, 1.8vw + 14px, 28px);  /* H2 */
+      --step-3:  clamp(32px, 3vw + 16px, 44px);    /* H1 */
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--color-text);
-            background-color: var(--color-bg);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.5;
+    }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-            line-height: 1.2;
-            font-weight: 700;
-        }
+    /* Acessibilidade de movimento */
+    @media (prefers-reduced-motion: reduce){
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    /* ===== Utilitários ===== */
+    .container{ max-width: var(--container); margin-inline: auto; padding: 24px; }
+    .section{ padding: 56px 0; }
+    .section--soft{ background: var(--bg-soft); }
+    .stack > * + *{ margin-top: 16px; }
+    .cluster{ display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+    .grid{ display: grid; gap: 20px; }
+    .grid--2{ grid-template-columns: repeat(1,1fr); }
+    .grid--3{ grid-template-columns: repeat(1,1fr); }
+    .grid--4{ grid-template-columns: repeat(1,1fr); }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
+    @media (min-width: 640px){
+      .grid--2{ grid-template-columns: repeat(2,1fr); }
+      .grid--3{ grid-template-columns: repeat(3,1fr); }
+      .grid--4{ grid-template-columns: repeat(4,1fr); }
+    }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 calc(var(--spacing-unit) * 3);
-        }
+    .card{
+      background: #FFF;
+      border: 1px solid rgba(103,105,255,.18);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
 
-        .section {
-            padding: calc(var(--spacing-unit) * 12) 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Tipografia (placeholders) */
+    .h1{ font-size: var(--step-3); font-weight: 800; color: var(--brand-primary); letter-spacing: -0.02em; }
+    .h2{ font-size: var(--step-2); font-weight: 800; color: var(--brand-primary); letter-spacing: -0.01em; }
+    .h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
+    .lead{ font-size: calc(var(--step-0) * 1.1); color: var(--ink); }
+    .muted{ color: var(--muted); font-size: var(--step--1); }
 
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 9999px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .btn-primary {
-            background-color: var(--color-highlight);
-            color: white;
-            border-color: var(--color-highlight);
-        }
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--color-text);
-            border-color: var(--color-text);
-        }
-        .btn-secondary:hover {
-            background-color: var(--color-text);
-            color: white;
-            border-color: var(--color-text);
-        }
+    /* Botões / CTAs (texto escuro sobre amarelo para contraste AA+) */
+    .cta{
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 20px; border-radius: 999px;
+      background: var(--brand-accent); color: var(--ink-strong);
+      font-weight: 800; text-transform: uppercase; letter-spacing: .02em;
+      border: 2px solid #00000012;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .cta:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
+    .cta:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.1); }
 
-        /* Navigation */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            transition: background 0.3s ease;
-        }
-        .header.scrolled {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-        .nav-links {
-            display: none;
-        }
-        .nav-link {
-            font-weight: 500;
-            margin: 0 calc(var(--spacing-unit) * 3);
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 0;
-            height: 2px;
-            background-color: var(--color-highlight);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .nav-cta {
-            display: none;
-        }
+    /* Slots de imagem */
+    .img-slot{
+      background: linear-gradient(135deg, rgba(103,105,255,.12), rgba(254,247,0,.12));
+      border: 2px dashed rgba(103,105,255,.45);
+      border-radius: var(--radius);
+      min-height: 220px;
+      display: grid; place-items: center;
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+    }
+    .img-slot--small{ min-height: 120px; }
+    .img-slot--hero{ min-height: 360px; }
 
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 101;
-        }
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: var(--color-text);
-            border-radius: 3px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .drawer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: var(--color-bg);
-            z-index: 99;
-            transform: translateX(-100%);
-            transition: transform 0.4s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 4);
-        }
-        .drawer.is-open {
-            transform: translateX(0);
-        }
+    /* Hero específico */
+    .hero{
+      padding-top: 48px; padding-bottom: 56px;
+      background:
+        radial-gradient(1200px 400px at 10% -10%, rgba(103,105,255,.08), transparent 60%),
+        radial-gradient(1000px 300px at 90% -20%, rgba(254,247,0,.15), transparent 60%),
+        var(--bg);
+    }
+    .hero-grid{
+      display: grid; gap: 28px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px){
+      .hero-grid{ grid-template-columns: 1.2fr 1fr; align-items: center; }
+    }
 
-        @media (min-width: 768px) {
-            .hamburger {
-                display: none;
-            }
-            .nav-links, .nav-cta {
-                display: flex;
-            }
-            .navbar {
-                justify-content: center;
-            }
-            .navbar-desktop-center {
-                flex-grow: 1;
-                display: flex;
-                justify-content: center;
-            }
-            .nav-cta {
-                margin-left: auto;
-            }
-        }
+    /* FAQ */
+    details{
+      border: 1px solid rgba(103,105,255,.25);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      background: #FFF;
+    }
+    details + details{ margin-top: 12px; }
+    summary{ cursor: pointer; font-weight: 700; color: var(--ink); }
+    details p{ margin-top: 10px; color: var(--muted); }
 
-        /* Hero */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding-top: var(--header-height);
-            color: white;
-            overflow: hidden;
-        }
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-            filter: brightness(0.7);
-        }
-        .hero-content {
-            z-index: 1;
-            max-width: 900px;
-            padding: calc(var(--spacing-unit) * 4);
-        }
-        .hero-badge {
-            display: inline-block;
-            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
-            border-radius: 9999px;
-            background-color: var(--color-highlight);
-            color: white;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: calc(var(--spacing-unit) * 4);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: hero-fade-in 1s ease-out forwards;
-        }
-        .hero-headline {
-            font-size: 3rem;
-            margin-bottom: calc(var(--spacing-unit) * 4);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: hero-fade-in 1s ease-out 0.2s forwards;
-        }
-        .hero-subheadline {
-            font-size: 1.25rem;
-            font-weight: 400;
-            margin-bottom: calc(var(--spacing-unit) * 6);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: hero-fade-in 1s ease-out 0.4s forwards;
-        }
-        .hero-ctas {
-            display: flex;
-            flex-direction: column;
-            gap: calc(var(--spacing-unit) * 2);
-            margin-bottom: calc(var(--spacing-unit) * 4);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: hero-fade-in 1s ease-out 0.6s forwards;
-        }
-        .hero-social-metric {
-            font-size: 0.875rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: hero-fade-in 1s ease-out 0.8s forwards;
-        }
-        @keyframes hero-fade-in {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @media (min-width: 768px) {
-            .hero-headline {
-                font-size: 5rem;
-            }
-            .hero-subheadline {
-                font-size: 1.5rem;
-            }
-            .hero-ctas {
-                flex-direction: row;
-                gap: calc(var(--spacing-unit) * 4);
-                justify-content: center;
-            }
-        }
+    /* Rodapé */
+    footer{ background: #0E0F2B; color: #EDEDED; }
+    .footer-link{ color: #EDEDED; text-decoration: underline; text-underline-offset: 2px; }
+    .social{ display: flex; gap: 10px; flex-wrap: wrap; }
+    .icon{ width: 36px; height: 36px; border-radius: 999px; background: var(--brand-primary); display: grid; place-items: center; color: #FFF; font-weight: 900; }
 
-        /* Credibility Logos */
-        .credibility-logos {
-            padding: calc(var(--spacing-unit) * 6) 0;
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-            background-color: white;
-        }
-        .credibility-logos-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: calc(var(--spacing-unit) * 6);
-        }
-        .credibility-logo {
-            height: 40px;
-            filter: grayscale(100%);
-            transition: filter 0.3s ease;
-        }
-        .credibility-logo:hover {
-            filter: grayscale(0%);
-        }
-
-        /* Features Section */
-        .features-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: calc(var(--spacing-unit) * 8);
-        }
-        .full-width-card {
-            background-color: white;
-            padding: calc(var(--spacing-unit) * 6);
-            border-radius: calc(var(--spacing-unit) * 4);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            margin-bottom: calc(var(--spacing-unit) * 6);
-            border: 1px solid var(--color-border);
-        }
-        .full-width-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: calc(var(--spacing-unit) * 2);
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: calc(var(--spacing-unit) * 4);
-        }
-        .feature-card {
-            background-color: white;
-            padding: calc(var(--spacing-unit) * 6);
-            border-radius: calc(var(--spacing-unit) * 4);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid var(--color-border);
-        }
-        .feature-card h4 {
-            font-size: 1.25rem;
-            margin-bottom: calc(var(--spacing-unit) * 2);
-        }
-        .feature-card p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        @media (min-width: 768px) {
-            .features-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Why Choose Section */
-        .why-choose-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: calc(var(--spacing-unit) * 6);
-        }
-        .why-choose-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .why-choose-item h4 {
-            font-size: 1.25rem;
-            margin-bottom: calc(var(--spacing-unit) * 1);
-        }
-
-        @media (min-width: 768px) {
-            .why-choose-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: calc(var(--spacing-unit) * 4);
-        }
-        .testimonial-card {
-            background-color: white;
-            padding: calc(var(--spacing-unit) * 6);
-            border-radius: calc(var(--spacing-unit) * 4);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid var(--color-border);
-        }
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: calc(var(--spacing-unit) * 4);
-        }
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: calc(var(--spacing-unit) * 4);
-        }
-        .testimonial-stars svg {
-            width: 16px;
-            height: 16px;
-            color: #ffc107;
-            margin-right: 2px;
-        }
-        .testimonial-text {
-            font-style: italic;
-            font-size: 1.125rem;
-            margin-bottom: calc(var(--spacing-unit) * 4);
-        }
-        .testimonial-author {
-            font-weight: 600;
-        }
-
-        /* FAQ */
-        .faq-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: calc(var(--spacing-unit) * 8);
-        }
-        .accordion-item {
-            border-bottom: 1px solid var(--color-border);
-            padding: calc(var(--spacing-unit) * 4) 0;
-        }
-        .accordion-button {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            padding: 0;
-        }
-        .accordion-button .icon {
-            transform: rotate(0deg);
-            transition: transform 0.3s ease;
-        }
-        .accordion-button[aria-expanded="true"] .icon {
-            transform: rotate(45deg);
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            font-size: 1rem;
-            padding-top: calc(var(--spacing-unit) * 2);
-            color: #555;
-        }
-
-        /* Final CTA */
-        .final-cta {
-            display: flex;
-            flex-direction: column;
-            gap: calc(var(--spacing-unit) * 8);
-            text-align: center;
-            background-color: var(--color-neutral-subtle);
-            padding: calc(var(--spacing-unit) * 8) 0;
-        }
-        .cta-left {
-            padding: calc(var(--spacing-unit) * 4) 0;
-        }
-        .cta-heading {
-            font-size: 2.5rem;
-            margin-bottom: calc(var(--spacing-unit) * 4);
-        }
-        .cta-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: calc(var(--spacing-unit) * 2);
-        }
-        .cta-right img {
-            border-radius: calc(var(--spacing-unit) * 2);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        @media (min-width: 768px) {
-            .final-cta {
-                flex-direction: row;
-                text-align: left;
-                align-items: center;
-            }
-            .cta-left, .cta-right {
-                flex: 1;
-            }
-            .cta-buttons {
-                flex-direction: row;
-            }
-            .cta-heading {
-                font-size: 3rem;
-            }
-        }
-
-        /* Footer */
-        .footer {
-            padding: calc(var(--spacing-unit) * 8) 0;
-            border-top: 1px solid var(--color-border);
-            text-align: center;
-            font-size: 0.875rem;
-            color: #777;
-        }
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: calc(var(--spacing-unit) * 4);
-            margin-bottom: calc(var(--spacing-unit) * 4);
-        }
-        .footer-socials {
-            display: flex;
-            justify-content: center;
-            gap: calc(var(--spacing-unit) * 4);
-            margin-top: calc(var(--spacing-unit) * 4);
-        }
-        .social-icon svg {
-            width: 24px;
-            height: 24px;
-            color: #777;
-            transition: color 0.2s ease;
-        }
-        .social-icon:hover svg {
-            color: var(--color-highlight);
-        }
-    </style>
+    /* Skip link para acessibilidade */
+    .skip-link{
+      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+    }
+    .skip-link:focus{
+      position: fixed; left: 16px; top: 16px; width: auto; height: auto;
+      background: var(--brand-accent); color: var(--ink-strong);
+      padding: 10px 14px; border-radius: 8px; z-index: 1000;
+      outline: 3px solid #000;
+    }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-    <header class="header" role="navigation">
-        <div class="container navbar">
-            <a href="#" class="logo">Comunidade Conteúdo Infinito com IA</a>
-            <nav class="navbar-desktop-center">
-                <ul class="nav-links">
-                    <li><a href="#features" class="nav-link">Features</a></li>
-                    <li><a href="#why-choose" class="nav-link">Why Choose</a></li>
-                    <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li><a href="#faq" class="nav-link">FAQ</a></li>
-                </ul>
-            </nav>
-            <a href="#final-cta" class="btn btn-primary nav-cta">Quero fazer parte</a>
-            <div class="hamburger" aria-controls="drawer-menu" aria-expanded="false" role="button" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="stack" aria-label="Área textual do hero">
+        <div class="h1">TÍTULO PRINCIPAL (H1)</div>
+        <p class="lead">Subtítulo / Mensagem de valor (H2 em tamanho grande).</p>
+        <div class="cluster">
+          <a href="#" class="cta" aria-label="Chamada principal">Botão CTA</a>
+          <span class="muted">Texto auxiliar curto</span>
         </div>
-        <div class="drawer" id="drawer-menu">
-            <ul class="nav-links">
-                <li><a href="#features" class="nav-link">Features</a></li>
-                <li><a href="#why-choose" class="nav-link">Why Choose</a></li>
-                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </div>
+      <div class="img-slot img-slot--hero" aria-label="Slot de imagem do hero">Slot de imagem (hero)</div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- ============ Destaques (3 colunas) ============ -->
+    <section class="section">
+      <div class="container grid grid--3">
+        <div class="card stack">
+          <div class="h3">DESTAQUE 1 (H3)</div>
+          <p class="muted">Parágrafo pequeno explicativo.</p>
+        </div>
+        <div class="card stack">
+          <div class="h3">DESTAQUE 2 (H3)</div>
+          <p class="muted">Parágrafo pequeno explicativo.</p>
+        </div>
+        <div class="card stack">
+          <div class="h3">DESTAQUE 3 (H3)</div>
+          <p class="muted">Parágrafo pequeno explicativo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ O que tem dentro (H2 + lista) ============ -->
+    <section class="section section--soft">
+      <div class="container grid grid--2">
+        <div class="stack">
+          <div class="h2">SEÇÃO: O QUE TEM DENTRO (H2)</div>
+          <p>Parágrafo curto de corpo. Placeholder de descrição do bloco.</p>
+          <ul>
+            <li>Bullet 1 (texto pequeno)</li>
+            <li>Bullet 2 (texto pequeno)</li>
+            <li>Bullet 3 (texto pequeno)</li>
+            <li>Bullet 4 (texto pequeno)</li>
+          </ul>
+        </div>
+        <div class="img-slot" aria-label="Slot de imagem da seção">Slot de imagem</div>
+      </div>
+    </section>
+
+    <!-- ============ Grid de ícones/cards (6–8) ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="h2" style="margin-bottom:16px;">GRID DE ÍCONES/CARDS (H2)</div>
+        <div class="grid grid--4">
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small">Ícone / Imagem</div><div class="h3">Título (H3)</div><p class="muted">Texto pequeno.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Caminho & “Chá-revelação” (duas sub-seções) ============ -->
+    <section class="section section--soft">
+      <div class="container grid grid--2">
+        <div class="card stack">
+          <div class="h2">CAMINHO (H2)</div>
+          <p>Parágrafo pequeno introdutório.</p>
+          <div class="img-slot img-slot--small">Imagem pequena</div>
+        </div>
+        <div class="card stack">
+          <div class="h2">CHÁ-REVELAÇÃO (H2)</div>
+          <p>Parágrafo pequeno introdutório.</p>
+          <div class="img-slot img-slot--small">Imagem pequena</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Trilha de conteúdos (4 cards) ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="h2" style="margin-bottom:16px;">TRILHA DE CONTEÚDOS (H2)</div>
+        <div class="grid grid--4">
+          <div class="card stack"><div class="img-slot">Imagem do card</div><p class="muted">Texto abaixo do card.</p></div>
+          <div class="card stack"><div class="img-slot">Imagem do card</div><p class="muted">Texto abaixo do card.</p></div>
+          <div class="card stack"><div class="img-slot">Imagem do card</div><p class="muted">Texto abaixo do card.</p></div>
+          <div class="card stack"><div class="img-slot">Imagem do card</div><p class="muted">Texto abaixo do card.</p></div>
+        </div>
+        <p class="muted" style="margin-top:14px;">Parágrafo explicativo (curto).</p>
+      </div>
+    </section>
+
+    <!-- ============ Conteúdos variados (grid grande de imagens) ============ -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="h2" style="margin-bottom:16px;">CONTEÚDOS VARIADOS (H2)</div>
+        <div class="grid grid--4">
+          <!-- 12 slots para exemplificar -->
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+          <div class="img-slot">Capa / Imagem</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Benefícios extras (lista) ============ -->
+    <section class="section">
+      <div class="container grid grid--2">
+        <div class="stack">
+          <div class="h2">BENEFÍCIOS EXTRAS (H2)</div>
+          <ul>
+            <li>Bullet 1</li>
+            <li>Bullet 2</li>
+            <li>Bullet 3</li>
+            <li>Bullet 4</li>
+            <li>Bullet 5</li>
+          </ul>
+        </div>
+        <div class="card stack">
+          <div class="h3">Destaque lateral (H3)</div>
+          <p class="muted">Texto pequeno/observação.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Público-alvo (para quem é / não é) ============ -->
+    <section class="section section--soft">
+      <div class="container grid grid--2">
+        <div class="card stack">
+          <div class="h2">PARA QUEM É (H2)</div>
+          <ul>
+            <li>Item de público 1</li>
+            <li>Item de público 2</li>
+            <li>Item de público 3</li>
+            <li>Item de público 4</li>
+          </ul>
+        </div>
+        <div class="card stack">
+          <div class="h3">E NÃO É PARA QUEM… (H3)</div>
+          <ul>
+            <li>Item de recorte 1</li>
+            <li>Item de recorte 2</li>
+            <li>Item de recorte 3</li>
+            <li>Item de recorte 4</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Oferta / CTA final ============ -->
+    <section class="section">
+      <div class="container card">
+        <div class="grid grid--3">
+          <div class="stack">
+            <div class="h2">FORMAS DE PAGAMENTO (H2)</div>
+            <ul>
+              <li>Opção 1</li>
+              <li>Opção 2</li>
+              <li>Opção 3</li>
             </ul>
-            <a href="#final-cta" class="btn btn-primary nav-cta">Quero fazer parte</a>
+          </div>
+          <div class="stack">
+            <div class="h3">Benefícios (H3)</div>
+            <ul>
+              <li>Benefício 1</li>
+              <li>Benefício 2</li>
+              <li>Benefício 3</li>
+            </ul>
+          </div>
+          <div class="stack" style="align-self:center;">
+            <a href="#" class="cta" aria-label="Chamada final">Quero fazer parte</a>
+            <p class="muted">Texto de apoio curto.</p>
+          </div>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main role="main">
-        <section class="hero" id="hero">
-            <img src="http://googleusercontent.com/image_generation_content/0" alt="Imagem cinemática e luxuosa de uma pessoa criando conteúdo com IA" class="hero-image">
-            <div class="hero-content">
-                <span class="hero-badge">+14000 infinitos</span>
-                <h1 class="hero-headline">Seu Conteúdo 100% feito com IA</h1>
-                <p class="hero-subheadline">Tudo que você vê aqui foi criado com a Inteligência Artificial. E não, não parece IA.</p>
-                <div class="hero-ctas">
-                    <a href="#final-cta" class="btn btn-primary">Quero fazer parte</a>
-                    <a href="#features" class="btn btn-secondary">Entrar na comunidade</a>
-                </div>
-                <p class="hero-social-metric">200 mil seguidores gerados sem surtar</p>
-            </div>
-        </section>
-
-        <section class="credibility-logos">
-            <div class="container">
-                <ul class="credibility-logos-list">
-                    <li><img src="https://logodownload.org/wp-content/uploads/2023/11/openai-logo.svg" alt="OpenAI Logo" class="credibility-logo" loading="lazy"></li>
-                    <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Freepik_logo.svg/1200px-Freepik_logo.svg.png" alt="Freepik Logo" class="credibility-logo" loading="lazy"></li>
-                    <li><img src="https://www.heygen.com/heygen-logo-white-background.png" alt="HeyGen Logo" class="credibility-logo" loading="lazy"></li>
-                    <li><img src="https://www.higgsfield.com/images/logo.png" alt="Higgsfield Logo" class="credibility-logo" loading="lazy"></li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="features" class="section">
-            <div class="container">
-                <h2 class="features-title">Features</h2>
-                <div class="full-width-card">
-                    <h3>10 Funcionários Não Humanos</h3>
-                </div>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h4>Conteúdo Escrito</h4>
-                        <p>Ferramentas de IA para gerar textos, artigos e roteiros de forma eficiente e criativa.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h4>Criação Visual</h4>
-                        <p>Plataformas que criam imagens e vídeos a partir de descrições textuais.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h4>Edição Inteligente</h4>
-                        <p>Ferramentas que automatizam a edição de conteúdo, otimizando seu tempo.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="why-choose" class="section">
-            <div class="container">
-                <div class="why-choose-grid">
-                    <div class="why-choose-item">
-                        <h4>Aulas novas todos os meses</h4>
-                    </div>
-                    <div class="why-choose-item">
-                        <h4>Chat comigo aberto todos os dias</h4>
-                    </div>
-                    <div class="why-choose-item">
-                        <h4>Minha Equipe Não Humana</h4>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="testimonials" class="section">
-            <div class="container">
-                <h2 class="features-title">Depoimentos</h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="https://via.placeholder.com/60/ccc/fff" alt="Avatar de Carol Argôlo" class="testimonial-avatar" loading="lazy">
-                            <div class="testimonial-stars">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25L15.424 8.783L22.5 9.75L17.25 14.467L18.75 21.75L12 17.25L5.25 21.75L6.75 14.467L1.5 9.75L8.576 8.783L12 2.25z" /></svg>
-                            </div>
-                        </div>
-                        <p class="testimonial-text">“Eu to meses a fio namorando essa compra e falando pra mim, espera, você não precisa disso. Mas eu preciso sim, pq parece incrível e to louca pra imergir aqui e gerar muito valor e conhecimento para mim.”</p>
-                        <p class="testimonial-author">— Carol Argôlo, Brasil</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="section">
-            <div class="container">
-                <h2 class="faq-title">Dúvidas Frequentes</h2>
-                <div class="accordion">
-                    <div class="accordion-item">
-                        <h3>
-                            <button class="accordion-button" aria-expanded="false" aria-controls="faq1">
-                                Quanto custa as ferramentas?
-                                <span class="icon">+</span>
-                            </button>
-                        </h3>
-                        <div id="faq1" class="accordion-content">
-                            <p>Você pode começar com a versão grátis do ChatGPT para testar os funcionários. Depois no plano PRO vai gastar 120 reais por mês e ele vai ser responsável por 87% do seu conteúdo com IA.</p>
-                            <p>Feito isso pode partir para criação das suas fotos e vídeos feitos pela sua gêmea digital usando as plataformas do HiggsField e Freepik. Investindo 80 à 120 reais por mês.</p>
-                            <p>Ai seu conteúdo chegou nos 100% e o restante vai vendo ao longo do tempo.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="final-cta">
-            <div class="container final-cta">
-                <div class="cta-left">
-                    <h2 class="cta-heading">Quero fazer parte</h2>
-                    <div class="cta-buttons">
-                        <a href="#" class="btn btn-primary">Quero fazer parte</a>
-                        <a href="#features" class="btn btn-secondary">Entrar na comunidade</a>
-                    </div>
-                </div>
-                <div class="cta-right">
-                    <img src="https://images.unsplash.com/photo-1620500133486-077b94998797?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mockup do aplicativo em um celular" class="cta-mockup" loading="lazy">
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <span>Comunidade Conteúdo Infinito com IA © 2025</span>
-            <div class="footer-socials">
-                <a href="#" class="social-icon" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07c3.272.15 4.908 1.785 5.05 5.05.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.15 3.272-1.785 4.908-5.05 5.05-.058.012-1.266.07-4.85.07s-3.584-.012-4.85-.07c-3.272-.15-4.908-1.785-5.05-5.05-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.15-3.272 1.785-4.908 5.05-5.05.058-.012 1.266-.07 4.85-.07zm0-2.163c-3.259 0-3.667.012-4.947.07c-4.407.2-6.643 2.438-6.845 6.845-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.202 4.407 2.438 6.643 6.845 6.845 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c4.407-.2 6.643-2.438 6.845-6.845.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.202-4.407-2.438-6.643-6.845-6.845-1.28-.058-1.688-.07-4.947-.07zm-2.5 7.5c0 1.381 1.119 2.5 2.5 2.5s2.5-1.119 2.5-2.5-1.119-2.5-2.5-2.5-2.5 1.119-2.5 2.5zm0 2.5a.75.75 0 100-1.5.75.75 0 000 1.5zm6.5-2.5c0 1.381 1.119 2.5 2.5 2.5s2.5-1.119 2.5-2.5-1.119-2.5-2.5-2.5-2.5 1.119-2.5 2.5z" fill="currentColor"/>
-                    </svg>
-                </a>
-            </div>
+    <!-- ============ Depoimentos visuais (grid de slots) ============ -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="h2" style="margin-bottom:16px;">DEPOIMENTOS VISUAIS (H2)</div>
+        <div class="grid grid--3">
+          <div class="img-slot">Depoimento (imagem)</div>
+          <div class="img-slot">Depoimento (imagem)</div>
+          <div class="img-slot">Depoimento (imagem)</div>
+          <div class="img-slot">Depoimento (imagem)</div>
+          <div class="img-slot">Depoimento (imagem)</div>
+          <div class="img-slot">Depoimento (imagem)</div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const header = document.querySelector('.header');
-            const hamburger = document.querySelector('.hamburger');
-            const drawer = document.querySelector('.drawer');
-            const navLinks = document.querySelectorAll('.nav-link, .nav-cta');
-            const sections = document.querySelectorAll('.section');
-            const accordionButtons = document.querySelectorAll('.accordion-button');
+    <!-- ============ FAQ (acordeão) ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="h2" style="margin-bottom:16px;">FAQ (H2)</div>
+        <details>
+          <summary>Pergunta 1 (H3)</summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
+        <details>
+          <summary>Pergunta 2 (H3)</summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
+        <details>
+          <summary>Pergunta 3 (H3)</summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
+      </div>
+    </section>
+  </main>
 
-            // Sticky Header & Scroll Effect
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-
-            // Mobile Drawer
-            hamburger.addEventListener('click', () => {
-                const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-                hamburger.setAttribute('aria-expanded', !expanded);
-                drawer.classList.toggle('is-open');
-                document.body.classList.toggle('no-scroll');
-            });
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (drawer.classList.contains('is-open')) {
-                        drawer.classList.remove('is-open');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        document.body.classList.remove('no-scroll');
-                    }
-                });
-            });
-
-            // Fade-in on Scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            sections.forEach(section => observer.observe(section));
-
-            // Accordion Functionality
-            accordionButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const expanded = button.getAttribute('aria-expanded') === 'true' || false;
-                    const content = document.getElementById(button.getAttribute('aria-controls'));
-
-                    if (!expanded) {
-                        accordionButtons.forEach(otherButton => {
-                            if (otherButton !== button && otherButton.getAttribute('aria-expanded') === 'true') {
-                                otherButton.setAttribute('aria-expanded', 'false');
-                                document.getElementById(otherButton.getAttribute('aria-controls')).style.maxHeight = null;
-                            }
-                        });
-                        button.setAttribute('aria-expanded', 'true');
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                    } else {
-                        button.setAttribute('aria-expanded', 'false');
-                        content.style.maxHeight = null;
-                    }
-                });
-            });
-        });
-    </script>
+  <!-- ================= RODAPÉ ================= -->
+  <footer class="section">
+    <div class="container grid grid--3">
+      <div class="stack">
+        <div class="h3" style="color:#FFF;">Informações</div>
+        <p class="muted" style="color:#D2D2D2;">Endereço, CNPJ e outras informações legais.</p>
+      </div>
+      <div class="stack">
+        <div class="h3" style="color:#FFF;">Links</div>
+        <a class="footer-link" href="#">Política de Privacidade</a>
+        <a class="footer-link" href="#">Termos de Uso</a>
+      </div>
+      <div class="stack">
+        <div class="h3" style="color:#FFF;">Redes</div>
+        <div class="social">
+          <div class="icon" aria-hidden="true">IG</div>
+          <div class="icon" aria-hidden="true">YT</div>
+          <div class="icon" aria-hidden="true">TT</div>
+          <div class="icon" aria-hidden="true">SP</div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="padding-top:8px;">
+      <p class="muted" style="color:#CFCFCF;">© 2025 Sua Marca. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 </body>
 </html>
