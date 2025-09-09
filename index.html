@@ -24,14 +24,16 @@
             --bg:            #FFFFFF;
             --bg-soft:       #F7F8FF;   /* leve banho de primária no fundo */
             --radius:        14px;
+            --radius-lg:     18px;
             --shadow:        0 6px 24px rgba(0,0,0,.06);
+            --shadow-lg:     0 14px 34px rgba(0,0,0,.12);
             --container:     1120px;
 
             --step--1: clamp(12px, 0.72vw + 9px, 14px);  /* legenda */
             --step-0:  clamp(14px, 0.85vw + 10px, 16px); /* corpo */
             --step-1:  clamp(18px, 1.2vw + 12px, 22px);  /* H3 */
-            --step-2:  clamp(22px, 1.8vw + 14px, 28px);  /* H2 */
-            --step-3:  clamp(32px, 3vw + 16px, 44px);    /* H1 */
+            --step-2:  clamp(22px, 1.8vw + 14px, 30px);  /* H2 (ligeiro up) */
+            --step-3:  clamp(36px, 3.5vw + 16px, 52px);  /* H1 (ligeiro up) */
         }
 
         body{
@@ -48,14 +50,15 @@
 
         /* ===== Utilitários ===== */
         .container{ max-width: var(--container); margin-inline: auto; padding: 24px; }
-        .section{ padding: 56px 0; }
+        .section{ padding: 68px 0; }              /* + respiro */
         .section--soft{ background: var(--bg-soft); }
+        .stack { display:flex; flex-direction:column; }
         .stack > * + *{ margin-top: 16px; }
         .cluster{ display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
         .grid{ display: grid; gap: 20px; }
-        .grid--2{ grid-template-columns: repeat(1,1fr); }
-        .grid--3{ grid-template-columns: repeat(1,1fr); }
-        .grid--4{ grid-template-columns: repeat(1,1fr); }
+        .grid--2{ grid-template-columns: 1fr; }
+        .grid--3{ grid-template-columns: 1fr; }
+        .grid--4{ grid-template-columns: 1fr; }
 
         @media (min-width: 640px){
             .grid--2{ grid-template-columns: repeat(2,1fr); }
@@ -69,27 +72,36 @@
             border-radius: var(--radius);
             padding: 20px;
             box-shadow: var(--shadow);
+            display:flex; flex-direction:column;            /* equal-height */
+            transition: transform .18s ease, box-shadow .18s ease;
         }
+        .card:hover{ transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .spacer{ flex:1 1 auto; }                      /* empurra o conteúdo para igualar alturas */
 
         /* Tipografia (tags semânticas) */
-        h1{ font-size: var(--step-3); font-weight: 800; color: var(--brand-primary); letter-spacing: -0.02em; }
+        h1{ font-size: var(--step-3); font-weight: 800; color: var(--brand-primary); letter-spacing: -0.02em; line-height:1.1; }
         h2{ font-size: var(--step-2); font-weight: 800; color: var(--brand-primary); letter-spacing: -0.01em; }
         h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
-        .lead{ font-size: calc(var(--step-0) * 1.1); color: var(--ink); }
+        .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink); }
         .muted{ color: var(--muted); font-size: var(--step--1); }
 
-        /* Botões / CTAs */
+        /* Botões / CTAs (mín. 44x44) */
         .cta{
             display: inline-flex; align-items: center; justify-content: center;
-            min-height: 48px; padding: 0 20px; border-radius: 999px;
+            min-height: 48px; min-width: 44px; padding: 0 22px; border-radius: 999px;
             background: var(--brand-accent); color: var(--ink-strong);
             font-weight: 800; text-transform: uppercase; letter-spacing: .02em;
             border: 2px solid #00000012;
             transition: transform .15s ease, box-shadow .15s ease;
+            white-space: nowrap;
         }
         .cta:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
         .cta:active{ transform: translateY(0); }
         .cta:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
+        .cta--ghost{
+            background: transparent; color: var(--brand-primary);
+            border: 2px solid rgba(103,105,255,.35);
+        }
         .cta-center {
             align-self: center;
         }
@@ -104,13 +116,14 @@
             color: var(--muted);
             text-align: center;
             padding: 16px;
+            user-select:none;
         }
         .img-slot--small{ min-height: 120px; }
-        .img-slot--hero{ min-height: 360px; }
+        .img-slot--hero{ min-height: 380px; border-radius: var(--radius-lg); }
 
         /* Hero */
         .hero{
-            padding-top: 48px; padding-bottom: 56px;
+            padding-top: 56px; padding-bottom: 64px;
             background:
                 radial-gradient(1200px 400px at 10% -10%, rgba(103,105,255,.08), transparent 60%),
                 radial-gradient(1000px 300px at 90% -20%, rgba(254,247,0,.15), transparent 60%),
@@ -132,9 +145,17 @@
             background: #FFF;
         }
         details + details{ margin-top: 12px; }
-        summary{ cursor: pointer; font-weight: 700; color: var(--ink); min-height: 44px; display: flex; align-items: center; }
-        details p{ margin-top: 10px; color: var(--muted); }
+        summary{
+            cursor: pointer; font-weight: 700; color: var(--ink);
+            min-height: 44px; display: flex; align-items: center; gap:10px;
+            position: relative; padding-right: 28px;
+        }
         .summary-h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
+        summary::after{
+            content:"+"; position:absolute; right: 6px; font-weight:900; color: var(--brand-primary);
+        }
+        details[open] summary::after{ content:"–"; }
+        details p{ margin-top: 10px; color: var(--muted); }
         summary:focus-visible,
         a.footer-link:focus-visible,
         .icon:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
@@ -144,17 +165,17 @@
         .footer-link{ color: #EDEDED; text-decoration: underline; text-underline-offset: 2px; }
         .social{ display: flex; gap: 10px; flex-wrap: wrap; }
         .icon{
-            width: 36px; height: 36px; border-radius: 999px;
+            width: 48px; height: 48px; border-radius: 999px;             /* + target size */
             background: var(--brand-primary);
             display: grid; place-items: center;
             color: #FFF; font-weight: 900;
+            transition: transform .15s ease;
         }
+        .icon:hover{ transform: translateY(-1px); }
         .footer-heading { color: #FFF; }
         .footer-muted { color: #D2D2D2; }
-        .footer-legal-container {
-            padding-top: 8px;
-        }
-        
+        .footer-legal-container { padding-top: 8px; }
+
         /* Skip link */
         .skip-link{
             position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
@@ -166,9 +187,23 @@
             outline: 3px solid #000;
         }
 
-        /* Títulos e notas de seção (sem inline styles) */
+        /* Títulos e notas */
         .grid-title{ margin-bottom: 16px; }
         .grid-note{ margin-top: 14px; color: var(--muted); }
+
+        /* Sticky CTA (mobile): mantém ação sempre visível */
+        .sticky-cta{
+            position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 999;
+            display: none;
+            background: #FFF; border: 1px solid rgba(0,0,0,.06);
+            box-shadow: var(--shadow-lg); padding: 12px;
+            border-radius: 999px; display: flex; justify-content: center;
+        }
+        .sticky-cta .cta{ width: 100%; }
+        @media (max-width: 768px){
+            .sticky-cta{ display: flex; }
+        }
+
         @media (min-width: 1440px){
             :root { --container: 1200px; }
         }
@@ -184,7 +219,7 @@
                 <p class="lead">Subtítulo / Mensagem de valor (H2 em tamanho grande).</p>
                 <div class="cluster">
                     <a href="/checkout" class="cta">Botão CTA</a>
-                    <span class="muted">Texto auxiliar curto</span>
+                    <a href="#faq" class="cta cta--ghost">Tirar dúvidas</a>
                 </div>
             </div>
             <div class="img-slot img-slot--hero" aria-hidden="true"></div>
@@ -197,14 +232,17 @@
                 <div class="card stack">
                     <h3>DESTAQUE 1 (H3)</h3>
                     <p class="muted">Parágrafo pequeno explicativo.</p>
+                    <span class="spacer"></span>
                 </div>
                 <div class="card stack">
                     <h3>DESTAQUE 2 (H3)</h3>
                     <p class="muted">Parágrafo pequeno explicativo.</p>
+                    <span class="spacer"></span>
                 </div>
                 <div class="card stack">
                     <h3>DESTAQUE 3 (H3)</h3>
                     <p class="muted">Parágrafo pequeno explicativo.</p>
+                    <span class="spacer"></span>
                 </div>
             </div>
         </section>
@@ -229,14 +267,14 @@
             <div class="container">
                 <h2 class="grid-title">GRID DE ÍCONES/CARDS (H2)</h2>
                 <div class="grid grid--4">
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
-                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
                 </div>
             </div>
         </section>
@@ -247,11 +285,13 @@
                     <h2>CAMINHO (H2)</h2>
                     <p>Parágrafo pequeno introdutório.</p>
                     <div class="img-slot img-slot--small" aria-hidden="true"></div>
+                    <span class="spacer"></span>
                 </div>
                 <div class="card stack">
                     <h2>CHÁ-REVELAÇÃO (H2)</h2>
                     <p>Parágrafo pequeno introdutório.</p>
                     <div class="img-slot img-slot--small" aria-hidden="true"></div>
+                    <span class="spacer"></span>
                 </div>
             </div>
         </section>
@@ -260,10 +300,10 @@
             <div class="container">
                 <h2 class="grid-title">TRILHA DE CONTEÚDOS (H2)</h2>
                 <div class="grid grid--4">
-                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p></div>
-                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p></div>
-                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p></div>
-                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p></div>
+                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
+                    <div class="card stack"><div class="img-slot" aria-hidden="true"></div><p class="muted">Texto abaixo do card.</p><span class="spacer"></span></div>
                 </div>
                 <p class="grid-note">Parágrafo explicativo (curto).</p>
             </div>
@@ -273,18 +313,9 @@
             <div class="container">
                 <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
                 <div class="grid grid--4">
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
+                    <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
+                    <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
+                    <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
@@ -304,6 +335,7 @@
                 <div class="card stack">
                     <h3>Destaque lateral (H3)</h3>
                     <p class="muted">Texto pequeno/observação.</p>
+                    <span class="spacer"></span>
                 </div>
             </div>
         </section>
@@ -318,6 +350,7 @@
                         <li>Item de público 3</li>
                         <li>Item de público 4</li>
                     </ul>
+                    <span class="spacer"></span>
                 </div>
                 <div class="card stack">
                     <h3>E NÃO É PARA QUEM… (H3)</h3>
@@ -327,6 +360,7 @@
                         <li>Item de recorte 3</li>
                         <li>Item de recorte 4</li>
                     </ul>
+                    <span class="spacer"></span>
                 </div>
             </div>
         </section>
@@ -341,6 +375,7 @@
                             <li>Opção 2</li>
                             <li>Opção 3</li>
                         </ul>
+                        <span class="spacer"></span>
                     </div>
                     <div class="stack">
                         <h3>Benefícios (H3)</h3>
@@ -349,6 +384,7 @@
                             <li>Benefício 2</li>
                             <li>Benefício 3</li>
                         </ul>
+                        <span class="spacer"></span>
                     </div>
                     <div class="stack cta-center">
                         <a href="/checkout" class="cta">Quero fazer parte</a>
@@ -362,17 +398,13 @@
             <div class="container">
                 <h2 class="grid-title">DEPOIMENTOS VISUAIS (H2)</h2>
                 <div class="grid grid--3">
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
-                    <div class="img-slot" aria-hidden="true"></div>
+                    <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
+                    <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="faq">
             <div class="container">
                 <h2 class="grid-title">FAQ (H2)</h2>
                 <details>
@@ -390,6 +422,10 @@
             </div>
         </section>
     </main>
+
+    <div class="sticky-cta">
+        <a href="/checkout" class="cta">Quero fazer parte</a>
+    </div>
 
     <footer class="section">
         <div class="container grid grid--3">
