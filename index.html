@@ -125,13 +125,13 @@
       text-align:center; padding:16px;
     }
 
-    /* ===== HERO (vídeo/foto protagonista) ===== */
+    /* ===== HERO ===== */
     .hero{
       padding-top: 40px; padding-bottom: 48px;
       background: var(--bg);
       position: relative; overflow: hidden;
     }
-    /* (ATENÇÃO) Removido glow amarelo do hero: não há ::after */
+    /* (Glow removido) */
 
     .hero-grid{ display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
     @media (min-width:1024px){
@@ -144,37 +144,6 @@
       h1{ line-height:1.18; }
       .hero{ padding-top: 36px; }
     }
-
-    /* ===== FAQ (estético, alinhado ao novo estilo who/whonot) ===== */
-    details{
-      border-radius: 16px;
-      padding: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.9));
-      box-shadow: 0 10px 28px rgba(0,0,0,.08);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid transparent;
-      background-clip: padding-box, border-box;
-      background-origin: border-box;
-      /* borda em gradiente */
-      --faq-border: linear-gradient(135deg, rgba(103,105,255,.55), rgba(254,247,0,.55));
-      background-image: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.92)), var(--faq-border);
-    }
-    details + details{ margin-top: 12px; }
-    summary{
-      cursor: pointer; font-weight:700; color:var(--ink);
-      min-height:60px; display:flex; align-items:center; gap:12px;
-      padding: 16px 18px;
-      position:relative; list-style:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    .summary-h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
-    .chev{ margin-left:auto; transition: transform .25s ease; color: var(--brand-primary); font-weight:900; }
-    details[open] .chev{ transform: rotate(90deg) scale(1.05); }
-    details[open]{ box-shadow: 0 16px 40px rgba(0,0,0,.12); }
-    details p{ padding: 0 18px 16px 18px; color:var(--ink); }
-
-    summary:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
 
     /* ===== Rodapé ===== */
     footer{
@@ -227,29 +196,23 @@
       .grid-note{ margin-top: 10px; margin-bottom: 16px; }
     }
 
-    /* Sticky CTA (sem alterações além das anteriores aprovadas) */
+    /* Sticky CTA (fixo, sem botão Fechar) */
     .sticky-cta{
-      position: fixed; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom));
+      position: fixed; left: 16px; right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom));
       z-index: 999;
-      display: none; align-items:center; gap:10px;
+      display: none; justify-content:center;
       background: #FFFFFFE6;
       border: 1px solid rgba(0,0,0,.06);
-      padding: 10px 10px 10px 12px;
+      padding: 12px;
       border-radius: 999px;
       box-shadow: var(--shadow-lg);
       backdrop-filter: blur(8px);
     }
-    .sticky-cta .cta{ flex:1 1 auto; }
-    .sticky-cta .cta-close{
-      appearance: none; border:0; background: transparent; color:#111;
-      width: 36px; height: 36px; border-radius: 999px; cursor: pointer;
-      display:grid; place-items:center; font-weight:900;
-    }
-    .sticky-cta .cta-close:hover{ background:#0000000f; }
-    .sticky-cta .cta-close:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 2px; }
+    .sticky-cta .cta{ width:100%; }
     @media (max-width:768px){ .sticky-cta{ display:flex; } }
 
-    /* ===== PROGRESSO DE LEITURA / DOTS / CARROSSEL / REVEAL ===== */
+    /* ===== PROGRESSO / DOTS / CARROSSEL / REVEAL ===== */
     .progress-wrap{ position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 1000; background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08)); backdrop-filter: blur(2px); }
     .progress-bar{ height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); transition: width .08s linear; }
 
@@ -274,7 +237,7 @@
     .reveal.in{ opacity:1; transform: translateY(0) scale(1); }
     .pulse:hover{ box-shadow: 0 14px 30px rgba(254,247,0,.22), 0 6px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
 
-    /* ===== NOVO ESTILO “PARA QUEM É / NÃO É” (glass + gradiente, micro-interações) ===== */
+    /* ===== “PARA QUEM É / NÃO É” (glass + gradiente) ===== */
     .who-wrap{ display:grid; gap:20px; }
     @media (min-width: 860px){ .who-wrap{ grid-template-columns: 1fr 1fr; } }
 
@@ -327,7 +290,41 @@
     }
     .who-item:hover::before, .whonot-item:hover::before{ width:10px; }
 
-    /* FAQ “harmonizado” com who/whonot: já está com card glass + borda gradiente acima */
+    /* ===== FAQ (harmonizado com who/whonot) ===== */
+    .faq-grid{
+      display:grid; gap:16px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 860px){
+      .faq-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    details{
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.92));
+      box-shadow: 0 12px 32px rgba(0,0,0,.09);
+      border: 1px solid transparent;
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      --faq-border: linear-gradient(135deg, rgba(103,105,255,.65), rgba(254,247,0,.55));
+      background-image: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95)), var(--faq-border);
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    details:hover{ transform: translateY(-1px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+    summary{
+      cursor: pointer; font-weight:700; color:var(--ink);
+      min-height:60px; display:flex; align-items:center; gap:12px;
+      padding: 16px 18px;
+      position:relative; list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .summary-h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
+    .chev{ margin-left:auto; transition: transform .25s ease; color: var(--brand-primary); font-weight:900; }
+    details[open] .chev{ transform: rotate(90deg) scale(1.05); }
+    details[open]{ box-shadow: 0 18px 44px rgba(0,0,0,.12); }
+    details p{ padding: 0 18px 16px 18px; color:var(--ink); }
+    summary:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
+
   </style>
 </head>
 <body>
@@ -336,20 +333,19 @@
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- ================= HERO (sem CTA e sem glow amarelo) ================= -->
+  <!-- ================= HERO (sem CTA e sem glow) ================= -->
   <header class="hero" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Texto do hero">
         <h1>TÍTULO PRINCIPAL (H1)</h1>
         <p class="lead">Subtítulo / Mensagem de valor (H2 em tamanho grande).</p>
-        <!-- CTA removido aqui conforme solicitado -->
       </div>
       <div class="media-slot" aria-hidden="true">VÍDEO/FOTO HERO</div>
     </div>
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <!-- ============ (demais seções mantidas) ============ -->
+    <!-- ============ Demais seções mantidas ============ -->
     <section class="section" id="sec-destaques">
       <div class="container grid grid--3">
         <div class="card stack reveal pulse"><h3>DESTAQUE 1 (H3)</h3><p>Parágrafo pequeno explicativo.</p></div>
@@ -472,10 +468,9 @@
       </div>
     </section>
 
-    <!-- ============ NOVO “PARA QUEM É / NÃO É” (somente UX/estilo/anim.) ============ -->
+    <!-- ============ Para quem é / Não é ============ -->
     <section class="section" id="sec-who-group">
       <div class="container who-wrap">
-        <!-- Para quem é -->
         <div class="who-col reveal">
           <div class="who-title">
             <div class="who-badge" aria-hidden="true">✓</div>
@@ -487,13 +482,11 @@
             <li class="who-item">Item de público 3</li>
             <li class="who-item">Item de público 4</li>
           </ul>
-          <!-- Mantém CTA APENAS neste bloco -->
           <div class="cluster" style="margin-top:12px">
             <a href="/checkout" class="cta">Quero fazer parte</a>
           </div>
         </div>
 
-        <!-- Não é para quem (sem CTA) -->
         <div class="who-col reveal">
           <div class="who-title">
             <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
@@ -509,33 +502,38 @@
       </div>
     </section>
 
-    <!-- ============ FAQ (harmonizado com who/whonot) ============ -->
+    <!-- ============ FAQ (agora em grid + estilo glass/gradiente) ============ -->
     <section class="section" id="faq">
       <div class="container">
         <h2 class="grid-title">FAQ (H2)</h2>
-        <details class="reveal">
-          <summary class="summary-h3">Pergunta 1 <span class="chev">›</span></summary>
-          <p>Resposta em parágrafo pequeno.</p>
-        </details>
-        <details class="reveal">
-          <summary class="summary-h3">Pergunta 2 <span class="chev">›</span></summary>
-          <p>Resposta em parágrafo pequeno.</p>
-        </details>
-        <details class="reveal">
-          <summary class="summary-h3">Pergunta 3 <span class="chev">›</span></summary>
-          <p>Resposta em parágrafo pequeno.</p>
-        </details>
+        <div class="faq-grid">
+          <details class="reveal">
+            <summary class="summary-h3">Pergunta 1 <span class="chev">›</span></summary>
+            <p>Resposta em parágrafo pequeno.</p>
+          </details>
+          <details class="reveal">
+            <summary class="summary-h3">Pergunta 2 <span class="chev">›</span></summary>
+            <p>Resposta em parágrafo pequeno.</p>
+          </details>
+          <details class="reveal">
+            <summary class="summary-h3">Pergunta 3 <span class="chev">›</span></summary>
+            <p>Resposta em parágrafo pequeno.</p>
+          </details>
+          <details class="reveal">
+            <summary class="summary-h3">Pergunta 4 <span class="chev">›</span></summary>
+            <p>Resposta em parágrafo pequeno.</p>
+          </details>
+        </div>
       </div>
     </section>
   </main>
 
-  <!-- Sticky CTA Mobile (com fechar) -->
+  <!-- Sticky CTA Mobile (fixo, sem fechar) -->
   <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
     <a href="/checkout" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
-    <button class="cta-close" id="stickyClose" aria-label="Fechar botão flutuante">×</button>
   </div>
 
-  <!-- Dots laterais (sem alterações) -->
+  <!-- Dots laterais -->
   <nav class="scroll-dots" aria-label="Progresso da página">
     <button data-target="#sec-hero" aria-label="Hero"></button>
     <button data-target="#sec-destaques" aria-label="Destaques"></button>
@@ -581,9 +579,9 @@
     </div>
   </footer>
 
-  <!-- Scripts (mesmos de antes + sticky close) -->
+  <!-- Scripts: progresso, dots, reveal, FAQ (um aberto), carrossel -->
   <script>
-    // Barra de progresso (rAF throttle)
+    // Barra de progresso
     (function(){
       const bar = document.getElementById('progressBar');
       let ticking = false;
@@ -671,19 +669,6 @@
       const handle = () => { mq.matches ? start() : stop(); };
       mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
       handle();
-    })();
-
-    // Sticky CTA: fechar + persistência na sessão
-    (function(){
-      const bar = document.getElementById('stickyCta');
-      const closeBtn = document.getElementById('stickyClose');
-      const KEY = 'stickyCtaClosed';
-      const hide = ()=> { bar.style.display='none'; sessionStorage.setItem(KEY, '1'); };
-      if (sessionStorage.getItem(KEY) === '1'){ hide(); }
-      closeBtn.addEventListener('click', hide);
-      document.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape' && bar.style.display !== 'none'){ hide(); }
-      });
     })();
   </script>
 </body>
