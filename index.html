@@ -130,13 +130,13 @@
       text-align:center; padding:16px;
     }
 
-    /* ===== HERO ===== (vídeo/foto protagonista na dobra) */
+    /* ===== HERO (vídeo/foto protagonista) ===== */
     .hero{
       padding-top: 40px; padding-bottom: 48px;
       background: var(--bg);
       position: relative; overflow: hidden;
     }
-    /* Acento amarelo animado no fundo do hero */
+    /* Acento amarelo animado (suavizado em mobile) */
     .hero::after{
       content:""; position:absolute; right:-8%; top:-12%;
       width: 540px; height: 540px; border-radius: 50%;
@@ -149,6 +149,12 @@
       0%   { transform: translate(0,0) scale(1);   opacity:.55; }
       100% { transform: translate(-4%,6%) scale(1.08); opacity:.7; }
     }
+    @media (max-width:640px){
+      .hero::after{ width:380px; height:380px; opacity:.45; right:-14%; top:-18%; filter: blur(14px); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .hero::after{ animation: none !important; }
+    }
 
     .hero-grid{ display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
     @media (min-width:1024px){
@@ -158,7 +164,7 @@
       .media-slot, .img-slot--hero{ min-height: 320px; }
     }
     @media (max-width:360px){
-      h1{ line-height:1.2; }
+      h1{ line-height:1.18; }
       .hero{ padding-top: 36px; }
     }
 
@@ -189,7 +195,7 @@
       outline: 3px solid var(--brand-primary); outline-offset: 3px;
     }
 
-    /* ===== Rodapé: mashup roxo→amarelo ===== */
+    /* ===== Rodapé: mashup roxo→amarelo (contraste reforçado) ===== */
     footer{
       background:
         linear-gradient(135deg, #222456 0%, #6769FF 40%, #b8b62a 75%, #FEF700 100%);
@@ -198,11 +204,13 @@
     }
     footer::before{
       content:""; position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.15));
+      background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.20));
       pointer-events:none;
     }
     footer .container{ position:relative; }
     .footer-link{ color:#FFFFFF; text-decoration: underline; text-underline-offset:2px; }
+    .footer-link:hover{ text-decoration-thickness: 2px; }
+    .footer-link:focus-visible{ outline: 3px solid #fff; outline-offset: 2px; }
     .social{ display:flex; gap:10px; flex-wrap:wrap; }
     .icon{
       width:48px; height:48px; border-radius:999px;
@@ -228,30 +236,37 @@
 
     /* Títulos e notas */
     .grid-title{ margin-bottom: 6px; }
-    .grid-note{ margin-top: 4px; margin-bottom: 12px; color: var(--muted); }
+    .grid-note{
+      margin-top: 6px; margin-bottom: 12px; color: var(--ink);
+      font-size: clamp(14px, 1.2vw + 10px, 17px);
+      border-left: 4px solid var(--brand-accent);
+      padding-left: 10px;
+    }
+    @media (max-width:640px){
+      .grid-note{ margin-top: 10px; margin-bottom: 16px; }
+    }
 
-    /* Sticky CTA mobile */
+    /* Sticky CTA (com fechar e área segura) */
     .sticky-cta{
-      position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 999;
-      display: none;
+      position: fixed; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom));
+      z-index: 999;
+      display: none; align-items:center; gap:10px;
       background: #FFFFFFE6;
       border: 1px solid rgba(0,0,0,.06);
-      padding: 12px;
-      border-radius: 999px; display: flex; justify-content: center;
+      padding: 10px 10px 10px 12px;
+      border-radius: 999px;
       box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(8px);
     }
-    .sticky-cta .cta{ width: 100%; }
-    @media (max-width:768px){
-      .sticky-cta{
-        display:flex;
-        padding-bottom: calc(12px + env(safe-area-inset-bottom));
-        backdrop-filter: blur(8px);
-        background: color-mix(in oklab, #ffffff 85%, transparent);
-      }
+    .sticky-cta .cta{ flex:1 1 auto; }
+    .sticky-cta .cta-close{
+      appearance: none; border:0; background: transparent; color:#111;
+      width: 36px; height: 36px; border-radius: 999px; cursor: pointer;
+      display:grid; place-items:center; font-weight:900;
     }
-    @supports (height: 100dvh){
-      .sticky-cta{ bottom: calc(16px + env(safe-area-inset-bottom)); }
-    }
+    .sticky-cta .cta-close:hover{ background:#0000000f; }
+    .sticky-cta .cta-close:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 2px; }
+    @media (max-width:768px){ .sticky-cta{ display:flex; } }
 
     /* ===== PROGRESSO DE LEITURA ===== */
     .progress-wrap{
@@ -265,17 +280,18 @@
       transition: width .08s linear;
     }
 
-    /* Dots laterais */
+    /* Dots laterais (melhor foco/hit-area) */
     .scroll-dots{
       position: fixed; right: 12px; top: 46%; transform: translateY(-50%);
       display: none; flex-direction: column; gap: 10px; z-index: 997; opacity:.9;
     }
     .scroll-dots button{
-      width: 9px; height: 9px; border-radius: 50%;
+      width: 11px; height: 11px; border-radius: 50%;
       border: 2px solid rgba(103,105,255,.6); background: #fff;
       padding: 0; cursor: pointer;
     }
     .scroll-dots button[aria-current="true"]{ background: var(--brand-primary); border-color: var(--brand-primary); }
+    .scroll-dots button:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 2px; }
     @media (min-width:1024px){ .scroll-dots{ display:flex; } }
 
     /* ===== Carrossel mobile: ícones/cards ===== */
@@ -288,6 +304,9 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       padding-bottom: 8px;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x pan-y;
+      scroll-padding-left: 12px;
     }
     .carousel > .card{ scroll-snap-align: start; }
     @media (min-width:640px){ .carousel{ display:none; } }
@@ -321,8 +340,15 @@
     .who-item::before, .whonot-item::before{
       content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
       background: linear-gradient(180deg, #3bb273, #9be2bf);
+      filter: saturate(1.2) brightness(1.05);
     }
-    .whonot-item::before{ background: linear-gradient(180deg, #d13b52, #f3a8b3); }
+    .whonot-item::before{
+      background: linear-gradient(180deg, #d13b52, #f3a8b3);
+      filter: saturate(1.2) brightness(1.05);
+    }
+
+    /* Ritmo entre seções após CTA 2 */
+    #sec-cta-mid-2 + .section{ padding-top: 40px; }
   </style>
 </head>
 <body>
@@ -331,7 +357,7 @@
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- ================= HERO (1 CTA, amarelo animado ao fundo) ================= -->
+  <!-- ================= HERO ================= -->
   <header class="hero" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Texto do hero">
@@ -399,7 +425,7 @@
         <h2 class="grid-title">GRID DE ÍCONES/CARDS (H2)</h2>
         <p class="grid-note">Legenda breve do grid (placeholder).</p>
 
-        <!-- Mobile: carrossel com scroll-snap e sombra amarela no hover -->
+        <!-- Mobile: carrossel -->
         <div class="carousel" id="iconsCarousel" aria-label="Recursos (carrossel)">
           <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
           <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
@@ -479,7 +505,7 @@
       </div>
     </section>
 
-    <!-- ============ Seção combinada: Para quem é / Não é (lista vertical fluida) ============ -->
+    <!-- ============ Seção combinada: Para quem é / Não é ============ -->
     <section class="section" id="sec-who-group">
       <div class="container who-wrap">
         <!-- Para quem é -->
@@ -524,12 +550,11 @@
     </section>
   </main>
 
-  <!-- Sticky CTA Mobile (mantido) -->
-  <div class="sticky-cta" aria-hidden="false">
+  <!-- Sticky CTA Mobile (com fechar) -->
+  <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
     <a href="/checkout" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
+    <button class="cta-close" id="stickyClose" aria-label="Fechar botão flutuante">×</button>
   </div>
-
-  <!-- (CTA flutuante desktop removido para evitar duplicidade na primeira etapa) -->
 
   <!-- Dots laterais -->
   <nav class="scroll-dots" aria-label="Progresso da página">
@@ -547,7 +572,7 @@
     <button data-target="#faq" aria-label="FAQ"></button>
   </nav>
 
-  <!-- ================= RODAPÉ (mashup roxo→amarelo) ================= -->
+  <!-- ================= RODAPÉ ================= -->
   <footer class="section">
     <div class="container grid grid--3">
       <div class="stack">
@@ -577,7 +602,7 @@
     </div>
   </footer>
 
-  <!-- Scripts: progresso, dots, reveal, FAQ (um aberto), carrossel auto-scroll -->
+  <!-- Scripts: progresso, dots, reveal, FAQ (um aberto), carrossel, sticky close -->
   <script>
     // Barra de progresso (rAF throttle)
     (function(){
@@ -597,7 +622,7 @@
       onScroll();
     })();
 
-    // Dots laterais
+    // Dots laterais + navegação suave
     (function(){
       const dots = Array.from(document.querySelectorAll('.scroll-dots button'));
       const targets = dots.map(btn => document.querySelector(btn.dataset.target)).filter(Boolean);
@@ -667,6 +692,19 @@
       const handle = () => { mq.matches ? start() : stop(); };
       mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
       handle();
+    })();
+
+    // Sticky CTA: fechar (botão e tecla Esc) + persistência na sessão
+    (function(){
+      const bar = document.getElementById('stickyCta');
+      const closeBtn = document.getElementById('stickyClose');
+      const KEY = 'stickyCtaClosed';
+      const hide = ()=> { bar.style.display='none'; sessionStorage.setItem(KEY, '1'); };
+      if (sessionStorage.getItem(KEY) === '1'){ hide(); }
+      closeBtn.addEventListener('click', hide);
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape' && bar.style.display !== 'none'){ hide(); }
+      });
     })();
   </script>
 </body>
