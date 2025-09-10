@@ -84,8 +84,6 @@
     h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
     .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink); }
     .muted{ color: var(--muted); font-size: var(--step--1); }
-
-    /* Em fundo amarelo, títulos escuros para contraste */
     .section--accent h2, .section--accent h3 { color: var(--ink-strong); }
 
     /* CTAs */
@@ -101,10 +99,7 @@
     .cta:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
     .cta:active{ transform: translateY(0); }
     .cta:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
-    .cta--ghost{
-      background: transparent; color: var(--brand-primary);
-      border: 2px solid rgba(103,105,255,.35);
-    }
+    .cta--ghost{ background: transparent; color: var(--brand-primary); border: 2px solid rgba(103,105,255,.35); }
     .cta--dark{ background:#111; color:#fff; border-color:#111; }
 
     /* Slots de mídia/imagética */
@@ -118,15 +113,14 @@
       text-align:center;
       padding:16px; user-select:none;
     }
-    /* define proporção para evitar CLS quando trocar por imagens reais */
-    .img-slot:not(.img-slot--hero){ aspect-ratio: 4 / 3; }
+    .img-slot:not(.img-slot--hero){ aspect-ratio: 4 / 3; } /* evita CLS */
     .img-slot--small{ min-height: 120px; }
     .img-slot--hero{ min-height: 400px; border-radius: var(--radius-lg); }
 
-    /* Slot específico para vídeo no hero */
+    /* Slot “vídeo/mockup” com look de media */
     .media-slot{
       border-radius: var(--radius-lg);
-      min-height: 400px;
+      min-height: 440px;
       background:
         linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,0)),
         linear-gradient(135deg, rgba(103,105,255,.15), rgba(254,247,0,.15));
@@ -134,7 +128,6 @@
       display:grid; place-items:center; color:var(--muted);
       text-align:center; padding:16px;
     }
-    .media-slot--hero{ min-height: 440px; }
 
     /* Hero */
     .hero{
@@ -172,7 +165,7 @@
 
     /* Rodapé */
     footer{ background: #0E0F2B; color:#EDEDED; }
-    .footer-link{ color:#EDEDED; text-decoration:underline; text-underline-offset:2px; }
+    .footer-link{ color:#EDEDED; text-decoration: underline; text-underline-offset:2px; }
     .footer-link:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
     .social{ display:flex; gap:10px; flex-wrap:wrap; }
     .icon{
@@ -228,16 +221,55 @@
     }
     @media (min-width:1024px){ .float-cta{ display:block; } }
 
+    /* ===== PROGRESSO DE LEITURA ===== */
+    .progress-wrap{
+      position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 1000;
+      background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
+      backdrop-filter: blur(2px);
+    }
+    .progress-bar{
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+      transition: width .08s linear;
+    }
+
+    /* Dots laterais (navegação por seções) */
+    .scroll-dots{
+      position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+      display: none; flex-direction: column; gap: 10px; z-index: 997;
+    }
+    .scroll-dots button{
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid rgba(103,105,255,.6); background: #fff;
+      padding: 0; cursor: pointer;
+    }
+    .scroll-dots button[aria-current="true"]{ background: var(--brand-primary); border-color: var(--brand-primary); }
+    .scroll-dots button:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 2px; }
+    @media (min-width:1024px){ .scroll-dots{ display:flex; } }
+
+    /* ===== ÍCONES nas seções “Para quem é / Não é” ===== */
+    .who .icon-mark, .who-not .icon-ban{
+      display:inline-grid; place-items:center;
+      width: 36px; height: 36px; border-radius: 50%;
+      font-weight: 900; margin-right: 10px; flex: 0 0 auto;
+    }
+    .who .icon-mark{ background: #E9FBEE; color: #0A7B33; border:1px solid #B4E8C7; }
+    .who-not .icon-ban{ background: #FDEBEC; color: #B00020; border:1px solid #F5C2C7; }
+    .who .title-row, .who-not .title-row{ display:flex; align-items:center; gap: 8px; }
+
     @media (min-width:1440px){
       :root { --container: 1200px; }
     }
   </style>
 </head>
 <body>
+  <!-- Barra de progresso -->
+  <div class="progress-wrap" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- ================= HERO ================= -->
-  <header class="hero">
+  <header class="hero" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Área textual do hero">
         <h1>TÍTULO PRINCIPAL (H1)</h1>
@@ -248,17 +280,16 @@
         </div>
       </div>
 
-      <!-- SLOT PARA VÍDEO/MOCKUP DO PRODUTO (executar depois) -->
-      <!-- Ex.: <video autoplay loop muted playsinline src="hero-demo.mp4"></video> -->
-      <div class="media-slot media-slot--hero" aria-hidden="true">
-        Slot de VÍDEO/MOCKUP do HERO (substituir por <video> ou imagem animada)
+      <!-- SLOT DE VÍDEO/MOCKUP HERO (substituir por <video> ou imagem animada) -->
+      <div class="media-slot" aria-hidden="true">
+        Slot de VÍDEO/MOCKUP do HERO
       </div>
     </div>
   </header>
 
   <main id="conteudo" tabindex="-1">
     <!-- ============ Destaques (3 colunas) ============ -->
-    <section class="section">
+    <section class="section" id="sec-destaques">
       <div class="container grid grid--3">
         <div class="card stack">
           <h3>DESTAQUE 1 (H3)</h3>
@@ -278,23 +309,21 @@
       </div>
     </section>
 
-    <!-- ============ Banda alternada: texto + mockup comunidade ============ -->
-    <section class="section section--soft" id="mockup-comunidade">
+    <!-- ============ Visão da comunidade (texto + mockup) ============ -->
+    <section class="section section--soft" id="sec-comunidade">
       <div class="container grid grid--2">
         <div class="stack">
           <h2>VISÃO DA COMUNIDADE (H2)</h2>
           <p>Parágrafo curto: onde fica o conteúdo, estrutura, módulos (placeholder).</p>
           <a href="/checkout" class="cta">Quero fazer parte</a>
         </div>
-        <!-- SLOT PARA MOCKUP DO DASHBOARD/PLATAFORMA -->
-        <div class="img-slot" aria-hidden="true">
-          Slot para MOCKUP da Comunidade (tela/dashboard)
-        </div>
+        <!-- SLOT MOCKUP DASHBOARD/PLATAFORMA -->
+        <div class="img-slot" aria-hidden="true">Mockup da Comunidade (tela/dashboard)</div>
       </div>
     </section>
 
     <!-- ============ O que tem dentro (H2 + lista) ============ -->
-    <section class="section">
+    <section class="section" id="sec-conteudo">
       <div class="container grid grid--2">
         <div class="stack">
           <h2>SEÇÃO: O QUE TEM DENTRO (H2)</h2>
@@ -306,14 +335,12 @@
             <li>Bullet 4 (texto pequeno)</li>
           </ul>
         </div>
-        <div class="img-slot" aria-hidden="true">
-          Slot para IMAGEM ilustrando um módulo específico
-        </div>
+        <div class="img-slot" aria-hidden="true">Imagem de um módulo (placeholder)</div>
       </div>
     </section>
 
     <!-- ============ CTA Intermediário (quebra visual) ============ -->
-    <section class="section section--accent">
+    <section class="section section--accent" id="sec-cta-mid">
       <div class="container stack" style="align-items:flex-start;">
         <h2>PRONTO PARA ESCALAR SUA PRODUÇÃO? (H2)</h2>
         <p class="muted" style="color:#2A2A2A;">Placeholder de reforço rápido (benefício/garantia).</p>
@@ -325,7 +352,7 @@
     </section>
 
     <!-- ============ Grid de ícones/cards (6–8) ============ -->
-    <section class="section">
+    <section class="section" id="sec-grid">
       <div class="container">
         <h2 class="grid-title">GRID DE ÍCONES/CARDS (H2)</h2>
         <p class="grid-note">Legenda breve do grid (placeholder).</p>
@@ -342,13 +369,11 @@
       </div>
     </section>
 
-    <!-- ============ Banda alternada: “feed que não para” ============ -->
-    <section class="section section--soft" id="feed-infinito">
+    <!-- ============ Banda alternada: feed infinito ============ -->
+    <section class="section section--soft" id="sec-feed">
       <div class="container grid grid--2">
-        <!-- SLOT PARA VÍDEO curto do feed gerando posts (executar depois) -->
-        <div class="media-slot" aria-hidden="true">
-          Slot de VÍDEO curto (feed/galeria gerando conteúdo automaticamente)
-        </div>
+        <!-- SLOT VÍDEO curto (executar depois) -->
+        <div class="media-slot" aria-hidden="true">Vídeo curto: feed criando posts (placeholder)</div>
         <div class="stack">
           <h2>ALIMENTAÇÃO CONTÍNUA (H2)</h2>
           <p>Placeholder: mostra o feed de conteúdos sendo criado/organizado.</p>
@@ -358,7 +383,7 @@
     </section>
 
     <!-- ============ Trilha de conteúdos (4 cards) ============ -->
-    <section class="section">
+    <section class="section" id="sec-trilha">
       <div class="container">
         <h2 class="grid-title">TRILHA DE CONTEÚDOS (H2)</h2>
         <p class="grid-note">Legenda breve da trilha (placeholder).</p>
@@ -371,13 +396,13 @@
       </div>
     </section>
 
-    <!-- ============ Conteúdos variados (galeria viva) ============ -->
-    <section class="section section--soft">
+    <!-- ============ Conteúdos variados (galeria) ============ -->
+    <section class="section section--soft" id="sec-galeria">
       <div class="container">
         <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
         <p class="grid-note">Coloque aqui capas reais de aulas, templates ou carrosséis.</p>
         <div class="grid grid--4">
-          <!-- 12 slots para capas -->
+          <!-- 12 slots -->
           <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
           <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
           <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
@@ -385,11 +410,14 @@
       </div>
     </section>
 
-    <!-- ============ Para quem é / não é ============ -->
-    <section class="section section--accent">
+    <!-- ============ Para quem é / Não é (com ícones) ============ -->
+    <section class="section section--accent" id="sec-who">
       <div class="container grid grid--2">
-        <div class="stack">
-          <h2>PARA QUEM É (H2)</h2>
+        <div class="stack who">
+          <div class="title-row">
+            <span class="icon-mark" aria-hidden="true">✓</span>
+            <h2>PARA QUEM É (H2)</h2>
+          </div>
           <ul>
             <li>Item de público 1</li>
             <li>Item de público 2</li>
@@ -397,8 +425,11 @@
             <li>Item de público 4</li>
           </ul>
         </div>
-        <div class="stack">
-          <h3>E NÃO É PARA QUEM… (H3)</h3>
+        <div class="stack who-not">
+          <div class="title-row">
+            <span class="icon-ban" aria-hidden="true">⊘</span>
+            <h3>E NÃO É PARA QUEM… (H3)</h3>
+          </div>
           <ul>
             <li>Item de recorte 1</li>
             <li>Item de recorte 2</li>
@@ -410,7 +441,7 @@
     </section>
 
     <!-- ============ Oferta / CTA final ============ -->
-    <section class="section">
+    <section class="section" id="sec-oferta">
       <div class="container card">
         <div class="grid grid--3">
           <div class="stack">
@@ -439,14 +470,12 @@
       </div>
     </section>
 
-    <!-- ============ Depoimentos (ESPAÇO reservado p/ vídeo/carrossel) ============ -->
-    <section class="section section--soft" id="depoimentos">
+    <!-- ============ Depoimentos (slot p/ carrossel/vídeo) ============ -->
+    <section class="section section--soft" id="sec-depoimentos">
       <div class="container">
         <h2 class="grid-title">DEPOIMENTOS (H2)</h2>
-        <!-- SLOT CARROSSEL/GRID DEPOIMENTOS (executar depois) -->
-        <!-- Sugestão: carrossel com 1–2 vídeos curtos + 3–6 thumbs/prints -->
         <div class="img-slot" aria-hidden="true">
-          Espaço para CARROSSEL/VIDEOS DEPOIMENTOS (substituir por componente depois)
+          Espaço para CARROSSEL/VÍDEOS DEPOIMENTOS (substituir por componente depois)
         </div>
       </div>
     </section>
@@ -481,6 +510,24 @@
     <a href="/checkout" class="cta">Entrar agora</a>
   </div>
 
+  <!-- Dots laterais (navegação por seções) -->
+  <nav class="scroll-dots" aria-label="Progresso da página">
+    <!-- Dots ordenados pelas seções principais -->
+    <button data-target="#sec-hero" aria-label="Hero"></button>
+    <button data-target="#sec-destaques" aria-label="Destaques"></button>
+    <button data-target="#sec-comunidade" aria-label="Comunidade"></button>
+    <button data-target="#sec-conteudo" aria-label="O que tem dentro"></button>
+    <button data-target="#sec-cta-mid" aria-label="CTA Intermediário"></button>
+    <button data-target="#sec-grid" aria-label="Grid Ícones"></button>
+    <button data-target="#sec-feed" aria-label="Feed Contínuo"></button>
+    <button data-target="#sec-trilha" aria-label="Trilha"></button>
+    <button data-target="#sec-galeria" aria-label="Galeria"></button>
+    <button data-target="#sec-who" aria-label="Para quem é / Não é"></button>
+    <button data-target="#sec-oferta" aria-label="Oferta"></button>
+    <button data-target="#sec-depoimentos" aria-label="Depoimentos"></button>
+    <button data-target="#faq" aria-label="FAQ"></button>
+  </nav>
+
   <!-- ================= RODAPÉ ================= -->
   <footer class="section">
     <div class="container grid grid--3">
@@ -510,8 +557,53 @@
     </div>
   </footer>
 
-  <!-- FAQ: permitir apenas um aberto por vez (leve e acessível) -->
+  <!-- Scripts leves: progresso, dots, FAQ (um aberto) -->
   <script>
+    // Barra de progresso no topo
+    (function(){
+      const bar = document.getElementById('progressBar');
+      const onScroll = () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = docHeight ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = progress + '%';
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    // Dots laterais: clicar rola para a seção; acende dot da seção visível
+    (function(){
+      const dots = Array.from(document.querySelectorAll('.scroll-dots button'));
+      const targets = dots.map(btn => document.querySelector(btn.dataset.target)).filter(Boolean);
+
+      // Clique navega até a seção
+      dots.forEach((btn, i) => {
+        btn.addEventListener('click', () => {
+          const el = document.querySelector(btn.dataset.target);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // Observa qual seção está em foco
+      if ('IntersectionObserver' in window){
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting){
+              const idx = targets.indexOf(entry.target);
+              if (idx > -1){
+                dots.forEach(d => d.setAttribute('aria-current', 'false'));
+                dots[idx].setAttribute('aria-current', 'true');
+              }
+            }
+          });
+        }, { root: null, rootMargin: '0px 0px -55% 0px', threshold: 0.0 });
+
+        targets.forEach(t => io.observe(t));
+      }
+    })();
+
+    // FAQ: apenas um aberto por vez
     (function(){
       const containers = document.querySelectorAll('#faq .container');
       containers.forEach(container => {
