@@ -18,9 +18,9 @@
     :root{
       --brand-primary: #6769FF;   /* roxo (marca) */
       --brand-accent:  #FEF700;   /* amarelo (acento) */
-      --ink-strong:    #111111;   /* títulos fortes e lead do hero */
-      --ink:           #2A2A2A;   /* corpo de texto */
-      --muted:         #6B6B6B;   /* notas/legendas */
+      --ink-strong:    #111111;
+      --ink:           #2A2A2A;
+      --muted:         #6B6B6B;
       --bg:            #FFFFFF;
       --bg-soft:       #F7F8FF;
       --radius:        14px;
@@ -86,7 +86,7 @@
     .muted{ color: var(--muted); font-size: var(--step--1); }
     .section--accent h2, .section--accent h3, .section--accent p { color: var(--ink-strong); }
 
-    /* CTA — roxo + halo amarelo */
+    /* CTA — roxo + halo amarelo (mantido para as demais seções) */
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
@@ -97,14 +97,9 @@
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, opacity .15s ease;
       white-space:nowrap; cursor: pointer;
     }
-    .cta:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 0 0 4px rgba(254,247,0,.35);
-      border-color: color-mix(in oklab, var(--brand-accent) 50%, transparent);
-    }
+    .cta:hover{ transform: translateY(-1px); box-shadow: 0 0 0 4px rgba(254,247,0,.35); }
     .cta:active{ transform: translateY(0); }
     .cta:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
-    .cta[aria-busy="true"], .cta[disabled]{ opacity:.7; cursor: not-allowed; transform:none; box-shadow:none; }
 
     /* Slots de mídia */
     .img-slot{
@@ -136,25 +131,7 @@
       background: var(--bg);
       position: relative; overflow: hidden;
     }
-    /* Acento amarelo animado (suavizado em mobile) */
-    .hero::after{
-      content:""; position:absolute; right:-8%; top:-12%;
-      width: 540px; height: 540px; border-radius: 50%;
-      background: radial-gradient(closest-side, rgba(254,247,0,.55), rgba(254,247,0,.0) 70%);
-      filter: blur(18px);
-      animation: floatGlow 9s ease-in-out infinite alternate;
-      pointer-events:none;
-    }
-    @keyframes floatGlow{
-      0%   { transform: translate(0,0) scale(1);   opacity:.55; }
-      100% { transform: translate(-4%,6%) scale(1.08); opacity:.7; }
-    }
-    @media (max-width:640px){
-      .hero::after{ width:380px; height:380px; opacity:.45; right:-14%; top:-18%; filter: blur(14px); }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .hero::after{ animation: none !important; }
-    }
+    /* (ATENÇÃO) Removido glow amarelo do hero: não há ::after */
 
     .hero-grid{ display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
     @media (min-width:1024px){
@@ -168,34 +145,38 @@
       .hero{ padding-top: 36px; }
     }
 
-    /* ===== FAQ (estético) ===== */
+    /* ===== FAQ (estético, alinhado ao novo estilo who/whonot) ===== */
     details{
-      border: 1px solid rgba(103,105,255,.25);
-      border-radius: var(--radius);
+      border-radius: 16px;
       padding: 0;
-      background: #FFF;
+      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.9));
+      box-shadow: 0 10px 28px rgba(0,0,0,.08);
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 14px rgba(0,0,0,.04);
-      transition: box-shadow .2s ease, border-color .2s ease;
+      border: 1px solid transparent;
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      /* borda em gradiente */
+      --faq-border: linear-gradient(135deg, rgba(103,105,255,.55), rgba(254,247,0,.55));
+      background-image: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.92)), var(--faq-border);
     }
     details + details{ margin-top: 12px; }
     summary{
       cursor: pointer; font-weight:700; color:var(--ink);
-      min-height:56px; display:flex; align-items:center; gap:12px;
-      padding: 14px 18px;
+      min-height:60px; display:flex; align-items:center; gap:12px;
+      padding: 16px 18px;
       position:relative; list-style:none;
     }
     summary::-webkit-details-marker{ display:none; }
     .summary-h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
-    .chev{ margin-left:auto; transition: transform .2s ease; color: var(--brand-primary); font-weight:900; }
-    details[open] .chev{ transform: rotate(90deg); }
-    details[open]{ border-color: rgba(103,105,255,.45); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+    .chev{ margin-left:auto; transition: transform .25s ease; color: var(--brand-primary); font-weight:900; }
+    details[open] .chev{ transform: rotate(90deg) scale(1.05); }
+    details[open]{ box-shadow: 0 16px 40px rgba(0,0,0,.12); }
     details p{ padding: 0 18px 16px 18px; color:var(--ink); }
-    summary:focus-visible, a.footer-link:focus-visible, .icon:focus-visible{
-      outline: 3px solid var(--brand-primary); outline-offset: 3px;
-    }
 
-    /* ===== Rodapé: mashup roxo→amarelo (contraste reforçado) ===== */
+    summary:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
+
+    /* ===== Rodapé ===== */
     footer{
       background:
         linear-gradient(135deg, #222456 0%, #6769FF 40%, #b8b62a 75%, #FEF700 100%);
@@ -246,7 +227,7 @@
       .grid-note{ margin-top: 10px; margin-bottom: 16px; }
     }
 
-    /* Sticky CTA (com fechar e área segura) */
+    /* Sticky CTA (sem alterações além das anteriores aprovadas) */
     .sticky-cta{
       position: fixed; left: 16px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom));
       z-index: 999;
@@ -268,87 +249,85 @@
     .sticky-cta .cta-close:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 2px; }
     @media (max-width:768px){ .sticky-cta{ display:flex; } }
 
-    /* ===== PROGRESSO DE LEITURA ===== */
-    .progress-wrap{
-      position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 1000;
-      background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
-      backdrop-filter: blur(2px);
-    }
-    .progress-bar{
-      height: 100%; width: 0%;
-      background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
-      transition: width .08s linear;
-    }
+    /* ===== PROGRESSO DE LEITURA / DOTS / CARROSSEL / REVEAL ===== */
+    .progress-wrap{ position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 1000; background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08)); backdrop-filter: blur(2px); }
+    .progress-bar{ height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); transition: width .08s linear; }
 
-    /* Dots laterais (melhor foco/hit-area) */
-    .scroll-dots{
-      position: fixed; right: 12px; top: 46%; transform: translateY(-50%);
-      display: none; flex-direction: column; gap: 10px; z-index: 997; opacity:.9;
-    }
-    .scroll-dots button{
-      width: 11px; height: 11px; border-radius: 50%;
-      border: 2px solid rgba(103,105,255,.6); background: #fff;
-      padding: 0; cursor: pointer;
-    }
+    .scroll-dots{ position: fixed; right: 12px; top: 46%; transform: translateY(-50%); display: none; flex-direction: column; gap: 10px; z-index: 997; opacity:.9; }
+    .scroll-dots button{ width: 11px; height: 11px; border-radius: 50%; border: 2px solid rgba(103,105,255,.6); background: #fff; padding: 0; cursor: pointer; }
     .scroll-dots button[aria-current="true"]{ background: var(--brand-primary); border-color: var(--brand-primary); }
     .scroll-dots button:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 2px; }
     @media (min-width:1024px){ .scroll-dots{ display:flex; } }
 
-    /* ===== Carrossel mobile: ícones/cards ===== */
     .carousel{
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 80%;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 8px;
-      overscroll-behavior-x: contain;
-      touch-action: pan-x pan-y;
-      scroll-padding-left: 12px;
+      display: grid; grid-auto-flow: column; grid-auto-columns: 80%;
+      gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px; overscroll-behavior-x: contain; touch-action: pan-x pan-y; scroll-padding-left: 12px;
     }
     .carousel > .card{ scroll-snap-align: start; }
     @media (min-width:640px){ .carousel{ display:none; } }
     .grid-icons-desktop{ display:none; }
-    @media (min-width:640px){
-      .grid-icons-desktop{ display:grid; gap:20px; grid-template-columns: repeat(4,1fr); }
-    }
+    @media (min-width:640px){ .grid-icons-desktop{ display:grid; gap:20px; grid-template-columns: repeat(4,1fr); } }
     .carousel .card:hover{ box-shadow: 0 10px 26px rgba(254,247,0,.35), 0 4px 12px rgba(0,0,0,.08); }
 
-    /* ===== Reveal/pulse ===== */
     .reveal{ opacity:0; transform: translateY(10px) scale(.98); transition: opacity .35s ease, transform .35s ease; }
     .reveal.in{ opacity:1; transform: translateY(0) scale(1); }
     .pulse:hover{ box-shadow: 0 14px 30px rgba(254,247,0,.22), 0 6px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
 
-    /* ===== Seção combinada: Para quem é / Não é ===== */
+    /* ===== NOVO ESTILO “PARA QUEM É / NÃO É” (glass + gradiente, micro-interações) ===== */
     .who-wrap{ display:grid; gap:20px; }
-    @media (min-width: 860px){
-      .who-wrap{ grid-template-columns: 1fr 1fr; }
-    }
+    @media (min-width: 860px){ .who-wrap{ grid-template-columns: 1fr 1fr; } }
+
     .who-col{
-      background: #fff; border:1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 18px;
-      box-shadow: 0 6px 16px rgba(0,0,0,.06);
+      position:relative;
+      border-radius: 18px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.92));
+      box-shadow: 0 12px 32px rgba(0,0,0,.09);
+      border: 1px solid transparent;
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      --who-border: linear-gradient(135deg, rgba(103,105,255,.65), rgba(254,247,0,.55));
+      background-image: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95)), var(--who-border);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    .who-title{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-    .who-title h2, .who-title h3{ margin:0; }
-    .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:10px; }
+    .who-col:hover{ transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.12); }
+
+    .who-title{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .who-badge{
+      width: 34px; height: 34px; border-radius: 10px; display:grid; place-items:center;
+      font-weight:900; color:#fff;
+      background: linear-gradient(135deg, #33C66E, #89E3B5); /* “É” */
+      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(51,198,110,.25);
+    }
+    .whonot-badge{
+      background: linear-gradient(135deg, #E24B6A, #F5A5B5); /* “Não é” */
+      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(226,75,106,.25);
+    }
+
+    .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
     .who-item, .whonot-item{
-      border-radius: 12px; padding:12px 14px; background:#fff; border:1px solid rgba(0,0,0,.06);
-      position: relative; overflow:hidden;
+      position: relative;
+      border-radius: 12px; padding: 12px 14px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      overflow:hidden;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
     }
     .who-item::before, .whonot-item::before{
       content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
       background: linear-gradient(180deg, #3bb273, #9be2bf);
-      filter: saturate(1.2) brightness(1.05);
+      transition: width .18s ease;
     }
-    .whonot-item::before{
-      background: linear-gradient(180deg, #d13b52, #f3a8b3);
-      filter: saturate(1.2) brightness(1.05);
+    .whonot-item::before{ background: linear-gradient(180deg, #d13b52, #f3a8b3); }
+    .who-item:hover, .whonot-item:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.10);
+      background: linear-gradient(180deg, #ffffff, #fafafa);
     }
+    .who-item:hover::before, .whonot-item:hover::before{ width:10px; }
 
-    /* Ritmo entre seções após CTA 2 */
-    #sec-cta-mid-2 + .section{ padding-top: 40px; }
+    /* FAQ “harmonizado” com who/whonot: já está com card glass + borda gradiente acima */
   </style>
 </head>
 <body>
@@ -357,22 +336,20 @@
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- ================= HERO ================= -->
+  <!-- ================= HERO (sem CTA e sem glow amarelo) ================= -->
   <header class="hero" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Texto do hero">
         <h1>TÍTULO PRINCIPAL (H1)</h1>
         <p class="lead">Subtítulo / Mensagem de valor (H2 em tamanho grande).</p>
-        <div class="cluster">
-          <a href="/checkout" class="cta">Quero fazer parte</a>
-        </div>
+        <!-- CTA removido aqui conforme solicitado -->
       </div>
       <div class="media-slot" aria-hidden="true">VÍDEO/FOTO HERO</div>
     </div>
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <!-- ============ Destaques ============ -->
+    <!-- ============ (demais seções mantidas) ============ -->
     <section class="section" id="sec-destaques">
       <div class="container grid grid--3">
         <div class="card stack reveal pulse"><h3>DESTAQUE 1 (H3)</h3><p>Parágrafo pequeno explicativo.</p></div>
@@ -381,7 +358,6 @@
       </div>
     </section>
 
-    <!-- ============ Visão da comunidade (padrão “Alimentação contínua”) ============ -->
     <section class="section section--soft" id="sec-comunidade">
       <div class="container grid grid--2">
         <div class="media-slot reveal" aria-hidden="true">Mockup/Preview da Comunidade</div>
@@ -393,7 +369,6 @@
       </div>
     </section>
 
-    <!-- ============ O que tem dentro ============ -->
     <section class="section" id="sec-conteudo">
       <div class="container grid grid--2">
         <div class="stack reveal">
@@ -410,7 +385,6 @@
       </div>
     </section>
 
-    <!-- ============ CTA Intermediário (1 botão) ============ -->
     <section class="section section--accent" id="sec-cta-mid">
       <div class="container stack" style="align-items:flex-start;">
         <h2>PRONTO PARA ESCALAR SUA PRODUÇÃO? (H2)</h2>
@@ -419,13 +393,11 @@
       </div>
     </section>
 
-    <!-- ============ Grid de ícones/cards ============ -->
     <section class="section" id="sec-grid">
       <div class="container">
         <h2 class="grid-title">GRID DE ÍCONES/CARDS (H2)</h2>
         <p class="grid-note">Legenda breve do grid (placeholder).</p>
 
-        <!-- Mobile: carrossel -->
         <div class="carousel" id="iconsCarousel" aria-label="Recursos (carrossel)">
           <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
           <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
@@ -434,7 +406,6 @@
           <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
         </div>
 
-        <!-- Desktop: grid tradicional -->
         <div class="grid-icons-desktop">
           <div class="card stack reveal pulse"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
           <div class="card stack reveal pulse"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
@@ -448,7 +419,6 @@
       </div>
     </section>
 
-    <!-- ============ Alimentação contínua ============ -->
     <section class="section section--soft" id="sec-feed">
       <div class="container grid grid--2">
         <div class="media-slot reveal" aria-hidden="true">Vídeo curto: feed criando posts</div>
@@ -460,7 +430,6 @@
       </div>
     </section>
 
-    <!-- ============ Trilha de conteúdos ============ -->
     <section class="section" id="sec-trilha">
       <div class="container">
         <h2 class="grid-title">TRILHA DE CONTEÚDOS (H2)</h2>
@@ -474,7 +443,6 @@
       </div>
     </section>
 
-    <!-- ============ CTA Intermediário (1 botão) ============ -->
     <section class="section section--accent" id="sec-cta-mid-2">
       <div class="container stack" style="align-items:flex-start;">
         <h2>AGORA QUE VOCÊ VIU A TRILHA… (H2)</h2>
@@ -483,7 +451,6 @@
       </div>
     </section>
 
-    <!-- ============ Conteúdos variados ============ -->
     <section class="section section--soft" id="sec-galeria">
       <div class="container">
         <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
@@ -505,12 +472,13 @@
       </div>
     </section>
 
-    <!-- ============ Seção combinada: Para quem é / Não é ============ -->
+    <!-- ============ NOVO “PARA QUEM É / NÃO É” (somente UX/estilo/anim.) ============ -->
     <section class="section" id="sec-who-group">
       <div class="container who-wrap">
         <!-- Para quem é -->
         <div class="who-col reveal">
           <div class="who-title">
+            <div class="who-badge" aria-hidden="true">✓</div>
             <h2>PARA QUEM É (H2)</h2>
           </div>
           <ul class="who-list">
@@ -519,6 +487,7 @@
             <li class="who-item">Item de público 3</li>
             <li class="who-item">Item de público 4</li>
           </ul>
+          <!-- Mantém CTA APENAS neste bloco -->
           <div class="cluster" style="margin-top:12px">
             <a href="/checkout" class="cta">Quero fazer parte</a>
           </div>
@@ -527,6 +496,7 @@
         <!-- Não é para quem (sem CTA) -->
         <div class="who-col reveal">
           <div class="who-title">
+            <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
             <h3>E NÃO É PARA QUEM… (H3)</h3>
           </div>
           <ul class="whonot-list">
@@ -539,13 +509,22 @@
       </div>
     </section>
 
-    <!-- ============ FAQ ============ -->
+    <!-- ============ FAQ (harmonizado com who/whonot) ============ -->
     <section class="section" id="faq">
       <div class="container">
         <h2 class="grid-title">FAQ (H2)</h2>
-        <details class="reveal"><summary class="summary-h3">Pergunta 1 <span class="chev">›</span></summary><p>Resposta em parágrafo pequeno.</p></details>
-        <details class="reveal"><summary class="summary-h3">Pergunta 2 <span class="chev">›</span></summary><p>Resposta em parágrafo pequeno.</p></details>
-        <details class="reveal"><summary class="summary-h3">Pergunta 3 <span class="chev">›</span></summary><p>Resposta em parágrafo pequeno.</p></details>
+        <details class="reveal">
+          <summary class="summary-h3">Pergunta 1 <span class="chev">›</span></summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
+        <details class="reveal">
+          <summary class="summary-h3">Pergunta 2 <span class="chev">›</span></summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
+        <details class="reveal">
+          <summary class="summary-h3">Pergunta 3 <span class="chev">›</span></summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
       </div>
     </section>
   </main>
@@ -556,7 +535,7 @@
     <button class="cta-close" id="stickyClose" aria-label="Fechar botão flutuante">×</button>
   </div>
 
-  <!-- Dots laterais -->
+  <!-- Dots laterais (sem alterações) -->
   <nav class="scroll-dots" aria-label="Progresso da página">
     <button data-target="#sec-hero" aria-label="Hero"></button>
     <button data-target="#sec-destaques" aria-label="Destaques"></button>
@@ -602,7 +581,7 @@
     </div>
   </footer>
 
-  <!-- Scripts: progresso, dots, reveal, FAQ (um aberto), carrossel, sticky close -->
+  <!-- Scripts (mesmos de antes + sticky close) -->
   <script>
     // Barra de progresso (rAF throttle)
     (function(){
@@ -670,7 +649,7 @@
       els.forEach(e=>io.observe(e));
     })();
 
-    // Carrossel auto-scroll (mobile) – loop simples
+    // Carrossel auto-scroll (mobile)
     (function(){
       const el = document.getElementById('iconsCarousel');
       if (!el) return;
@@ -694,7 +673,7 @@
       handle();
     })();
 
-    // Sticky CTA: fechar (botão e tecla Esc) + persistência na sessão
+    // Sticky CTA: fechar + persistência na sessão
     (function(){
       const bar = document.getElementById('stickyCta');
       const closeBtn = document.getElementById('stickyClose');
