@@ -16,11 +16,11 @@
 
     /* ===== Tokens ===== */
     :root{
-      --brand-primary: #6769FF;   /* predominante (rox0) */
-      --brand-accent:  #FEF700;   /* destaque (amarelo) */
-      --ink-strong:    #111111;
-      --ink:           #2A2A2A;
-      --muted:         #6B6B6B;
+      --brand-primary: #6769FF;   /* roxo (marca) */
+      --brand-accent:  #FEF700;   /* amarelo (acento) */
+      --ink-strong:    #111111;   /* títulos fortes, lead no hero */
+      --ink:           #2A2A2A;   /* corpo de texto */
+      --muted:         #6B6B6B;   /* notas/legendas */
       --bg:            #FFFFFF;
       --bg-soft:       #F7F8FF;   /* lavanda suave */
       --ok-bg:         #EAF7F0;   /* verde suave (para quem é) */
@@ -40,13 +40,16 @@
 
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-      color: var(--ink);
+      color: var(--ink);                   /* parágrafos = cinza-escuro */
       background: var(--bg);
       line-height: 1.5;
     }
 
     @media (prefers-reduced-motion: reduce){
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+    @media (prefers-reduced-motion: no-preference){
+      html{ scroll-behavior: smooth; }
     }
 
     /* ===== Utilitários ===== */
@@ -81,24 +84,24 @@
     .card:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,.14); }
     .spacer{ flex:1 1 auto; }
 
-    /* Tipografia */
+    /* Tipografia (hierarquia de cor) */
     h1{ font-size: var(--step-3); font-weight: 800; color: var(--brand-primary); letter-spacing: -.02em; line-height:1.1; }
     h2{ font-size: var(--step-2); font-weight: 800; color: var(--brand-primary); letter-spacing: -.01em; }
     h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
-    .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink); }
+    .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); } /* preto forte no hero */
     .muted{ color: var(--muted); font-size: var(--step--1); }
-    .section--accent h2, .section--accent h3 { color: var(--ink-strong); }
+    .section--accent h2, .section--accent h3, .section--accent p { color: var(--ink-strong); } /* contraste no amarelo */
 
-    /* Botões / CTAs — PRIMÁRIO ROXO, TEXTO BRANCO; AMARELO COMO ACENTO */
+    /* CTAs — primário roxo, texto branco; amarelo como acento */
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
       background: var(--brand-primary); color: #FFFFFF;
       font-weight:800; text-transform:uppercase; letter-spacing:.02em;
       border:2px solid transparent;
-      box-shadow: 0 0 0 0 rgba(254,247,0,0); /* halo amarelo em hover */
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-      white-space:nowrap;
+      box-shadow: 0 0 0 0 rgba(254,247,0,0);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, opacity .15s ease;
+      white-space:nowrap; cursor: pointer;
     }
     .cta:hover{
       transform: translateY(-1px);
@@ -106,14 +109,13 @@
       border-color: color-mix(in oklab, var(--brand-accent) 50%, transparent);
     }
     .cta:active{ transform: translateY(0); }
-    .cta:focus-visible{
-      outline: 3px solid var(--brand-accent); outline-offset: 3px;
-    }
+    .cta:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
     .cta--ghost{
       background: transparent; color: var(--brand-primary);
       border: 2px solid rgba(103,105,255,.45);
     }
-    .cta--dark{ background:#111; color:#fff; border-color:#111; }
+    .cta--ghost:hover{ border-color: rgba(103,105,255,.65); }
+    .cta[aria-busy="true"], .cta[disabled]{ opacity:.7; cursor: not-allowed; transform:none; box-shadow:none; }
 
     /* Slots de mídia/imagética */
     .img-slot{
@@ -152,6 +154,14 @@
     .hero-grid{ display:grid; gap:28px; grid-template-columns:1fr; }
     @media (min-width:900px){
       .hero-grid{ grid-template-columns: 1.2fr 1fr; align-items:center; }
+    }
+    /* micro-patch: mais respiro em telas muito largas */
+    @media (min-width:1280px){
+      .hero-grid{ grid-template-columns: 1.3fr 1fr; }
+    }
+    /* micro-patch: limitar mídia no mobile para não "comer" a dobra */
+    @media (max-width:640px){
+      .media-slot, .img-slot--hero{ min-height: 320px; }
     }
 
     /* FAQ */
@@ -224,11 +234,16 @@
         background: color-mix(in oklab, #ffffff 85%, transparent);
       }
     }
+    /* micro-patch: tablets */
     @media (min-width:600px) and (max-width:1024px){
       .sticky-cta{ left:24px; right:24px; max-width: 680px; margin: 0 auto; }
     }
+    /* micro-patch: teclado mobile (dvh) */
+    @supports (height: 100dvh){
+      .sticky-cta{ bottom: calc(16px + env(safe-area-inset-bottom)); }
+    }
 
-    /* CTA flutuante desktop (sem JS) */
+    /* CTA flutuante desktop */
     .float-cta{
       position: fixed; right: 24px; bottom: 24px; z-index: 998; display:none;
       background:#fff; border:1px solid rgba(0,0,0,.06); box-shadow: var(--shadow-lg);
@@ -250,8 +265,8 @@
 
     /* Dots laterais (navegação por seções) */
     .scroll-dots{
-      position: fixed; right: 12px; top: 48%; transform: translateY(-50%);
-      display: none; flex-direction: column; gap: 10px; z-index: 997;
+      position: fixed; right: 12px; top: 46%; transform: translateY(-50%);
+      display: none; flex-direction: column; gap: 10px; z-index: 997; opacity:.9;
     }
     .scroll-dots button{
       width: 9px; height: 9px; border-radius: 50%;
@@ -261,6 +276,10 @@
     .scroll-dots button[aria-current="true"]{ background: var(--brand-primary); border-color: var(--brand-primary); }
     .scroll-dots button:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 2px; }
     @media (min-width:1024px){ .scroll-dots{ display:flex; } }
+    /* leve "desvio" visual quando o CTA flutuante está em foco/hover */
+    @media (min-width:1024px){
+      .float-cta:has(.cta:hover) ~ .scroll-dots { opacity:.7; }
+    }
 
     /* Ícones nas seções “Para quem é / Não é” */
     .who .icon-mark, .who-not .icon-ban{
@@ -271,6 +290,19 @@
     .who .icon-mark{ background: #E9FBEE; color: #0A7B33; border:1px solid #B4E8C7; }
     .who-not .icon-ban{ background: #FDEBEC; color: #B00020; border:1px solid #F5C2C7; }
     .who .title-row, .who-not .title-row{ display:flex; align-items:center; gap: 8px; }
+    /* Equilibrar peso do H3 no "não é" */
+    #sec-who-not h3{ font-size: calc(var(--step-1) * 1.05); }
+
+    /* micro-patch de ritmo entre trilha e a próxima seção */
+    #sec-trilha + .section{ padding-top: 40px; }
+
+    /* Galeria: card duplo em desktop + 2 colunas no mobile >=420px */
+    @media (min-width: 1024px){
+      #sec-galeria .grid > .img-slot:first-child{ grid-column: span 2; aspect-ratio: 16/9; }
+    }
+    @media (min-width:420px) and (max-width:640px){
+      #sec-galeria .grid{ grid-template-columns: repeat(2,1fr); }
+    }
 
     @media (min-width:1440px){
       :root { --container: 1200px; }
@@ -414,9 +446,18 @@
         <p class="grid-note">Capas reais de aulas, templates ou carrosséis.</p>
         <div class="grid grid--4">
           <!-- 12 slots -->
-          <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
-          <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
-          <div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div><div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
+          <div class="img-slot" aria-hidden="true"></div>
         </div>
       </div>
     </section>
@@ -456,6 +497,10 @@
             <li>Item de recorte 3</li>
             <li>Item de recorte 4</li>
           </ul>
+        </div>
+        <!-- micro-CTA educativo para reduzir rejeição -->
+        <div class="cluster" style="margin-top:8px">
+          <a href="#" class="cta cta--ghost">Conhecer conteúdos gratuitos</a>
         </div>
       </div>
     </section>
@@ -567,18 +612,23 @@
     </div>
   </footer>
 
-  <!-- Scripts leves: progresso, dots, FAQ (um aberto) -->
+  <!-- Scripts leves: progresso (throttled), dots, FAQ (um aberto) -->
   <script>
-    // Barra de progresso
+    // Barra de progresso (throttle via rAF)
     (function(){
       const bar = document.getElementById('progressBar');
+      let ticking = false;
       const onScroll = () => {
-        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const progress = docHeight ? (scrollTop / docHeight) * 100 : 0;
-        bar.style.width = progress + '%';
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const st = document.documentElement.scrollTop || document.body.scrollTop;
+          const h  = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          bar.style.width = (h ? (st/h)*100 : 0) + '%';
+          ticking = false;
+        });
       };
-      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('scroll', onScroll, { passive:true });
       onScroll();
     })();
 
