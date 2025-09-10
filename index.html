@@ -40,7 +40,7 @@
 
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-      color: var(--ink);                   /* parágrafos = cinza-escuro */
+      color: var(--ink);
       background: var(--bg);
       line-height: 1.5;
     }
@@ -88,11 +88,24 @@
     h1{ font-size: var(--step-3); font-weight: 800; color: var(--brand-primary); letter-spacing: -.02em; line-height:1.1; }
     h2{ font-size: var(--step-2); font-weight: 800; color: var(--brand-primary); letter-spacing: -.01em; }
     h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
-    .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); } /* preto forte no hero */
+    .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); }
     .muted{ color: var(--muted); font-size: var(--step--1); }
-    .section--accent h2, .section--accent h3, .section--accent p { color: var(--ink-strong); } /* contraste no amarelo */
+    .section--accent h2, .section--accent h3, .section--accent p { color: var(--ink-strong); }
 
-    /* CTAs — primário roxo, texto branco; amarelo como acento */
+    /* Badges / accent lines */
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      background: var(--brand-accent); color:#111; font-weight:800;
+      padding:6px 10px; border-radius: 999px; font-size: var(--step--1);
+      border:1px solid rgba(0,0,0,.1);
+      width:max-content;
+    }
+    .accent-underline{
+      width: 88px; height: 6px; border-radius: 999px;
+      background: linear-gradient(90deg, var(--brand-accent), transparent);
+    }
+
+    /* CTAs — primário roxo, texto branco; amarelo como halo/acento */
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
@@ -117,18 +130,16 @@
     .cta--ghost:hover{ border-color: rgba(103,105,255,.65); }
     .cta[aria-busy="true"], .cta[disabled]{ opacity:.7; cursor: not-allowed; transform:none; box-shadow:none; }
 
-    /* Slots de mídia/imagética */
+    /* Slots mídia */
     .img-slot{
       background: linear-gradient(135deg, rgba(103,105,255,.12), rgba(254,247,0,.12));
       border: 2px dashed rgba(103,105,255,.45);
       border-radius: var(--radius);
       min-height: 220px;
       display:grid; place-items:center;
-      color: var(--muted);
-      text-align:center;
-      padding:16px; user-select:none;
+      color: var(--muted); text-align:center; padding:16px; user-select:none;
     }
-    .img-slot:not(.img-slot--hero){ aspect-ratio: 4 / 3; } /* evita CLS */
+    .img-slot:not(.img-slot--hero){ aspect-ratio: 4 / 3; }
     .img-slot--small{ min-height: 120px; }
     .img-slot--hero{ min-height: 400px; border-radius: var(--radius-lg); }
 
@@ -155,47 +166,60 @@
     @media (min-width:900px){
       .hero-grid{ grid-template-columns: 1.2fr 1fr; align-items:center; }
     }
-    /* micro-patch: mais respiro em telas muito largas */
     @media (min-width:1280px){
       .hero-grid{ grid-template-columns: 1.3fr 1fr; }
     }
-    /* micro-patch: limitar mídia no mobile para não "comer" a dobra */
     @media (max-width:640px){
       .media-slot, .img-slot--hero{ min-height: 320px; }
+    }
+    @media (max-width:360px){
+      h1{ line-height:1.2; }
+      .hero{ padding-top: 44px; }
     }
 
     /* FAQ */
     details{
       border: 1px solid rgba(103,105,255,.25);
       border-radius: var(--radius);
-      padding: 14px 18px;
+      padding: 0;
       background: #FFF;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,.04);
+      transition: box-shadow .2s ease, border-color .2s ease;
     }
     details + details{ margin-top: 12px; }
     summary{
       cursor: pointer; font-weight:700; color:var(--ink);
-      min-height:44px; display:flex; align-items:center; gap:10px;
-      position:relative; padding-right:28px;
+      min-height:56px; display:flex; align-items:center; gap:12px;
+      padding: 14px 18px 14px 18px;
+      position:relative;
+      list-style:none;
     }
+    summary::-webkit-details-marker{ display:none; }
     .summary-h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
-    summary::after{ content:"+"; position:absolute; right:6px; font-weight:900; color:var(--brand-primary); }
-    details[open] summary::after{ content:"–"; }
-    details p{ margin-top:10px; color:var(--muted); }
+    .chev{ margin-left:auto; transition: transform .2s ease; color: var(--brand-primary); font-weight:900; }
+    details[open] .chev{ transform: rotate(90deg); }
+    details[open]{ border-color: rgba(103,105,255,.45); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+    details p{ padding: 0 18px 16px 18px; color:var(--ink); }
     summary:focus-visible, a.footer-link:focus-visible, .icon:focus-visible{
       outline: 3px solid var(--brand-primary); outline-offset: 3px;
     }
 
-    /* Rodapé */
-    footer{ background: #0E0F2B; color:#EDEDED; }
+    /* Rodapé (coerente com a marca) */
+    footer{
+      background: linear-gradient(180deg, #111222 0%, #1b1e4a 40%, #292b86 100%);
+      color:#EDEDED;
+    }
     .footer-link{ color:#EDEDED; text-decoration: underline; text-underline-offset:2px; }
     .footer-link:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
     .social{ display:flex; gap:10px; flex-wrap:wrap; }
     .icon{
       width:48px; height:48px; border-radius:999px;
-      background: var(--brand-primary); display:grid; place-items:center;
-      color:#FFF; font-weight:900; transition: transform .15s ease;
+      background: #ffffff1a; display:grid; place-items:center;
+      color:#FFF; font-weight:900; transition: transform .15s ease, background .15s ease;
+      border: 1px solid #ffffff2a;
     }
-    .icon:hover{ transform: translateY(-1px); }
+    .icon:hover{ transform: translateY(-1px); background:#ffffff2e; }
     .footer-heading{ color:#FFF; }
     .footer-muted{ color:#D2D2D2; }
     .footer-legal-container{ padding-top:8px; }
@@ -234,11 +258,9 @@
         background: color-mix(in oklab, #ffffff 85%, transparent);
       }
     }
-    /* micro-patch: tablets */
     @media (min-width:600px) and (max-width:1024px){
       .sticky-cta{ left:24px; right:24px; max-width: 680px; margin: 0 auto; }
     }
-    /* micro-patch: teclado mobile (dvh) */
     @supports (height: 100dvh){
       .sticky-cta{ bottom: calc(16px + env(safe-area-inset-bottom)); }
     }
@@ -263,7 +285,7 @@
       transition: width .08s linear;
     }
 
-    /* Dots laterais (navegação por seções) */
+    /* Dots laterais */
     .scroll-dots{
       position: fixed; right: 12px; top: 46%; transform: translateY(-50%);
       display: none; flex-direction: column; gap: 10px; z-index: 997; opacity:.9;
@@ -276,9 +298,8 @@
     .scroll-dots button[aria-current="true"]{ background: var(--brand-primary); border-color: var(--brand-primary); }
     .scroll-dots button:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 2px; }
     @media (min-width:1024px){ .scroll-dots{ display:flex; } }
-    /* leve "desvio" visual quando o CTA flutuante está em foco/hover */
     @media (min-width:1024px){
-      .float-cta:has(.cta:hover) ~ .scroll-dots { opacity:.7; }
+      .float-cta:hover ~ .scroll-dots{ opacity:.65; }
     }
 
     /* Ícones nas seções “Para quem é / Não é” */
@@ -290,10 +311,39 @@
     .who .icon-mark{ background: #E9FBEE; color: #0A7B33; border:1px solid #B4E8C7; }
     .who-not .icon-ban{ background: #FDEBEC; color: #B00020; border:1px solid #F5C2C7; }
     .who .title-row, .who-not .title-row{ display:flex; align-items:center; gap: 8px; }
-    /* Equilibrar peso do H3 no "não é" */
     #sec-who-not h3{ font-size: calc(var(--step-1) * 1.05); }
 
-    /* micro-patch de ritmo entre trilha e a próxima seção */
+    /* Chips nas listas (mais fluidez e “vida”) */
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius: 999px; background:#fff; border:1px solid rgba(0,0,0,.06);
+      box-shadow: 0 4px 10px rgba(0,0,0,.04); font-size: var(--step--1);
+    }
+    .chip .mark{ font-weight:900; }
+
+    /* Carrossel horizontal (grid ícones/cards – mobile) */
+    .carousel{
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 80%;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .carousel > .card{ scroll-snap-align: start; }
+    @media (min-width:640px){
+      .carousel{ display:none; } /* só mobile */
+    }
+    /* Grid tradicional (tablet/desktop) */
+    .grid-icons-desktop{ display:none; }
+    @media (min-width:640px){
+      .grid-icons-desktop{ display:grid; gap:20px; grid-template-columns: repeat(4,1fr); }
+    }
+
+    /* micro-ritmo entre trilha e próxima seção */
     #sec-trilha + .section{ padding-top: 40px; }
 
     /* Galeria: card duplo em desktop + 2 colunas no mobile >=420px */
@@ -302,10 +352,6 @@
     }
     @media (min-width:420px) and (max-width:640px){
       #sec-galeria .grid{ grid-template-columns: repeat(2,1fr); }
-    }
-
-    @media (min-width:1440px){
-      :root { --container: 1200px; }
     }
   </style>
 </head>
@@ -319,11 +365,12 @@
   <header class="hero" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Área textual do hero">
+        <span class="badge">Novidade • Slot IA</span>
         <h1>TÍTULO PRINCIPAL (H1)</h1>
+        <div class="accent-underline" aria-hidden="true"></div>
         <p class="lead">Subtítulo / Mensagem de valor (H2 em tamanho grande).</p>
         <div class="cluster">
           <a href="/checkout" class="cta">Quero fazer parte</a>
-          <a href="#faq" class="cta cta--ghost">Tirar dúvidas</a>
         </div>
       </div>
 
@@ -336,9 +383,9 @@
     <!-- ============ Destaques (3 colunas) ============ -->
     <section class="section" id="sec-destaques">
       <div class="container grid grid--3">
-        <div class="card stack"><h3>DESTAQUE 1 (H3)</h3><p class="muted">Parágrafo pequeno explicativo.</p><span class="spacer"></span></div>
-        <div class="card stack"><h3>DESTAQUE 2 (H3)</h3><p class="muted">Parágrafo pequeno explicativo.</p><span class="spacer"></span></div>
-        <div class="card stack"><h3>DESTAQUE 3 (H3)</h3><p class="muted">Parágrafo pequeno explicativo.</p><span class="spacer"></span></div>
+        <div class="card stack"><h3>DESTAQUE 1 (H3)</h3><p>Parágrafo pequeno explicativo.</p><span class="spacer"></span></div>
+        <div class="card stack"><h3>DESTAQUE 2 (H3)</h3><p>Parágrafo pequeno explicativo.</p><span class="spacer"></span></div>
+        <div class="card stack"><h3>DESTAQUE 3 (H3)</h3><p>Parágrafo pequeno explicativo.</p><span class="spacer"></span></div>
       </div>
     </section>
 
@@ -348,7 +395,7 @@
         <div class="stack">
           <h2>VISÃO DA COMUNIDADE (H2)</h2>
           <p>Parágrafo curto: onde fica o conteúdo, estrutura, módulos (placeholder).</p>
-          <a href="/checkout" class="cta">Quero fazer parte</a>
+          <a href="/checkout" class="cta" style="align-self:flex-start;">Quero fazer parte</a>
         </div>
         <div class="img-slot" aria-hidden="true">Mockup da Comunidade (tela/dashboard)</div>
       </div>
@@ -371,15 +418,12 @@
       </div>
     </section>
 
-    <!-- ============ CTA Intermediário (quebra 1) ============ -->
+    <!-- ============ CTA Intermediário (quebra 1 – 1 botão) ============ -->
     <section class="section section--accent" id="sec-cta-mid">
       <div class="container stack" style="align-items:flex-start;">
         <h2>PRONTO PARA ESCALAR SUA PRODUÇÃO? (H2)</h2>
         <p class="muted" style="color:#2A2A2A;">Placeholder de reforço rápido (benefício/garantia).</p>
-        <div class="cluster">
-          <a href="/checkout" class="cta">Entrar agora</a>
-          <a href="#faq" class="cta cta--ghost">Ver dúvidas frequentes</a>
-        </div>
+        <a href="/checkout" class="cta">Entrar agora</a>
       </div>
     </section>
 
@@ -388,15 +432,26 @@
       <div class="container">
         <h2 class="grid-title">GRID DE ÍCONES/CARDS (H2)</h2>
         <p class="grid-note">Legenda breve do grid (placeholder).</p>
-        <div class="grid grid--4">
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
-          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título (H3)</h3><p class="muted">Texto pequeno.</p><span class="spacer"></span></div>
+
+        <!-- Mobile: carrossel horizontal com scroll-snap -->
+        <div class="carousel" id="iconsCarousel" aria-label="Recursos (carrossel)">
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+        </div>
+
+        <!-- Desktop: grid tradicional -->
+        <div class="grid-icons-desktop">
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
+          <div class="card stack"><div class="img-slot img-slot--small" aria-hidden="true"></div><h3>Título</h3><p class="muted">Texto pequeno.</p></div>
         </div>
       </div>
     </section>
@@ -427,15 +482,12 @@
       </div>
     </section>
 
-    <!-- ============ CTA Intermediário (quebra 2) ============ -->
+    <!-- ============ CTA Intermediário (quebra 2 – 1 botão) ============ -->
     <section class="section section--accent" id="sec-cta-mid-2">
       <div class="container stack" style="align-items:flex-start;">
         <h2>AGORA QUE VOCÊ VIU A TRILHA… (H2)</h2>
         <p class="muted" style="color:#2A2A2A;">Mais uma chance de converter sem precisar voltar ao topo.</p>
-        <div class="cluster">
-          <a href="/checkout" class="cta">Garantir minha vaga</a>
-          <a href="#faq" class="cta cta--ghost">Ver dúvidas frequentes</a>
-        </div>
+        <a href="/checkout" class="cta">Garantir minha vaga</a>
       </div>
     </section>
 
@@ -445,7 +497,6 @@
         <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
         <p class="grid-note">Capas reais de aulas, templates ou carrosséis.</p>
         <div class="grid grid--4">
-          <!-- 12 slots -->
           <div class="img-slot" aria-hidden="true"></div>
           <div class="img-slot" aria-hidden="true"></div>
           <div class="img-slot" aria-hidden="true"></div>
@@ -462,75 +513,44 @@
       </div>
     </section>
 
-    <!-- ============ Para quem é (seção própria) ============ -->
-    <section class="section section--ok" id="sec-who">
+    <!-- ============ Para quem é (mais vivo/fluido) ============ -->
+    <section class="section" id="sec-who" style="background: linear-gradient(135deg, #EAF7F0, #ffffff);">
       <div class="container">
         <div class="stack who">
           <div class="title-row">
             <span class="icon-mark" aria-hidden="true">✓</span>
             <h2>PARA QUEM É (H2)</h2>
           </div>
-          <ul>
-            <li>Item de público 1</li>
-            <li>Item de público 2</li>
-            <li>Item de público 3</li>
-            <li>Item de público 4</li>
-          </ul>
+          <div class="chips">
+            <span class="chip"><span class="mark">✓</span> Profissional X</span>
+            <span class="chip"><span class="mark">✓</span> Perfil Y</span>
+            <span class="chip"><span class="mark">✓</span> Objetivo Z</span>
+            <span class="chip"><span class="mark">✓</span> Necessidade W</span>
+          </div>
         </div>
-        <div class="cluster" style="margin-top:8px">
+        <div class="cluster" style="margin-top:12px">
           <a href="/checkout" class="cta">Quero fazer parte</a>
         </div>
       </div>
     </section>
 
-    <!-- ============ Não é para quem (seção própria) ============ -->
-    <section class="section section--no" id="sec-who-not">
+    <!-- ============ Não é para quem (mais vivo/fluido) ============ -->
+    <section class="section" id="sec-who-not" style="background: linear-gradient(135deg, #F6ECEF, #ffffff);">
       <div class="container">
         <div class="stack who-not">
           <div class="title-row">
             <span class="icon-ban" aria-hidden="true">⊘</span>
             <h3>E NÃO É PARA QUEM… (H3)</h3>
           </div>
-          <ul>
-            <li>Item de recorte 1</li>
-            <li>Item de recorte 2</li>
-            <li>Item de recorte 3</li>
-            <li>Item de recorte 4</li>
-          </ul>
+          <div class="chips">
+            <span class="chip"><span class="mark">⊘</span> Caso A</span>
+            <span class="chip"><span class="mark">⊘</span> Caso B</span>
+            <span class="chip"><span class="mark">⊘</span> Caso C</span>
+            <span class="chip"><span class="mark">⊘</span> Caso D</span>
+          </div>
         </div>
-        <!-- micro-CTA educativo para reduzir rejeição -->
-        <div class="cluster" style="margin-top:8px">
+        <div class="cluster" style="margin-top:12px">
           <a href="#" class="cta cta--ghost">Conhecer conteúdos gratuitos</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ Oferta / CTA final ============ -->
-    <section class="section" id="sec-oferta">
-      <div class="container card">
-        <div class="grid grid--3">
-          <div class="stack">
-            <h2>FORMAS DE PAGAMENTO (H2)</h2>
-            <ul>
-              <li>Opção 1</li>
-              <li>Opção 2</li>
-              <li>Opção 3</li>
-            </ul>
-            <span class="spacer"></span>
-          </div>
-          <div class="stack">
-            <h3>Benefícios (H3)</h3>
-            <ul>
-              <li>Benefício 1</li>
-              <li>Benefício 2</li>
-              <li>Benefício 3</li>
-            </ul>
-            <span class="spacer"></span>
-          </div>
-          <div class="stack" style="align-self:center;">
-            <a href="/checkout" class="cta">Quero fazer parte</a>
-            <p class="muted">Texto de apoio curto.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -543,25 +563,34 @@
       </div>
     </section>
 
-    <!-- ============ FAQ (um aberto por vez) ============ -->
+    <!-- ============ FAQ (um aberto por vez, mais estético) ============ -->
     <section class="section" id="faq">
       <div class="container">
         <h2 class="grid-title">FAQ (H2)</h2>
-        <details><summary class="summary-h3">Pergunta 1</summary><p>Resposta em parágrafo pequeno.</p></details>
-        <details><summary class="summary-h3">Pergunta 2</summary><p>Resposta em parágrafo pequeno.</p></details>
-        <details><summary class="summary-h3">Pergunta 3</summary><p>Resposta em parágrafo pequeno.</p></details>
+        <details>
+          <summary class="summary-h3">Pergunta 1 <span class="chev">›</span></summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
+        <details>
+          <summary class="summary-h3">Pergunta 2 <span class="chev">›</span></summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
+        <details>
+          <summary class="summary-h3">Pergunta 3 <span class="chev">›</span></summary>
+          <p>Resposta em parágrafo pequeno.</p>
+        </details>
       </div>
     </section>
   </main>
 
   <!-- Sticky CTA Mobile -->
   <div class="sticky-cta" aria-hidden="false">
-    <a href="/checkout" class="cta">Quero fazer parte</a>
+    <a href="/checkout" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
   </div>
 
   <!-- CTA flutuante Desktop (apenas ≥ 1024px) -->
   <div class="float-cta" aria-hidden="false">
-    <a href="/checkout" class="cta">Entrar agora</a>
+    <a href="/checkout" class="cta" aria-label="Ir para o checkout">Entrar agora</a>
   </div>
 
   <!-- Dots laterais (navegação por seções) -->
@@ -578,7 +607,6 @@
     <button data-target="#sec-galeria" aria-label="Galeria"></button>
     <button data-target="#sec-who" aria-label="Para quem é"></button>
     <button data-target="#sec-who-not" aria-label="Não é para quem"></button>
-    <button data-target="#sec-oferta" aria-label="Oferta"></button>
     <button data-target="#sec-depoimentos" aria-label="Depoimentos"></button>
     <button data-target="#faq" aria-label="FAQ"></button>
   </nav>
@@ -587,14 +615,15 @@
   <footer class="section">
     <div class="container grid grid--3">
       <div class="stack">
-        <h3 class="footer-heading">Informações</h3>
-        <p class="muted footer-muted">Endereço, CNPJ e outras informações legais.</p>
+        <h3 class="footer-heading">Sobre</h3>
+        <p class="footer-muted">Breve descrição/propósito da comunidade.</p>
       </div>
       <div class="stack">
         <h3 class="footer-heading">Links</h3>
         <ul>
           <li><a class="footer-link" href="#">Política de Privacidade</a></li>
           <li><a class="footer-link" href="#">Termos de Uso</a></li>
+          <li><a class="footer-link" href="#faq">FAQ</a></li>
         </ul>
       </div>
       <div class="stack">
@@ -608,13 +637,13 @@
       </div>
     </div>
     <div class="container footer-legal-container">
-      <p class="muted footer-muted">© 2025 Sua Marca. Todos os direitos reservados.</p>
+      <p class="footer-muted">© 2025 Sua Marca. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <!-- Scripts leves: progresso (throttled), dots, FAQ (um aberto) -->
+  <!-- Scripts: progresso (throttle), dots, FAQ (um aberto), carrossel auto-scroll -->
   <script>
-    // Barra de progresso (throttle via rAF)
+    // Barra de progresso (rAF throttle)
     (function(){
       const bar = document.getElementById('progressBar');
       let ticking = false;
@@ -660,15 +689,43 @@
 
     // FAQ: apenas um aberto por vez
     (function(){
-      const containers = document.querySelectorAll('#faq .container');
-      containers.forEach(container => {
-        const items = container.querySelectorAll('details');
-        items.forEach(d => {
-          d.addEventListener('toggle', () => {
-            if (d.open) { items.forEach(o => { if (o !== d) o.removeAttribute('open'); }); }
-          });
+      const items = document.querySelectorAll('#faq details');
+      items.forEach(d => {
+        d.addEventListener('toggle', () => {
+          if (d.open) { items.forEach(o => { if (o !== d) o.removeAttribute('open'); }); }
         });
       });
+    })();
+
+    // Carrossel auto-scroll (mobile) – loop simples
+    (function(){
+      const el = document.getElementById('iconsCarousel');
+      if (!el) return;
+      let auto = null;
+      const step = () => {
+        const max = el.scrollWidth - el.clientWidth;
+        const next = el.scrollLeft + el.clientWidth * 0.5; // meio card por passo
+        if (next >= max - 2) {
+          el.scrollTo({ left: 0, behavior: 'instant' in el ? 'instant' : 'auto' });
+        } else {
+          el.scrollTo({ left: next, behavior: 'smooth' });
+        }
+      };
+      const start = () => { stop(); auto = setInterval(step, 2500); };
+      const stop  = () => { if (auto) clearInterval(auto); auto = null; };
+
+      // pausa quando o usuário interage
+      el.addEventListener('pointerenter', stop);
+      el.addEventListener('pointerdown', stop);
+      el.addEventListener('pointerleave', start);
+      el.addEventListener('touchstart', stop, {passive:true});
+      el.addEventListener('touchend', start, {passive:true});
+
+      // só inicia em telas <640px (onde o carrossel está ativo)
+      const mq = window.matchMedia('(max-width: 639px)');
+      const handle = () => { mq.matches ? start() : stop(); };
+      mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
+      handle();
     })();
   </script>
 </body>
