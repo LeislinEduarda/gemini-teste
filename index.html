@@ -52,7 +52,12 @@
 
     /* ===== Utilitários ===== */
     .container{ max-width: var(--container); margin-inline: auto; padding: 24px; }
-    .section{ padding: 68px 0; }
+    .section{
+      padding: 68px 0;
+      /* performance */
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 900px;
+    }
     .section--soft{ background: var(--bg-soft); }
     .section--accent{ background: var(--brand-accent); color: var(--ink-strong); }
     .stack { display:flex; flex-direction:column; }
@@ -76,7 +81,9 @@
       transition: transform .18s ease, box-shadow .18s ease;
     }
     .card:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,.14); }
-    .spacer{ flex:1 1 auto; }
+    @media (max-width:640px){
+      .card:hover{ box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+    }
 
     /* Tipografia */
     h1{ font-size: var(--step-3); font-weight: 800; color: var(--brand-primary); letter-spacing: -.02em; line-height:1.1; }
@@ -86,7 +93,7 @@
     .muted{ color: var(--muted); font-size: var(--step--1); }
     .section--accent h2, .section--accent h3, .section--accent p { color: var(--ink-strong); }
 
-    /* CTA — roxo + halo amarelo (mantido para as demais seções) */
+    /* CTA — roxo com halo amarelo (padronizado) */
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
@@ -125,17 +132,16 @@
       text-align:center; padding:16px;
     }
 
-    /* ===== HERO ===== */
+    /* ===== HERO (sem CTA e sem glow) ===== */
     .hero{
       padding-top: 40px; padding-bottom: 48px;
       background: var(--bg);
       position: relative; overflow: hidden;
     }
-    /* (Glow removido) */
 
     .hero-grid{ display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
     @media (min-width:1024px){
-      .hero-grid{ grid-template-columns: 1.1fr 1fr; }
+      .hero-grid{ grid-template-columns: 1.05fr 1fr; }
     }
     @media (max-width:640px){
       .media-slot, .img-slot--hero{ min-height: 320px; }
@@ -145,7 +151,7 @@
       .hero{ padding-top: 36px; }
     }
 
-    /* ===== Rodapé ===== */
+    /* Rodapé */
     footer{
       background:
         linear-gradient(135deg, #222456 0%, #6769FF 40%, #b8b62a 75%, #FEF700 100%);
@@ -187,16 +193,16 @@
     /* Títulos e notas */
     .grid-title{ margin-bottom: 6px; }
     .grid-note{
-      margin-top: 6px; margin-bottom: 12px; color: var(--ink);
-      font-size: clamp(14px, 1.2vw + 10px, 17px);
+      margin-top: 8px; margin-bottom: 14px; color: var(--ink);
+      font-size: clamp(15px, 1.3vw + 10px, 18px);
       border-left: 4px solid var(--brand-accent);
       padding-left: 10px;
     }
     @media (max-width:640px){
-      .grid-note{ margin-top: 10px; margin-bottom: 16px; }
+      .grid-note{ margin-top: 12px; margin-bottom: 18px; }
     }
 
-    /* Sticky CTA (fixo, sem botão Fechar) */
+    /* Sticky CTA (fixo, sem fechar) */
     .sticky-cta{
       position: fixed; left: 16px; right: 16px;
       bottom: calc(16px + env(safe-area-inset-bottom));
@@ -212,13 +218,13 @@
     .sticky-cta .cta{ width:100%; }
     @media (max-width:768px){ .sticky-cta{ display:flex; } }
 
-    /* ===== PROGRESSO / DOTS / CARROSSEL / REVEAL ===== */
+    /* Progresso / Dots / Carrossel / Reveal */
     .progress-wrap{ position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 1000; background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08)); backdrop-filter: blur(2px); }
     .progress-bar{ height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); transition: width .08s linear; }
 
     .scroll-dots{ position: fixed; right: 12px; top: 46%; transform: translateY(-50%); display: none; flex-direction: column; gap: 10px; z-index: 997; opacity:.9; }
-    .scroll-dots button{ width: 11px; height: 11px; border-radius: 50%; border: 2px solid rgba(103,105,255,.6); background: #fff; padding: 0; cursor: pointer; }
-    .scroll-dots button[aria-current="true"]{ background: var(--brand-primary); border-color: var(--brand-primary); }
+    .scroll-dots button{ width: 11px; height: 11px; border-radius: 50%; border: 2px solid rgba(103,105,255,.6); background: #fff; padding: 0; cursor: pointer; transition: transform .12s ease; }
+    .scroll-dots button[aria-current="true"]{ background: var(--brand-primary); border-color: var(--brand-primary); transform: scale(1.12); }
     .scroll-dots button:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 2px; }
     @media (min-width:1024px){ .scroll-dots{ display:flex; } }
 
@@ -269,6 +275,9 @@
     }
 
     .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
+    @media (max-width:640px){
+      .who-list, .whonot-list{ gap:14px; }  /* +tocável no mobile */
+    }
     .who-item, .whonot-item{
       position: relative;
       border-radius: 12px; padding: 12px 14px;
@@ -290,7 +299,25 @@
     }
     .who-item:hover::before, .whonot-item:hover::before{ width:10px; }
 
-    /* ===== FAQ (harmonizado com who/whonot) ===== */
+    /* ===== BRIDGE entre “Não é” e FAQ (suaviza a transição) ===== */
+    .section-bridge{
+      padding: 26px 0;
+      background: linear-gradient(90deg, rgba(103,105,255,.10), rgba(254,247,0,.10));
+      position: relative;
+      overflow: hidden;
+    }
+    .bridge-band{
+      height: 8px; border-radius: 999px;
+      background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+      box-shadow: 0 8px 22px rgba(0,0,0,.08);
+    }
+
+    /* ===== FAQ (harmonizado e com overlap no topo) ===== */
+    .faq-wrap{
+      position: relative;
+      margin-top: -18px; /* pequeno overlap para parecer continuidade */
+      z-index: 1;
+    }
     .faq-grid{
       display:grid; gap:16px;
       grid-template-columns: 1fr;
@@ -345,7 +372,6 @@
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <!-- ============ Demais seções mantidas ============ -->
     <section class="section" id="sec-destaques">
       <div class="container grid grid--3">
         <div class="card stack reveal pulse"><h3>DESTAQUE 1 (H3)</h3><p>Parágrafo pequeno explicativo.</p></div>
@@ -502,8 +528,15 @@
       </div>
     </section>
 
-    <!-- ============ FAQ (agora em grid + estilo glass/gradiente) ============ -->
-    <section class="section" id="faq">
+    <!-- ===== Bridge suave para o FAQ ===== -->
+    <section class="section-bridge" aria-hidden="true">
+      <div class="container">
+        <div class="bridge-band"></div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ (grid + glass + overlap) ============ -->
+    <section class="section faq-wrap" id="faq">
       <div class="container">
         <h2 class="grid-title">FAQ (H2)</h2>
         <div class="faq-grid">
