@@ -54,7 +54,6 @@
     .container{ max-width: var(--container); margin-inline: auto; padding: 24px; }
     .section{
       padding: 68px 0;
-      /* performance */
       content-visibility: auto;
       contain-intrinsic-size: 1px 900px;
     }
@@ -93,7 +92,7 @@
     .muted{ color: var(--muted); font-size: var(--step--1); }
     .section--accent h2, .section--accent h3, .section--accent p { color: var(--ink-strong); }
 
-    /* CTA — roxo com halo amarelo (padronizado) */
+    /* CTA — roxo com halo amarelo */
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
@@ -132,13 +131,12 @@
       text-align:center; padding:16px;
     }
 
-    /* ===== HERO (sem CTA e sem glow) ===== */
+    /* ===== HERO ===== */
     .hero{
       padding-top: 40px; padding-bottom: 48px;
       background: var(--bg);
       position: relative; overflow: hidden;
     }
-
     .hero-grid{ display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
     @media (min-width:1024px){
       .hero-grid{ grid-template-columns: 1.05fr 1fr; }
@@ -218,7 +216,7 @@
     .sticky-cta .cta{ width:100%; }
     @media (max-width:768px){ .sticky-cta{ display:flex; } }
 
-    /* Progresso / Dots / Carrossel / Reveal */
+    /* Progresso / Dots / Reveal */
     .progress-wrap{ position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 1000; background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08)); backdrop-filter: blur(2px); }
     .progress-bar{ height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); transition: width .08s linear; }
 
@@ -228,283 +226,68 @@
     .scroll-dots button:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 2px; }
     @media (min-width:1024px){ .scroll-dots{ display:flex; } }
 
-    .carousel{
-      display: grid; grid-auto-flow: column; grid-auto-columns: 80%;
-      gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-      padding-bottom: 8px; overscroll-behavior-x: contain; touch-action: pan-x pan-y; scroll-padding-left: 12px;
-    }
-    .carousel > .card{ scroll-snap-align: start; }
-    @media (min-width:640px){ .carousel{ display:none; } }
-    .grid-icons-desktop{ display:none; }
-    @media (min-width:640px){ .grid-icons-desktop{ display:grid; gap:20px; grid-template-columns: repeat(4,1fr); } }
-    .carousel .card:hover{ box-shadow: 0 10px 26px rgba(254,247,0,.35), 0 4px 12px rgba(0,0,0,.08); }
-
     .reveal{ opacity:0; transform: translateY(10px) scale(.98); transition: opacity .35s ease, transform .35s ease; }
     .reveal.in{ opacity:1; transform: translateY(0) scale(1); }
     .pulse:hover{ box-shadow: 0 14px 30px rgba(254,247,0,.22), 0 6px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
 
-    /* ===== “PARA QUEM É / NÃO É” (glass + gradiente) ===== */
-    .who-wrap{ display:grid; gap:20px; }
-    @media (min-width: 860px){ .who-wrap{ grid-template-columns: 1fr 1fr; } }
-
-    .who-col{
-      position:relative;
-      border-radius: 18px;
-      padding: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.92));
-      box-shadow: 0 12px 32px rgba(0,0,0,.09);
-      border: 1px solid transparent;
-      background-clip: padding-box, border-box;
-      background-origin: border-box;
-      --who-border: linear-gradient(135deg, rgba(103,105,255,.65), rgba(254,247,0,.55));
-      background-image: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95)), var(--who-border);
-      transition: transform .2s ease, box-shadow .2s ease;
+    /* ===== Carrossel: slots pontilhados com imagem dentro ===== */
+    .scroll-row{
+      display:flex;
+      gap:16px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type:x mandatory;
+      scroll-padding-inline:16px;
+      padding:6px 8px 20px;
+      margin-inline:-8px;
+      overscroll-behavior-x: contain;
     }
-    .who-col:hover{ transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.12); }
+    .scroll-row::-webkit-scrollbar{ display:none; }
 
-    .who-title{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-    .who-badge{
-      width: 34px; height: 34px; border-radius: 10px; display:grid; place-items:center;
-      font-weight:900; color:#fff;
-      background: linear-gradient(135deg, #33C66E, #89E3B5); /* “É” */
-      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(51,198,110,.25);
-    }
-    .whonot-badge{
-      background: linear-gradient(135deg, #E24B6A, #F5A5B5); /* “Não é” */
-      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(226,75,106,.25);
+    .scroll-row .card{
+      flex:0 0 auto;
+      scroll-snap-align:start;
+      width: 260px;
+      background:#fff;
+      border:1px solid rgba(103,105,255,.18);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:14px;
     }
 
-    .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
-    @media (max-width:640px){
-      .who-list, .whonot-list{ gap:14px; }  /* +tocável no mobile */
-    }
-    .who-item, .whonot-item{
-      position: relative;
-      border-radius: 12px; padding: 12px 14px;
-      background: #fff;
-      border: 1px solid rgba(0,0,0,.06);
+    .scroll-row .img-slot{
+      width:100%;
+      aspect-ratio: 1 / 1;   /* padrão: quadrado */
+      border:2px dashed rgba(103,105,255,.45);
+      background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
+      border-radius: var(--radius);
       overflow:hidden;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-    }
-    .who-item::before, .whonot-item::before{
-      content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
-      background: linear-gradient(180deg, #3bb273, #9be2bf);
-      transition: width .18s ease;
-    }
-    .whonot-item::before{ background: linear-gradient(180deg, #d13b52, #f3a8b3); }
-    .who-item:hover, .whonot-item:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.10);
-      background: linear-gradient(180deg, #ffffff, #fafafa);
-    }
-    .who-item:hover::before, .whonot-item:hover::before{ width:10px; }
-
-    /* ===== BRIDGE entre “Não é” e FAQ (suaviza a transição) ===== */
-    .section-bridge{
-      padding: 26px 0;
-      background: linear-gradient(90deg, rgba(103,105,255,.10), rgba(254,247,0,.10));
-      position: relative;
-      overflow: hidden;
-    }
-    .bridge-band{
-      height: 8px; border-radius: 999px;
-      background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
-      box-shadow: 0 8px 22px rgba(0,0,0,.08);
     }
 
-    /* ===== FAQ (harmonizado e com overlap no topo) ===== */
-    .faq-wrap{
-      position: relative;
-      margin-top: -18px; /* pequeno overlap para parecer continuidade */
-      z-index: 1;
+    .scroll-row .img-slot img{
+      display:block; width:100%; height:100%;
+      object-fit: cover; border-radius: inherit;
     }
-    .faq-grid{
-      display:grid; gap:16px;
-      grid-template-columns: 1fr;
+
+    .scroll-row .card-title{
+      margin-top:12px;
+      font-weight:700;
+      font-size: var(--step-0);
+      min-height: 1.6em;
     }
-    @media (min-width: 860px){
-      .faq-grid{ grid-template-columns: 1fr 1fr; }
+    .scroll-row .card-sub{
+      margin-top:6px;
+      color: var(--muted);
+      font-size: var(--step--1);
+      min-height: 2.6em;
     }
-    details{
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.92));
-      box-shadow: 0 12px 32px rgba(0,0,0,.09);
-      border: 1px solid transparent;
-      background-clip: padding-box, border-box;
-      background-origin: border-box;
-      --faq-border: linear-gradient(135deg, rgba(103,105,255,.65), rgba(254,247,0,.55));
-      background-image: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95)), var(--faq-border);
-      overflow: hidden;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    details:hover{ transform: translateY(-1px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
-    summary{
-      cursor: pointer; font-weight:700; color:var(--ink);
-      min-height:60px; display:flex; align-items:center; gap:12px;
-      padding: 16px 18px;
-      position:relative; list-style:none;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    .summary-h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
-    .chev{ margin-left:auto; transition: transform .25s ease; color: var(--brand-primary); font-weight:900; }
-    details[open] .chev{ transform: rotate(90deg) scale(1.05); }
-    details[open]{ box-shadow: 0 18px 44px rgba(0,0,0,.12); }
-    details p{ padding: 0 18px 16px 18px; color:var(--ink); }
-    summary:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
-    .scroll-row {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 10px;
-}
 
-.scroll-row::-webkit-scrollbar {
-  display: none; /* Esconde barra no Chrome/Safari */
-}
+    /* espaço pro sticky CTA não cobrir os carrosseis */
+    #sec-cards-funcionarios.section,
+    #sec-grid.section{ padding-bottom: 96px; }
 
-<style>
-  /* ====== Ajustes do carrossel (mobile + desktop) ====== */
-  .scroll-row{
-    display:flex;
-    gap:16px;
-    overflow-x:auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type:x mandatory;
-    scroll-padding-inline:16px;        /* evita corte do 1º/último card */
-    padding:6px 8px 20px;
-    margin-inline:-8px;                 /* ocupa a largura total no mobile */
-    overscroll-behavior-x: contain;     /* evita “puxar” a página junto */
-  }
-  .scroll-row::-webkit-scrollbar{ display:none; }
-
-  /* o card aqui vira apenas um “holder” sem sombra/padding,
-     para a moldura pontilhada aparecer inteira */
-  .scroll-row .card{
-    flex:0 0 auto;
-    scroll-snap-align:start;
-    background:transparent;
-    box-shadow:none;
-    padding:0;
-    border-radius: var(--radius);
-    min-width: 260px;                   /* 240–300 px fica ótimo */
-  }
-
-  /* moldura pontilhada consistente e sem corte */
-  .scroll-row .img-slot{
-    display:block;
-    width:100%;
-    aspect-ratio: 1 / 1;                /* quadrado perfeito no mobile */
-    border:2px dashed rgba(103,105,255,.45);
-    background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
-    border-radius: var(--radius);
-    overflow:hidden;                    /* impede a imagem de “vazar” */
-  }
-/* ===== Carrossel: slots pontilhados com imagem dentro ===== */
-.scroll-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type:x mandatory;
-  scroll-padding-inline:16px;
-  padding:6px 8px 20px;
-  margin-inline:-8px;
-  overscroll-behavior-x: contain;
-}
-.scroll-row::-webkit-scrollbar{ display:none; }
-
-.scroll-row .card{
-  flex:0 0 auto;
-  scroll-snap-align:start;
-  background:transparent;
-  box-shadow:none;
-  padding:0;
-  border-radius: var(--radius);
-  min-width: 240px;         /* ajuste fino: 220–300px */
-  max-width: 280px;
-}
-
-/* o slot pontilhado vira o “moldura” real */
-.scroll-row .img-slot{
-  width:100%;
-  aspect-ratio: 1 / 1;      /* quadrado; mude p/ 4/5 se preferir retrato */
-  border:2px dashed rgba(103,105,255,.45);
-  background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
-  border-radius: var(--radius);
-  overflow:hidden;          /* impede a imagem de vazar */
-  padding:0;                /* zera padding do slot global dentro do carrossel */
-}
-
-/* imagem presa dentro do slot */
-.scroll-row .img-slot img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit: cover;        /* preenche sem distorcer */
-  border-radius: inherit;
-}
-
-/* dá espaço do sticky CTA no mobile */
-#sec-cards-funcionarios.section { padding-bottom: 96px; }
-
-    /* === Carrossel consistente com título/sub === */
-.scroll-row{
-  display:flex;
-  gap:16px;
-  overflow-x:auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type:x mandatory;
-  scroll-padding-inline:16px;
-  padding:6px 8px 20px;
-  margin-inline:-8px;
-}
-.scroll-row::-webkit-scrollbar{ display:none; }
-
-.scroll-row .card{
-  flex:0 0 auto;
-  scroll-snap-align:start;
-  width: 260px;                 /* todos com a mesma largura */
-  background:#fff;
-  border:1px solid rgba(103,105,255,.18);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding:14px;
-}
-
-/* slot pontilhado */
-.scroll-row .img-slot{
-  width:100%;
-  aspect-ratio: 1 / 1;          /* quadrado (mude p/ 4/5 se preferir retrato) */
-  border:2px dashed rgba(103,105,255,.45);
-  background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
-  border-radius: var(--radius);
-  overflow:hidden;
-}
-
-/* imagem presa dentro do slot */
-.scroll-row .img-slot img{
-  display:block; width:100%; height:100%;
-  object-fit: cover; border-radius: inherit;
-}
-
-/* títulos e textos dos cards */
-.scroll-row .card-title{
-  margin-top:12px;
-  font-weight:700;
-  font-size: var(--step-0);
-  min-height: 1.6em;            /* evita card “mais curto” */
-}
-.scroll-row .card-sub{
-  margin-top:6px;
-  color: var(--muted);
-  font-size: var(--step--1);
-  min-height: 2.6em;            /* altura mínima p/ equalizar */
-}
-
-/* espaço pro sticky CTA não cobrir o carrossel */
-#sec-cards-funcionarios.section{ padding-bottom: 96px; }
-    
+    /* carrossel 2 (retangular) */
+    #row-funcionarios-2 .img-slot{ aspect-ratio: 4 / 5; }
   </style>
 </head>
 <body>
@@ -513,7 +296,7 @@
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- ================= HERO (sem CTA e sem glow) ================= -->
+  <!-- ================= HERO ================= -->
   <header class="hero" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Texto do hero">
@@ -521,16 +304,16 @@
         <p class="lead">Reels, carrosséis, stories, ganchos, fotos e designs — feitos de forma leve, rápida e fácil, sem cara de IA. Do jeito que você sempre quis.</p>
       </div>
       <div class="media-slot">
-  <img
-    src="/gemini-teste/assets/hero/hero-mock-800.webp"
-    width="800"
-    height="600"
-    alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
-    decoding="async"
-    fetchpriority="high"
-    style="width:100%; height:auto; display:block; border-radius:18px;"
-  >
-</div>
+        <img
+          src="/gemini-teste/assets/hero/hero-mock-800.webp"
+          width="800"
+          height="600"
+          alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
+          decoding="async"
+          fetchpriority="high"
+          style="width:100%; height:auto; display:block; border-radius:18px;"
+        >
+      </div>
     </div>
   </header>
 
@@ -558,90 +341,27 @@
       </div>
     </section>
 
+    <!-- ========= GRID 1 – CONTEÚDOS VARIADOS (1–10) ========= -->
     <section class="section" id="sec-cards-funcionarios">
-  <div class="container">
-    <h2 class="grid-title">CONTEÚDOS VARIADOS</h2>
-    <p class="grid-note">Veja alguns exemplos que você terá acesso</p>
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario1.webp" alt="Funcionário 1">
-  </div>
-  <h3 class="card__title">Funcionário 1</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
+      <div class="container">
+        <h2 class="grid-title">CONTEÚDOS VARIADOS</h2>
+        <p class="grid-note">Veja alguns exemplos que você terá acesso</p>
 
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario2.webp" alt="Funcionário 2">
-  </div>
-  <h3 class="card__title">Funcionário 2</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario3.webp" alt="Funcionário 3">
-  </div>
-  <h3 class="card__title">Funcionário 3</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario4.webp" alt="Funcionário 4">
-  </div>
-  <h3 class="card__title">Funcionário 4</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario5.webp" alt="Funcionário 5">
-  </div>
-  <h3 class="card__title">Funcionário 5</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario6.webp" alt="Funcionário 6">
-  </div>
-  <h3 class="card__title">Funcionário 6</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario7.webp" alt="Funcionário 7">
-  </div>
-  <h3 class="card__title">Funcionário 7</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario8.webp" alt="Funcionário 8">
-  </div>
-  <h3 class="card__title">Funcionário 8</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario9.webp" alt="Funcionário 9">
-  </div>
-  <h3 class="card__title">Funcionário 9</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario10.webp" alt="Funcionário 10">
-  </div>
-  <h3 class="card__title">Funcionário 10</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-</section>
+        <div class="scroll-row" id="row-funcionarios-1">
+          <!-- 1 a 10 -->
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">Funcionário 1</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Funcionário 2</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Funcionário 3</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Funcionário 4</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario5.webp" alt="Funcionário 5" loading="lazy"></div><h3 class="card-title">Funcionário 5</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Funcionário 6</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Funcionário 7</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario8.webp" alt="Funcionário 8" loading="lazy"></div><h3 class="card-title">Funcionário 8</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Funcionário 9</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Funcionário 10</h3><p class="card-sub">Descrição curta aqui.</p></div>
+        </div>
+      </div>
+    </section>
 
     <section class="section section--soft" id="sec-feed">
       <div class="container grid grid--2">
@@ -654,130 +374,31 @@
       </div>
     </section>
     
+    <!-- ========= GRID 2 – AULAS QUE OS MEMBROS SE APAIXONARAM (11–25, 4/5) ========= -->
     <section class="section" id="sec-grid">
       <div class="container">
         <h2 class="grid-title">AULAS QUE OS MEMBROS SE APAIXONARAM</h2>
         <p class="grid-note">Legenda breve do grid (placeholder).</p>
 
-        <div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario11.webp" alt="Funcionário 11">
-  </div>
-  <h3 class="card__title">Funcionário 11</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario12.webp" alt="Funcionário 12">
-  </div>
-  <h3 class="card__title">Funcionário 12</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario13.webp" alt="Funcionário 13">
-  </div>
-  <h3 class="card__title">Funcionário 13</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario14.webp" alt="Funcionário 14">
-  </div>
-  <h3 class="card__title">Funcionário 14</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario15.webp" alt="Funcionário 15">
-  </div>
-  <h3 class="card__title">Funcionário 15</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario16.webp" alt="Funcionário 16">
-  </div>
-  <h3 class="card__title">Funcionário 16</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario17.webp" alt="Funcionário 17">
-  </div>
-  <h3 class="card__title">Funcionário 17</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario18.webp" alt="Funcionário 18">
-  </div>
-  <h3 class="card__title">Funcionário 18</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario19.webp" alt="Funcionário 19">
-  </div>
-  <h3 class="card__title">Funcionário 19</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario20.webp" alt="Funcionário 20">
-  </div>
-  <h3 class="card__title">Funcionário 20</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario21.webp" alt="Funcionário 21">
-  </div>
-  <h3 class="card__title">Funcionário 21</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario22.webp" alt="Funcionário 22">
-  </div>
-  <h3 class="card__title">Funcionário 22</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario23.webp" alt="Funcionário 23">
-  </div>
-  <h3 class="card__title">Funcionário 23</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario24.webp" alt="Funcionário 24">
-  </div>
-  <h3 class="card__title">Funcionário 24</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
-
-<div class="card stack reveal">
-  <div class="card__media">
-    <img src="assets/cards/funcionarios/funcionario25.webp" alt="Funcionário 25">
-  </div>
-  <h3 class="card__title">Funcionário 25</h3>
-  <p class="card__text">Descrição curta aqui.</p>
-</div>
+        <div class="scroll-row" id="row-funcionarios-2">
+          <!-- 11 a 25 (aspect 4/5) -->
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario11.webp" alt="Funcionário 11" loading="lazy"></div><h3 class="card-title">Funcionário 11</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario12.webp" alt="Funcionário 12" loading="lazy"></div><h3 class="card-title">Funcionário 12</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario13.webp" alt="Funcionário 13" loading="lazy"></div><h3 class="card-title">Funcionário 13</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario14.webp" alt="Funcionário 14" loading="lazy"></div><h3 class="card-title">Funcionário 14</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario15.webp" alt="Funcionário 15" loading="lazy"></div><h3 class="card-title">Funcionário 15</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario16.webp" alt="Funcionário 16" loading="lazy"></div><h3 class="card-title">Funcionário 16</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario17.webp" alt="Funcionário 17" loading="lazy"></div><h3 class="card-title">Funcionário 17</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario18.webp" alt="Funcionário 18" loading="lazy"></div><h3 class="card-title">Funcionário 18</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario19.webp" alt="Funcionário 19" loading="lazy"></div><h3 class="card-title">Funcionário 19</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario20.webp" alt="Funcionário 20" loading="lazy"></div><h3 class="card-title">Funcionário 20</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario21.webp" alt="Funcionário 21" loading="lazy"></div><h3 class="card-title">Funcionário 21</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario22.webp" alt="Funcionário 22" loading="lazy"></div><h3 class="card-title">Funcionário 22</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario23.webp" alt="Funcionário 23" loading="lazy"></div><h3 class="card-title">Funcionário 23</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario24.webp" alt="Funcionário 24" loading="lazy"></div><h3 class="card-title">Funcionário 24</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionarios/funcionario25.webp" alt="Funcionário 25" loading="lazy"></div><h3 class="card-title">Funcionário 25</h3><p class="card-sub">Descrição curta aqui.</p></div>
+        </div>
+      </div>
     </section>
 
     <section class="section section--soft" id="sec-galeria">
@@ -837,12 +458,10 @@
 
     <!-- ===== Bridge suave para o FAQ ===== -->
     <section class="section-bridge" aria-hidden="true">
-      <div class="container">
-        <div class="bridge-band"></div>
-      </div>
+      <div class="container"><div class="bridge-band"></div></div>
     </section>
 
-    <!-- ============ FAQ (grid + glass + overlap) ============ -->
+    <!-- ============ FAQ ============ -->
     <section class="section faq-wrap" id="faq">
       <div class="container">
         <h2 class="grid-title">FAQ (H2)</h2>
@@ -868,7 +487,7 @@
     </section>
   </main>
 
-  <!-- Sticky CTA Mobile (fixo, sem fechar) -->
+  <!-- Sticky CTA Mobile -->
   <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
     <a href="/checkout" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
   </div>
@@ -877,13 +496,10 @@
   <nav class="scroll-dots" aria-label="Progresso da página">
     <button data-target="#sec-hero" aria-label="Hero"></button>
     <button data-target="#sec-destaques" aria-label="Destaques"></button>
-    <button data-target="#sec-comunidade" aria-label="Comunidade"></button>
     <button data-target="#sec-conteudo" aria-label="O que tem dentro"></button>
-    <button data-target="#sec-cta-mid" aria-label="CTA 1"></button>
-    <button data-target="#sec-grid" aria-label="Grid Ícones"></button>
+    <button data-target="#sec-cards-funcionarios" aria-label="Grid 1"></button>
     <button data-target="#sec-feed" aria-label="Feed"></button>
-    <button data-target="#sec-trilha" aria-label="Trilha"></button>
-    <button data-target="#sec-cta-mid-2" aria-label="CTA 2"></button>
+    <button data-target="#sec-grid" aria-label="Grid 2"></button>
     <button data-target="#sec-galeria" aria-label="Galeria"></button>
     <button data-target="#sec-who-group" aria-label="Para quem é / Não é"></button>
     <button data-target="#faq" aria-label="FAQ"></button>
@@ -919,7 +535,7 @@
     </div>
   </footer>
 
-  <!-- Scripts: progresso, dots, reveal, FAQ (um aberto), carrossel -->
+  <!-- Scripts: progresso, dots, reveal, FAQ, auto-scroll -->
   <script>
     // Barra de progresso
     (function(){
@@ -939,7 +555,7 @@
       onScroll();
     })();
 
-    // Dots laterais + navegação suave
+    // Dots laterais
     (function(){
       const dots = Array.from(document.querySelectorAll('.scroll-dots button'));
       const targets = dots.map(btn => document.querySelector(btn.dataset.target)).filter(Boolean);
@@ -987,28 +603,29 @@
       els.forEach(e=>io.observe(e));
     })();
 
-    // Carrossel auto-scroll (mobile)
+    // Auto-scroll leve para carrosseis no mobile (pausa ao tocar)
     (function(){
-      const el = document.getElementById('iconsCarousel');
-      if (!el) return;
-      let timer = null;
-      const step = () => {
-        const max = el.scrollWidth - el.clientWidth;
-        const next = el.scrollLeft + el.clientWidth * 0.5;
-        if (next >= max - 2) el.scrollTo({ left: 0, behavior: 'auto' });
-        else el.scrollTo({ left: next, behavior: 'smooth' });
-      };
-      const start = () => { stop(); timer = setInterval(step, 2500); };
-      const stop  = () => { if (timer) clearInterval(timer); timer = null; };
-      el.addEventListener('pointerenter', stop);
-      el.addEventListener('pointerdown', stop);
-      el.addEventListener('pointerleave', start);
-      el.addEventListener('touchstart', stop, {passive:true});
-      el.addEventListener('touchend', start, {passive:true});
+      const rows = [document.getElementById('row-funcionarios-1'), document.getElementById('row-funcionarios-2')].filter(Boolean);
       const mq = window.matchMedia('(max-width: 639px)');
-      const handle = () => { mq.matches ? start() : stop(); };
-      mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
-      handle();
+      rows.forEach((el)=>{
+        let timer = null;
+        const step = () => {
+          const max = el.scrollWidth - el.clientWidth;
+          const next = el.scrollLeft + el.clientWidth * 0.5;
+          if (next >= max - 2) el.scrollTo({ left: 0, behavior: 'auto' });
+          else el.scrollTo({ left: next, behavior: 'smooth' });
+        };
+        const start = () => { if (timer) return; timer = setInterval(step, 2500); };
+        const stop  = () => { clearInterval(timer); timer = null; };
+        el.addEventListener('pointerenter', stop);
+        el.addEventListener('pointerdown', stop);
+        el.addEventListener('pointerleave', () => mq.matches && start());
+        el.addEventListener('touchstart', stop, {passive:true});
+        el.addEventListener('touchend', () => mq.matches && start(), {passive:true});
+        const handle = () => mq.matches ? start() : stop();
+        mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
+        handle();
+      });
     })();
   </script>
 </body>
