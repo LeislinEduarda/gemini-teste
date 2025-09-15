@@ -351,6 +351,27 @@
     details[open]{ box-shadow: 0 18px 44px rgba(0,0,0,.12); }
     details p{ padding: 0 18px 16px 18px; color:var(--ink); }
     summary:focus-visible{ outline: 3px solid var(--brand-primary); outline-offset: 3px; }
+    .scroll-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+}
+
+.scroll-row::-webkit-scrollbar {
+  display: none; /* Esconde barra no Chrome/Safari */
+}
+
+.scroll-row .card {
+  flex: 0 0 auto;
+  width: 220px; /* ajuste conforme seu design */
+  scroll-snap-align: start;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  background: #fff;
+  padding: 10px;
+}
 
   </style>
 </head>
@@ -405,24 +426,75 @@
       </div>
     </section>
 
-<section class="section">
+<section class="section" id="sec-cards-funcionarios">
   <div class="container">
-    <h2 class="grid-title">NOSSA EQUIPE NÃO HUMANA</h2>
+    <h2 class="grid-title">CONTEÚDOS VARIADOS</h2>
+    <p class="grid-note">Veja alguns exemplos que você terá acesso</p>
+
     <div class="scroll-row">
-      <div class="card reveal"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario3.webp" alt="Funcionário 3"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario4.webp" alt="Funcionário 4"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario5.webp" alt="Funcionário 5"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario6.webp" alt="Funcionário 6"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario7.webp" alt="Funcionário 7"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario8.webp" alt="Funcionário 8"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario9.webp" alt="Funcionário 9"></div>
-      <div class="card reveal"><img src="assets/cards/funcionario10.webp" alt="Funcionário 10"></div>
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario1.webp" alt="Funcionário 1">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario2.webp" alt="Funcionário 2">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario3.webp" alt="Funcionário 3">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario4.webp" alt="Funcionário 4">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario5.webp" alt="Funcionário 5">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario6.webp" alt="Funcionário 6">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario7.webp" alt="Funcionário 7">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario8.webp" alt="Funcionário 8">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario9.webp" alt="Funcionário 9">
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="img-slot">
+          <img src="/gemini-teste/assets/cards/funcionario10.webp" alt="Funcionário 10">
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
+    
     <section class="section section--soft" id="sec-feed">
       <div class="container grid grid--2">
         <div class="media-slot reveal" aria-hidden="true">Vídeo curto: feed criando posts</div>
