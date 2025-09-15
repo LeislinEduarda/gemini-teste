@@ -310,6 +310,15 @@
     details[open] .chev{ transform: rotate(90deg) scale(1.05); }
     details[open]{ box-shadow: 0 18px 44px rgba(0,0,0,.12); }
     details p{ padding: 0 18px 16px 18px; color:var(--ink); }
+
+    /* Fundo arredondado atrás de títulos */
+.title-box{
+  display: inline-block;
+  background: #FFF2BC; /* amarelinho suave, contraste bom em todos fundos */
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+}
   </style>
 </head>
 <body>
@@ -366,7 +375,7 @@
     <!-- 4 — GRID 1: funcionários -->
     <section class="section theme-4" id="sec-cards-funcionarios">
       <div class="container">
-        <h2 class="grid-title">CONTEÚDOS VARIADOS</h2>
+        <h2 class="grid-title title-box">CONTEÚDOS VARIADOS</h2>
         <p class="grid-note">Veja alguns exemplos que você terá acesso</p>
 
         <div class="scroll-row" id="row-funcionarios-1">
@@ -480,7 +489,7 @@
       <div class="container">
         <div class="bridge-band" style="margin-bottom:18px;"></div>
 
-        <h2 class="grid-title">FAQ</h2>
+        <h2 class="grid-title title-box">FAQ (H2)</h2>
         <div class="faq-grid">
           <details class="reveal">
             <summary class="summary-h3">Pergunta 1 <span class="chev">›</span></summary>
