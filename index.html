@@ -314,6 +314,15 @@
     details[open] .chev{ transform: rotate(90deg) scale(1.05); }
     details[open]{ box-shadow: 0 18px 44px rgba(0,0,0,.12); }
     details p{ padding: 0 18px 16px 18px; color:var(--ink); }
+    /* Imagem do sistema */
+.flow-img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid rgba(124,73,42,.15); /* marrom suave */
+}
   </style>
 </head>
 <body>
@@ -389,13 +398,23 @@
     </section>
 
     <!-- 5 — NOVA: Sistema -->
-    <section class="section theme-5" id="sec-sistema">
-      <div class="container">
-        <h2 class="grid-title">O SISTEMA DE CONTEÚDO</h2>
-        <p class="grid-note">Uma visão simples de como tudo se conecta.</p>
-        <img src="assets/sistema.webp" alt="Ilustração do sistema de conteúdo" style="width:100%; height:auto; border-radius:18px; display:block;" loading="lazy">
-      </div>
-    </section>
+<section class="section theme-8" id="sec-sistema">
+ <div class="container" style="max-width: 1280px;">
+    <h2 class="grid-title">COMO FUNCIONA NA PRÁTICA</h2>
+
+    <picture class="reveal">
+      <img
+        src="gemini-teste/assets/30.webp"
+        width="1200"
+        height="1900"
+        alt="Fluxo do sistema de conteúdo com funcionários não humanos"
+        class="flow-img"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  </div>
+</section>
 
     <!-- 6 — GRID 2: Aulas (somente imagens retangulares) -->
     <section class="section theme-6" id="sec-aulas">
