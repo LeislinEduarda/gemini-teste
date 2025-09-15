@@ -21,15 +21,13 @@
       --ink-strong:    #111111;
       --ink:           #2A2A2A;
       --muted:         #6B6B6B;
-      --bg:            #FFFFFF;
-      --bg-soft:       #F7F8FF;
       --radius:        14px;
       --radius-lg:     18px;
       --shadow:        0 6px 24px rgba(0,0,0,.06);
       --shadow-lg:     0 14px 34px rgba(0,0,0,.12);
       --container:     1120px;
 
-      /* Novas cores */
+      /* Cores extras */
       --tone-1:    #7C492A;
       --tone-soft: #FFF2BC;
       --tone-blue: #4647F1;
@@ -44,7 +42,7 @@
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
       color: var(--ink);
-      background: var(--bg);
+      background: #FFF2BC; /* fallback */
       line-height: 1.5;
     }
 
@@ -65,16 +63,22 @@
       z-index: 0;
     }
 
-    /* Alternância de fundos por seção (suave) */
-    main .section:nth-of-type(odd){
-      background: linear-gradient(0deg, rgba(255,242,188,.55), rgba(255,242,188,.55));
+    /* Alternância de fundos (nenhum branco) – ciclo de 3 */
+    /* 1º, 4º, 7º ... */
+    main .section:nth-of-type(3n+1){
+      background: linear-gradient(0deg, rgba(255,242,188,.85), rgba(255,242,188,.85));
     }
-    main .section:nth-of-type(even){
-      background: linear-gradient(0deg, rgba(124,73,42,.06), rgba(124,73,42,.06));
+    /* 2º, 5º, 8º ... */
+    main .section:nth-of-type(3n+2){
+      background: linear-gradient(0deg, rgba(124,73,42,.10), rgba(124,73,42,.10));
     }
-    /* Seções “soft”: tom azul bem suave */
+    /* 3º, 6º, 9º ... */
+    main .section:nth-of-type(3n){
+      background: linear-gradient(0deg, rgba(70,71,241,.10), rgba(70,71,241,.10));
+    }
+    /* Seções “soft” forçam azul clarinho */
     .section--soft{
-      background: linear-gradient(0deg, rgba(70,71,241,.06), rgba(70,71,241,.06)) !important;
+      background: linear-gradient(0deg, rgba(70,71,241,.12), rgba(70,71,241,.12)) !important;
     }
 
     .stack { display:flex; flex-direction:column; }
@@ -108,24 +112,8 @@
     h3{ font-size: var(--step-1); font-weight: 700; color: var(--ink); }
     .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); }
     .muted{ color: var(--muted); font-size: var(--step--1); }
-    .section--accent h2, .section--accent h3, .section--accent p { color: var(--ink-strong); }
 
-    /* CTA — roxo com halo amarelo */
-    .cta{
-      display:inline-flex; align-items:center; justify-content:center;
-      min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
-      background: var(--brand-primary); color: #FFFFFF;
-      font-weight:800; text-transform:uppercase; letter-spacing:.02em;
-      border:2px solid transparent;
-      box-shadow: 0 0 0 0 rgba(254,247,0,0);
-      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, opacity .15s ease;
-      white-space:nowrap; cursor: pointer;
-    }
-    .cta:hover{ transform: translateY(-1px); box-shadow: 0 0 0 4px rgba(254,247,0,.35); }
-    .cta:active{ transform: translateY(0); }
-    .cta:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
-
-    /* Slot base (usado no carrossel 1) */
+    /* Slot base (carrossel 1) */
     .img-slot{
       background:
         linear-gradient(135deg, rgba(103,105,255,.10), rgba(254,247,0,.10)),
@@ -137,7 +125,6 @@
       color: var(--muted); text-align:center; padding:16px; user-select:none;
       overflow:hidden;
     }
-    .img-slot--small{ min-height: 120px; }
 
     .media-slot{
       border-radius: var(--radius-lg);
@@ -150,10 +137,10 @@
       text-align:center; padding:16px;
     }
 
-    /* ===== HERO ===== */
+    /* ===== HERO (também colorido) ===== */
     .hero{
       padding-top: 40px; padding-bottom: 48px;
-      background: var(--bg);
+      background: linear-gradient(0deg, rgba(255,242,188,.85), rgba(255,242,188,.85));
       position: relative; overflow: hidden;
     }
     .hero-grid{ display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
@@ -163,15 +150,11 @@
     @media (max-width:640px){
       .media-slot{ min-height: 320px; }
     }
-    @media (max-width:360px){
-      h1{ line-height:1.18; }
-      .hero{ padding-top: 36px; }
-    }
 
-    /* Rodapé (minimal) */
+    /* Rodapé (minimal e colorido) */
     footer{
-      background: var(--bg);
-      color: var(--muted);
+      background: linear-gradient(0deg, rgba(124,73,42,.10), rgba(124,73,42,.10));
+      color: var(--ink);
       border-top: 1px solid rgba(0,0,0,.06);
     }
     .footer-min{
@@ -179,8 +162,8 @@
       font-size: var(--step--1);
     }
     .footer-links{ display:flex; gap:16px; flex-wrap:wrap; }
-    .footer-links a{ color: var(--muted); text-decoration: underline; text-underline-offset:2px; }
-    .footer-links a:hover{ text-decoration-thickness: 2px; color: var(--ink); }
+    .footer-links a{ color: var(--ink); text-decoration: underline; text-underline-offset:2px; }
+    .footer-links a:hover{ text-decoration-thickness: 2px; color: var(--brand-primary); }
     .footer-copy{ opacity:.85; }
 
     /* Skip link */
@@ -201,7 +184,7 @@
       font-size: clamp(15px, 1.3vw + 10px, 18px);
       border-left: 4px solid var(--tone-soft);
       padding-left: 10px;
-      background: linear-gradient(90deg, #FFF 0%, rgba(255,242,188,.35) 100%);
+      background: linear-gradient(90deg, rgba(255,255,255,.0) 0%, rgba(255,242,188,.35) 100%);
       border-radius: 8px;
     }
     @media (max-width:640px){
@@ -236,7 +219,6 @@
 
     .reveal{ opacity:0; transform: translateY(10px) scale(.98); transition: opacity .35s ease, transform .35s ease; }
     .reveal.in{ opacity:1; transform: translateY(0) scale(1); }
-    .pulse:hover{ box-shadow: 0 14px 30px rgba(254,247,0,.22), 0 6px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
 
     /* ===== Carrosséis ===== */
     .scroll-row{
@@ -263,29 +245,30 @@
       padding:14px;
     }
 
-    /* Carrossel 1 (funcionários): quadrado com pontilhado e imagem “colada” no pontilhado */
+    /* Carrossel 1 (funcionários): quadrado com pontilhado e imagem colada no pontilhado */
     #row-funcionarios-1 .img-slot{ aspect-ratio: 1 / 1; padding:0; }
     #row-funcionarios-1 .img-slot img{ width:100%; height:100%; object-fit: cover; border-radius: inherit; }
-
     .scroll-row .card-title{ margin-top:12px; font-weight:700; font-size: var(--step-0); min-height: 1.6em; }
     .scroll-row .card-sub{ margin-top:6px; color: var(--muted); font-size: var(--step--1); min-height: 2.6em; }
 
-    /* Carrossel 2 (AULAS): somente a imagem (sem pontilhado e sem textos) */
+    /* Carrossel 2 (AULAS): somente a imagem (sem box branco, sem borda/sombra) */
     #row-funcionarios-2 .plain{
       flex:0 0 auto;
       scroll-snap-align:start;
-      width: 280px;            /* um pouquinho maior para prints horizontais */
+      width: 300px;
       border-radius: 18px;
       overflow:hidden;
-      background:#fff;
-      box-shadow: 0 8px 28px rgba(0,0,0,.08);
-      border: 1px solid rgba(0,0,0,.05);
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      padding: 0;
     }
     #row-funcionarios-2 .plain img{
-      display:block; width:100%; height:auto; object-fit: contain; background:#fff;
+      display:block; width:100%; height:auto; object-fit: contain; border-radius: 18px;
+      background: transparent;
     }
 
-    /* Carrossel 3 (prints/feedbacks abaixo): retangular sem corte */
+    /* Carrossel 3 (prints/feedbacks): retangular sem corte */
     #row-prints .img-slot{ aspect-ratio: 4 / 5; border-style: dashed; padding:0; }
     #row-prints .img-slot img{ width:100%; height:100%; object-fit: contain; background:#fff; border-radius: inherit; }
 
@@ -293,7 +276,7 @@
     #sec-cards-funcionarios.section,
     #sec-grid.section{ padding-bottom: 96px; }
 
-    /* ===== “PARA QUEM É / NÃO É” (quadrado emoji fluido) ===== */
+    /* ===== “PARA QUEM É / NÃO É” (emoji fluido restaurado) ===== */
     .who-wrap{ display:grid; gap:20px; }
     @media (min-width: 860px){ .who-wrap{ grid-template-columns: 1fr 1fr; } }
 
@@ -353,7 +336,7 @@
     }
     .who-item:hover::before, .whonot-item:hover::before{ width:10px; }
 
-    /* ===== FAQ — “emoji fluido” ===== */
+    /* ===== FAQ — emoji fluido ===== */
     .faq-wrap{ position: relative; margin-top: -18px; z-index: 1; }
     .faq-grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
     @media (min-width: 860px){ .faq-grid{ grid-template-columns: 1fr 1fr; } }
@@ -432,9 +415,9 @@
   <main id="conteudo" tabindex="-1">
     <section class="section" id="sec-destaques">
       <div class="container grid grid--3">
-        <div class="card stack reveal pulse"><h3>+10.000</h3><p class="muted">posts já criados pela nossa equipe não humana</p></div>
-        <div class="card stack reveal pulse"><h3>A primeira</h3><p class="muted">equipe não humana no Brasil</p></div>
-        <div class="card stack reveal pulse"><h3>para todos</h3><p class="muted">empreendedores, criadores e negócios locais</p></div>
+        <div class="card stack reveal"><h3>+10.000</h3><p class="muted">posts já criados pela nossa equipe não humana</p></div>
+        <div class="card stack reveal"><h3>A primeira</h3><p class="muted">equipe não humana no Brasil</p></div>
+        <div class="card stack reveal"><h3>para todos</h3><p class="muted">empreendedores, criadores e negócios locais</p></div>
       </div>
     </section>
 
@@ -485,6 +468,18 @@
         </div>
       </div>
     </section>
+
+    <!-- ========= NOVA SEÇÃO – SISTEMA DE CONTEÚDO ========= -->
+    <section class="section" id="sec-sistema">
+      <div class="container">
+        <h2 class="grid-title">O SISTEMA DE CONTEÚDO</h2>
+        <p class="grid-note">Uma visão simples de como tudo se conecta.</p>
+        <div class="stack reveal" style="gap:14px;">
+          <!-- Troque o src abaixo pelo seu arquivo ilustrativo -->
+          <img src="assets/sistema.webp" alt="Ilustração do sistema de conteúdo" style="width:100%; height:auto; border-radius:18px; display:block;" loading="lazy">
+        </div>
+      </div>
+    </section>
     
     <!-- ========= GRID 2 – AULAS QUE OS MEMBROS SE APAIXONARAM (somente imagem) ========= -->
     <section class="section" id="sec-grid">
@@ -493,7 +488,7 @@
         <p class="grid-note">Capas reais de aulas e estruturas que deram resultado.</p>
 
         <div class="scroll-row" id="row-funcionarios-2">
-          <!-- Somente a imagem, sem pontilhado e sem título/sub -->
+          <!-- Somente a imagem, sem box branco e sem pontilhado -->
           <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy"></div>
           <div class="plain reveal"><img src="12.webp" alt="Aula 12" loading="lazy"></div>
           <div class="plain reveal"><img src="13.webp" alt="Aula 13" loading="lazy"></div>
@@ -612,6 +607,7 @@
     <button data-target="#sec-conteudo" aria-label="O que tem dentro"></button>
     <button data-target="#sec-cards-funcionarios" aria-label="Grid 1"></button>
     <button data-target="#sec-feed" aria-label="Feed"></button>
+    <button data-target="#sec-sistema" aria-label="Sistema de Conteúdo"></button>
     <button data-target="#sec-grid" aria-label="Grid 2"></button>
     <button data-target="#sec-galeria" aria-label="Galeria"></button>
     <button data-target="#sec-who-group" aria-label="Para quem é / Não é"></button>
