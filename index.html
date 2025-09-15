@@ -447,6 +447,63 @@
 
 /* dá espaço do sticky CTA no mobile */
 #sec-cards-funcionarios.section { padding-bottom: 96px; }
+
+    /* === Carrossel consistente com título/sub === */
+.scroll-row{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:16px;
+  padding:6px 8px 20px;
+  margin-inline:-8px;
+}
+.scroll-row::-webkit-scrollbar{ display:none; }
+
+.scroll-row .card{
+  flex:0 0 auto;
+  scroll-snap-align:start;
+  width: 260px;                 /* todos com a mesma largura */
+  background:#fff;
+  border:1px solid rgba(103,105,255,.18);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:14px;
+}
+
+/* slot pontilhado */
+.scroll-row .img-slot{
+  width:100%;
+  aspect-ratio: 1 / 1;          /* quadrado (mude p/ 4/5 se preferir retrato) */
+  border:2px dashed rgba(103,105,255,.45);
+  background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
+  border-radius: var(--radius);
+  overflow:hidden;
+}
+
+/* imagem presa dentro do slot */
+.scroll-row .img-slot img{
+  display:block; width:100%; height:100%;
+  object-fit: cover; border-radius: inherit;
+}
+
+/* títulos e textos dos cards */
+.scroll-row .card-title{
+  margin-top:12px;
+  font-weight:700;
+  font-size: var(--step-0);
+  min-height: 1.6em;            /* evita card “mais curto” */
+}
+.scroll-row .card-sub{
+  margin-top:6px;
+  color: var(--muted);
+  font-size: var(--step--1);
+  min-height: 2.6em;            /* altura mínima p/ equalizar */
+}
+
+/* espaço pro sticky CTA não cobrir o carrossel */
+#sec-cards-funcionarios.section{ padding-bottom: 96px; }
     
   </style>
 </head>
@@ -511,60 +568,80 @@
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario5.webp" alt="Funcionário 5" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario8.webp" alt="Funcionário 8" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
 
       <div class="card">
         <div class="img-slot">
           <img src="/gemini-teste/assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy" decoding="async">
         </div>
+        <h3 class="card-title">Título</h3>
+        <p class="card-sub">Texto pequeno.</p>
       </div>
     </div>
   </div>
