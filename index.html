@@ -29,9 +29,10 @@
       --shadow-lg:     0 14px 34px rgba(0,0,0,.12);
       --container:     1120px;
 
-      --tone-1:    #7C492A;   /* marrom quente (profundidade) */
-      --tone-soft: #FFF2BC;   /* amarelo manteiga (fundos suaves) */
-      --tone-blue: #4647F1;   /* azul alternativo */
+      /* Novas cores */
+      --tone-1:    #7C492A;
+      --tone-soft: #FFF2BC;
+      --tone-blue: #4647F1;
 
       --step--1: clamp(12px, 0.72vw + 9px, 14px);
       --step-0:  clamp(14px, 0.85vw + 10px, 16px);
@@ -60,9 +61,22 @@
       padding: 68px 0;
       content-visibility: auto;
       contain-intrinsic-size: 1px 900px;
+      position: relative;
+      z-index: 0;
     }
-    .section--soft{ background: var(--bg-soft); }
-    .section--accent{ background: var(--brand-accent); color: var(--ink-strong); }
+
+    /* Alternância de fundos por seção (suave) */
+    main .section:nth-of-type(odd){
+      background: linear-gradient(0deg, rgba(255,242,188,.55), rgba(255,242,188,.55));
+    }
+    main .section:nth-of-type(even){
+      background: linear-gradient(0deg, rgba(124,73,42,.06), rgba(124,73,42,.06));
+    }
+    /* Seções “soft”: tom azul bem suave */
+    .section--soft{
+      background: linear-gradient(0deg, rgba(70,71,241,.06), rgba(70,71,241,.06)) !important;
+    }
+
     .stack { display:flex; flex-direction:column; }
     .stack > * + *{ margin-top: 16px; }
     .cluster{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
@@ -111,7 +125,7 @@
     .cta:active{ transform: translateY(0); }
     .cta:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
 
-    /* Slots de mídia (base) */
+    /* Slot base (usado no carrossel 1) */
     .img-slot{
       background:
         linear-gradient(135deg, rgba(103,105,255,.10), rgba(254,247,0,.10)),
@@ -123,9 +137,7 @@
       color: var(--muted); text-align:center; padding:16px; user-select:none;
       overflow:hidden;
     }
-    .img-slot:not(.img-slot--hero){ aspect-ratio: 4 / 3; }
     .img-slot--small{ min-height: 120px; }
-    .img-slot--hero{ min-height: 420px; border-radius: var(--radius-lg); }
 
     .media-slot{
       border-radius: var(--radius-lg);
@@ -149,7 +161,7 @@
       .hero-grid{ grid-template-columns: 1.05fr 1fr; }
     }
     @media (max-width:640px){
-      .media-slot, .img-slot--hero{ min-height: 320px; }
+      .media-slot{ min-height: 320px; }
     }
     @media (max-width:360px){
       h1{ line-height:1.18; }
@@ -226,7 +238,7 @@
     .reveal.in{ opacity:1; transform: translateY(0) scale(1); }
     .pulse:hover{ box-shadow: 0 14px 30px rgba(254,247,0,.22), 0 6px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
 
-    /* ===== Carrosséis: slots pontilhados com imagem dentro ===== */
+    /* ===== Carrosséis ===== */
     .scroll-row{
       display:flex;
       gap:16px;
@@ -251,55 +263,37 @@
       padding:14px;
     }
 
-    .scroll-row .img-slot{
-      width:100%;
-      border:2px dashed rgba(103,105,255,.50);
-      background:
-        linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08)),
-        radial-gradient(120% 80% at 10% 10%, rgba(255,242,188,.35), transparent 60%);
-      border-radius: var(--radius);
+    /* Carrossel 1 (funcionários): quadrado com pontilhado e imagem “colada” no pontilhado */
+    #row-funcionarios-1 .img-slot{ aspect-ratio: 1 / 1; padding:0; }
+    #row-funcionarios-1 .img-slot img{ width:100%; height:100%; object-fit: cover; border-radius: inherit; }
+
+    .scroll-row .card-title{ margin-top:12px; font-weight:700; font-size: var(--step-0); min-height: 1.6em; }
+    .scroll-row .card-sub{ margin-top:6px; color: var(--muted); font-size: var(--step--1); min-height: 2.6em; }
+
+    /* Carrossel 2 (AULAS): somente a imagem (sem pontilhado e sem textos) */
+    #row-funcionarios-2 .plain{
+      flex:0 0 auto;
+      scroll-snap-align:start;
+      width: 280px;            /* um pouquinho maior para prints horizontais */
+      border-radius: 18px;
       overflow:hidden;
-      padding:0; /* essencial para a foto encostar no pontilhado */
+      background:#fff;
+      box-shadow: 0 8px 28px rgba(0,0,0,.08);
+      border: 1px solid rgba(0,0,0,.05);
+    }
+    #row-funcionarios-2 .plain img{
+      display:block; width:100%; height:auto; object-fit: contain; background:#fff;
     }
 
-    /* Carrossel 1: quadrado foto-cheia (sem cortes laterais visíveis) */
-    #row-funcionarios-1 .img-slot{ aspect-ratio: 1 / 1; }
-    #row-funcionarios-1 .img-slot img{
-      width:100%; height:100%; object-fit: cover; border-radius: inherit;
-      image-rendering: auto;
-    }
+    /* Carrossel 3 (prints/feedbacks abaixo): retangular sem corte */
+    #row-prints .img-slot{ aspect-ratio: 4 / 5; border-style: dashed; padding:0; }
+    #row-prints .img-slot img{ width:100%; height:100%; object-fit: contain; background:#fff; border-radius: inherit; }
 
-    /* Carrossel 2: retangular (evitar cortes) */
-    #row-funcionarios-2 .img-slot{ aspect-ratio: 4 / 5; }
-    #row-funcionarios-2 .img-slot img{
-      width:100%; height:100%; object-fit: contain; border-radius: inherit;
-      background:#fff; /* “papel” atrás para prints */
-    }
-
-    /* Carrossel 3 (prints/feedbacks abaixo): retangular como prints */
-    #row-prints .img-slot{ aspect-ratio: 4 / 5; }
-    #row-prints .img-slot img{
-      width:100%; height:100%; object-fit: contain; border-radius: inherit; background:#fff;
-    }
-
-    .scroll-row .card-title{
-      margin-top:12px;
-      font-weight:700;
-      font-size: var(--step-0);
-      min-height: 1.6em;
-    }
-    .scroll-row .card-sub{
-      margin-top:6px;
-      color: var(--muted);
-      font-size: var(--step--1);
-      min-height: 2.6em;
-    }
-
-    /* espaço pro sticky CTA não cobrir os carrosseis */
+    /* Espaço para o sticky CTA não cobrir carrosséis */
     #sec-cards-funcionarios.section,
     #sec-grid.section{ padding-bottom: 96px; }
 
-    /* ===== “PARA QUEM É / NÃO É” — fundo “quadrado emoji fluido” ===== */
+    /* ===== “PARA QUEM É / NÃO É” (quadrado emoji fluido) ===== */
     .who-wrap{ display:grid; gap:20px; }
     @media (min-width: 860px){ .who-wrap{ grid-template-columns: 1fr 1fr; } }
 
@@ -321,7 +315,6 @@
         radial-gradient(110% 80% at 85% 15%, rgba(70,71,241,.12), transparent 60%),
         radial-gradient(90% 70% at 50% 100%, rgba(124,73,42,.08), transparent 60%);
       z-index: 0;
-      filter: blur(0.3px);
     }
     .who-col > *{ position:relative; z-index:1; }
 
@@ -338,9 +331,7 @@
     }
 
     .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
-    @media (max-width:640px){
-      .who-list, .whonot-list{ gap:14px; }
-    }
+    @media (max-width:640px){ .who-list, .whonot-list{ gap:14px; } }
     .who-item, .whonot-item{
       position: relative;
       border-radius: 12px; padding: 12px 14px;
@@ -362,7 +353,7 @@
     }
     .who-item:hover::before, .whonot-item:hover::before{ width:10px; }
 
-    /* ===== FAQ — fundo “quadrado emoji fluido” ===== */
+    /* ===== FAQ — “emoji fluido” ===== */
     .faq-wrap{ position: relative; margin-top: -18px; z-index: 1; }
     .faq-grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
     @media (min-width: 860px){ .faq-grid{ grid-template-columns: 1fr 1fr; } }
@@ -495,51 +486,51 @@
       </div>
     </section>
     
-    <!-- ========= GRID 2 – AULAS QUE OS MEMBROS SE APAIXONARAM (11–25, retangular) ========= -->
+    <!-- ========= GRID 2 – AULAS QUE OS MEMBROS SE APAIXONARAM (somente imagem) ========= -->
     <section class="section" id="sec-grid">
       <div class="container">
         <h2 class="grid-title">AULAS QUE OS MEMBROS SE APAIXONARAM</h2>
         <p class="grid-note">Capas reais de aulas e estruturas que deram resultado.</p>
 
         <div class="scroll-row" id="row-funcionarios-2">
-          <!-- 11 a 25 (evitar cortes: contain) -->
-          <div class="card reveal"><div class="img-slot"><img src="11.webp" alt="Aula 11" loading="lazy"></div><h3 class="card-title">Sua Rotina pode ser um Storytelling Poderoso</h3><p class="card-sub">Seu dia “chato” vira seu melhor post</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="12.webp" alt="Aula 12" loading="lazy"></div><h3 class="card-title">Aula 12</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="13.webp" alt="Aula 13" loading="lazy"></div><h3 class="card-title">Aula 13</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="14.webp" alt="Aula 14" loading="lazy"></div><h3 class="card-title">Aula 14</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="15.webp" alt="Aula 15" loading="lazy"></div><h3 class="card-title">Aula 15</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="16.webp" alt="Aula 16" loading="lazy"></div><h3 class="card-title">Aula 16</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="17.webp" alt="Aula 17" loading="lazy"></div><h3 class="card-title">Aula 17</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="18.webp" alt="Aula 18" loading="lazy"></div><h3 class="card-title">Aula 18</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="19.webp" alt="Aula 19" loading="lazy"></div><h3 class="card-title">Aula 19</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="20.webp" alt="Aula 20" loading="lazy"></div><h3 class="card-title">Aula 20</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="21.webp" alt="Aula 21" loading="lazy"></div><h3 class="card-title">Aula 21</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="22.webp" alt="Aula 22" loading="lazy"></div><h3 class="card-title">Aula 22</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="23.webp" alt="Aula 23" loading="lazy"></div><h3 class="card-title">Aula 23</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="24.webp" alt="Aula 24" loading="lazy"></div><h3 class="card-title">Aula 24</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="25.webp" alt="Aula 25" loading="lazy"></div><h3 class="card-title">Aula 25</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <!-- Somente a imagem, sem pontilhado e sem título/sub -->
+          <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy"></div>
+          <div class="plain reveal"><img src="12.webp" alt="Aula 12" loading="lazy"></div>
+          <div class="plain reveal"><img src="13.webp" alt="Aula 13" loading="lazy"></div>
+          <div class="plain reveal"><img src="14.webp" alt="Aula 14" loading="lazy"></div>
+          <div class="plain reveal"><img src="15.webp" alt="Aula 15" loading="lazy"></div>
+          <div class="plain reveal"><img src="16.webp" alt="Aula 16" loading="lazy"></div>
+          <div class="plain reveal"><img src="17.webp" alt="Aula 17" loading="lazy"></div>
+          <div class="plain reveal"><img src="18.webp" alt="Aula 18" loading="lazy"></div>
+          <div class="plain reveal"><img src="19.webp" alt="Aula 19" loading="lazy"></div>
+          <div class="plain reveal"><img src="20.webp" alt="Aula 20" loading="lazy"></div>
+          <div class="plain reveal"><img src="21.webp" alt="Aula 21" loading="lazy"></div>
+          <div class="plain reveal"><img src="22.webp" alt="Aula 22" loading="lazy"></div>
+          <div class="plain reveal"><img src="23.webp" alt="Aula 23" loading="lazy"></div>
+          <div class="plain reveal"><img src="24.webp" alt="Aula 24" loading="lazy"></div>
+          <div class="plain reveal"><img src="25.webp" alt="Aula 25" loading="lazy"></div>
         </div>
       </div>
     </section>
 
-    <!-- ========= CONTEÚDOS VARIADOS (abaixo) — prints/feedbacks em carrossel retangular ========= -->
-    <section class="section section--soft" id="sec-galeria">
+    <!-- ========= CONTEÚDOS VARIADOS (abaixo) — prints/feedbacks ========= -->
+    <section class="section" id="sec-galeria">
       <div class="container">
         <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
         <p class="grid-note">Prints e feedbacks reais (arraste para ver).</p>
 
         <div class="scroll-row" id="row-prints">
-          <!-- Slots prontos para você subir prints/feedbacks -->
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 1</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 2</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 3</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 4</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 5</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 6</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 7</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 8</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 9</h3><p class="card-sub">Feedback real</p></div>
-          <div class="card reveal"><div class="img-slot"></div><h3 class="card-title">Print 10</h3><p class="card-sub">Feedback real</p></div>
+          <!-- Suba os prints trocando pelo <img> dentro -->
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
+          <div class="card reveal"><div class="img-slot"></div></div>
         </div>
       </div>
     </section>
