@@ -243,22 +243,15 @@
   padding-top: var(--pt);
   padding-bottom: var(--pb);
 }
-    /* AULAS: topo com respiro, fundo quase zerado */
+/* AULAS: mais respiro no topo, fundo equilibrado */
 #sec-aulas {
-  --pt: 72px;   /* MAIS espaço antes do título */
-  --pb: 4px;    /* QUASE nada de espaço no fim */
+  --pt: 72px;   /* mais espaço antes do título */
+  --pb: 32px;   /* espaço suficiente no fim pra não cortar imagens */
 }
 
-/* tira resíduo de padding interno e do carrossel */
+/* garante que o carrossel não seja comprimido */
 #sec-aulas .container { padding-bottom: 0 !important; }
-#sec-aulas .scroll-row { padding-bottom: 4px !important; }
-
-/* opcional: em telas muito pequenas, dá para zerar de vez */
-@media (max-width: 768px){
-  #sec-aulas { --pb: 0px; }
-  #sec-aulas .scroll-row { padding-bottom: 0 !important; }
-}
-    
+#sec-aulas .scroll-row { margin-bottom: 0 !important; }
   </style>
 </head>
 <body>
