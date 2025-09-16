@@ -58,24 +58,19 @@
       padding: 68px 0;
       position: relative;
       z-index: 0;
-      /* variável de acento/borda por tema */
       --theme-border: rgba(103,105,255,.45);
     }
 
-    /* Temas (fundo + borda/acento) — harmonizados */
+    /* Temas */
     .theme-1{ background: linear-gradient(0deg, rgba(208,250,140,.25), rgba(208,250,140,.25)); --theme-border: var(--c1); }
-    /* Marrom puro (sem suavidade) */
-.theme-2{
-  background: #7C492A;     /* cor sólida */
-  --theme-border: #7C492A; /* mantém consistência dos detalhes */
-}
-    .theme-3{ background: var(--c3);                                                          --theme-border: var(--c3); }
-    .theme-4{ background: var(--c4);                                                          --theme-border: var(--c4); }
-    .theme-5{ background: var(--c5);                                                          --theme-border: var(--c5); }
-    .theme-6{ background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15));--theme-border: var(--c6); }
-    .theme-7{ background: linear-gradient(0deg, rgba(255,107,0,.14), rgba(255,107,0,.14));    --theme-border: var(--c7); }
-    .theme-8{ background: linear-gradient(0deg, rgba(208,250,140,.25), rgba(208,250,140,.25));--theme-border: var(--c8); }
-    .theme-9{ background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15));--theme-border: var(--c9); }
+    .theme-2{ background: #7C492A; --theme-border: #7C492A; }          /* marrom puro */
+    .theme-3{ background: var(--c3); --theme-border: var(--c3); }
+    .theme-4{ background: var(--c4); --theme-border: var(--c4); }
+    .theme-5{ background: var(--c5); --theme-border: var(--c5); }
+    .theme-6{ background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15)); --theme-border: var(--c6); }
+    .theme-7{ background: linear-gradient(0deg, rgba(255,107,0,.14), rgba(255,107,0,.14)); --theme-border: var(--c7); }
+    .theme-8{ background: linear-gradient(0deg, rgba(208,250,140,.25), rgba(208,250,140,.25)); --theme-border: var(--c8); }
+    .theme-9{ background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15)); --theme-border: var(--c9); }
 
     .stack { display:flex; flex-direction:column; }
     .stack > * + *{ margin-top: 16px; }
@@ -127,7 +122,33 @@
       text-align:center; padding:16px;
     }
 
-    /* Rodapé minimal (vai dentro da mesma seção do FAQ) */
+    /* ========= HERO AJUSTADO ========= */
+    /* menos espaço no topo */
+    #sec-hero{ padding-top: 24px; }
+    @media (max-width:640px){ #sec-hero{ padding-top: 16px; } }
+
+    /* remove o “quadrado” atrás e cola a borda na imagem */
+    #sec-hero .media-slot{
+      background: transparent;          /* sem gradiente */
+      border: 2px dashed var(--theme-border);
+      padding: 0;                        /* sem respiro interno */
+      min-height: auto;                  /* deixa a altura ser a da imagem */
+      border-radius: 18px;
+      box-shadow: none;
+    }
+    #sec-hero .media-slot img{
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: inherit;            /* borda rente à imagem */
+    }
+
+    /* reserva espaço pro CTA flutuante no mobile */
+    @media (max-width:768px){
+      #sec-hero{ padding-bottom: 120px; }
+    }
+
+    /* Rodapé minimal (na mesma seção do FAQ) */
     .footer-min{
       display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
       font-size: var(--step--1);
@@ -212,23 +233,21 @@
       border-radius: var(--radius); box-shadow: var(--shadow); padding:14px;
     }
 
-    /* Carrossel 1 – funcionários: imagem “colada” no pontilhado (quadrado) */
+    /* Carrossel 1 – funcionários */
     #row-funcionarios-1 .img-slot{ aspect-ratio: 1 / 1; padding:0; }
     #row-funcionarios-1 .img-slot img{ width:100%; height:100%; object-fit: cover; border-radius: inherit; }
     .scroll-row .card-title{ margin-top:12px; font-weight:700; font-size: var(--step-0); min-height: 1.6em; }
     .scroll-row .card-sub{ margin-top:6px; color: var(--muted); font-size: var(--step--1); min-height: 2.6em; }
 
-    /* Carrossel 2 – Aulas: somente a imagem (retangular) */
+    /* Carrossel 2 – Aulas (somente imagem) */
     #row-aulas .plain{
       flex:0 0 auto; scroll-snap-align:start; width: 300px;
       border-radius: 18px; overflow:hidden; background: transparent;
       box-shadow: none; border: none; padding: 0;
     }
-    #row-aulas .plain img{
-      display:block; width:100%; height:auto; object-fit: contain; border-radius: 18px;
-    }
+    #row-aulas .plain img{ display:block; width:100%; height:auto; object-fit: contain; border-radius: 18px; }
 
-    /* Carrossel 3 – Prints/feedbacks: retangular (4/5) dentro de slot */
+    /* Carrossel 3 – Prints (4/5) */
     #row-prints .img-slot{ aspect-ratio: 4 / 5; padding:0; }
     #row-prints .img-slot img{ width:100%; height:100%; object-fit: contain; border-radius: inherit; background:#fff; }
 
@@ -286,7 +305,7 @@
     .section-bridge{ padding: 26px 0; background: linear-gradient(90deg, rgba(103,105,255,.10), rgba(254,247,0,.10)); }
     .bridge-band{ height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); box-shadow: 0 8px 22px rgba(0,0,0,.08); }
 
-    /* FAQ (ficará na mesma seção do rodapé) */
+    /* FAQ */
     .faq-grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
     @media (min-width: 860px){ .faq-grid{ grid-template-columns: 1fr 1fr; } }
 
@@ -314,42 +333,7 @@
     details[open] .chev{ transform: rotate(90deg) scale(1.05); }
     details[open]{ box-shadow: 0 18px 44px rgba(0,0,0,.12); }
     details p{ padding: 0 18px 16px 18px; color:var(--ink); }
-    /* Imagem do sistema */
-.flow-img{
-  display:block;
-  width:100%;
-  height:auto;
-  border-radius: 18px;
-  box-shadow: var(--shadow-lg);
-  border: 2px solid rgba(124,73,42,.15); /* marrom suave */
-}
-    <style>
-  /* estilos que já existem... */
 
-  .hero-section {
-    padding-top: 20px;
-    padding-bottom: 40px;
-    text-align: center;
-  }
-
-  .hero-title {
-    margin-top: 10px;
-  }
-
-  .hero-image {
-    display: block;
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    border-radius: 12px;
-    border: 2px dashed var(--theme-border);
-    margin: 10px auto 20px auto;
-  }
-
-  .hero-button {
-    margin-top: 10px;
-  }
-</style>
   </style>
 </head>
 <body>
@@ -425,24 +409,22 @@
     </section>
 
     <!-- 5 — NOVA: Sistema -->
-<section class="section theme-8" id="sec-sistema">
- <div class="container" style="max-width: 1280px;">
-    <h2 class="grid-title">COMO FUNCIONA NA PRÁTICA</h2>
+    <section class="section theme-8" id="sec-sistema">
+      <div class="container" style="max-width: 1280px;">
+        <h2 class="grid-title">COMO FUNCIONA NA PRÁTICA</h2>
 
-     <picture class="reveal">
-      <source srcset="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1" type="image/webp">
-      <img
-        src="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1"
-        width="1200"
-        height="1900"
-        alt="Fluxo do sistema de conteúdo com funcionários não humanos"
-        class="flow-img"
-        loading="lazy"
-        decoding="async"
-      />
-    </picture>
-  </div>
-</section>
+        <picture class="reveal">
+          <source srcset="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1" type="image/webp">
+          <img
+            src="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1"
+            width="1200" height="1900"
+            alt="Fluxo do sistema de conteúdo com funcionários não humanos"
+            style="display:block;width:100%;height:auto;border-radius:18px;box-shadow:var(--shadow-lg);border:2px solid rgba(124,73,42,.15);"
+            loading="lazy" decoding="async"
+          />
+        </picture>
+      </div>
+    </section>
 
     <!-- 6 — GRID 2: Aulas (somente imagens retangulares) -->
     <section class="section theme-6" id="sec-aulas">
@@ -477,7 +459,6 @@
         <p class="grid-note">Prints e feedbacks reais (arraste para ver).</p>
 
         <div class="scroll-row" id="row-prints">
-          <!-- suba imagens dentro dos slots -->
           <div class="card reveal"><div class="img-slot"></div></div>
           <div class="card reveal"><div class="img-slot"></div></div>
           <div class="card reveal"><div class="img-slot"></div></div>
@@ -658,15 +639,4 @@
         const start = () => { if (timer) return; timer = setInterval(step, 2500); };
         const stop  = () => { clearInterval(timer); timer = null; };
         el.addEventListener('pointerenter', stop);
-        el.addEventListener('pointerdown', stop);
-        el.addEventListener('pointerleave', () => mq.matches && start());
-        el.addEventListener('touchstart', stop, {passive:true});
-        el.addEventListener('touchend', () => mq.matches && start(), {passive:true});
-        const handle = () => mq.matches ? start() : stop();
-        mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
-        handle();
-      });
-    })();
-  </script>
-</body>
-</html>
+        el.addEventListener('pointerdown',
