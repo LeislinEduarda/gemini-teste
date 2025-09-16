@@ -398,6 +398,15 @@
   margin: 0 auto;
   border-radius: 12px;
 }
+.seu-gif {
+  display: block;       /* elimina espaços extras */
+  width: 100%;          /* ocupa toda a largura disponível */
+  height: auto;         /* mantém proporção original */
+  margin: 0;            /* remove margens */
+  padding: 0;           /* remove espaçamentos */
+  border: none;         /* garante que não haja borda */
+  background: none;     /* remove fundo extra */
+}
     
   </style>
 </head>
@@ -440,27 +449,6 @@
 
     <!-- 3 -->
     
-
-    <!-- 4 — GRID 1: funcionários -->
-    <section class="section theme-4" id="sec-cards-funcionarios">
-      <div class="container">
-        <h2 class="grid-title">CONTEÚDOS VARIADOS</h2>
-        <p class="grid-note">Veja alguns exemplos que você terá acesso</p>
-
-        <div class="scroll-row" id="row-funcionarios-1">
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Frases que Param o Feed</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Ideias que Viralizam</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Funcionário 3</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Funcionário 4</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario5.webp" alt="Funcionário 5" loading="lazy"></div><h3 class="card-title">Funcionário 5</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Funcionário 6</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Funcionário 7</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario8.webp" alt="Funcionário 8" loading="lazy"></div><h3 class="card-title">Funcionário 8</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Funcionário 9</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Funcionário 10</h3><p class="card-sub">Descrição curta aqui.</p></div>
-        </div>
-      </div>
-    </section>
     <section class="section theme-3" id="sec-conteudo">
   <div class="container grid grid--2">
     <div class="stack reveal">
@@ -492,8 +480,7 @@
       </ul>
     </div>
 
-<div class="img-slot reveal">
-  <video autoplay loop muted playsinline class="video-gif">
+<img src="caminho-do-gif.gif" alt="gif">  <video autoplay loop muted playsinline class="video-gif">
     <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
     Seu navegador não suporta vídeos.
   </video>
@@ -501,6 +488,27 @@
     </div>
   </div>
 </section>
+
+    <!-- 4 — GRID 1: funcionários -->
+    <section class="section theme-4" id="sec-cards-funcionarios">
+      <div class="container">
+        <h2 class="grid-title">CONTEÚDOS VARIADOS</h2>
+        <p class="grid-note">Veja alguns exemplos que você terá acesso</p>
+
+        <div class="scroll-row" id="row-funcionarios-1">
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Frases que Param o Feed</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Ideias que Viralizam</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Funcionário 3</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Funcionário 4</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario5.webp" alt="Funcionário 5" loading="lazy"></div><h3 class="card-title">Funcionário 5</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Funcionário 6</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Funcionário 7</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario8.webp" alt="Funcionário 8" loading="lazy"></div><h3 class="card-title">Funcionário 8</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Funcionário 9</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Funcionário 10</h3><p class="card-sub">Descrição curta aqui.</p></div>
+        </div>
+      </div>
+    </section>
 
     <!-- 5 — NOVA: Sistema -->
     <section class="section theme-8" id="sec-sistema">
