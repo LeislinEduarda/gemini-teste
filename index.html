@@ -440,6 +440,37 @@
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+    /* Menor espaço entre subtítulo e imagens */
+#sec-aulas .grid-note {
+  margin-bottom: 10px;   /* antes provavelmente 20–30px */
+}
+
+/* Maior espaço entre título e final da seção */
+#sec-aulas {
+  padding-bottom: 60px;  /* aumenta o "respiro" no fim */
+}
+
+/* (opcional) espaço mais harmonioso entre título e subtítulo */
+#sec-aulas .grid-title {
+  margin-bottom: 15px;   /* define um valor fixo entre h2 e p */
+}
+    /* Título maior e mais destacado */
+#sec-como-funciona .grid-title {
+  font-size: 2.2rem;     /* maior que os outros títulos (ex.: 35px se base for 16px) */
+  font-weight: 800;      /* bem marcante */
+  margin-bottom: 15px;   /* espaço entre título e subtítulo */
+  text-align: center;    /* opcional: centralizar */
+}
+
+/* Subtítulo mais próximo do conteúdo */
+#sec-como-funciona .grid-note {
+  margin-bottom: 12px;   /* diminui espaço entre subtítulo e cards/imagens */
+}
+
+/* Mais respiro no final da seção */
+#sec-como-funciona {
+  padding-bottom: 60px;  /* aumenta espaço antes da próxima seção */
+}
     
   </style>
 </head>
@@ -546,7 +577,7 @@
     <!-- 5 — NOVA: Sistema -->
     <section class="section theme-8" id="sec-sistema">
       <div class="container" style="max-width: 1280px;">
-        <h2 class="grid-title">COMO FUNCIONA NA PRÁTICA</h2>
+        <h2 class="grid-title">COMO FUNCIONA NA PRÁTICA 👇</h2>
 
         <picture class="reveal">
           <source srcset="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1" type="image/webp">
