@@ -365,6 +365,17 @@
       box-shadow: var(--shadow-lg);
       border: 2px solid rgba(124,73,42,.15); /* marrom suave */
     }
+    .lista-destaque {
+  list-style: none;        /* remove os pontos */
+  padding-left: 0;         /* tira recuo */
+  margin-top: 18px;
+}
+
+.lista-destaque li {
+  margin-bottom: 22px;     /* mais espaço entre cada item */
+  line-height: 1.55;       /* deixa o texto mais “respirado” */
+  font-size: var(--step-0);
+}
   </style>
 </head>
 <body>
@@ -419,11 +430,32 @@
       </p>
       
       <ul>
-        <li>🤖 <strong>Equipe de Social Media Não Humana</strong> → 10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.</li>
-        <li>🎥 <strong>Aulas práticas e express de conteúdo + IA</strong> → direto ao ponto, sem enrolação, para aplicar no mesmo dia.</li>
-        <li>🧶 <strong>Material de apoio exclusivo</strong> → checklists e prompts prontos para facilitar sua vida.</li>
-        <li>🔑 <strong>Segredos e hacks testados</strong> → ganchos, insights e estratégias que já funcionaram para mim na prática.</li>
-        <li>💬 <strong>Chat com todos os membros (inclusive comigo)</strong> → para pedir ajuda sempre que precisar.</li>
+        <ul class="lista-destaque">
+  <li>
+    🤖 <strong>Equipe de Social Media Não Humana</strong><br>
+    10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.
+  </li>
+
+  <li>
+    🎥 <strong>Aulas práticas e express de conteúdo + IA</strong><br>
+    Direto ao ponto, sem enrolação, para aplicar no mesmo dia.
+  </li>
+
+  <li>
+    🧶 <strong>Material de apoio exclusivo</strong><br>
+    Checklists e prompts prontos para facilitar sua vida.
+  </li>
+
+  <li>
+    🔑 <strong>Segredos e hacks testados</strong><br>
+    Ganchos, insights e estratégias que já funcionaram para mim na prática.
+  </li>
+
+  <li>
+    💬 <strong>Chat com todos os membros (inclusive comigo)</strong><br>
+    Para pedir ajuda sempre que precisar.
+  </li>
+</ul>
       </ul>
     </div>
 
