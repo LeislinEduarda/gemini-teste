@@ -243,6 +243,21 @@
   padding-top: var(--pt);
   padding-bottom: var(--pb);
 }
+    /* AULAS: topo com respiro, fundo quase zerado */
+#sec-aulas {
+  --pt: 72px;   /* MAIS espaço antes do título */
+  --pb: 4px;    /* QUASE nada de espaço no fim */
+}
+
+/* tira resíduo de padding interno e do carrossel */
+#sec-aulas .container { padding-bottom: 0 !important; }
+#sec-aulas .scroll-row { padding-bottom: 4px !important; }
+
+/* opcional: em telas muito pequenas, dá para zerar de vez */
+@media (max-width: 768px){
+  #sec-aulas { --pb: 0px; }
+  #sec-aulas .scroll-row { padding-bottom: 0 !important; }
+}
     
   </style>
 </head>
