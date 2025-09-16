@@ -123,21 +123,50 @@
       text-align:center; padding:16px;
     }
 
-    /* ===== HERO (ajustado) ===== */
-    #sec-hero{ padding-top: 28px; padding-bottom: 40px; }
-    .hero-grid{ display:grid; gap:22px; grid-template-columns: 1fr; align-items:center; }
-    @media (min-width:1024px){ .hero-grid{ grid-template-columns: 1.05fr 1fr; } }
-    .hero-title{ margin-top: 2px; }
-    .hero-subtitle{
-      font-size: calc(var(--step-0) * 1.1);
-      color: var(--ink-strong);
-      max-width: 68ch;
-      text-wrap: balance;
-    }
-    .hero-media{ border-radius:18px; overflow:hidden; }
-    .hero-img{ display:block; width:100%; height:auto; border-radius:18px; }
-    /* Evita o CTA flutuante cobrir a imagem no mobile */
-    @media (max-width:768px){ #sec-hero{ padding-bottom: 120px; } }
+    /* ===== HERO (ajustado – topo curto e respiro no rodapé) ===== */
+#sec-hero{
+  padding-top: 10px;          /* <— encurta o topo */
+  padding-bottom: 34px;       /* desktop/tablet */
+}
+
+.hero-grid{
+  display:grid;
+  gap: 14px;                  /* <— aproxima título, texto e imagem */
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+@media (min-width:1024px){
+  .hero-grid{ grid-template-columns: 1.05fr 1fr; }
+}
+
+.hero-title{ margin-top: 0; }
+
+.hero-subtitle{
+  font-size: calc(var(--step-0) * 1.1);
+  color: var(--ink-strong);
+  max-width: 66ch;            /* leitura mais confortável */
+  text-wrap: balance;
+  margin-top: 4px;            /* subtítulo mais “colado” no h1 */
+  line-height: 1.45;
+}
+
+.hero-media{
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 6px;            /* cola a imagem no subtítulo */
+}
+
+.hero-img{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius: 18px;
+}
+
+/* Mobile: dá mais respiro para o botão flutuante não encostar na imagem */
+@media (max-width: 768px){
+  #sec-hero{ padding-bottom: 168px; } /* <— “mais solto” na área do botão */
+}
 
     /* Rodapé minimal (vai dentro da mesma seção do FAQ) */
     .footer-min{
