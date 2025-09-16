@@ -236,6 +236,14 @@
     /* Menos espaço entre subtítulo e cards dos funcionários */
     #sec-cards-funcionarios .funcionarios{ margin:0 0 8px 0; padding-bottom:4px; }
     #sec-cards-funcionarios #row-funcionarios-1{ margin-top:0; padding-top:6px; }
+    /* ===== Seções: espaçamento controlado por variáveis ===== */
+.section {
+  --pt: 68px;   /* padding-top padrão */
+  --pb: 68px;   /* padding-bottom padrão */
+  padding-top: var(--pt);
+  padding-bottom: var(--pb);
+}
+    
   </style>
 </head>
 <body>
