@@ -16,19 +16,12 @@
 
     /* ===== Tokens ===== */
     :root{
-      --brand-primary: #6769FF;   /* roxo (títulos e ênfases) */
-      --brand-accent:  #FEF700;   /* amarelo brilho antigo (mantido p/ detalhes) */
+      --brand-primary: #6769FF;   /* roxo (marca) */
+      --brand-accent:  #FEF700;   /* amarelo (acento) */
       --ink-strong:    #111111;
       --ink:           #2A2A2A;
       --muted:         #6B6B6B;
       --bg:            #FFFFFF;
-
-      /* Paleta extra (pedido) */
-      --c-green:  #D0FA8C;  /* verde */
-      --c-brown:  #7C492A;  /* marrom */
-      --c-yellow: #FFF2BC;  /* amarelo clarinho */
-      --c-orange: #FF6B00;  /* laranja */
-      --c-purple: #7374F1;  /* roxo de fundo final */
 
       --radius:        14px;
       --radius-lg:     18px;
@@ -41,6 +34,13 @@
       --step-1:  clamp(18px, 1.2vw + 12px, 22px);
       --step-2:  clamp(22px, 1.8vw + 14px, 30px);
       --step-3:  clamp(36px, 3.5vw + 16px, 52px);
+
+      /* Paleta enviada */
+      --c-green:  #D0FA8C;  /* verde */
+      --c-brown:  #7C492A;  /* marrom (sólido) */
+      --c-yellow: #FFF2BC;  /* amarelo claro */
+      --c-purple: #7374F1;  /* roxo final */
+      --c-orange: #FF6B00;  /* laranja (detalhes – opcional) */
     }
 
     body{
@@ -59,16 +59,10 @@
 
     /* ===== Utilitários ===== */
     .container{ max-width: var(--container); margin-inline: auto; padding: 24px; }
-    .section{
-      padding: 56px 0;              /* respiro global menor */
-      content-visibility: auto;
-      contain-intrinsic-size: 1px 900px;
-    }
-    .section--tight{ padding: 36px 0; }  /* seções com menos respiro (pedido) */
+    .section{ padding: 68px 0; position: relative; }
     .stack { display:flex; flex-direction:column; }
-    .stack > * + *{ margin-top: 14px; }
+    .stack > * + *{ margin-top: 16px; }
     .cluster{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
-
     .grid{ display:grid; gap:20px; }
     .grid--2, .grid--3, .grid--4{ grid-template-columns: 1fr; }
     @media (min-width:640px){
@@ -77,16 +71,18 @@
       .grid--4{ grid-template-columns: repeat(4,1fr); }
     }
 
-    /* Temas de fundo por seção (sem branco) */
-    .theme-green  { background: var(--c-green);  }
-    .theme-yellow { background: var(--c-yellow); }
-    .theme-brown  { background: var(--c-brown);  color:#fff; }
-    .theme-orange { background: var(--c-orange); color:#111; }
-    .theme-purple { background: var(--c-purple); color:#fff; }
-    .theme-brown h2, .theme-purple h2,
-    .theme-brown h3, .theme-purple h3 { color:#fff; }
-    .theme-brown .grid-note, .theme-purple .grid-note{
-      color:#f4f4f4; border-left: 4px solid #ffffff99;
+    .card{
+      background: #FFF;
+      border: 1px solid rgba(103,105,255,.18);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display:flex; flex-direction:column;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,.14); }
+    @media (max-width:640px){
+      .card:hover{ box-shadow: 0 10px 24px rgba(0,0,0,.12); }
     }
 
     /* Tipografia */
@@ -96,13 +92,29 @@
     .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); }
     .muted{ color: var(--muted); font-size: var(--step--1); }
 
-    /* CTA flutuante */
+    /* ===== Temas de fundo (sem branco puro) ===== */
+    .theme-hero { background: var(--c-yellow); }  /* Hero: amarelo */
+    .theme-1    { background: var(--c-green); }   /* Destaques: verde */
+    .theme-2    { background: var(--c-brown); color:#fff; } /* Visu: marrom */
+    .theme-3    { background: var(--c-yellow); }  /* Carrossel 1: amarelo */
+    .theme-4    { background: var(--c-green); }   /* Aulas: verde */
+    .theme-5    { background: var(--c-yellow); }  /* Sistema: amarelo */
+    .theme-6    { background: var(--c-green); }   /* Galeria: verde */
+    .theme-7    { background: var(--c-brown); color:#fff; } /* Para quem é: marrom */
+    .theme-final{ background: var(--c-purple); color:#fff; } /* FAQ + rodapé: roxo */
+
+    .theme-2 h2, .theme-2 h3, .theme-2 p, .theme-2 li { color:#fff; }
+    .theme-7 h2, .theme-7 h3, .theme-7 p, .theme-7 li { color:#fff; }
+    .theme-final h2, .theme-final h3, .theme-final p, .theme-final li { color:#fff; }
+
+    /* CTA — roxo com halo amarelo */
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
       min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
       background: var(--brand-primary); color: #FFFFFF;
       font-weight:800; text-transform:uppercase; letter-spacing:.02em;
       border:2px solid transparent;
+      box-shadow: 0 0 0 0 rgba(254,247,0,0);
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, opacity .15s ease;
       white-space:nowrap; cursor: pointer;
     }
@@ -110,10 +122,61 @@
     .cta:active{ transform: translateY(0); }
     .cta:focus-visible{ outline: 3px solid var(--brand-accent); outline-offset: 3px; }
 
+    /* Slots de mídia */
+    .img-slot{
+      background: linear-gradient(135deg, rgba(103,105,255,.12), rgba(254,247,0,.12));
+      border: 2px dashed rgba(103,105,255,.45);
+      border-radius: var(--radius);
+      min-height: 220px;
+      display:grid; place-items:center;
+      color: var(--muted); text-align:center; padding:16px; user-select:none;
+    }
+    .img-slot--small{ min-height: 120px; }
+    .img-slot--hero{ min-height: 420px; border-radius: var(--radius-lg); }
+
+    .media-slot{
+      border-radius: var(--radius-lg);
+      min-height: 460px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,0)),
+        linear-gradient(135deg, rgba(103,105,255,.15), rgba(254,247,0,.15));
+      border: 2px dashed rgba(103,105,255,.45);
+      display:grid; place-items:center; color:var(--muted);
+      text-align:center; padding:16px;
+    }
+    .media-slot img{ border-radius: 18px; }
+
+    /* ===== HERO ===== */
+    .hero{
+      padding-top: 40px; padding-bottom: 48px;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid{ display:grid; gap:24px; grid-template-columns: 1fr; align-items:center; }
+    @media (min-width:1024px){
+      .hero-grid{ grid-template-columns: 1.05fr 1fr; }
+    }
+    @media (max-width:640px){
+      .media-slot, .img-slot--hero{ min-height: 320px; }
+    }
+    @media (max-width:360px){
+      h1{ line-height:1.18; }
+      .hero{ padding-top: 36px; }
+    }
+
+    /* Títulos e notas */
+    .grid-title{ margin-bottom: 6px; }
+    .grid-note{
+      margin-top: 8px; margin-bottom: 14px; color: inherit;
+      font-size: clamp(15px, 1.3vw + 10px, 18px);
+      border-left: 4px solid rgba(0,0,0,.18);
+      padding-left: 10px;
+    }
+
+    /* Sticky CTA (fixo, sem fechar) — restaurado */
     .sticky-cta{
       position: fixed; left: 16px; right: 16px;
       bottom: calc(16px + env(safe-area-inset-bottom));
-      z-index: 9999;
+      z-index: 9999;     /* garantir que fica acima de tudo */
       display: none; justify-content:center;
       background: #FFFFFFE6;
       border: 1px solid rgba(0,0,0,.06);
@@ -125,67 +188,7 @@
     .sticky-cta .cta{ width:100%; }
     @media (max-width:768px){ .sticky-cta{ display:flex; } }
 
-    /* Slots de mídia */
-    .img-slot{
-      background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
-      border: 2px dashed rgba(103,105,255,.45);
-      border-radius: var(--radius);
-      min-height: 220px;
-      display:grid; place-items:center;
-      color: var(--muted); text-align:center; padding:10px; user-select:none;
-    }
-    .img-slot--small{ min-height: 120px; }
-    .img-slot--hero{
-      min-height: 360px;              /* menor pra caber acima da dobra */
-      border: 1.5px dashed rgba(103,105,255,.45); /* “borda menor” (pedido) */
-      border-radius: var(--radius-lg);
-      padding: 8px;
-    }
-
-    .media-slot{
-      border-radius: var(--radius-lg);
-      min-height: 360px;              /* menor que antes para 1ª dobra */
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,0)),
-        linear-gradient(135deg, rgba(103,105,255,.10), rgba(254,247,0,.10));
-      border: 1.5px dashed rgba(103,105,255,.45);
-      display:grid; place-items:center; color:var(--muted);
-      text-align:center; padding:8px;
-    }
-
-    /* HERO compacto */
-    .hero{
-      padding-top: 28px; padding-bottom: 30px;
-      background: var(--bg);
-      position: relative; overflow: hidden;
-    }
-    .hero-grid{ display:grid; gap:16px; grid-template-columns: 1fr; align-items:center; }
-    @media (min-width:1024px){
-      .hero-grid{ grid-template-columns: 1.05fr 1fr; }
-    }
-
-    /* Cards (apenas onde usamos “conteúdos variados”) */
-    .card{
-      background: #FFF;
-      border: 1px solid rgba(103,105,255,.18);
-      border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: var(--shadow);
-      display:flex; flex-direction:column;
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .card:hover{ transform: translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,.14); }
-
-    /* Títulos e notas */
-    .grid-title{ margin-bottom: 4px; }
-    .grid-note{
-      margin-top: 6px; margin-bottom: 12px; color: var(--ink);
-      font-size: clamp(15px, 1.3vw + 10px, 18px);
-      border-left: 4px solid var(--brand-accent);
-      padding-left: 10px;
-    }
-
-    /* Barra de progresso + dots (mantidos) */
+    /* Progresso / Dots / Reveal */
     .progress-wrap{ position: fixed; inset: 0 0 auto 0; height: 4px; z-index: 1000; background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08)); backdrop-filter: blur(2px); }
     .progress-bar{ height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); transition: width .08s linear; }
 
@@ -197,84 +200,103 @@
 
     .reveal{ opacity:0; transform: translateY(10px) scale(.98); transition: opacity .35s ease, transform .35s ease; }
     .reveal.in{ opacity:1; transform: translateY(0) scale(1); }
+    .pulse:hover{ box-shadow: 0 14px 30px rgba(254,247,0,.22), 0 6px 16px rgba(0,0,0,.08); transform: translateY(-2px); }
 
     /* ===== Carrossel base ===== */
     .scroll-row{
       display:flex;
-      gap:14px;
+      gap:16px;
       overflow-x:auto;
       -webkit-overflow-scrolling: touch;
       scroll-snap-type:x mandatory;
       scroll-padding-inline:16px;
-      padding:4px 6px 16px;
-      margin-inline:-6px;
+      padding:6px 8px 20px;
+      margin-inline:-8px;
       overscroll-behavior-x: contain;
     }
     .scroll-row::-webkit-scrollbar{ display:none; }
 
-    /* ===== Carrossel 1 – Conteúdos variados (quadrado, com títulos) ===== */
-    #row-funcionarios-1 .card{
+    .scroll-row .card{
       flex:0 0 auto;
       scroll-snap-align:start;
-      width: 240px;
+      width: 260px;
       background:#fff;
       border:1px solid rgba(103,105,255,.18);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding:12px;
+      padding:14px;
     }
-    #row-funcionarios-1 .img-slot{
+
+    /* Carrossel 1 – pontilhado com imagem dentro */
+    .scroll-row .img-slot{
       width:100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1 / 1;   /* quadrado */
       border:2px dashed rgba(103,105,255,.45);
       background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
       border-radius: var(--radius);
       overflow:hidden;
     }
-    #row-funcionarios-1 .img-slot img{ width:100%; height:100%; object-fit: cover; }
-    #row-funcionarios-1 .card-title{ margin-top:10px; font-weight:700; font-size: var(--step-0); }
-    #row-funcionarios-1 .card-sub{ margin-top:4px; color: var(--muted); font-size: var(--step--1); }
+    .scroll-row .img-slot img{
+      width:100%; height:100%;
+      object-fit: cover; border-radius: inherit;
+    }
 
-    /* ===== Carrossel 2 – Aulas (retangular, sem títulos/sub, só a borda pontilhada) ===== */
+    .scroll-row .card-title{
+      margin-top:12px;
+      font-weight:700;
+      font-size: var(--step-0);
+      min-height: 1.6em;
+    }
+    .scroll-row .card-sub{
+      margin-top:6px;
+      color: var(--muted);
+      font-size: var(--step--1);
+      min-height: 2.6em;
+    }
+
+    /* Carrossel 2 – Aulas (sem pontilhado) */
     #row-funcionarios-2 .card{
-      flex:0 0 auto;
-      scroll-snap-align:start;
-      background:transparent;
-      border:0;
-      box-shadow:none;
-      padding:0;
-      width: clamp(220px, 60vw, 520px); /* menor respiro horizontal */
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
     }
-    #row-funcionarios-2 .img-slot{
-      width:100%;
-      aspect-ratio: 16 / 9;               /* retangular (pedido) */
-      border:2px dashed rgba(103,105,255,.55); /* pontilhado visível */
-      background: transparent;            /* sem fundo branco por trás */
-      border-radius: 16px;
-      overflow:hidden;
-      padding:0;                          /* borda encosta na imagem */
+    #row-funcionarios-2 .img-plain{
+      width: 260px;
+      aspect-ratio: 4 / 5;     /* retângulo vertical */
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ddd;
     }
-    #row-funcionarios-2 .img-slot img{ width:100%; height:100%; object-fit: cover; display:block; }
-    /* tira qualquer espaço extra dos títulos/subs não usados */
-    #row-funcionarios-2 .card-title, #row-funcionarios-2 .card-sub{ display: none !important; }
+    #row-funcionarios-2 .img-plain img{
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    #row-funcionarios-2 .card-title,
+    #row-funcionarios-2 .card-sub{
+      padding-left: 4px;
+      color: inherit;
+    }
 
-    /* ===== “Para quem é / Não é” (glass forte sobre fundo colorido) ===== */
-    .who-wrap{ display:grid; gap:16px; }
+    /* ===== WHO / FAQ – restaura “glass + gradiente” ===== */
+    .who-wrap{ display:grid; gap:20px; }
     @media (min-width: 860px){ .who-wrap{ grid-template-columns: 1fr 1fr; } }
 
     .who-col{
       position:relative;
       border-radius: 18px;
-      padding: 16px;
-      /* mais “white glass” para não ficar apagado */
-      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.98));
-      box-shadow: 0 14px 34px rgba(0,0,0,.10);
-      border: 1px solid rgba(255,255,255,.9);
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
+      box-shadow: 0 12px 32px rgba(0,0,0,.09);
+      border: 1px solid rgba(255,255,255,.4);
+      background-clip: padding-box;
       transition: transform .2s ease, box-shadow .2s ease;
+      color: #111; /* texto escuro dentro do glass */
     }
     .who-col:hover{ transform: translateY(-2px); box-shadow: 0 18px 44px rgba(0,0,0,.12); }
 
-    .who-title{ display:flex; align-items:center; gap:12px; margin-bottom:10px; }
+    .who-title{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
     .who-badge{
       width: 34px; height: 34px; border-radius: 10px; display:grid; place-items:center;
       font-weight:900; color:#fff;
@@ -286,47 +308,52 @@
       box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(226,75,106,.25);
     }
 
-    .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:10px; }
-    .who-item, .whonot-item{
-      border-radius: 12px; padding: 10px 12px;
-      background: #fff;
-      border: 1px solid rgba(0,0,0,.06);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-    }
-    .who-item:hover, .whonot-item:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.08);
-      background: linear-gradient(180deg, #ffffff, #fafafa);
-    }
+    .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
 
-    /* ===== FAQ (clean) ===== */
-    .faq-grid{ display:grid; gap:12px; grid-template-columns: 1fr; }
-    @media (min-width: 860px){ .faq-grid{ grid-template-columns: 1fr 1fr; } }
-
-    details{
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid rgba(0,0,0,.08);
-      box-shadow: 0 8px 22px rgba(0,0,0,.08);
+    /* FAQ (glass) */
+    .faq-wrap details{
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
+      box-shadow: 0 12px 32px rgba(0,0,0,.09);
+      border: 1px solid rgba(255,255,255,.4);
       overflow: hidden;
-      transition: transform .2s ease, box-shadow .2s ease;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      color: #111; /* texto escuro dentro do glass */
     }
-    details:hover{ transform: translateY(-1px); box-shadow: 0 12px 28px rgba(0,0,0,.10); }
+    details:hover{ transform: translateY(-1px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
     summary{
-      cursor: pointer; font-weight:700; color:var(--ink);
-      min-height:54px; display:flex; align-items:center; gap:12px;
-      padding: 12px 14px;
+      cursor: pointer; font-weight:700;
+      min-height:60px; display:flex; align-items:center; gap:12px;
+      padding: 16px 18px;
       position:relative; list-style:none;
+      color:#111;
     }
     summary::-webkit-details-marker{ display:none; }
+    .summary-h3{ font-size: var(--step-1); font-weight: 700; }
     .chev{ margin-left:auto; transition: transform .25s ease; color: var(--brand-primary); font-weight:900; }
     details[open] .chev{ transform: rotate(90deg) scale(1.05); }
-    details[open]{ box-shadow: 0 14px 34px rgba(0,0,0,.12); }
-    details p{ padding: 0 14px 12px 14px; color:var(--ink); }
+    details[open]{ box-shadow: 0 18px 44px rgba(0,0,0,.12); }
+    details p{ padding: 0 18px 16px 18px; color:#222; }
 
-    /* Espaço extra pro sticky CTA não cobrir carrosseis (mobile) */
-    #sec-cards-funcionarios.section,
-    #sec-grid.section{ padding-bottom: 96px; }
+    /* Rodapé minimalista */
+    .footer-min{
+      display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;
+      padding: 18px 0;
+      border-top: 1px solid rgba(255,255,255,.35);
+    }
+    .footer-link{ text-decoration: underline; text-underline-offset:2px; }
+    .footer-link:hover{ text-decoration-thickness: 2px; }
+
+    /* Skip link */
+    .skip-link{
+      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      position:fixed; left:16px; top:16px; width:auto; height:auto;
+      background:var(--brand-accent); color:var(--ink-strong);
+      padding:10px 14px; border-radius:8px; z-index:1000;
+      outline:3px solid #000;
+    }
   </style>
 </head>
 <body>
@@ -335,99 +362,214 @@
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- ================= HERO (mais compacto) ================= -->
-  <header class="hero" id="sec-hero">
+  <!-- ================= HERO ================= -->
+  <header class="hero theme-hero" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Texto do hero">
         <h1>O SEU POST FEITO 100% COM IA</h1>
-        <p class="lead">Reels, carrosséis, stories, ganchos, fotos e designs — feitos de forma leve, rápida e fácil, sem cara de IA. Sem tomar seu tempo. Do jeito que eu faço pra mim.</p>
+        <p class="lead">Reels, carrosséis, stories, ganchos, fotos e designs — feitos de forma leve, rápida e fácil, sem cara de IA. Do jeito que você sempre quis.</p>
       </div>
       <div class="media-slot">
         <img
-          src="/gemini-teste/assets/hero/hero-mock-800.webp"
+          src="assets/hero/hero-mock-800.webp"
           width="800"
           height="600"
           alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
           decoding="async"
           fetchpriority="high"
-          style="width:100%; height:auto; display:block; border-radius:18px;"
         >
       </div>
     </div>
   </header>
 
   <main id="conteudo" tabindex="-1">
-    <!-- ================= Destaques (verde) ================= -->
-    <section class="section theme-green" id="sec-destaques">
+    <!-- Destaques -->
+    <section class="section theme-1" id="sec-destaques">
       <div class="container grid grid--3">
-        <div class="card stack reveal"><h3>+10.000</h3><p class="muted">posts já criados pela nossa equipe não humana</p></div>
-        <div class="card stack reveal"><h3>A primeira</h3><p class="muted">equipe não humana no Brasil</p></div>
-        <div class="card stack reveal"><h3>para todos</h3><p class="muted">empreendedores, criadores e negócios locais</p></div>
+        <div class="card stack reveal pulse"><h3>+10.000</h3><p class="muted">posts já criados pela nossa equipe não humana</p></div>
+        <div class="card stack reveal pulse"><h3>A primeira</h3><p class="muted">equipe não humana no Brasil</p></div>
+        <div class="card stack reveal pulse"><h3>para todos</h3><p class="muted">empreendedores, criadores e negócios locais</p></div>
       </div>
     </section>
 
-    <!-- ================= Conteúdos Variados (amarelo) – Carrossel 1 ================= -->
-    <section class="section theme-yellow" id="sec-cards-funcionarios">
+    <!-- VISU da Comunidade -->
+    <section class="section theme-2" id="sec-conteudo">
+      <div class="container grid grid--2">
+        <div class="stack reveal">
+          <h2>VISU DA COMUNIDADE</h2>
+          <ul>
+            <li>90 aulas sobre: criação de posts, produtos e automações</li>
+            <li>Chat ativo comigo e todos os membros</li>
+            <li>Lista com todas as IAs que eu uso no meu dia a dia</li>
+            <li>Minhas estratégias de crescimento detalhadas em Notions</li>
+          </ul>
+        </div>
+        <div class="img-slot reveal" aria-hidden="true">Imagem de um módulo (placeholder)</div>
+      </div>
+    </section>
+
+    <!-- ========= GRID 1 – CONTEÚDOS VARIADOS (1–10) ========= -->
+    <section class="section theme-3" id="sec-cards-funcionarios">
       <div class="container">
         <h2 class="grid-title">CONTEÚDOS VARIADOS</h2>
         <p class="grid-note">Veja alguns exemplos que você terá acesso</p>
 
         <div class="scroll-row" id="row-funcionarios-1">
-          <!-- 1 a 10 — caminhos absolutos, imagem 1 corrigida -->
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario1.webp" alt="João dos Ganchos" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Frases que Param o Feed</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario2.webp" alt="Maria das Ideias" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Ideias que Viralizam</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Funcionário 3</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Funcionário 4</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario5.webp" alt="Funcionário 5" loading="lazy"></div><h3 class="card-title">Funcionário 5</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Funcionário 6</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Funcionário 7</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario8.webp" alt="Funcionário 8" loading="lazy"></div><h3 class="card-title">Funcionário 8</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Funcionário 9</h3><p class="card-sub">Descrição curta aqui.</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Funcionário 10</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="João dos Ganchos" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Frases que param o feed</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Maria das Ideias" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Ideias que viralizam</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Funcionário 3</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Funcionário 4</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario5.webp" alt="Funcionário 5" loading="lazy"></div><h3 class="card-title">Funcionário 5</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Funcionário 6</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Funcionário 7</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario8.webp" alt="Funcionário 8" loading="lazy"></div><h3 class="card-title">Funcionário 8</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Funcionário 9</h3><p class="card-sub">Descrição curta aqui.</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Funcionário 10</h3><p class="card-sub">Descrição curta aqui.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ================= Aulas que os membros amam (marrom) – Carrossel 2 ================= -->
-    <section class="section theme-brown" id="sec-grid">
+    <!-- ========= GRID 2 – AULAS QUE OS MEMBROS SE APAIXONARAM (11–25) ========= -->
+    <section class="section theme-4" id="sec-grid">
       <div class="container">
         <h2 class="grid-title">AULAS QUE OS MEMBROS SE APAIXONARAM</h2>
-        <p class="grid-note">Prints reais das aulas. Só arrasta e sente.</p>
+        <p class="grid-note">Do zero à execução: o que mais destrava resultados na prática.</p>
 
         <div class="scroll-row" id="row-funcionarios-2">
-          <!-- 11 a 25 — retangular, sem títulos/subs, borda pontilhada -->
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/11.webp" alt="Aula 11" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/12.webp" alt="Aula 12" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/13.webp" alt="Aula 13" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/14.webp" alt="Aula 14" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/15.webp" alt="Aula 15" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/16.webp" alt="Aula 16" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/17.webp" alt="Aula 17" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/18.webp" alt="Aula 18" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/19.webp" alt="Aula 19" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/20.webp" alt="Aula 20" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/21.webp" alt="Aula 21" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/22.webp" alt="Aula 22" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/23.webp" alt="Aula 23" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/24.webp" alt="Aula 24" loading="lazy"></div></div>
-          <div class="card reveal"><div class="img-slot"><img src="/gemini-teste/25.webp" alt="Aula 25" loading="lazy"></div></div>
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/11.webp" alt="Sua rotina pode ser um Storytelling poderoso" loading="lazy"></div>
+            <h3 class="card-title">Sua rotina pode ser um Storytelling poderoso</h3>
+            <p class="card-sub">Seu dia 'comum' vira seu melhor post</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/12.webp" alt="Todo conteúdo está nos seus produtos" loading="lazy"></div>
+            <h3 class="card-title">Todo conteúdo está nos seus produtos</h3>
+            <p class="card-sub">Você só precisa enxergar</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/13.webp" alt="Vire autoridade sendo você mesmo" loading="lazy"></div>
+            <h3 class="card-title">Vire autoridade sendo você mesmo</h3>
+            <p class="card-sub">Sem personagem</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/14.webp" alt="Frases que viciaram 1 milhão de pessoas" loading="lazy"></div>
+            <h3 class="card-title">Frases que viciaram 1 milhão de pessoas</h3>
+            <p class="card-sub">Use sem parecer IA</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/15.webp" alt="O que dizer nos primeiros segundos" loading="lazy"></div>
+            <h3 class="card-title">O que dizer nos primeiros segundos</h3>
+            <p class="card-sub">Pra ninguém sair do seu vídeo</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/16.webp" alt="Ganchos visuais com ChatGPT" loading="lazy"></div>
+            <h3 class="card-title">Ganchos visuais com ChatGPT</h3>
+            <p class="card-sub">Sem enrolação</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/17.webp" alt="Meus 4 pilares do conteúdo viral" loading="lazy"></div>
+            <h3 class="card-title">Meus 4 pilares do conteúdo viral</h3>
+            <p class="card-sub">O que realmente importa</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/18.webp" alt="Estoque infinito de ideias" loading="lazy"></div>
+            <h3 class="card-title">Estoque infinito de ideias</h3>
+            <p class="card-sub">E como filtrar as que vendem</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/19.webp" alt="Crie sua persona com ChatGPT" loading="lazy"></div>
+            <h3 class="card-title">Crie sua persona com ChatGPT</h3>
+            <p class="card-sub">Fácil e aplicável</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/20.webp" alt="Recicle seu melhor conteúdo" loading="lazy"></div>
+            <h3 class="card-title">Recicle seu melhor conteúdo</h3>
+            <p class="card-sub">Sem soar repetitivo</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/21.webp" alt="Leia a mente do seu público (IA)" loading="lazy"></div>
+            <h3 class="card-title">Leia a mente do seu público (IA)</h3>
+            <p class="card-sub">Pergunte do jeito certo</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/22.webp" alt="Roteiros que fogem do igual" loading="lazy"></div>
+            <h3 class="card-title">Roteiros que fogem do igual</h3>
+            <p class="card-sub">Zero tédio</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/23.webp" alt="Meu processo de reels" loading="lazy"></div>
+            <h3 class="card-title">Meu processo de reels</h3>
+            <p class="card-sub">Rápido, simples e estratégico</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/24.webp" alt="Meus hacks secretos com ChatGPT" loading="lazy"></div>
+            <h3 class="card-title">Meus hacks secretos com ChatGPT</h3>
+            <p class="card-sub">Para respostas perfeitas</p>
+          </div>
+
+          <div class="card reveal">
+            <div class="img-plain"><img src="assets/25.webp" alt="Automações que convertem (ManyChat)" loading="lazy"></div>
+            <h3 class="card-title">Automações que convertem</h3>
+            <p class="card-sub">ManyChat sem dor de cabeça</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ================= Sistema de conteúdo (amarelo) – menos respiro ================= -->
-    <section class="section section--tight theme-yellow" id="sec-sistema">
+    <!-- ===== SISTEMA DE CONTEÚDO (imagem 30.webp) ===== -->
+    <section class="section theme-5" id="sec-sistema">
+      <div class="container stack reveal" style="align-items:center; text-align:center;">
+        <h2>Como nosso sistema cria por você (de ponta a ponta)</h2>
+        <p class="muted">Da ideia ao post final — com IA treinada no seu jeito de comunicar.</p>
+
+        <figure style="margin-top:18px; max-width: 920px; width:100%; border-radius:16px; overflow:hidden; box-shadow: 0 10px 32px rgba(0,0,0,.12);">
+          <img
+            src="assets/30.webp"
+            alt="Fluxo do sistema de conteúdo com IA: ideias → roteiro → design → post"
+            width="920" height="640" loading="lazy"
+            style="width:100%; height:auto; display:block;"
+          >
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== Galeria ===== -->
+    <section class="section theme-6" id="sec-galeria">
       <div class="container">
-        <h2 class="grid-title">O SISTEMA QUE CRIA POR VOCÊ, DE PONTA A PONTA</h2>
-        <p class="grid-note">Do “sem ideia” ao post pronto que vende pra você — sem parecer IA.</p>
-        <div class="img-slot" style="aspect-ratio: 16/9;">
-          <img src="/gemini-teste/assets/30.webp" alt="Diagrama do sistema de conteúdo de ponta a ponta" loading="lazy" style="width:100%; height:100%; object-fit: cover;">
+        <h2 class="grid-title">CONTEÚDOS VARIADOS (H2)</h2>
+        <p class="grid-note">Capas reais de aulas, templates ou carrosséis.</p>
+        <div class="grid grid--4">
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
+          <div class="img-slot reveal pulse" aria-hidden="true"></div>
         </div>
       </div>
     </section>
 
-    <!-- ============ Para quem é / Não é (laranja) – sem botão ========= -->
-    <section class="section theme-orange" id="sec-who-group">
+    <!-- ============ Para quem é / Não é ============ -->
+    <section class="section theme-7" id="sec-who-group">
       <div class="container who-wrap">
         <div class="who-col reveal">
           <div class="who-title">
@@ -435,11 +577,14 @@
             <h2>PARA QUEM É</h2>
           </div>
           <ul class="who-list">
-            <li class="who-item">Empreendedores e criadores que querem posts prontos em minutos.</li>
-            <li class="who-item">Gente prática: menos barulho, mais impacto no feed.</li>
-            <li class="who-item">Quem quer IA com cara humana (e resultado de verdade).</li>
-            <li class="who-item">Quem valoriza estilo de vida acima de “trabalhar 24/7”.</li>
+            <li class="who-item">Empreendedores que querem criar sem travar</li>
+            <li class="who-item">Quem quer posts que parecem feitos à mão (mesmo com IA)</li>
+            <li class="who-item">Quem precisa de consistência sem perder tempo</li>
+            <li class="who-item">Quem quer vender sem parecer que está vendendo</li>
           </ul>
+          <div class="cluster" style="margin-top:12px">
+            <a href="/checkout" class="cta">Quero fazer parte</a>
+          </div>
         </div>
 
         <div class="who-col reveal">
@@ -448,53 +593,50 @@
             <h3>E NÃO É PARA QUEM…</h3>
           </div>
           <ul class="whonot-list">
-            <li class="whonot-item">Quer ficar testando 30 ferramentas sem usar nenhuma.</li>
-            <li class="whonot-item">Acha que IA precisa parecer IA pra funcionar.</li>
-            <li class="whonot-item">Procura fórmula mágica sem colocar nada no mundo.</li>
-            <li class="whonot-item">Quer tudo complicado e cheio de passos inúteis.</li>
+            <li class="whonot-item">Procura “hack milagroso” sem fazer o básico</li>
+            <li class="whonot-item">Quer delegar a criação sem dar nenhuma direção</li>
+            <li class="whonot-item">Acha que IA substitui completamente a sua voz</li>
+            <li class="whonot-item">Está confortável com posts que não convertem</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- ============ FAQ (roxo) – botões novos e menos espaço até o final ============ -->
-    <section class="section section--tight theme-purple faq-wrap" id="faq">
+    <!-- ============ FAQ (final roxo) ============ -->
+    <section class="section theme-final faq-wrap" id="faq">
       <div class="container">
-        <h2 class="grid-title" style="color:#fff;">FAQ</h2>
+        <h2 class="grid-title">FAQ</h2>
         <div class="faq-grid">
           <details class="reveal">
-            <summary>Isso vai “soar IA” no meu feed? <span class="chev">›</span></summary>
-            <p>Não. Todo o sistema é pensado pra parecer 100% humano: vocabulário, pausas, “voz” pessoal e imagem coerente.</p>
+            <summary class="summary-h3">“IA não deixa meu conteúdo artificial?” <span class="chev">›</span></summary>
+            <p>Não do jeito que fazemos. O sistema usa sua voz e seu posicionamento como base. O resultado final parece feito por você — só que mais rápido.</p>
           </details>
           <details class="reveal">
-            <summary>Eu não tenho tempo — funciona pra mim? <span class="chev">›</span></summary>
-            <p>Sim. A ideia é tirar peso: você entra, pede o que quer, sai com post pronto. Sem “mais uma tarefa”.</p>
+            <summary class="summary-h3">“Eu não tenho tempo pra criar.” <span class="chev">›</span></summary>
+            <p>Justamente por isso existe nossa equipe não humana. Você ganha um fluxo simples: ideias prontas, frases que chamam atenção, roteiros e artes finalizadas em minutos.</p>
           </details>
           <details class="reveal">
-            <summary>Preciso dominar IA antes? <span class="chev">›</span></summary>
-            <p>Nada disso. A gente já treinou a equipe não-humana pra falar com você como se fosse gente.</p>
+            <summary class="summary-h3">“Preciso saber usar IA antes?” <span class="chev">›</span></summary>
+            <p>Não. Você entra e já usa. As aulas são diretas e a equipe não humana guia seu passo a passo.</p>
           </details>
           <details class="reveal">
-            <summary>Dá pra usar com o que eu já faço? <span class="chev">›</span></summary>
-            <p>Sim. Você pode usar só reels, só carrosséis, só stories — ou tudo junto, do jeito que preferir.</p>
+            <summary class="summary-h3">“Funciona para meu nicho?” <span class="chev">›</span></summary>
+            <p>Sim. O sistema é adaptado por linguagem, público e objetivo (negócios locais, serviços, infoprodutos, etc.).</p>
+          </details>
+          <details class="reveal">
+            <summary class="summary-h3">“E se eu já tentei e não deu resultado?” <span class="chev">›</span></summary>
+            <p>Provavelmente faltou método. Aqui você tem estrutura de ideias, começo que prende atenção e posts que levam à ação.</p>
+          </details>
+          <details class="reveal">
+            <summary class="summary-h3">“Qual é o próximo passo?” <span class="chev">›</span></summary>
+            <p>Clique em “Quero fazer parte”, entre, e comece usando os templates de posts prontos. O resto é automático.</p>
           </details>
         </div>
       </div>
     </section>
-
-    <!-- ===== Rodapé “junto do final” (roxo) ===== -->
-    <section class="section section--tight theme-purple" id="sec-legal">
-      <div class="container" style="text-align:center;">
-        <p style="opacity:.92; margin:0 0 8px 0;">
-          <a class="footer-link" href="#" style="color:#fff; text-decoration:underline; text-underline-offset:2px;">Política de Privacidade</a> ·
-          <a class="footer-link" href="#" style="color:#fff; text-decoration:underline; text-underline-offset:2px;">Termos de Uso</a>
-        </p>
-        <p class="footer-muted" style="color:#EEE; margin:0;">© 2025 Sua Marca. Todos os direitos reservados.</p>
-      </div>
-    </section>
   </main>
 
-  <!-- Sticky CTA Mobile (fixo, sem fechar) -->
+  <!-- Sticky CTA Mobile -->
   <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
     <a href="/checkout" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
   </div>
@@ -503,15 +645,27 @@
   <nav class="scroll-dots" aria-label="Progresso da página">
     <button data-target="#sec-hero" aria-label="Hero"></button>
     <button data-target="#sec-destaques" aria-label="Destaques"></button>
+    <button data-target="#sec-conteudo" aria-label="Visu"></button>
     <button data-target="#sec-cards-funcionarios" aria-label="Grid 1"></button>
     <button data-target="#sec-grid" aria-label="Grid 2"></button>
     <button data-target="#sec-sistema" aria-label="Sistema"></button>
+    <button data-target="#sec-galeria" aria-label="Galeria"></button>
     <button data-target="#sec-who-group" aria-label="Para quem é / Não é"></button>
     <button data-target="#faq" aria-label="FAQ"></button>
-    <button data-target="#sec-legal" aria-label="Legal"></button>
   </nav>
 
-  <!-- Scripts: progresso, dots, reveal -->
+  <!-- ================= RODAPÉ (na mesma vibe do final) ================= -->
+  <footer class="section theme-final" role="contentinfo">
+    <div class="container footer-min">
+      <span>© 2025 Sua Marca</span>
+      <span>
+        <a href="#" class="footer-link">Política de Privacidade</a> ·
+        <a href="#" class="footer-link">Termos de Uso</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Scripts: progresso, dots, reveal, FAQ, auto-scroll -->
   <script>
     // Barra de progresso
     (function(){
@@ -531,7 +685,7 @@
       onScroll();
     })();
 
-    // Dots laterais + navegação
+    // Dots laterais
     (function(){
       const dots = Array.from(document.querySelectorAll('.scroll-dots button'));
       const targets = dots.map(btn => document.querySelector(btn.dataset.target)).filter(Boolean);
@@ -557,6 +711,16 @@
       }
     })();
 
+    // FAQ: um aberto por vez
+    (function(){
+      const items = document.querySelectorAll('#faq details');
+      items.forEach(d => {
+        d.addEventListener('toggle', () => {
+          if (d.open) { items.forEach(o => { if (o !== d) o.removeAttribute('open'); }); }
+        });
+      });
+    })();
+
     // Reveal ao entrar em viewport
     (function(){
       const els = document.querySelectorAll('.reveal');
@@ -567,6 +731,34 @@
         });
       }, {threshold: .1});
       els.forEach(e=>io.observe(e));
+    })();
+
+    // Auto-scroll leve para carrosseis no mobile (pausa ao tocar)
+    (function(){
+      const rows = [
+        document.getElementById('row-funcionarios-1'),
+        document.getElementById('row-funcionarios-2')
+      ].filter(Boolean);
+      const mq = window.matchMedia('(max-width: 639px)');
+      rows.forEach((el)=>{
+        let timer = null;
+        const step = () => {
+          const max = el.scrollWidth - el.clientWidth;
+          const next = el.scrollLeft + el.clientWidth * 0.5;
+          if (next >= max - 2) el.scrollTo({ left: 0, behavior: 'auto' });
+          else el.scrollTo({ left: next, behavior: 'smooth' });
+        };
+        const start = () => { if (timer) return; timer = setInterval(step, 2500); };
+        const stop  = () => { clearInterval(timer); timer = null; };
+        el.addEventListener('pointerenter', stop);
+        el.addEventListener('pointerdown', stop);
+        el.addEventListener('pointerleave', () => mq.matches && start());
+        el.addEventListener('touchstart', stop, {passive:true});
+        el.addEventListener('touchend', () => mq.matches && start(), {passive:true});
+        const handle = () => mq.matches ? start() : stop();
+        mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
+        handle();
+      });
     })();
   </script>
 </body>
