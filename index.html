@@ -376,6 +376,21 @@
   line-height: 1.55;       /* deixa o texto mais “respirado” */
   font-size: var(--step-0);
 }
+    /* Vídeo dentro do slot pontilhado */
+.img-slot--video { 
+  padding: 0;                /* sem acolchoamento para o vídeo encostar na borda */
+  aspect-ratio: 4 / 5;       /* ajuste se quiser outro formato (ex.: 1/1, 16/9, etc.) */
+  overflow: hidden;          /* garante que não vaze */
+}
+
+.img-slot--video .slot-video{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* preenche o espaço sem distorcer */
+  border-radius: inherit;    /* acompanha o raio do slot */
+}
+    
   </style>
 </head>
 <body>
@@ -469,14 +484,20 @@
       </ul>
     </div>
 
-    <!-- Substitui o placeholder pela imagem gif -->
-    <div class="reveal">
-      <img 
-        src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm"
-        alt="Demonstração em vídeo/gif da comunidade em ação" 
-        class="flow-img"
-        loading="lazy"
-      >
+  <div class="img-slot img-slot--video reveal">
+  <video
+    class="slot-video"
+    src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm?v=1"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+  >
+    <!-- Fallback simples: se o navegador não suportar WebM -->
+    Seu navegador não suporta vídeo em WebM.
+  </video>
+</div>
     </div>
   </div>
 </section>
