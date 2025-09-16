@@ -288,54 +288,22 @@
     width: calc(100vw - 48px); /* aproveita largura no celular */
   }
 }
-    /* === SEÇÃO DEPOIMENTOS === */
-#sec-depoimentos {
-  --pt: 48px;   /* espaço em cima */
-  --pb: 20px;   /* espaço embaixo */
-}
-
-#sec-depoimentos .grid-title {
-  margin-bottom: 10px;
-}
-
-#sec-depoimentos .grid-note {
-  margin-bottom: 20px;
-}
-
-/* Estilo das imagens de depoimentos */
+/* === SEÇÃO DEPOIMENTOS === */
 #row-depoimentos .plain {
-  width: 280px;            /* tamanho fixo das caixinhas */
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background: #fff;
-}
-
-#row-depoimentos .plain img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-@media (max-width: 480px) {
-  #row-depoimentos .plain {
-    width: calc(100vw - 48px); /* aproveita a largura no celular */
-  }
-}
-    #row-depoimentos .plain {
-  width: 280px;
-  aspect-ratio: 4/5;                /* deixa todos no mesmo formato vertical */
-  border: 2px dashed var(--theme-border); 
-  border-radius: 16px;
+  width: 280px;                /* largura de cada depoimento */
+  aspect-ratio: 3/4;           /* formato de cartaz (ajusta se quiser mais largo ou mais quadrado) */
+  border: 2px dashed #FF6600;  /* pontilhado laranja */
+  border-radius: 16px;         /* cantos arredondados */
   overflow: hidden;
   background: #fff;
+  flex-shrink: 0;              /* impede que fiquem achatados no carrossel */
 }
 
 #row-depoimentos .plain img {
   width: 100%;
   height: 100%;
-  object-fit: cover;                /* preenche bem o espaço */
-  border-radius: inherit;
+  object-fit: cover;           /* a imagem cobre toda a área */
+  display: block;
 }
   </style>
 </head>
@@ -468,8 +436,7 @@
     <!-- 7 — Prints -->
     <section class="section theme-7" id="sec-depoimentos">
   <div class="container">
-    <h2 class="grid-title">O QUE DIZEM OS MEMBROS</h2>
-    <p class="grid-note">Alguns depoimentos reais de quem já está na comunidade 🚀</p>
+    <h2 class="grid-title">O QUE ESTÃO FALANDO DA COMUNIDADE</h2>
 
     <div class="scroll-row" id="row-depoimentos">
       <div class="plain reveal">
