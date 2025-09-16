@@ -410,6 +410,15 @@
     section.conteudos-variados {
   margin: 30px 0;   /* reduz o espaço acima e abaixo */
 }
+    .funcionarios h2,
+.funcionarios p {
+  text-align: left;        /* garante o mesmo alinhamento */
+  margin-left: 0;          /* remove recuo extra */
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  max-width: 100%;         /* evita quebrar mais curto que o título */
+}
     
   </style>
 </head>
@@ -494,9 +503,10 @@
     <!-- 4 — GRID 1: funcionários -->
     <section class="section theme-4" id="sec-cards-funcionarios">
       <div class="container">
-        <h2 class="grid-title">OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
-        <p class="grid-note">Conheça o que cada um dos 10 resolvem por você 👇</p>
-
+        <section class="funcionarios">
+  <h2>OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
+  <p>Conheça o que cada um dos 10 resolvem por você 👇</p>
+</section>
         <div class="scroll-row" id="row-funcionarios-1">
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Cria frases iniciais que prendem</p></div>
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Gera ideias infinitas</p></div>
