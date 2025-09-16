@@ -390,6 +390,14 @@
   object-fit: cover;         /* preenche o espaço sem distorcer */
   border-radius: inherit;    /* acompanha o raio do slot */
 }
+.video-gif {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
     
   </style>
 </head>
@@ -484,18 +492,10 @@
       </ul>
     </div>
 
-  <div class="img-slot img-slot--video reveal">
-  <video
-    class="slot-video"
-    src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm?v=1"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="metadata"
-  >
-    <!-- Fallback simples: se o navegador não suportar WebM -->
-    Seu navegador não suporta vídeo em WebM.
+<div class="img-slot reveal">
+  <video autoplay loop muted playsinline class="video-gif">
+    <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
+    Seu navegador não suporta vídeos.
   </video>
 </div>
     </div>
