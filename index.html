@@ -323,17 +323,33 @@
   box-shadow: var(--shadow-lg);
   border: 2px solid rgba(124,73,42,.15); /* marrom suave */
 }
-    .hero-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 12px; /* mantém o estilo arredondado */
-  border: 2px dashed var(--theme-border); /* mesma lógica usada nas aulas */
-  margin: 0 auto; /* centraliza */
-}
-    .hero-title {
-  margin-top: 10px; /* diminui espaço antes do título */
-}
+    <style>
+  /* estilos que já existem... */
+
+  .hero-section {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+  }
+
+  .hero-title {
+    margin-top: 10px;
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 12px;
+    border: 2px dashed var(--theme-border);
+    margin: 10px auto 20px auto;
+  }
+
+  .hero-button {
+    margin-top: 10px;
+  }
+</style>
   </style>
 </head>
 <body>
