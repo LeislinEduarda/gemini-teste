@@ -16,8 +16,8 @@
 
     /* ===== Tokens ===== */
     :root{
-      --brand-primary: #6769FF;   /* roxo (marca) */
-      --brand-accent:  #FEF700;   /* amarelo (acento) */
+      --brand-primary: #6769FF;
+      --brand-accent:  #FEF700;
       --ink-strong:    #111111;
       --ink:           #2A2A2A;
       --muted:         #6B6B6B;
@@ -27,16 +27,16 @@
       --shadow-lg:     0 14px 34px rgba(0,0,0,.12);
       --container:     1120px;
 
-      /* Cores pedidas (como "borda/tema") */
-      --c1: #D0FA8C;  /* verde */
-      --c2: #7C492A;  /* marrom */
-      --c3: #FFF2BC;  /* amarelo */
-      --c4: #FFFFFF;  /* branco */
-      --c5: #FFFFFF;  /* branco */
-      --c6: #FFF2BC;  /* amarelo */
-      --c7: #FF6B00;  /* laranja */
-      --c8: #D0FA8C;  /* verde */
-      --c9: #7374F1;  /* roxo final */
+      /* Cores */
+      --c1: #D0FA8C;
+      --c2: #7C492A;
+      --c3: #FFF2BC;
+      --c4: #FFFFFF;
+      --c5: #FFFFFF;
+      --c6: #FFF2BC;
+      --c7: #FF6B00;
+      --c8: #D0FA8C;
+      --c9: #7374F1;
 
       --step--1: clamp(12px, 0.72vw + 9px, 14px);
       --step-0:  clamp(14px, 0.85vw + 10px, 16px);
@@ -49,19 +49,14 @@
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
       color: var(--ink);
       line-height: 1.5;
-      background: #FFF; /* fallback */
+      background: #FFF;
     }
 
     /* ===== Utilitários ===== */
     .container{ max-width: var(--container); margin-inline: auto; padding: 24px; }
-    .section{
-      padding: 68px 0;
-      position: relative;
-      z-index: 0;
-      --theme-border: rgba(103,105,255,.45); /* variável de acento/borda por tema */
-    }
+    .section{ padding: 68px 0; position: relative; z-index: 0; --theme-border: rgba(103,105,255,.45); }
 
-    /* Temas (fundo + borda/acento) — harmonizados */
+    /* Temas */
     .theme-1{ background: linear-gradient(0deg, rgba(208,250,140,.25), rgba(208,250,140,.25)); --theme-border: var(--c1); }
     .theme-2{ background: #7C492A; --theme-border: #7C492A; }
     .theme-3{ background: var(--c3); --theme-border: var(--c3); }
@@ -100,7 +95,7 @@
     .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); }
     .muted{ color: var(--muted); font-size: var(--step--1); }
 
-    /* Slot pontilhado padrão (usa --theme-border) */
+    /* Slot pontilhado */
     .img-slot{
       background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
       border: 2px dashed var(--theme-border);
@@ -111,7 +106,6 @@
       overflow:hidden;
     }
 
-    /* (a .media-slot continua existindo para outras partes, mas NÃO é usada no hero) */
     .media-slot{
       border-radius: var(--radius-lg);
       min-height: 460px;
@@ -123,52 +117,17 @@
       text-align:center; padding:16px;
     }
 
-    /* ===== HERO (ajustado – topo curto e respiro no rodapé) ===== */
-#sec-hero{
-  padding-top: 10px;          /* <— encurta o topo */
-  padding-bottom: 34px;       /* desktop/tablet */
-}
+    /* ===== HERO ===== */
+    #sec-hero{ padding-top: 10px; padding-bottom: 34px; }
+    .hero-grid{ display:grid; gap:14px; grid-template-columns:1fr; align-items:center; }
+    @media (min-width:1024px){ .hero-grid{ grid-template-columns: 1.05fr 1fr; } }
+    .hero-title{ margin-top: 0; }
+    .hero-subtitle{ font-size: calc(var(--step-0) * 1.1); color: var(--ink-strong); max-width: 66ch; text-wrap: balance; margin-top:4px; line-height:1.45; }
+    .hero-media{ border-radius: 18px; overflow: hidden; margin-top: 6px; }
+    .hero-img{ display:block; width:100%; height:auto; border-radius:18px; }
+    @media (max-width: 768px){ #sec-hero{ padding-bottom: 168px; } }
 
-.hero-grid{
-  display:grid;
-  gap: 14px;                  /* <— aproxima título, texto e imagem */
-  grid-template-columns: 1fr;
-  align-items: center;
-}
-@media (min-width:1024px){
-  .hero-grid{ grid-template-columns: 1.05fr 1fr; }
-}
-
-.hero-title{ margin-top: 0; }
-
-.hero-subtitle{
-  font-size: calc(var(--step-0) * 1.1);
-  color: var(--ink-strong);
-  max-width: 66ch;            /* leitura mais confortável */
-  text-wrap: balance;
-  margin-top: 4px;            /* subtítulo mais “colado” no h1 */
-  line-height: 1.45;
-}
-
-.hero-media{
-  border-radius: 18px;
-  overflow: hidden;
-  margin-top: 6px;            /* cola a imagem no subtítulo */
-}
-
-.hero-img{
-  display:block;
-  width:100%;
-  height:auto;
-  border-radius: 18px;
-}
-
-/* Mobile: dá mais respiro para o botão flutuante não encostar na imagem */
-@media (max-width: 768px){
-  #sec-hero{ padding-bottom: 168px; } /* <— “mais solto” na área do botão */
-}
-
-    /* Rodapé minimal (vai dentro da mesma seção do FAQ) */
+    /* Rodapé minimal */
     .footer-min{
       display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
       font-size: var(--step--1);
@@ -201,7 +160,7 @@
       border-radius: 8px;
     }
 
-    /* Sticky CTA (fixo — mobile) */
+    /* Sticky CTA (mobile) */
     .sticky-cta{
       position: fixed; left: 16px; right: 16px;
       bottom: calc(16px + env(safe-area-inset-bottom));
@@ -253,23 +212,21 @@
       border-radius: var(--radius); box-shadow: var(--shadow); padding:14px;
     }
 
-    /* Carrossel 1 – funcionários: imagem “colada” no pontilhado (quadrado) */
+    /* Carrossel 1 – funcionários */
     #row-funcionarios-1 .img-slot{ aspect-ratio: 1 / 1; padding:0; }
     #row-funcionarios-1 .img-slot img{ width:100%; height:100%; object-fit: cover; border-radius: inherit; }
     .scroll-row .card-title{ margin-top:12px; font-weight:700; font-size: var(--step-0); min-height: 1.6em; }
     .scroll-row .card-sub{ margin-top:6px; color: var(--muted); font-size: var(--step--1); min-height: 2.6em; }
 
-    /* Carrossel 2 – Aulas: somente a imagem (retangular) */
+    /* Carrossel 2 – Aulas */
     #row-aulas .plain{
       flex:0 0 auto; scroll-snap-align:start; width: 300px;
       border-radius: 18px; overflow:hidden; background: transparent;
       box-shadow: none; border: none; padding: 0;
     }
-    #row-aulas .plain img{
-      display:block; width:100%; height:auto; object-fit: contain; border-radius: 18px;
-    }
+    #row-aulas .plain img{ display:block; width:100%; height:auto; object-fit: contain; border-radius: 18px; }
 
-    /* Carrossel 3 – Prints/feedbacks: retangular (4/5) dentro de slot */
+    /* Carrossel 3 – Prints */
     #row-prints .img-slot{ aspect-ratio: 4 / 5; padding:0; }
     #row-prints .img-slot img{ width:100%; height:100%; object-fit: contain; border-radius: inherit; background:#fff; }
 
@@ -277,37 +234,26 @@
     #sec-cards-funcionarios.section,
     #sec-aulas.section{ padding-bottom: 96px; }
 
-    /* ===== “PARA QUEM É / NÃO É” com fundo fluido ===== */
+    /* Para quem é */
     .who-wrap{ display:grid; gap:20px; }
     @media (min-width: 860px){ .who-wrap{ grid-template-columns: 1fr 1fr; } }
-
-    .who-col{
-      position:relative; border-radius: 18px; padding: 18px;
+    .who-col{ position:relative; border-radius: 18px; padding: 18px;
       background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
       box-shadow: 0 12px 32px rgba(0,0,0,.08);
       border: 1px solid color-mix(in srgb, var(--theme-border) 40%, #0000);
-      overflow: hidden;
-    }
-    .who-col::after{
-      content:""; position:absolute; inset:10px; border-radius: 22px;
+      overflow: hidden; }
+    .who-col::after{ content:""; position:absolute; inset:10px; border-radius: 22px;
       background:
         radial-gradient(120% 80% at 10% 10%, color-mix(in srgb, var(--theme-border) 45%, #0000), transparent 60%),
-        radial-gradient(110% 80% at 85% 15%, rgba(70,71,241,.12), transparent 60%);
-      z-index: 0;
-    }
+        radial-gradient(110% 80% at 85% 15%, rgba(70,71,241,.12), transparent 60%); z-index:0; }
     .who-col > *{ position:relative; z-index:1; }
 
     .who-title{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-    .who-badge{
-      width: 34px; height: 34px; border-radius: 10px; display:grid; place-items:center;
-      font-weight:900; color:#fff;
-      background: linear-gradient(135deg, #33C66E, #89E3B5);
-      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(51,198,110,.25);
-    }
-    .whonot-badge{
-      background: linear-gradient(135deg, #E24B6A, #F5A5B5);
-      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(226,75,106,.25);
-    }
+    .who-badge{ width: 34px; height: 34px; border-radius: 10px; display:grid; place-items:center;
+      font-weight:900; color:#fff; background: linear-gradient(135deg, #33C66E, #89E3B5);
+      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(51,198,110,.25); }
+    .whonot-badge{ background: linear-gradient(135deg, #E24B6A, #F5A5B5);
+      box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(226,75,106,.25); }
 
     .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
     .who-item, .whonot-item{
@@ -327,10 +273,9 @@
     .section-bridge{ padding: 26px 0; background: linear-gradient(90deg, rgba(103,105,255,.10), rgba(254,247,0,.10)); }
     .bridge-band{ height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); box-shadow: 0 8px 22px rgba(0,0,0,.08); }
 
-    /* FAQ (ficará na mesma seção do rodapé) */
+    /* FAQ */
     .faq-grid{ display:grid; gap:16px; grid-template-columns: 1fr; }
     @media (min-width: 860px){ .faq-grid{ grid-template-columns: 1fr 1fr; } }
-
     details{
       position:relative; border-radius: 18px;
       background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
@@ -357,121 +302,46 @@
     details p{ padding: 0 18px 16px 18px; color:var(--ink); }
 
     /* Imagem do sistema */
-    .flow-img{
-      display:block;
-      width:100%;
-      height:auto;
-      border-radius: 18px;
-      box-shadow: var(--shadow-lg);
-      border: 2px solid rgba(124,73,42,.15); /* marrom suave */
-    }
-    .lista-destaque {
-  list-style: none;        /* remove os pontos */
-  padding-left: 0;         /* tira recuo */
-  margin-top: 18px;
-}
+    .flow-img{ display:block; width:100%; height:auto; border-radius:18px; box-shadow: var(--shadow-lg); border: 2px solid rgba(124,73,42,.15); }
 
-.lista-destaque li {
-  margin-bottom: 22px;     /* mais espaço entre cada item */
-  line-height: 1.55;       /* deixa o texto mais “respirado” */
-  font-size: var(--step-0);
-}
+    .lista-destaque { list-style: none; padding-left: 0; margin-top: 18px; }
+    .lista-destaque li { margin-bottom: 22px; line-height: 1.55; font-size: var(--step-0); }
+
     /* Vídeo dentro do slot pontilhado */
-.img-slot--video { 
-  padding: 0;                /* sem acolchoamento para o vídeo encostar na borda */
-  aspect-ratio: 4 / 5;       /* ajuste se quiser outro formato (ex.: 1/1, 16/9, etc.) */
-  overflow: hidden;          /* garante que não vaze */
-}
+    .img-slot--video { padding: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+    .img-slot--video .slot-video{ display:block; width:100%; height:100%; object-fit: cover; border-radius: inherit; }
 
-.img-slot--video .slot-video{
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* preenche o espaço sem distorcer */
-  border-radius: inherit;    /* acompanha o raio do slot */
-}
-.video-gif {
-  width: 100%;
-  height: auto;
-  max-width: 600px;
-  display: block;
-  margin: 0 auto;
-  border-radius: 12px;
-}
-.seu-gif {
-  display: block;       /* elimina espaços extras */
-  width: 100%;          /* ocupa toda a largura disponível */
-  height: auto;         /* mantém proporção original */
-  margin: 0;            /* remove margens */
-  padding: 0;           /* remove espaçamentos */
-  border: none;         /* garante que não haja borda */
-  background: none;     /* remove fundo extra */
-}
-    section.conteudos-variados {
-  margin: 30px 0;   /* reduz o espaço acima e abaixo */
-}
-    .funcionarios h2,
-.funcionarios p {
-  text-align: left;        /* garante o mesmo alinhamento */
-  margin-left: 0;          /* remove recuo extra */
-  margin-right: 0;
-  padding-left: 0;
-  padding-right: 0;
-  max-width: 100%;         /* evita quebrar mais curto que o título */
-}
-    #sec-aulas {
-  margin-top: 30px;     /* antes pode estar 60px ou 80px */
-  margin-bottom: 30px;  /* idem */
-  padding-top: 20px;    /* reduz o respiro interno */
-  padding-bottom: 20px;
-}
-    .section {
-  margin: 40px 0;   /* era 80px 0, por exemplo */
-  padding: 30px 0;  /* era 60px 0 */
-}
-    #sec-aulas {
-  margin-top: 10px !important;      /* reduz bem o espaço acima */
-  margin-bottom: 10px !important;   /* reduz bem o espaço abaixo */
-  padding-top: 10px !important;     /* menos espaço interno */
-  padding-bottom: 10px !important;
-}
+    .video-gif { width: 100%; height: auto; max-width: 600px; display: block; margin: 0 auto; border-radius: 12px; }
+    .seu-gif { display: block; width: 100%; height: auto; margin: 0; padding: 0; border: none; background: none; }
 
-#sec-aulas .container {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-    /* Menor espaço entre subtítulo e imagens */
-#sec-aulas .grid-note {
-  margin-bottom: 10px;   /* antes provavelmente 20–30px */
-}
+    section.conteudos-variados { margin: 30px 0; }
 
-/* Maior espaço entre título e final da seção */
-#sec-aulas {
-  padding-bottom: 60px;  /* aumenta o "respiro" no fim */
-}
+    /* Alinhamento funcionários */
+    .funcionarios h2, .funcionarios p { text-align: left; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; max-width: 100%; }
 
-/* (opcional) espaço mais harmonioso entre título e subtítulo */
-#sec-aulas .grid-title {
-  margin-bottom: 15px;   /* define um valor fixo entre h2 e p */
-}
-    /* Título maior e mais destacado */
-#sec-como-funciona .grid-title {
-  font-size: 2.2rem;     /* maior que os outros títulos (ex.: 35px se base for 16px) */
-  font-weight: 800;      /* bem marcante */
-  margin-bottom: 15px;   /* espaço entre título e subtítulo */
-  text-align: center;    /* opcional: centralizar */
-}
+    /* Aulas – respiro */
+    #sec-aulas{ margin-top: 10px !important; margin-bottom: 10px !important; padding-top: 10px !important; padding-bottom: 60px !important; }
+    #sec-aulas .container{ padding-top: 0 !important; padding-bottom: 0 !important; }
+    #sec-aulas .grid-note{ margin-bottom: 10px; }
+    #sec-aulas .grid-title{ margin-bottom: 15px; }
 
-/* Subtítulo mais próximo do conteúdo */
-#sec-como-funciona .grid-note {
-  margin-bottom: 12px;   /* diminui espaço entre subtítulo e cards/imagens */
-}
+    /* ===== AJUSTES PEDIDOS ===== */
 
-/* Mais respiro no final da seção */
-#sec-como-funciona {
-  padding-bottom: 60px;  /* aumenta espaço antes da próxima seção */
-}
-    
+    /* 1) Título maior em “COMO FUNCIONA NA PRÁTICA” */
+    #sec-sistema .grid-title{
+      font-size: clamp(30px, 2.2vw + 20px, 46px);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-align: left; /* mantém o padrão da página */
+    }
+
+    /* 2) Menos espaço entre o subtítulo e as imagens dos funcionários */
+    #sec-cards-funcionarios .funcionarios{ margin: 0 0 8px 0; padding-bottom: 4px; }
+    #sec-cards-funcionarios #row-funcionarios-1{ margin-top: 0; padding-top: 6px; }
+
+    /* Mantém espaçamentos gerais mais contidos entre seções */
+    .section{ margin: 40px 0; padding: 30px 0; }
   </style>
 </head>
 <body>
@@ -480,7 +350,7 @@
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- ================= HERO (ATUALIZADO) ================= -->
+  <!-- ================= HERO ================= -->
   <header class="section theme-1" id="sec-hero">
     <div class="container hero-grid">
       <div class="stack" aria-label="Texto do hero">
@@ -512,54 +382,36 @@
     </section>
 
     <!-- 3 -->
-    
     <section class="section theme-3" id="sec-conteudo">
-  <div class="container grid grid--2">
-    <div class="stack reveal">
-      <h2>Eu separei um “visu” rápido da comunidade pra você 👀</h2>
-      <p>Aqui não é só “um curso e fim”. É uma comunidade viva, que todo mês recebe aulas novas e materiais que eu mesma uso na prática. Tudo passa por uma curadoria — só entra o que realmente deu certo comigo. 
-      Assim que você comprar a comunidade, já pode usar tudo isso:</p>
-      
-      <ul class="lista-destaque">
-        <li>
-          🤖 <strong>Equipe de Social Media Não Humana</strong><br>
-          10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.
-        </li>
-        <li>
-          🎥 <strong>Aulas práticas e express de conteúdo + IA</strong><br>
-          Direto ao ponto, sem enrolação, para aplicar no mesmo dia.
-        </li>
-        <li>
-          🧶 <strong>Material de apoio exclusivo</strong><br>
-          Checklists e prompts prontos para facilitar sua vida.
-        </li>
-        <li>
-          🔑 <strong>Segredos e hacks testados</strong><br>
-          Ganchos, insights e estratégias que já funcionaram para mim na prática.
-        </li>
-        <li>
-          💬 <strong>Chat com todos os membros (inclusive comigo)</strong><br>
-          Para pedir ajuda sempre que precisar.
-        </li>
-      </ul>
-    </div>
+      <div class="container grid grid--2">
+        <div class="stack reveal">
+          <h2>Eu separei um “visu” rápido da comunidade pra você 👀</h2>
+          <p>Aqui não é só “um curso e fim”. É uma comunidade viva, que todo mês recebe aulas novas e materiais que eu mesma uso na prática. Tudo passa por uma curadoria — só entra o que realmente deu certo comigo. 
+          Assim que você comprar a comunidade, já pode usar tudo isso:</p>
+          <ul class="lista-destaque">
+            <li>🤖 <strong>Equipe de Social Media Não Humana</strong><br>10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.</li>
+            <li>🎥 <strong>Aulas práticas e express de conteúdo + IA</strong><br>Direto ao ponto, sem enrolação, para aplicar no mesmo dia.</li>
+            <li>🧶 <strong>Material de apoio exclusivo</strong><br>Checklists e prompts prontos para facilitar sua vida.</li>
+            <li>🔑 <strong>Segredos e hacks testados</strong><br>Ganchos, insights e estratégias que já funcionaram para mim na prática.</li>
+            <li>💬 <strong>Chat com todos os membros (inclusive comigo)</strong><br>Para pedir ajuda sempre que precisar.</li>
+          </ul>
+        </div>
 
-<video autoplay loop muted playsinline class="video-gif">
-    <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
-    Seu navegador não suporta vídeos.
-  </video>
-</div>
-    </div>
-  </div>
-</section>
+        <video autoplay loop muted playsinline preload="metadata" class="video-gif">
+          <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
+          Seu navegador não suporta vídeos.
+        </video>
+      </div>
+    </section>
+
     <!-- 4 — GRID 1: funcionários -->
     <section class="section theme-4" id="sec-cards-funcionarios">
       <div class="container">
         <section class="funcionarios">
-  <h2>OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
-  <p>Conheça o que cada um dos 10 resolvem por você 👇</p>
-</section>
-        
+          <h2>OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
+          <p>Conheça o que cada um dos 10 resolvem por você 👇</p>
+        </section>
+
         <div class="scroll-row" id="row-funcionarios-1">
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Cria frases iniciais que prendem</p></div>
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Gera ideias infinitas</p></div>
@@ -574,6 +426,7 @@
         </div>
       </div>
     </section>
+
     <!-- 5 — NOVA: Sistema -->
     <section class="section theme-8" id="sec-sistema">
       <div class="container" style="max-width: 1280px;">
@@ -583,39 +436,37 @@
           <source srcset="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1" type="image/webp">
           <img
             src="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1"
-            width="1200"
-            height="1900"
+            width="1200" height="1900"
             alt="Fluxo do sistema de conteúdo com funcionários não humanos"
             class="flow-img"
-            loading="lazy"
-            decoding="async"
+            loading="lazy" decoding="async"
           />
         </picture>
       </div>
     </section>
 
-    <!-- 6 — GRID 2: Aulas (somente imagens retangulares) -->
+    <!-- 6 — GRID 2: Aulas -->
     <section class="section theme-6" id="sec-aulas">
       <div class="container">
         <h2 class="grid-title">AULAS PRA QUALQUER SITUAÇÃO</h2>
         <p class="grid-note">Rápidas, práticas e diretas: entrou, aprendeu, aplicou 🌟🤝🏻</p>
 
         <div class="scroll-row" id="row-aulas">
-          <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy"></div>
-          <div class="plain reveal"><img src="12.webp" alt="Aula 12" loading="lazy"></div>
-          <div class="plain reveal"><img src="13.webp" alt="Aula 13" loading="lazy"></div>
-          <div class="plain reveal"><img src="14.webp" alt="Aula 14" loading="lazy"></div>
-          <div class="plain reveal"><img src="15.webp" alt="Aula 15" loading="lazy"></div>
-          <div class="plain reveal"><img src="16.webp" alt="Aula 16" loading="lazy"></div>
-          <div class="plain reveal"><img src="17.webp" alt="Aula 17" loading="lazy"></div>
-          <div class="plain reveal"><img src="18.webp" alt="Aula 18" loading="lazy"></div>
-          <div class="plain reveal"><img src="19.webp" alt="Aula 19" loading="lazy"></div>
-          <div class="plain reveal"><img src="20.webp" alt="Aula 20" loading="lazy"></div>
-          <div class="plain reveal"><img src="21.webp" alt="Aula 21" loading="lazy"></div>
-          <div class="plain reveal"><img src="22.webp" alt="Aula 22" loading="lazy"></div>
-          <div class="plain reveal"><img src="23.webp" alt="Aula 23" loading="lazy"></div>
-          <div class="plain reveal"><img src="24.webp" alt="Aula 24" loading="lazy"></div>
-          <div class="plain reveal"><img src="25.webp" alt="Aula 25" loading="lazy"></div>
+          <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="12.webp" alt="Aula 12" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="13.webp" alt="Aula 13" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="14.webp" alt="Aula 14" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="15.webp" alt="Aula 15" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="16.webp" alt="Aula 16" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="17.webp" alt="Aula 17" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="18.webp" alt="Aula 18" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="19.webp" alt="Aula 19" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="20.webp" alt="Aula 20" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="21.webp" alt="Aula 21" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="22.webp" alt="Aula 22" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="23.webp" alt="Aula 23" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="24.webp" alt="Aula 24" loading="lazy" decoding="async"></div>
+          <div class="plain reveal"><img src="25.webp" alt="Aula 25" loading="lazy" decoding="async"></div>
         </div>
       </div>
     </section>
@@ -675,7 +526,7 @@
       </div>
     </section>
 
-    <!-- 9 — Bridge + FAQ + RODAPÉ (mesma seção) -->
+    <!-- 9 — Bridge + FAQ + RODAPÉ -->
     <section class="section theme-9" id="sec-faq-footer">
       <div class="container">
         <div class="bridge-band" style="margin-bottom:18px;"></div>
@@ -700,7 +551,6 @@
           </details>
         </div>
 
-        <!-- Rodapé minimal dentro da MESMA seção -->
         <div class="footer-min">
           <div class="footer-copy">© 2025 Sua Marca.</div>
           <div class="footer-links">
@@ -730,7 +580,7 @@
     <button data-target="#sec-faq-footer" aria-label="FAQ + Rodapé"></button>
   </nav>
 
-  <!-- Scripts: progresso, dots, reveal, auto-scroll -->
+  <!-- Scripts -->
   <script>
     // Barra de progresso
     (function(){
@@ -776,7 +626,7 @@
       }
     })();
 
-    // Reveal ao entrar em viewport
+    // Reveal
     (function(){
       const els = document.querySelectorAll('.reveal');
       if (!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('in')); return; }
@@ -788,32 +638,49 @@
       els.forEach(e=>io.observe(e));
     })();
 
-    // Auto-scroll leve para carrosséis no mobile
+    // Auto-scroll leve para carrosséis no mobile — roda só quando visível (melhor performance)
     (function(){
       const rows = [
         document.getElementById('row-funcionarios-1'),
         document.getElementById('row-aulas'),
         document.getElementById('row-prints')
       ].filter(Boolean);
+
       const mq = window.matchMedia('(max-width: 639px)');
+
       rows.forEach((el)=>{
         let timer = null;
+
         const step = () => {
           const max = el.scrollWidth - el.clientWidth;
           const next = el.scrollLeft + el.clientWidth * 0.5;
           if (next >= max - 2) el.scrollTo({ left: 0, behavior: 'auto' });
           else el.scrollTo({ left: next, behavior: 'smooth' });
         };
-        const start = () => { if (timer) return; timer = setInterval(step, 2500); };
-        const stop  = () => { clearInterval(timer); timer = null; };
+
+        const start = () => { if (timer || !mq.matches) return; timer = setInterval(step, 2600); };
+        const stop  = () => { if (!timer) return; clearInterval(timer); timer = null; };
+
+        // Pausa ao interagir
         el.addEventListener('pointerenter', stop);
         el.addEventListener('pointerdown', stop);
-        el.addEventListener('pointerleave', () => mq.matches && start());
         el.addEventListener('touchstart', stop, {passive:true});
         el.addEventListener('touchend', () => mq.matches && start(), {passive:true});
-        const handle = () => mq.matches ? start() : stop();
+
+        // Inicia só quando o carrossel entra na viewport
+        if ('IntersectionObserver' in window){
+          const io = new IntersectionObserver((entries)=>{
+            entries.forEach(e => { if (e.isIntersecting) start(); else stop(); });
+          }, { threshold: 0.15 });
+          io.observe(el);
+        } else {
+          // Fallback simples
+          mq.matches && start();
+        }
+
+        // Para quando sair do mobile
+        const handle = () => { if (!mq.matches) stop(); };
         mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
-        handle();
       });
     })();
   </script>
