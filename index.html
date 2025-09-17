@@ -392,6 +392,29 @@
   color: var(--ink-strong);
   margin-bottom: 2px;
 }
+    /* ===== AJUSTES NA SEÇÃO FUNCIONÁRIOS ===== */
+.section-funcionarios {
+  padding-top: 40px;    /* reduz espaço em cima */
+  padding-bottom: 40px; /* reduz espaço embaixo */
+}
+
+.section-funcionarios .func-title {
+  font-size: 2.2rem;    /* título maior */
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--cor-roxa, #6a3df0); /* mantém a cor do site */
+}
+
+.section-funcionarios .func-subtitle {
+  font-size: 1.15rem;   /* subtítulo maior */
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  max-width: 600px;
+  margin-inline: auto;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -485,14 +508,13 @@
     </section>
 
     <!-- 4 — GRID 1: funcionários -->
-    <section class="section theme-4" id="sec-cards-funcionarios">
-      <div class="container">
-        <section class="funcionarios">
-          <h2>OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
-          <p>Conheça o que cada um dos 10 resolvem por você 👇</p>
-          
-        </section>
-
+    <section class="section-funcionarios">
+  <h2 class="func-title">OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
+  <p class="func-subtitle">Conheça o que cada um dos 10 resolvem por você 👇</p>
+  
+  <!-- aqui continuam os cards já existentes -->
+</section>
+    
         <div class="scroll-row" id="row-funcionarios-1">
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Cria frases iniciais que prendem</p></div>
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Gera ideias infinitas</p></div>
