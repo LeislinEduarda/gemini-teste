@@ -96,25 +96,30 @@
     @media (max-width:768px){
       .hero-title{ line-height: 1.07 !important; margin-bottom: 8px !important; }
     }
-    .hero-price{
-      font-size: calc(var(--step-0) * 1.05);
-      color:#5c4033;                      /* marrom, já usado antes */
-      text-align:center;
-      margin-inline:auto;
-      margin-bottom: 6px;                 /* perto da linha */
-    }
-    .hero-underline{
-      height: 3px; width: 120px;
-      margin: 0 auto 12px auto;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #7B2FFF, #B266FF, #7B2FFF);
-      background-size: 200% 100%;
-      animation: heroMove 3s linear infinite;
-    }
-    @keyframes heroMove{
-      0%{ background-position: 0% 50%; }
-      100%{ background-position: 200% 50%; }
-    }
+    .hero-price {
+  font-size: 1.35rem;       /* maior e mais impactante */
+  font-weight: 800;         /* mais pesado, transmite força */
+  color: var(--brand-primary); /* mesma cor do título */
+  text-align: center;
+  margin: 0 auto 12px auto;
+  font-family: 'Poppins', sans-serif; /* mais harmônica e moderna */
+  letter-spacing: -0.3px;
+}
+
+.hero-underline {
+  height: 4px;              /* mais grossa */
+  width: 160px;             /* um pouco mais longa */
+  margin: 0 auto 20px auto;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand-primary), #8a6eff, var(--brand-primary));
+  background-size: 200% 100%;
+  animation: heroLineAnim 3s linear infinite;
+}
+
+@keyframes heroLineAnim {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
     /* --------------------------------------- */
 
     .hero-subtitle{ font-size: calc(var(--step-0) * 1.1); color:var(--ink-strong); max-width:66ch; text-wrap:balance; margin-top:4px; line-height:1.45; }
@@ -335,12 +340,12 @@
   <div class="container hero-grid">
     <div class="stack" aria-label="Texto do hero" style="text-align:center">
       <h1 class="hero-title">
-        seus posts 100% com IA<br>
+        crie seus posts 100% com IA<br>
         sem cara de IA com a minha equipe não humana
       </h1>
 
       <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
-      <div class="hero-underline" aria-hidden="true"></div>
+<div class="hero-underline" aria-hidden="true"></div>
     </div>
 
     <div class="hero-media">
