@@ -369,39 +369,6 @@
   align-items: center;
   text-align: center;
 }
-  /* HERO AJUSTES FINOS */
-.hero-title {
-  font-size: 108%; /* 8% maior */
-  line-height: 1.3;
-}
-
-.hero-price {
-  color: #5C4033; /* marrom */
-  font-size: 90%; /* mais compacto */
-  margin-top: -25%; /* sobe em relação à borda */
-  display: inline-block;
-  border-bottom: 2px solid #6A0DAD; /* roxo */
-  padding-bottom: 4px;
-  animation: pulse 2s infinite; /* movimento suave */
-}
-
-.hero-image {
-  margin-top: -25%; /* sobe 25% a imagem */
-}
-
-.hero-price::after {
-  content: "";
-  display: block;
-  width: 65%; /* 35% mais fina */
-  margin: 0 auto;
-  border-bottom: 2px solid #6A0DAD;
-}
-  
-@keyframes pulse {
-  0% { opacity: 1; transform: scaleX(1); }
-  50% { opacity: 0.7; transform: scaleX(1.05); }
-  100% { opacity: 1; transform: scaleX(1); }
-}
   </style>
 </head>
 <body>
@@ -411,29 +378,63 @@
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- ================= HERO ================= -->
-  <header class="section theme-1" id="sec-hero">
-  <div class="container hero-grid">
-    <div class="stack" aria-label="Texto do hero">
-      <h1 class="hero-title">aprenda a criar o seu post 100% com ia sem cara de ia com a minha equipe não humana</h1>
+  <section id="hero" style="text-align:center; padding: 40px 20px; background:#F5FFE9;">
+  
+  <!-- TÍTULO -->
+  <h1 style="
+    font-size: 2.4rem; 
+    line-height: 1.3; 
+    font-weight: 700; 
+    color:#6A0DAD; /* roxo */
+    margin-bottom: 10px;">
+    aprenda a criar o seu post 100% com ia <br>
+    sem cara de ia com a minha equipe não humana
+  </h1>
 
-      <!-- Preço compacto com linha roxa fina e “movimento” -->
-      <p class="hero-price">
-        apenas <strong>R$38,80/mês</strong> <span class="price-note">(plano anual)</span>
-      </p>
-    </div>
+  <!-- PREÇO COM LINHA ROXA MAIS FINA -->
+  <p style="
+    font-size: 1rem; 
+    font-weight: 600; 
+    color:#5C4033; /* marrom */ 
+    display:inline-block; 
+    border-bottom: 2px solid #6A0DAD; 
+    padding-bottom: 3px; 
+    margin-top: -25px; 
+    animation:pulse 2s infinite;">
+    apenas R$38,80/mês (plano anual)
+  </p>
 
-    <!-- Só adicionei a classe hero-image para subir a arte -->
-    <div class="hero-media hero-image">
-      <img
-        src="/gemini-teste/assets/moockup.webp"
-        width="800" height="900"
-        alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
-        decoding="async" fetchpriority="high"
-        class="hero-img"
-      >
-    </div>
+  <!-- IMAGEM HERO -->
+  <div style="margin-top:-25%;">
+    <img src="/gemini-teste/assets/moockup.webp" 
+         alt="Hero comunidade" 
+         style="max-width:100%; height:auto;">
   </div>
-</header>
+
+  <!-- BOTÃO CTA -->
+  <a href="#oferta" style="
+    display:inline-block; 
+    margin-top:20px; 
+    padding:15px 40px; 
+    background:#6A0DAD; 
+    color:#fff; 
+    border-radius:50px; 
+    font-size:1.2rem; 
+    font-weight:700; 
+    text-decoration:none;
+    box-shadow:0 4px 8px rgba(0,0,0,0.2);">
+    QUERO FAZER PARTE
+  </a>
+</section>
+
+<!-- ANIMAÇÃO -->
+<style>
+@keyframes pulse {
+  0% { opacity: 1; transform: scaleX(1); }
+  50% { opacity: 0.7; transform: scaleX(1.05); }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+</style>
 
   <main id="conteudo" tabindex="-1">
     <!-- 2 -->
