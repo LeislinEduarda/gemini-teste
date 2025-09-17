@@ -105,6 +105,73 @@
       border-radius:999px;
       filter: saturate(1.2);
     }
+    /* === HERO: espaçamento e hierarquia === */
+#sec-hero { 
+  padding-top: 24px;
+  padding-bottom: 38px;
+}
+
+.hero-grid { 
+  gap: 14px;               /* reduz o gap pra trazer tudo mais pra cima */
+}
+
+.hero-title{
+  text-align: center;
+  color: var(--brand-primary); /* 1 cor */
+}
+
+/* Sobe a imagem e dá respiro antes do CTA */
+.hero-media{
+  margin-top: 6px;          /* mais próxima do preço/título */
+  margin-bottom: 12px;      /* evita encostar no CTA */
+}
+@media (min-width: 1024px){
+  .hero-media{ 
+    margin-top: -4px;       /* “puxa” um tiquinho pra cima no desktop */
+    margin-bottom: 14px;
+  }
+}
+
+/* === PREÇO: menor, compacto e marrom === */
+.hero-price{
+  font-size: clamp(15px, 1.1vw + 11px, 20px); /* menor que o título */
+  line-height: 1.12; 
+  letter-spacing: -0.01em;
+  color: var(--c2); /* marrom (já existe nos tokens: #7C492A) */
+  margin: 6px auto 6px;     /* aproxima do título e da imagem */
+  width: fit-content;
+  position: relative;
+  padding-bottom: 8px;       /* espaço para a linha animada */
+}
+
+/* === LINHA ROXA animada (sensação de movimento) === */
+.hero-price::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height: 7px;
+  border-radius: 999px;
+  /* brilho roxo com movimento */
+  background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #6c63ff 20%,
+      #8a84ff 50%,
+      #6c63ff 80%,
+      transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: priceWave 2.8s linear infinite;
+  filter: saturate(1.2);
+  opacity: 1;
+}
+
+/* Animação de varredura */
+@keyframes priceWave{
+  0%   { background-position: 0% 0;   transform: translateY(0); }
+  50%  { background-position: 100% 0; transform: translateY(0.5px); }
+  100% { background-position: 200% 0; transform: translateY(0); }
+}
 
     .footer-min{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
                  font-size:var(--step--1); padding-top:12px; margin-top:22px;
