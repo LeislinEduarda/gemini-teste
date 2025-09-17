@@ -90,33 +90,72 @@
     /* >>> Removido o espaço extra no mobile (override) */
     @media (max-width:768px){ #sec-hero{ padding-bottom:34px !important; } }
 
-    /* ==== AJUSTES DO HERO (pedido) ==== */
-    .hero-grid .stack{ align-items:center; text-align:center; }
-    .hero-title{ 
-      font-size: calc(var(--step-3) * 1.08) !important;  /* +8% */
-      color: var(--brand-primary) !important;            /* roxo único */
-      text-transform:none;
-    }
-    .hero-price{
-      display:inline-block;
-      margin-top: -6px;            /* sobe o texto ~25% do bloco de respiro */
-      font-size: calc(var(--step-0) * 1.0);
-      font-weight: 800;
-      color: var(--c2);            /* marrom */
-      padding-bottom: 4px;
-      border-bottom: 2px solid var(--brand-primary); /* linha ~35% mais fina */
-      animation: heroPulse 2.4s ease-in-out infinite;
-    }
-    @keyframes heroPulse{
-      0%{ transform: scaleX(1); opacity:1;}
-      50%{ transform: scaleX(1.04); opacity:.9;}
-      100%{ transform: scaleX(1); opacity:1;}
-    }
-    /* sobe a imagem */
-    .hero-media{ margin-top: -10vh !important; }
-    @media (max-width:768px){
-      .hero-media{ margin-top: -12vh !important; }
-    }
+/* ==== AJUSTES DO HERO (pedido) – v2 harmonizada ==== */
+#sec-hero{
+  padding-top: 22px;         /* menos respiro no topo */
+  padding-bottom: 18px;      /* mínimo respiro no fim */
+}
+.hero-grid{ gap: 8px; }      /* aproxima tudo */
+.hero-grid .stack{ align-items:center; text-align:center; }
+
+/* TÍTULO: forte, legível e compacto */
+.hero-title{
+  margin: 0;
+  max-width: 23ch;                      /* controla as quebras */
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 900;
+  color: var(--brand-primary);          /* cor única roxa */
+  font-size: clamp(28px, 8.8vw, 60px);  /* escala bem no mobile */
+}
+
+/* PREÇO: texto menor, marrom, com UMA linha roxa fina e animada */
+.hero-price{
+  margin-top: 6px;                      /* aproxima do título */
+  font-size: clamp(14px, 4vw, 22px);    /* mais compacto que o título */
+  font-weight: 800;
+  color: var(--c2);                      /* marrom */
+  position: relative;
+  padding-bottom: 10px;                 /* espaço para a linha */
+}
+.hero-price::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: min(460px, 78%);               /* comprimento da linha */
+  height: 3px;                          /* ~35% mais fina */
+  background: linear-gradient(90deg, #6769FF, #B2B3FF);
+  border-radius: 999px;
+  opacity: .95;
+  animation: heroLineGlow 3.2s ease-in-out infinite;
+}
+/* sensação de movimento suave */
+@keyframes heroLineGlow{
+  0%,100%{ box-shadow: 0 0 0 rgba(103,105,255,0.00); }
+  50%    { box-shadow: 0 0 10px rgba(103,105,255,0.45); }
+}
+
+/* IMAGEM: sobe ~25% em relação ao estado anterior e deixa espaço pro CTA fixo */
+.hero-media{
+  margin-top: -9.5vh !important;        /* sobe a imagem */
+  margin-bottom: 74px !important;       /* área de segurança pro CTA flutuante */
+  border-radius: 18px;
+  overflow: hidden;
+}
+.hero-img{ display:block; width:100%; height:auto; }
+
+@media (min-width: 1024px){
+  /* no desktop sobe um pouco menos para manter equilíbrio */
+  .hero-media{ margin-top: -7vh !important; margin-bottom: 64px !important; }
+}
+
+@media (max-width: 380px){
+  /* telas muito pequenas: evita encostar no título/CTA */
+  .hero-title{ font-size: clamp(26px, 9.8vw, 56px); }
+  .hero-media{ margin-top: -8vh !important; margin-bottom: 78px !important; }
+}
 
     .footer-min{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
                  font-size:var(--step--1); padding-top:12px; margin-top:22px;
@@ -343,28 +382,29 @@
 
   <!-- ================= HERO ================= -->
   <header class="section theme-1" id="sec-hero">
-    <div class="container hero-grid">
-      <div class="stack" aria-label="Texto do hero">
-        <h1 class="hero-title">
-          aprenda a criar o seu post 100% com ia<br>
-          sem cara de ia com a minha equipe não humana
-        </h1>
+  <div class="container hero-grid">
+    <div class="stack" aria-label="Texto do hero">
+      <h1 class="hero-title">
+        aprenda a criar o seu post 100%<br>
+        com ia sem cara de ia com a<br>
+        minha equipe não humana
+      </h1>
 
-        <!-- Preço com linha roxa fina + marrom -->
-        <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
-      </div>
-
-      <div class="hero-media">
-        <img
-          src="/gemini-teste/assets/moockup.webp"
-          width="800" height="900"
-          alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
-          decoding="async" fetchpriority="high"
-          class="hero-img"
-        >
-      </div>
+      <!-- Preço: marrom + linha roxa fina (sem card) -->
+      <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
     </div>
-  </header>
+
+    <div class="hero-media">
+      <img
+        src="/gemini-teste/assets/moockup.webp"
+        width="800" height="900"
+        alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
+        decoding="async" fetchpriority="high"
+        class="hero-img"
+      >
+    </div>
+  </div>
+</header>
 
   <main id="conteudo" tabindex="-1">
     <!-- 2 -->
