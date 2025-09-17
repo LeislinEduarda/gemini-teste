@@ -335,6 +335,63 @@
     --hero-media-shift: -12px;
   }
 }
+    /* === LISTA EM CARDS (VISU) === */
+#sec-conteudo .lista-cards{
+  list-style: none;
+  padding-left: 0;
+  margin: 18px 0 0 0;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px){
+  #sec-conteudo .lista-cards{
+    grid-template-columns: 1fr 1fr; /* duas colunas no desktop */
+  }
+}
+
+.card-bullet{
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 12px;
+  align-items: start;
+  background: #fff;
+  border: 1.5px solid color-mix(in srgb, var(--brand-primary) 10%, #0000);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 22px rgba(0,0,0,.06);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.card-bullet:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(0,0,0,.10);
+  border-color: color-mix(in srgb, var(--brand-primary) 18%, #0000);
+}
+
+.cb-ico{
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  font-size: 24px;
+  color: #222;
+  background:
+    radial-gradient(120% 120% at 20% 20%, rgba(103,105,255,.14), transparent 60%),
+    linear-gradient(180deg, #ffffff, #F7F8FF);
+  box-shadow: inset 0 0 0 2px #ffffff66, 0 8px 18px rgba(103,105,255,.12);
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 20%, #ffffff);
+}
+
+.cb-text{
+  font-size: var(--step-0);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.cb-text strong{
+  display: inline-block;
+  font-weight: 800;
+  color: var(--ink-strong);
+  margin-bottom: 2px;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -377,13 +434,47 @@
           <h2>Eu separei um “visu” rápido da comunidade pra você 👀</h2>
           <p>Aqui não é só “um curso e fim”. É uma comunidade viva, que todo mês recebe aulas novas e materiais que eu mesma uso na prática. Tudo passa por uma curadoria — só entra o que realmente deu certo comigo. 
           Assim que você comprar a comunidade, já pode usar tudo isso:</p>
-          <ul class="lista-destaque">
-            <li>🤖 <strong>Equipe de Social Media Não Humana</strong><br>10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.</li>
-            <li>🎥 <strong>Aulas práticas e express de conteúdo + IA</strong><br>Direto ao ponto, sem enrolação, para aplicar no mesmo dia.</li>
-            <li>🧶 <strong>Material de apoio exclusivo</strong><br>Checklists e prompts prontos para facilitar sua vida.</li>
-            <li>🔑 <strong>Segredos e hacks testados</strong><br>Ganchos, insights e estratégias que já funcionaram para mim na prática.</li>
-            <li>💬 <strong>Chat com todos os membros (inclusive comigo)</strong><br>Para pedir ajuda sempre que precisar.</li>
-          </ul>
+<ul class="lista-cards">
+  <li class="card-bullet">
+    <span class="cb-ico" aria-hidden="true">🤖</span>
+    <div class="cb-text">
+      <strong>Equipe de Social Media Não Humana</strong><br>
+      10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.
+    </div>
+  </li>
+
+  <li class="card-bullet">
+    <span class="cb-ico" aria-hidden="true">🎥</span>
+    <div class="cb-text">
+      <strong>Aulas práticas e express de conteúdo + IA</strong><br>
+      Direto ao ponto, sem enrolação, para aplicar no mesmo dia.
+    </div>
+  </li>
+
+  <li class="card-bullet">
+    <span class="cb-ico" aria-hidden="true">🧶</span>
+    <div class="cb-text">
+      <strong>Material de apoio exclusivo</strong><br>
+      Checklists e prompts prontos para facilitar sua vida.
+    </div>
+  </li>
+
+  <li class="card-bullet">
+    <span class="cb-ico" aria-hidden="true">🔑</span>
+    <div class="cb-text">
+      <strong>Segredos e hacks testados</strong><br>
+      Ganchos, insights e estratégias que já funcionaram para mim na prática.
+    </div>
+  </li>
+
+  <li class="card-bullet">
+    <span class="cb-ico" aria-hidden="true">💬</span>
+    <div class="cb-text">
+      <strong>Chat com todos os membros (inclusive comigo)</strong><br>
+      Para pedir ajuda sempre que precisar.
+    </div>
+  </li>
+</ul>
         </div>
 
         <video autoplay loop muted playsinline preload="metadata" class="video-gif">
