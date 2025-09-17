@@ -277,37 +277,82 @@
 
 #row-depoimentos .plain { width: 280px; aspect-ratio: 3/4; border: 2px dashed #FF6600; border-radius: 16px; overflow: hidden; background: #fff; flex-shrink: 0; }
 #row-depoimentos .plain img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    /* ====== OVERRIDES SÓ DO HERO ====== */
+:root{
+  --hero-title-lh: 1.05;       /* compactação do título */
+  --hero-title-mb: 8px;        /* espaço abaixo do título */
+  --hero-price-mb: 8px;        /* espaço abaixo do preço */
+  --hero-price-color: #5c4033; /* marrom do preço */
+  --hero-price-scale: 1.00;    /* tamanho do preço vs texto base */
+  --hero-underline-h: 3px;     /* espessura da linha */
+  --hero-underline-w: 140px;   /* largura da linha */
+  --hero-underline-speed: 2.8s;/* velocidade da animação */
+  --hero-media-shift: -10px;   /* sobe a imagem (negativo = sobe) */
+}
+
+#sec-hero{ padding-top: 10px; padding-bottom: 26px; }
+#sec-hero .hero-title{
+  line-height: var(--hero-title-lh) !important;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--hero-title-mb) !important;
+  text-wrap: balance;
+}
+#sec-hero .hero-price{
+  font-size: calc(var(--step-0) * var(--hero-price-scale));
+  color: var(--hero-price-color);
+  text-align:center;
+  margin: 0 auto var(--hero-price-mb) auto;
+}
+#sec-hero .hero-underline{
+  height: var(--hero-underline-h);
+  width: var(--hero-underline-w);
+  margin: 0 auto 10px auto;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#7B2FFF,#B266FF,#7B2FFF);
+  background-size: 200% 100%;
+  animation: heroMove var(--hero-underline-speed) linear infinite;
+}
+@keyframes heroMove{
+  0%{   background-position:   0% 50%; }
+  100%{ background-position: 200% 50%; }
+}
+/* Sobe a imagem sem colar no preço/linha */
+#sec-hero .hero-media{ margin-top: var(--hero-media-shift); }
+
+/* Mobile: mantém tudo compacto e seguro */
+@media (max-width: 480px){
+  :root{
+    --hero-title-lh: 1.06;
+    --hero-title-mb: 8px;
+    --hero-price-mb: 8px;
+    --hero-underline-w: 120px;
+    --hero-media-shift: -12px;
+  }
+}
   </style>
-</head>
-<body>
-  <!-- Barra de progresso -->
-  <div class="progress-wrap" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+<header class="section theme-1" id="sec-hero">
+  <div class="container hero-grid">
+    <div class="stack" aria-label="Texto do hero" style="text-align:center">
+      <h1 class="hero-title">
+        aprenda a criar o seu post 100% com IA<br>
+        sem cara de IA com a minha equipe não humana
+      </h1>
 
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
-
-  <!-- ================= HERO ================= -->
-  <header class="section theme-1" id="sec-hero">
-    <div class="container hero-grid">
-      <div class="stack" aria-label="Texto do hero" style="text-align:center">
-        <h1 class="hero-title">aprenda a criar seus posts 100% com IA sem cara de IA com a minha equipe não humana</h1>
-
-        <!-- Se o seu HTML já tem o preço + linha, eles continuarão funcionando.
-             Estes elementos abaixo existem aqui só para garantir compatibilidade -->
-        <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
-        <div class="hero-underline" aria-hidden="true"></div>
-      </div>
-
-      <div class="hero-media">
-        <img
-          src="/gemini-teste/assets/moockup.webp"
-          width="800" height="900"
-          alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
-          decoding="async" fetchpriority="high"
-          class="hero-img"
-        >
-      </div>
+      <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
+      <div class="hero-underline" aria-hidden="true"></div>
     </div>
-  </header>
+
+    <div class="hero-media">
+      <img
+        src="/gemini-teste/assets/moockup.webp"
+        width="800" height="900"
+        alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
+        decoding="async" fetchpriority="high"
+        class="hero-img"
+      >
+    </div>
+  </div>
+</header>
 
   <main id="conteudo" tabindex="-1">
     <!-- 2 -->
