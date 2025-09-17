@@ -628,6 +628,28 @@
 #sec-paraquem .card {
   margin-bottom: 15px; /* fallback extra */
 }
+    /* ===== Espaçamento entre os dois cards da seção PARA QUEM É / NÃO É ===== */
+#sec-who-group .who-wrap{
+  gap: 28px !important;   /* aumenta o espaço horizontal/vertical entre os dois cards */
+}
+
+/* reforço de margem no mobile quando viram pilha */
+@media (max-width: 859px){
+  #sec-who-group .who-col + .who-col{
+    margin-top: 12px !important; /* garante respiro entre um e outro no mobile */
+  }
+}
+/* ===== Reforço de estilo para títulos heroish ===== */
+.section-title-heroish{
+  font-size: clamp(28px, 4.8vw, 44px);
+  font-weight: 800;
+  color: var(--brand-primary);
+  line-height: 1.05;
+  text-align: center;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.section-title-heroish .no-break{ white-space: nowrap; }
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -796,6 +818,7 @@
   O QUE ESTÃO FALANDO<br>
   <span class="no-break">DA COMUNIDADE</span>
 </h2>
+</h2>
 
     <div class="scroll-row" id="row-depoimentos">
       <div class="plain reveal">
@@ -871,6 +894,7 @@
         <h2 class="grid-title section-title-heroish">
   PERGUNTAS QUE<br>
   <span class="no-break">SEMPRE ME FAZEM</span>
+</h2>
 </h2>
         <div class="faq-grid">
           <details class="reveal">
