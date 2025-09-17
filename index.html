@@ -557,6 +557,47 @@
 #row-aulas .plain::after {
   content: none !important;     /* garante que não crie segunda linha */
 }
+    /* ===== Reset agressivo de moldura na SEÇÃO AULAS ===== */
+/* Zera qualquer borda/outline/sombra aplicada no carrossel e filhos */
+#sec-aulas .scroll-row,
+#sec-aulas .scroll-row::before,
+#sec-aulas .scroll-row::after,
+#sec-aulas .scroll-row > *:not(.plain),
+#sec-aulas .scroll-row > *:not(.plain)::before,
+#sec-aulas .scroll-row > *:not(.plain)::after {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-image: none !important; /* evita truques com bg simulado */
+}
+
+/* Mantém apenas o pontilhado grudado na imagem */
+#row-aulas .plain {
+  position: relative;
+  border: 2px dashed #F4B400 !important;  /* laranja */
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent !important;     /* sem “moldura” pintada */
+  box-shadow: none !important;            /* sem sombra dupla */
+  outline: none !important;
+}
+
+/* Garante que .plain não crie uma segunda borda via pseudo-elemento */
+#row-aulas .plain::before,
+#row-aulas .plain::after {
+  content: none !important;
+}
+
+/* E a imagem não carrega nenhuma borda/outline extra */
+#row-aulas .plain img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
