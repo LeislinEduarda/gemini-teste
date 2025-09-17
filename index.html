@@ -333,6 +333,31 @@
   object-fit: cover;           /* a imagem cobre toda a área */
   display: block;
 }
+    .hero-title {
+  font-size: 2.2rem;       /* mantém grande, mas menos exagerado */
+  line-height: 1.15;       /* menos espaçado verticalmente */
+  margin-bottom: 0.8rem;   /* aproxima o título do preço */
+}
+
+.hero-price {
+  font-size: 1.1rem;
+  color: #5c4033;          /* marrom */
+  margin-bottom: 0.3rem;
+}
+
+.hero-line {
+  height: 3px;
+  width: 100px;
+  margin: 0 auto 1.2rem auto;
+  background: linear-gradient(90deg, #7B2FFF, #B266FF, #7B2FFF);
+  border-radius: 2px;
+  animation: moveLine 3s linear infinite;
+}
+
+@keyframes moveLine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
   </style>
 </head>
 <body>
@@ -343,16 +368,15 @@
 
   <!-- ================= HERO ================= -->
   <section class="hero" style="padding: 40px 20px; text-align: center; background: #f0ffe8;">
-  <h1 style="font-size: 2.8rem; font-weight: bold; color: #6c4ee0; line-height: 1.2; margin-bottom: 15px;">
-    aprenda a criar o seu post 100% com ia <br>
-    sem cara de ia com a minha equipe não humana
+  div class="hero">
+  <h1 class="hero-title">
+    aprenda a criar o seu post 100% com ia<br>
+    sem cara de ia com a<br>
+    minha equipe não humana
   </h1>
-
-  <p style="font-size: 1.1rem; font-weight: 600; color: #5a3a22; margin-bottom: 10px;">
-    apenas R$38,80/mês (plano anual)
-  </p>
-
-  <div style="width: 60%; height: 2px; background: #6c4ee0; margin: 0 auto 25px auto; border-radius: 2px;"></div>
+  <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
+  <div class="hero-line"></div>
+</div>
 
   <!-- Imagem com espaçamento melhorado -->
   <div style="margin-top: -10px; margin-bottom: 20px;">
