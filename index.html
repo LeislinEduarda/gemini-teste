@@ -470,6 +470,19 @@
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+    /* Mantém só o pontilhado do card principal */
+.section-aulas .aula-card {
+  border: 3px dashed #fbbf24;  /* o único pontilhado */
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* remove pontilhados extras vindos de pseudo-elementos */
+.section-aulas .aula-card::before,
+.section-aulas .aula-card::after {
+  display: none !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -607,7 +620,9 @@
     <!-- 6 — Aulas -->
     <section class="section theme-6" id="sec-aulas">
       <div class="container">
-        <h2 class="grid-title">AULAS PRA QUALQUER SITUAÇÃO</h2>
+        <h2 class="aulas-title">
+  AULAS PRA QUALQUER SITUAÇÃO <span>🧠</span>
+</h2>
 
         <div class="scroll-row" id="row-aulas">
           <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy" decoding="async"></div>
