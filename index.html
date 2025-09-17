@@ -620,6 +620,14 @@
   content: '' !important;
   display: none !important;
 }
+    #sec-paraquem .grid-cards {
+  display: grid;
+  gap: 20px;   /* aumenta espaço entre os cards */
+}
+
+#sec-paraquem .card {
+  margin-bottom: 15px; /* fallback extra */
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -784,7 +792,10 @@
     <!-- 7 — Prints -->
     <section class="section theme-7" id="sec-depoimentos">
   <div class="container">
-    <h2 class="grid-title">O QUE ESTÃO FALANDO DA COMUNIDADE:</h2>
+    <h2 class="grid-title section-title-heroish">
+  O QUE ESTÃO FALANDO<br>
+  <span class="no-break">DA COMUNIDADE</span>
+</h2>
 
     <div class="scroll-row" id="row-depoimentos">
       <div class="plain reveal">
@@ -857,7 +868,10 @@
       <div class="container">
         <div class="bridge-band" style="margin-bottom:18px;"></div>
 
-        <h2 class="grid-title">PERGUNTAS QUE SEMPRE ME FAZEM:</h2>
+        <h2 class="grid-title section-title-heroish">
+  PERGUNTAS QUE<br>
+  <span class="no-break">SEMPRE ME FAZEM</span>
+</h2>
         <div class="faq-grid">
           <details class="reveal">
             <summary class="summary-h3">“Posso usar com ChatGPT gratuito?”<span class="chev">›</span></summary>
