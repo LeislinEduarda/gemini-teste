@@ -432,6 +432,44 @@
   color: #6c40f7;      /* cor igual aos outros títulos */
   margin-bottom: 20px;
 }
+    /* === COMO FUNCIONA (ajuste como o hero) === */
+#sec-sistema {
+  /* ~20% menos altura na seção */
+  --pt: 36px;      /* antes era maior */
+  --pb: 24px;
+  padding-top: var(--pt) !important;
+  padding-bottom: var(--pb) !important;
+}
+
+#sec-sistema .grid-title{
+  /* visual do hero */
+  font-size: clamp(30px, 3.3vw + 12px, 48px);
+  font-weight: 800;
+  line-height: 1.07;          /* mais compacto, como o hero */
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #6c40f7;             /* mesma cor do hero */
+  margin: 0 0 10px 0;         /* encosta melhor na imagem */
+  text-wrap: balance;
+}
+
+/* garante que o emoji não quebre sozinho */
+#sec-sistema .grid-title .no-wrap{
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+/* aproxima ainda mais o visual da imagem do título */
+#sec-sistema .flow-img{
+  margin-top: 6px;            /* cola a imagem no título */
+  display:block;
+}
+
+/* (opcional) se estiver com espaço a mais no container interno */
+#sec-sistema .container{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -549,7 +587,10 @@
     <!-- 5 — Sistema -->
     <section class="section theme-8" id="sec-sistema">
       <div class="container" style="max-width: 1280px;">
-        <h2 class="funciona-title">COMO FUNCIONA NA PRÁTICA&nbsp;👇</h2>
+        <h2 class="grid-title">
+  COMO<br>
+  FUNCIONA NA PRÁTICA <span class="no-wrap">👇</span>
+</h2>
 
         <picture class="reveal">
           <source srcset="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1" type="image/webp">
@@ -567,7 +608,6 @@
     <section class="section theme-6" id="sec-aulas">
       <div class="container">
         <h2 class="grid-title">AULAS PRA QUALQUER SITUAÇÃO</h2>
-        <p class="grid-note">Rápidas, práticas e diretas: entrou, aprendeu, aplicou 🌟🤝🏻</p>
 
         <div class="scroll-row" id="row-aulas">
           <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy" decoding="async"></div>
