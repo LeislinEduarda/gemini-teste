@@ -533,6 +533,30 @@
   border:0;
   box-shadow:none;
 }
+    /* ===== Corrigir pontilhado extra na seção AULAS ===== */
+#sec-aulas .scroll-row,
+#sec-aulas .scroll-row::before,
+#sec-aulas .scroll-row::after,
+#sec-aulas .aula-wrap,
+#sec-aulas .aula-wrap::before,
+#sec-aulas .aula-wrap::after {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* mantém apenas o pontilhado colado na imagem */
+#row-aulas .plain {
+  border: 2px dashed #F4B400;   /* cor laranja */
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+#row-aulas .plain::before,
+#row-aulas .plain::after {
+  content: none !important;     /* garante que não crie segunda linha */
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
