@@ -328,6 +328,47 @@
     /* Espaçamento global um pouco mais “grudado” */
     .section{ padding-top:56px; padding-bottom:56px; }
     @media (max-width:768px){ .section{ padding-top:44px; padding-bottom:44px; } }
+
+    /* ===== Refinos do HERO (título, preço, imagem) ===== */
+.hero-title{
+  text-align:center;
+  color: var(--brand-primary);
+  margin-bottom: 10px; /* aproxima do preço */
+}
+
+.hero-price{
+  /* linha roxa fina com “sensação de movimento” */
+  position: relative;
+  display: inline-block;
+  margin: 6px auto 10px;
+  padding-bottom: 2px;
+  font-size: clamp(16px, 1.2vw + 12px, 20px); /* menor que o título */
+  font-weight: 600;
+  color: var(--c2); /* marrom do site (#7C492A) */
+  border-bottom: 2px solid var(--brand-primary); /* roxo */
+}
+.hero-price::after{
+  content:"";
+  position:absolute; left:0; bottom:-2px;
+  width:0; height:2px; background: var(--brand-primary);
+  transition: width .35s ease-in-out;
+}
+.hero-price:hover::after{ width:100%; }
+
+.hero-price .price-note{
+  opacity:.85; font-weight:500;
+}
+
+/* Sobe a imagem do mockup (ajuste fino no margin-top) */
+.hero-image{
+  margin-top: -18px;   /* se quiser ainda mais alto, teste -24px ou -28px */
+}
+
+/* Centraliza o bloco do hero sem alterar grid em desktop */
+#sec-hero .stack{
+  align-items: center;
+  text-align: center;
+}
   </style>
 </head>
 <body>
@@ -338,22 +379,28 @@
 
   <!-- ================= HERO ================= -->
   <header class="section theme-1" id="sec-hero">
-    <div class="container hero-grid">
-      <div class="stack" aria-label="Texto do hero">
-        <h1 class="hero-title">aprenda a criar o seu post 100% com ia sem cara de ia com a minha equipe não humana</h1>
-        <div class="hero-price">apenas <strong>R$38,80/mês</strong> (plano anual)</div>
-      </div>
-      <div class="hero-media">
-        <img
-          src="/gemini-teste/assets/moockup.webp"
-          width="800" height="900"
-          alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
-          decoding="async" fetchpriority="high"
-          class="hero-img"
-        >
-      </div>
+  <div class="container hero-grid">
+    <div class="stack" aria-label="Texto do hero">
+      <h1 class="hero-title">aprenda a criar o seu post 100% com ia sem cara de ia com a minha equipe não humana</h1>
+
+      <!-- Preço compacto com linha roxa fina e “movimento” -->
+      <p class="hero-price">
+        apenas <strong>R$38,80/mês</strong> <span class="price-note">(plano anual)</span>
+      </p>
     </div>
-  </header>
+
+    <!-- Só adicionei a classe hero-image para subir a arte -->
+    <div class="hero-media hero-image">
+      <img
+        src="/gemini-teste/assets/moockup.webp"
+        width="800" height="900"
+        alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
+        decoding="async" fetchpriority="high"
+        class="hero-img"
+      >
+    </div>
+  </div>
+</header>
 
   <main id="conteudo" tabindex="-1">
     <!-- 2 -->
