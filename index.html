@@ -650,6 +650,26 @@
   margin-bottom: 16px;
 }
 .section-title-heroish .no-break{ white-space: nowrap; }
+    /* ===== Espaçamento entre os dois cards PARA QUEM É / NÃO É ===== */
+#sec-who-group .who-col {
+  flex: 1 1 45%;
+  margin: 0 14px;                /* dá respiro horizontal */
+}
+
+#sec-who-group .who-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: -14px;             /* corrige o offset lateral */
+  margin-right: -14px;
+}
+
+/* Mobile: garante espaço vertical */
+@media (max-width: 768px) {
+  #sec-who-group .who-col {
+    margin: 10px 0 !important;   /* espaço em cima/baixo quando empilha */
+  }
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
