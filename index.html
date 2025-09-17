@@ -483,6 +483,56 @@
 .section-aulas .aula-card::after {
   display: none !important;
 }
+    /* ===== AULAS: título com estilo do hero/como-funciona ===== */
+#sec-aulas .grid-title.section-title-heroish{
+  font-size: clamp(28px, 4.6vw + 8px, 40px);
+  line-height: 1.06;
+  font-weight: 800;
+  color: var(--brand-primary);     /* roxo do site */
+  text-align: center;
+  text-wrap: balance;
+  margin: 0 0 8px;
+}
+#sec-aulas .grid-title.section-title-heroish .no-break{
+  white-space: nowrap;             /* emoji não quebra sozinho */
+}
+
+/* reduz um pouco o respiro da seção (≈ -20%) */
+#sec-aulas{ --pt: 40px; --pb: 20px; }
+#sec-aulas .scroll-row{ padding: 6px 8px 10px !important; }
+
+/* ===== AULAS: manter APENAS um pontilhado (o do card da imagem) ===== */
+#sec-aulas .scroll-row,
+#sec-aulas .scroll-row::before,
+#sec-aulas .scroll-row::after,
+#sec-aulas .aula-wrap,
+#sec-aulas .aula-wrap::before,
+#sec-aulas .aula-wrap::after {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Aplica o ÚNICO pontilhado no item (a borda grudada na imagem) */
+#row-aulas .plain{
+  border: 2px dashed #F4B400;      /* amarelo/laranja */
+  border-radius: 18px;
+  overflow: hidden;
+}
+#row-aulas .plain::before,
+#row-aulas .plain::after{
+  content: none !important;        /* garante que não haja segunda borda */
+}
+
+/* Imagem preenchendo o card sem bordas adicionais */
+#row-aulas .plain img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  border:0;
+  box-shadow:none;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -620,8 +670,9 @@
     <!-- 6 — Aulas -->
     <section class="section theme-6" id="sec-aulas">
       <div class="container">
-        <h2 class="aulas-title">
-  AULAS PRA QUALQUER SITUAÇÃO <span>🧠</span>
+        <h2 class="grid-title section-title-heroish">
+  AULAS PRA QUALQUER<br>
+  <span class="no-break">SITUAÇÃO</span>
 </h2>
 
         <div class="scroll-row" id="row-aulas">
