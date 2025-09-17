@@ -1,690 +1,1394 @@
 <!doctype html>
+
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="utf-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Landing – Conteúdo Infinito</title>
+
   <style>
+
     /* ===== Reset leve ===== */
+
     *, *::before, *::after { box-sizing: border-box; }
+
     html, body { margin: 0; padding: 0; }
+
     img, picture, svg, video { display: block; max-width: 100%; height: auto; }
+
     button, input, select, textarea { font: inherit; }
+
     a { color: inherit; text-decoration: none; }
+
     ul { margin: 0; padding-left: 1rem; }
+
     h1, h2, h3, p { margin: 0; }
 
+
+
     /* ===== Tokens ===== */
+
     :root{
+
       --brand-primary: #6769FF;   --brand-accent:#FEF700;
+
       --ink-strong:#111111; --ink:#2A2A2A; --muted:#6B6B6B;
+
       --radius:14px; --radius-lg:18px;
+
       --shadow:0 6px 24px rgba(0,0,0,.06); --shadow-lg:0 14px 34px rgba(0,0,0,.12);
+
       --container:1120px;
 
+
+
       --c1:#D0FA8C; --c2:#7C492A; --c3:#FFF2BC; --c4:#FFFFFF; --c5:#FFFFFF;
+
       --c6:#FFF2BC; --c7:#FF6B00; --c8:#D0FA8C; --c9:#7374F1;
 
+
+
       --step--1: clamp(12px, 0.72vw + 9px, 14px);
+
       --step-0:  clamp(14px, 0.85vw + 10px, 16px);
+
       --step-1:  clamp(18px, 1.2vw + 12px, 22px);
+
       --step-2:  clamp(22px, 1.8vw + 14px, 30px);
+
       --step-3:  clamp(36px, 3.5vw + 16px, 52px);
+
     }
+
+
 
     body{ font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+
           color: var(--ink); line-height: 1.5; background:#FFF; }
 
+
+
     .container{ max-width: var(--container); margin-inline:auto; padding:24px; }
+
     .section{ padding:68px 0; position:relative; z-index:0; --theme-border: rgba(103,105,255,.45); }
 
+
+
     /* Temas */
+
     .theme-1{ background: linear-gradient(0deg, rgba(208,250,140,.25), rgba(208,250,140,.25)); --theme-border: var(--c1); }
+
     .theme-2{ background:#7C492A; --theme-border:#7C492A; }
+
     .theme-3{ background: var(--c3); --theme-border: var(--c3); }
+
     .theme-4{ background: var(--c4); --theme-border: var(--c4); }
+
     .theme-5{ background: var(--c5); --theme-border: var(--c5); }
+
     .theme-6{ background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15)); --theme-border: var(--c6); }
+
     .theme-7{ background: linear-gradient(0deg, rgba(255,107,0,.14), rgba(255,107,0,.14)); --theme-border: var(--c7); }
+
     .theme-8{ background: linear-gradient(0deg, rgba(208,250,140,.25), rgba(208,250,140,.25)); --theme-border: var(--c8); }
+
     .theme-9{ background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15)); --theme-border: var(--c9); }
 
+
+
     .stack{ display:flex; flex-direction:column; } .stack > * + *{ margin-top:16px; }
+
     .grid{ display:grid; gap:20px; }
+
     .grid--2, .grid--3, .grid--4{ grid-template-columns:1fr; }
+
     @media (min-width:640px){
+
       .grid--2{ grid-template-columns: repeat(2,1fr); }
+
       .grid--3{ grid-template-columns: repeat(3,1fr); }
+
       .grid--4{ grid-template-columns: repeat(4,1fr); }
+
     }
+
+
 
     .card{ background:#FFF; border:1px solid rgba(0,0,0,.06); border-radius:var(--radius); padding:20px;
+
            box-shadow:var(--shadow); display:flex; flex-direction:column;
+
            transition: transform .18s ease, box-shadow .18s ease; }
+
     .card:hover{ transform: translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,.14); }
 
+
+
     /* Tipografia */
+
     h1{ font-size: var(--step-3); font-weight:800; color:var(--brand-primary); letter-spacing:-.02em; line-height:1.1; }
+
     h2{ font-size: var(--step-2); font-weight:800; color:var(--brand-primary); letter-spacing:-.01em; }
+
     h3{ font-size: var(--step-1); font-weight:700; color:var(--ink); }
+
     .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); }
+
     .muted{ color:var(--muted); font-size: var(--step--1); }
 
+
+
     .img-slot{ background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
+
                border:2px dashed var(--theme-border); border-radius:var(--radius); min-height:220px;
+
                display:grid; place-items:center; color:var(--muted); text-align:center; padding:16px; overflow:hidden; }
 
+
+
     .media-slot{ border-radius:var(--radius-lg); min-height:460px;
+
                  background: linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,0)),
+
                              linear-gradient(135deg, rgba(103,105,255,.15), rgba(254,247,0,.15));
+
                  border:2px dashed var(--theme-border); display:grid; place-items:center; color:var(--muted); padding:16px; }
 
+
+
     /* ===== HERO ===== */
-    /* NOVA ESTRUTURA PARA MAIOR HARMONIA E EVITAR COLISÕES */
-    #sec-hero {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-    .hero-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-        text-align: center;
-    }
-    .hero-text {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        align-items: center;
-    }
-    .hero-title {
-        font-size: clamp(28px, 8.8vw, 60px);
-        font-weight: 900;
-        color: var(--brand-primary);
-        letter-spacing: -0.01em;
-        line-height: 1.05;
-        max-width: 25ch;
-    }
-    .hero-price {
-        font-size: clamp(14px, 4vw, 22px);
-        font-weight: 800;
-        color: var(--c2);
-        position: relative;
-        padding-bottom: 10px;
-    }
-    .hero-price::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0;
-        width: min(460px, 78%);
-        height: 3px;
-        background: linear-gradient(90deg, #6769FF, #B2B3FF);
-        border-radius: 999px;
-        opacity: .95;
-        animation: heroLineGlow 3.2s ease-in-out infinite;
-    }
-    @keyframes heroLineGlow {
-        0%, 100% { box-shadow: 0 0 0 rgba(103, 105, 255, 0.00); }
-        50%      { box-shadow: 0 0 10px rgba(103, 105, 255, 0.45); }
-    }
-    .hero-media {
-        margin-top: 10px;
-        border-radius: 18px;
-        overflow: hidden;
-    }
-    .hero-img {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-    @media (min-width: 1024px) {
-        .hero-grid {
-            flex-direction: row;
-            text-align: left;
-            gap: 40px;
-        }
-        .hero-text {
-            align-items: flex-start;
-        }
-    }
+
+    #sec-hero{ padding-top:10px; padding-bottom:34px; }
+
+    .hero-grid{ display:grid; gap:14px; grid-template-columns:1fr; align-items:center; }
+
+    @media (min-width:1024px){ .hero-grid{ grid-template-columns: 1.05fr 1fr; } }
+
+    .hero-title{ margin-top:0; }
+
+    .hero-subtitle{ font-size: calc(var(--step-0) * 1.1); color:var(--ink-strong); max-width:66ch; text-wrap:balance; margin-top:4px; line-height:1.45; }
+
+    .hero-media{ border-radius:18px; overflow:hidden; margin-top:6px; }
+
+    .hero-img{ display:block; width:100%; height:auto; border-radius:18px; }
+
+    /* >>> Removido o espaço extra no mobile (override) */
+
+    @media (max-width:768px){ #sec-hero{ padding-bottom:34px !important; } }
+
+
+
+/* ==== AJUSTES DO HERO (pedido) – v2 harmonizada ==== */
+
+#sec-hero{
+
+  padding-top: 22px;         /* menos respiro no topo */
+
+  padding-bottom: 18px;      /* mínimo respiro no fim */
+
+}
+
+.hero-grid{ gap: 8px; }      /* aproxima tudo */
+
+.hero-grid .stack{ align-items:center; text-align:center; }
+
+
+
+/* TÍTULO: forte, legível e compacto */
+
+.hero-title{
+
+  margin: 0;
+
+  max-width: 23ch;                      /* controla as quebras */
+
+  line-height: 1.05;
+
+  letter-spacing: -0.01em;
+
+  font-weight: 900;
+
+  color: var(--brand-primary);          /* cor única roxa */
+
+  font-size: clamp(28px, 8.8vw, 60px);  /* escala bem no mobile */
+
+}
+
+
+
+/* PREÇO: texto menor, marrom, com UMA linha roxa fina e animada */
+
+.hero-price{
+
+  margin-top: 6px;                      /* aproxima do título */
+
+  font-size: clamp(14px, 4vw, 22px);    /* mais compacto que o título */
+
+  font-weight: 800;
+
+  color: var(--c2);                      /* marrom */
+
+  position: relative;
+
+  padding-bottom: 10px;                 /* espaço para a linha */
+
+}
+
+.hero-price::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+
+  transform: translateX(-50%);
+
+  bottom: 0;
+
+  width: min(460px, 78%);               /* comprimento da linha */
+
+  height: 3px;                          /* ~35% mais fina */
+
+  background: linear-gradient(90deg, #6769FF, #B2B3FF);
+
+  border-radius: 999px;
+
+  opacity: .95;
+
+  animation: heroLineGlow 3.2s ease-in-out infinite;
+
+}
+
+/* sensação de movimento suave */
+
+@keyframes heroLineGlow{
+
+  0%,100%{ box-shadow: 0 0 0 rgba(103,105,255,0.00); }
+
+  50%    { box-shadow: 0 0 10px rgba(103,105,255,0.45); }
+
+}
+
+
+
+/* IMAGEM: sobe ~25% em relação ao estado anterior e deixa espaço pro CTA fixo */
+
+.hero-media{
+
+  margin-top: -9.5vh !important;        /* sobe a imagem */
+
+  margin-bottom: 74px !important;       /* área de segurança pro CTA flutuante */
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+}
+
+.hero-img{ display:block; width:100%; height:auto; }
+
+
+
+@media (min-width: 1024px){
+
+  /* no desktop sobe um pouco menos para manter equilíbrio */
+
+  .hero-media{ margin-top: -7vh !important; margin-bottom: 64px !important; }
+
+}
+
+
+
+@media (max-width: 380px){
+
+  /* telas muito pequenas: evita encostar no título/CTA */
+
+  .hero-title{ font-size: clamp(26px, 9.8vw, 56px); }
+
+  .hero-media{ margin-top: -8vh !important; margin-bottom: 78px !important; }
+
+}
+
+
 
     .footer-min{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
+
                  font-size:var(--step--1); padding-top:12px; margin-top:22px;
+
                  border-top:1px solid color-mix(in srgb, var(--theme-border) 40%, #0000); }
+
     .footer-links{ display:flex; gap:16px; flex-wrap:wrap; }
+
     .footer-links a{ color:var(--ink); text-decoration:underline; text-underline-offset:2px; }
+
     .footer-links a:hover{ text-decoration-thickness:2px; color:var(--brand-primary); }
+
     .footer-copy{ opacity:.85; }
 
+
+
     .skip-link{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+
     .skip-link:focus{ position:fixed; left:16px; top:16px; width:auto; height:auto; background:var(--brand-accent);
+
                       color:var(--ink-strong); padding:10px 14px; border-radius:8px; z-index:1000; outline:3px solid #000; }
 
+
+
     .grid-title{ margin-bottom:6px; }
+
     .grid-note{
+
       margin-top:8px; margin-bottom:14px; color:var(--ink);
+
       font-size: clamp(15px, 1.3vw + 10px, 18px);
+
       border-left:6px solid var(--theme-border); padding-left:10px;
+
       background: color-mix(in srgb, var(--theme-border) 15%, #fff0);
+
       border-radius:8px;
+
     }
 
+
+
     .sticky-cta{ position:fixed; left:16px; right:16px;
+
                  bottom: calc(16px + env(safe-area-inset-bottom));
+
                  z-index:9999; display:none; justify-content:center;
+
                  background:#FFFFFFE6; border:1px solid rgba(0,0,0,.06);
+
                  padding:12px; border-radius:999px; box-shadow:var(--shadow-lg); backdrop-filter: blur(8px); }
+
     .sticky-cta .cta{ display:inline-flex; align-items:center; justify-content:center;
+
                       min-height:48px; min-width:44px; padding:0 22px; border-radius:999px;
+
                       background:var(--brand-primary); color:#FFF; font-weight:800; text-transform:uppercase;
+
                       letter-spacing:.02em; border:2px solid transparent; width:100%;
+
                       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, opacity .15s ease; }
+
     .sticky-cta .cta:hover{ transform: translateY(-1px); box-shadow:0 0 0 4px rgba(254,247,0,.35); }
+
     @media (max-width:768px){ .sticky-cta{ display:flex; } }
 
+
+
     .progress-wrap{ position:fixed; inset:0 0 auto 0; height:4px; z-index:1000;
+
                     background: linear-gradient(90deg, rgba(103,105,255,.08), rgba(254,247,0,.08)); backdrop-filter: blur(2px); }
+
     .progress-bar{ height:100%; width:0%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); transition: width .08s linear; }
 
+
+
     .scroll-dots{ position:fixed; right:12px; top:46%; transform:translateY(-50%); display:none; flex-direction:column; gap:10px; z-index:997; opacity:.9; }
+
     .scroll-dots button{ width:11px; height:11px; border-radius:50%; border:2px solid rgba(103,105,255,.6); background:#fff; padding:0; cursor:pointer; transition: transform .12s ease; }
+
     .scroll-dots button[aria-current="true"]{ background:var(--brand-primary); border-color:var(--brand-primary); transform:scale(1.12); }
+
     .scroll-dots button:focus-visible{ outline:3px solid var(--brand-accent); outline-offset:2px; }
+
     @media (min-width:1024px){ .scroll-dots{ display:flex; } }
 
+
+
     .reveal{ opacity:0; transform: translateY(10px) scale(.98); transition: opacity .35s ease, transform .35s ease; }
+
     .reveal.in{ opacity:1; transform: translateY(0) scale(1); }
 
+
+
     /* ===== Carrosséis ===== */
+
     .scroll-row{ display:flex; gap:16px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+
                  scroll-snap-type:x mandatory; scroll-padding-inline:16px;
+
                  padding:6px 8px 20px; margin-inline:-8px; overscroll-behavior-x:contain; }
+
     .scroll-row::-webkit-scrollbar{ display:none; }
 
+
+
     .scroll-row .card{ flex:0 0 auto; scroll-snap-align:start; width:260px; background:#fff; border:1px solid rgba(0,0,0,.06);
+
                        border-radius:var(--radius); box-shadow:var(--shadow); padding:14px; }
 
+
+
     /* Funcionários */
+
     #row-funcionarios-1 .img-slot{ aspect-ratio:1 / 1; padding:0; }
+
     #row-funcionarios-1 .img-slot img{ width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+
     .scroll-row .card-title{ margin-top:12px; font-weight:700; font-size:var(--step-0); min-height:1.6em; }
+
     .scroll-row .card-sub{ margin-top:6px; color:var(--muted); font-size:var(--step--1); min-height:2.6em; }
 
+
+
     /* Aulas */
+
     #row-aulas .plain{ flex:0 0 auto; scroll-snap-align:start; width:300px;
+
                        border-radius:18px; overflow:hidden; background:transparent; box-shadow:none; border:none; padding:0; }
+
     #row-aulas .plain img{ display:block; width:100%; height:auto; object-fit:contain; border-radius:18px; }
 
+
+
     /* Prints */
+
     #row-prints .img-slot{ aspect-ratio:4 / 5; padding:0; }
+
     #row-prints .img-slot img{ width:100%; height:100%; object-fit:contain; border-radius:inherit; background:#fff; }
 
+
+
     /* Antes: os dois tinham 96px. Mantemos só para funcionários. */
+
     #sec-cards-funcionarios.section{ padding-bottom:96px; }
 
+
+
     /* Para quem é */
+
     .who-wrap{ display:grid; gap:20px; }
+
     @media (min-width:860px){ .who-wrap{ grid-template-columns:1fr 1fr; } }
+
     .who-col{ position:relative; border-radius:18px; padding:18px;
+
               background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
+
               box-shadow:0 12px 32px rgba(0,0,0,.08);
+
               border:1px solid color-mix(in srgb, var(--theme-border) 40%, #0000); overflow:hidden; }
+
     .who-col::after{ content:""; position:absolute; inset:10px; border-radius:22px;
+
                       background: radial-gradient(120% 80% at 10% 10%, color-mix(in srgb, var(--theme-border) 45%, #0000), transparent 60%),
+
                                   radial-gradient(110% 80% at 85% 15%, rgba(70,71,241,.12), transparent 60%); z-index:0; }
+
     .who-col > *{ position:relative; z-index:1; }
 
+
+
     .who-title{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+
     .who-badge{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center; font-weight:900; color:#fff;
+
                 background: linear-gradient(135deg, #33C66E, #89E3B5); box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(51,198,110,.25); }
+
     .whonot-badge{ background: linear-gradient(135deg, #E24B6A, #F5A5B5); box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(226,75,106,.25); }
 
+
+
     .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
+
     .who-item, .whonot-item{ position:relative; border-radius:12px; padding:12px 14px; background:#fff; border:1px solid rgba(0,0,0,.06);
+
                               transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
+
     .who-item::before, .whonot-item::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
+
                                              background: linear-gradient(180deg, #3bb273, #9be2bf); transition: width .18s ease; }
+
     .whonot-item::before{ background: linear-gradient(180deg, #d13b52, #f3a8b3); }
+
     .who-item:hover, .whonot-item:hover{ transform: translateY(-1px); box-shadow:0 12px 28px rgba(0,0,0,.10); background: linear-gradient(180deg, #ffffff, #fafafa); }
 
+
+
     .section-bridge{ padding:26px 0; background: linear-gradient(90deg, rgba(103,105,255,.10), rgba(254,247,0,.10)); }
+
     .bridge-band{ height:8px; border-radius:999px; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); box-shadow:0 8px 22px rgba(0,0,0,.08); }
 
+
+
     .faq-grid{ display:grid; gap:16px; grid-template-columns:1fr; }
+
     @media (min-width:860px){ .faq-grid{ grid-template-columns:1fr 1fr; } }
+
     details{ position:relative; border-radius:18px; background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
+
              box-shadow:0 12px 32px rgba(0,0,0,.09); border:1px solid color-mix(in srgb, var(--theme-border) 40%, #0000); overflow:hidden; }
+
     details::after{ content:""; position:absolute; inset:10px; border-radius:22px;
+
                     background: radial-gradient(130% 90% at 15% 15%, color-mix(in srgb, var(--theme-border) 35%, #0000), transparent 60%); z-index:0; }
+
     details > *{ position:relative; z-index:1; }
+
     summary{ cursor:pointer; font-weight:700; color:var(--ink); min-height:60px; display:flex; align-items:center; gap:12px; padding:16px 18px; list-style:none; }
+
     summary::-webkit-details-marker{ display:none; }
+
     .summary-h3{ font-size: var(--step-1); font-weight:700; color:var(--ink); }
+
     .chev{ margin-left:auto; transition: transform .25s ease; color:var(--brand-primary); font-weight:900; }
+
     details[open] .chev{ transform: rotate(90deg) scale(1.05); }
+
     details[open]{ box-shadow:0 18px 44px rgba(0,0,0,.12); }
+
     details p{ padding:0 18px 16px 18px; color:var(--ink); }
+
+
 
     .flow-img{ display:block; width:100%; height:auto; border-radius:18px; box-shadow:var(--shadow-lg); border:2px solid rgba(124,73,42,.15); }
 
+
+
     .lista-destaque{ list-style:none; padding-left:0; margin-top:18px; }
+
     .lista-destaque li{ margin-bottom:22px; line-height:1.55; font-size:var(--step-0); }
 
+
+
     .img-slot--video{ padding:0; aspect-ratio:4 / 5; overflow:hidden; }
+
     .img-slot--video .slot-video{ display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+
     .video-gif{ width:100%; height:auto; max-width:600px; display:block; margin:0 auto; border-radius:12px; }
+
     .seu-gif{ display:block; width:100%; height:auto; margin:0; padding:0; border:none; background:none; }
 
+
+
     section.conteudos-variados{ margin:30px 0; }
+
     .funcionarios h2, .funcionarios p{ text-align:left; margin-left:0; margin-right:0; padding-left:0; padding-right:0; max-width:100%; }
 
+
+
     /* ===== AJUSTES QUE VOCÊ PEDIU PARA "AULAS" ===== */
+
     /* Mais espaço NO INÍCIO da seção (antes do título) e MENOS espaço no fim */
+
     #sec-aulas.section{ padding-top: 64px !important; padding-bottom: 28px !important; }
+
     /* Subtítulo colado nas imagens continua enxuto */
+
     #sec-aulas .grid-title{ margin-bottom: 15px; }
+
     #sec-aulas .grid-note{ margin-bottom: 10px; }
 
+
+
     /* Título maior em “COMO FUNCIONA NA PRÁTICA” (mantido) */
+
     #sec-sistema .grid-title{
+
       font-size: clamp(30px, 2.2vw + 20px, 46px);
+
       line-height:1.1; font-weight:800; margin-bottom:16px; text-align:left;
+
     }
 
+
+
     /* Menos espaço entre subtítulo e cards dos funcionários */
+
     #sec-cards-funcionarios .funcionarios{ margin:0 0 8px 0; padding-bottom:4px; }
+
     #sec-cards-funcionarios #row-funcionarios-1{ margin-top:0; padding-top:6px; }
+
     /* ===== Seções: espaçamento controlado por variáveis ===== */
+
 .section {
+
   --pt: 68px;   /* padding-top padrão */
+
   --pb: 68px;   /* padding-bottom padrão */
+
   padding-top: var(--pt);
+
   padding-bottom: var(--pb);
+
 }
+
 /* === SEÇÃO AULAS AJUSTADA === */
+
 #sec-aulas {
+
   --pt: 52px;   /* espaço no topo da seção */
+
   --pb: 14px;   /* espaço no fim da seção */
+
 }
+
+
 
 #sec-aulas .container {
+
   padding-top: 0 !important;
+
   padding-bottom: 0 !important;
+
 }
+
+
 
 #sec-aulas .grid-title {
+
   margin-bottom: 10px; /* aproxima título do subtítulo */
+
 }
+
+
 
 #sec-aulas .grid-note {
+
   margin-top: 6px;
+
   margin-bottom: 12px; /* aproxima do carrossel */
+
 }
+
+
 
 #sec-aulas .scroll-row {
+
   padding: 6px 8px 10px !important; /* menos espaço dentro */
+
 }
+
+
 
 /* === IMAGENS MAIORES === */
+
 #row-aulas .plain {
+
   width: 340px;         /* aumenta largura padrão */
+
   aspect-ratio: 16/9;   /* altura fixa e proporcional */
+
   overflow: hidden;
+
   border: 2px dashed #FFD700; /* contorno pontilhado amarelo (ajuste cor se quiser) */
+
   border-radius: 18px;
+
 }
+
+
 
 #row-aulas .plain img {
+
   width: 100%;
+
   height: 100%;
+
   object-fit: cover;   /* preenche bem */
+
   display: block;
+
 }
+
+
 
 @media (max-width: 480px) {
+
   #row-aulas .plain {
+
     width: calc(100vw - 48px); /* aproveita largura no celular */
+
   }
-}
-/* === SEÇÃO DEPOIMENTOS === */
-#row-depoimentos .plain {
-  width: 280px;                /* largura de cada depoimento */
-  aspect-ratio: 3/4;           /* formato de cartaz (ajusta se quiser mais largo ou mais quadrado) */
-  border: 2px dashed #FF6600;  /* pontilhado laranja */
-  border-radius: 16px;         /* cantos arredondados */
-  overflow: hidden;
-  background: #fff;
-  flex-shrink: 0;              /* impede que fiquem achatados no carrossel */
+
 }
 
-#row-depoimentos .plain img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;           /* a imagem cobre toda a área */
-  display: block;
+/* === SEÇÃO DEPOIMENTOS === */
+
+#row-depoimentos .plain {
+
+  width: 280px;                /* largura de cada depoimento */
+
+  aspect-ratio: 3/4;           /* formato de cartaz (ajusta se quiser mais largo ou mais quadrado) */
+
+  border: 2px dashed #FF6600;  /* pontilhado laranja */
+
+  border-radius: 16px;         /* cantos arredondados */
+
+  overflow: hidden;
+
+  background: #fff;
+
+  flex-shrink: 0;              /* impede que fiquem achatados no carrossel */
+
 }
+
+
+
+#row-depoimentos .plain img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;           /* a imagem cobre toda a área */
+
+  display: block;
+
+}
+
   </style>
+
 </head>
+
 <body>
-    <div class="progress-wrap" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+  <!-- Barra de progresso -->
+
+  <div class="progress-wrap" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+
 
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-    <header class="section theme-1" id="sec-hero">
-  <div class="container hero-grid">
-    <div class="hero-text">
-      <h1 class="hero-title">
-        aprenda a criar o seu post 100%<br>
-        com ia sem cara de ia com a<br>
-        minha equipe não humana
-      </h1>
 
-      <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
-    </div>
 
-    <div class="hero-media">
-      <img
-        src="/gemini-teste/assets/moockup.webp"
-        width="800" height="900"
-        alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
-        decoding="async" fetchpriority="high"
-        class="hero-img"
-      >
-    </div>
-  </div>
-</header>
+  <!-- ================= HERO ================= -->
+
+  <section class="hero" style="padding: 40px 20px; text-align: center; background: #f0ffe8;">
+  <h1 style="font-size: 2.8rem; font-weight: bold; color: #6c4ee0; line-height: 1.2; margin-bottom: 15px;">
+    aprenda a criar o seu post 100% com ia <br>
+    sem cara de ia com a minha equipe não humana
+  </h1>
+
+  <p style="font-size: 1.1rem; font-weight: 600; color: #5a3a22; margin-bottom: 10px;">
+    apenas R$38,80/mês (plano anual)
+  </p>
+
+  <div style="width: 60%; height: 2px; background: #6c4ee0; margin: 0 auto 25px auto; border-radius: 2px;"></div>
+
+  <!-- Imagem com espaçamento melhorado -->
+  <div style="margin-top: -10px; margin-bottom: 20px;">
+    <img src="assets/hero.png" alt="hero" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+  </div>
+
+  <!-- CTA flutuante -->
+  <a href="#comprar" style="display: inline-block; background: #6c4ee0; color: white; padding: 16px 28px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; text-decoration: none; box-shadow: 0px 4px 15px rgba(108,78,224,0.3); position: relative; top: 0; z-index: 5;">
+    QUERO FAZER PARTE
+  </a>
+</section>
+
+
 
   <main id="conteudo" tabindex="-1">
-        <section class="section theme-2" id="sec-destaques">
+
+    <!-- 2 -->
+
+    <section class="section theme-2" id="sec-destaques">
+
       <div class="container grid grid--3">
+
         <div class="card stack reveal"><h3>⚡️ 10 MIL POSTS</h3><p class="muted">entregues pela minha equipe de social media não humana</p></div>
+
         <div class="card stack reveal"><h3>♾️ A PRIMEIRA</h3><p class="muted">comunidade focada em criação de conteúdo com IA</p></div>
+
         <div class="card stack reveal"><h3>🤬 PARA QUEM</h3><p class="muted">cansou de calendários e templates de conteúdo </p></div>
+
       </div>
+
     </section>
 
-        <section class="section theme-3" id="sec-conteudo">
+
+
+    <!-- 3 -->
+
+    <section class="section theme-3" id="sec-conteudo">
+
       <div class="container grid grid--2">
+
         <div class="stack reveal">
+
           <h2>Eu separei um “visu” rápido da comunidade pra você 👀</h2>
+
           <p>Aqui não é só “um curso e fim”. É uma comunidade viva, que todo mês recebe aulas novas e materiais que eu mesma uso na prática. Tudo passa por uma curadoria — só entra o que realmente deu certo comigo. 
+
           Assim que você comprar a comunidade, já pode usar tudo isso:</p>
+
           <ul class="lista-destaque">
+
             <li>🤖 <strong>Equipe de Social Media Não Humana</strong><br>10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.</li>
+
             <li>🎥 <strong>Aulas práticas e express de conteúdo + IA</strong><br>Direto ao ponto, sem enrolação, para aplicar no mesmo dia.</li>
+
             <li>🧶 <strong>Material de apoio exclusivo</strong><br>Checklists e prompts prontos para facilitar sua vida.</li>
+
             <li>🔑 <strong>Segredos e hacks testados</strong><br>Ganchos, insights e estratégias que já funcionaram para mim na prática.</li>
+
             <li>💬 <strong>Chat com todos os membros (inclusive comigo)</strong><br>Para pedir ajuda sempre que precisar.</li>
+
           </ul>
+
         </div>
+
+
 
         <video autoplay loop muted playsinline preload="metadata" class="video-gif">
+
           <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
+
           Seu navegador não suporta vídeos.
+
         </video>
+
       </div>
+
     </section>
 
-        <section class="section theme-4" id="sec-cards-funcionarios">
+
+
+    <!-- 4 — GRID 1: funcionários -->
+
+    <section class="section theme-4" id="sec-cards-funcionarios">
+
       <div class="container">
+
         <section class="funcionarios">
+
           <h2>OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
+
           <p>Conheça o que cada um dos 10 resolvem por você 👇</p>
+
           
+
         </section>
 
+
+
         <div class="scroll-row" id="row-funcionarios-1">
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Cria frases iniciais que prendem</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Gera ideias infinitas</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Carlos dos Carrosséis</h3><p class="card-sub">Cria textos que te fazem deslizar para o lado</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Leonardo da Viralização</h3><p class="card-sub">Avalia o seu conteúdo e dê uma nota viral</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario5.webp" alt="Funcionário 5" loading="lazy"></div><h3 class="card-title">José dos Stories</h3><p class="card-sub">Sequências que prendem e vendem</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Laura das Legendas</h3><p class="card-sub">Cria legendas impossíveis de ignorar</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Larissa dos Roteiros</h3><p class="card-sub">Monta roteiros de vídeos que funcionam</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario8.webp" alt="Funcionário 8" loading="lazy"></div><h3 class="card-title">Bruno do Branding</h3><p class="card-sub">Deixa sua marca memorável</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Bia do Público</h3><p class="card-sub">Descobre o que seu público nunca te conta</p></div>
+
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Dudu da Bio</h3><p class="card-sub">Escreve bios que gera seguidores</p></div>
+
         </div>
+
       </div>
+
     </section>
 
-        <section class="section theme-8" id="sec-sistema">
+
+
+    <!-- 5 — Sistema -->
+
+    <section class="section theme-8" id="sec-sistema">
+
       <div class="container" style="max-width: 1280px;">
+
         <h2 class="grid-title">COMO FUNCIONA NA PRÁTICA 👇</h2>
 
+
+
         <picture class="reveal">
+
           <source srcset="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1" type="image/webp">
+
           <img
+
             src="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1"
+
             width="1200" height="1900"
+
             alt="Fluxo do sistema de conteúdo com funcionários não humanos"
+
             class="flow-img" loading="lazy" decoding="async"
+
           />
+
         </picture>
+
       </div>
+
     </section>
 
-        <section class="section theme-6" id="sec-aulas">
+
+
+    <!-- 6 — Aulas -->
+
+    <section class="section theme-6" id="sec-aulas">
+
       <div class="container">
+
         <h2 class="grid-title">AULAS PRA QUALQUER SITUAÇÃO</h2>
+
         <p class="grid-note">Rápidas, práticas e diretas: entrou, aprendeu, aplicou 🌟🤝🏻</p>
 
+
+
         <div class="scroll-row" id="row-aulas">
+
           <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="12.webp" alt="Aula 12" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="13.webp" alt="Aula 13" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="14.webp" alt="Aula 14" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="15.webp" alt="Aula 15" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="16.webp" alt="Aula 16" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="17.webp" alt="Aula 17" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="18.webp" alt="Aula 18" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="19.webp" alt="Aula 19" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="20.webp" alt="Aula 20" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="21.webp" alt="Aula 21" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="22.webp" alt="Aula 22" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="23.webp" alt="Aula 23" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="24.webp" alt="Aula 24" loading="lazy" decoding="async"></div>
+
           <div class="plain reveal"><img src="25.webp" alt="Aula 25" loading="lazy" decoding="async"></div>
+
         </div>
+
       </div>
+
     </section>
 
-        <section class="section theme-7" id="sec-depoimentos">
+
+
+    <!-- 7 — Prints/Depoimentos -->
+
+    <section class="section theme-7" id="sec-depoimentos">
+
       <div class="container">
+
         <h2 class="grid-title">O QUE ESTÃO FALANDO DA COMUNIDADE:</h2>
 
+
+
         <div class="scroll-row" id="row-depoimentos">
+
           <div class="plain reveal">
+
             <img src="assets/depoimento1.webp" alt="Depoimento 1" loading="lazy">
+
           </div>
+
           <div class="plain reveal">
+
             <img src="assets/depoimento2.webp" alt="Depoimento 2" loading="lazy">
+
           </div>
+
           <div class="plain reveal">
+
             <img src="assets/depoimento3.webp" alt="Depoimento 3" loading="lazy">
+
           </div>
+
           <div class="plain reveal">
+
             <img src="assets/depoimento4.webp" alt="Depoimento 4" loading="lazy">
+
           </div>
+
           <div class="plain reveal">
+
             <img src="assets/depoimento5.webp" alt="Depoimento 5" loading="lazy">
+
           </div>
+
           <div class="plain reveal">
+
             <img src="assets/depoimento6.webp" alt="Depoimento 6" loading="lazy">
+
           </div>
+
           <div class="plain reveal">
+
             <img src="assets/depoimento7.webp" alt="Depoimento 7" loading="lazy">
+
           </div>
+
           <div class="plain reveal">
+
             <img src="assets/depoimento8.webp" alt="Depoimento 8" loading="lazy">
+
           </div>
+
         </div>
+
       </div>
+
     </section>
 
-        <section class="section theme-8" id="sec-who-group">
+
+
+    <!-- 8 — Para quem é / Não é -->
+
+    <section class="section theme-8" id="sec-who-group">
+
       <div class="container who-wrap">
-        <div class="who-col reveal">
-          <div class="who-title">
-            <div class="who-badge" aria-hidden="true">✓</div>
-            <h2>PARA QUEM É</h2>
-          </div>
-          <ul class="who-list">
-            <li class="who-item">✅ Você já posta alguma coisa ou tem vontade de começar</li>
-            <li class="who-item">✅ Você quer que mais gente se interesse pelo que você posta</li>
-            <li class="who-item">✅ Você tá cansado de postar igual a todo mundo</li>
-            <li class="who-item">✅ Você gostaria que postar fosse mais leve</li>
-            <li class="who-item">✅ Você vê a IA como parte da solução</li>
-          </ul>
-        </div>
 
         <div class="who-col reveal">
+
           <div class="who-title">
-            <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
-            <h3>E NÃO É PARA QUEM…</h3>
+
+            <div class="who-badge" aria-hidden="true">✓</div>
+
+            <h2>PARA QUEM É</h2>
+
           </div>
-          <ul class="whonot-list">
-            <li class="whonot-item">❌ Você tá procurando solução mágica</li>
-            <li class="whonot-item">❌ Você acha que o problema é o algoritmo</li>
-            <li class="whonot-item">❌ Você não gosta de testar coisas novas</li>
-            <li class="whonot-item">❌ Você prefere aula longa</li>
-            <li class="whonot-item">❌ Você tem medo de novidade</li>
+
+          <ul class="who-list">
+
+            <li class="who-item">✅ Você já posta alguma coisa ou tem vontade de começar</li>
+
+            <li class="who-item">✅ Você quer que mais gente se interesse pelo que você posta</li>
+
+            <li class="who-item">✅ Você tá cansado de postar igual a todo mundo</li>
+
+            <li class="who-item">✅ Você gostaria que postar fosse mais leve</li>
+
+            <li class="who-item">✅ Você vê a IA como parte da solução</li>
+
           </ul>
+
         </div>
+
+
+
+        <div class="who-col reveal">
+
+          <div class="who-title">
+
+            <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
+
+            <h3>E NÃO É PARA QUEM…</h3>
+
+          </div>
+
+          <ul class="whonot-list">
+
+            <li class="whonot-item">❌ Você tá procurando solução mágica</li>
+
+            <li class="whonot-item">❌ Você acha que o problema é o algoritmo</li>
+
+            <li class="whonot-item">❌ Você não gosta de testar coisas novas</li>
+
+            <li class="whonot-item">❌ Você prefere aula longa</li>
+
+            <li class="whonot-item">❌ Você tem medo de novidade</li>
+
+          </ul>
+
+        </div>
+
       </div>
+
     </section>
 
-        <section class="section theme-9" id="sec-faq-footer">
+
+
+    <!-- 9 — FAQ + rodapé -->
+
+    <section class="section theme-9" id="sec-faq-footer">
+
       <div class="container">
+
         <div class="bridge-band" style="margin-bottom:18px;"></div>
 
+
+
         <h2 class="grid-title">PERGUNTAS QUE SEMPRE ME FAZEM:</h2>
+
         <div class="faq-grid">
+
           <details class="reveal">
+
             <summary class="summary-h3">“Posso usar com ChatGPT gratuito?”<span class="chev">›</span></summary>
+
             <p>Você pode usar os funcionários não humanos com o ChatGPT gratuito sem problema. As aulas e os prompts que você recebe também funcionam no gratuito.</p>
+
           </details>
+
           <details class="reveal">
+
             <summary class="summary-h3">“Preciso pagar pelas ferramentas de IA à parte?”<span class="chev">›</span></summary>
+
             <p>Sim.Mas você não precisa se preocupar: já tem um caminho pronto lá dentro mostrando quais ferramentas realmente valem a pena (nada de pagar por 10 que você nunca vai abrir).</p>
+
           </details>
+
           <details class="reveal">
+
             <summary class="summary-h3">“Isso é um curso?”<span class="chev">›</span></summary>
+
             <p>Não. Cursos acabam. Aqui é um sistema vivo. Você vai receber aulas express + Minha Equipe Não Humana + Uma Comunidade Ativa</p>
+
           </details>
+
           <details class="reveal">
+
             <summary class="summary-h3">“Eu preciso saber de IA e CONTEÚDO antes?”<span class="chev">›</span></summary>
+
             <p>Não. O que importa é entender do seu negócio. O restante a comunidade resolve.</p>
+
           </details>
+
         </div>
+
+
 
         <div class="footer-min">
+
           <div class="footer-copy">© 2025 @leislineduarda - Comunidade Conteúdo Infinito com IA</div>
+
           <div class="footer-links"></div>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
-    <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
+
+
+  <!-- Sticky CTA Mobile -->
+
+  <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
+
     <a href="/checkout" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
+
   </div>
 
-    <nav class="scroll-dots" aria-label="Progresso da página">
+
+
+  <!-- Dots laterais -->
+
+  <nav class="scroll-dots" aria-label="Progresso da página">
+
     <button data-target="#sec-hero" aria-label="Hero"></button>
+
     <button data-target="#sec-destaques" aria-label="Destaques"></button>
+
     <button data-target="#sec-conteudo" aria-label="O que tem dentro"></button>
+
     <button data-target="#sec-cards-funcionarios" aria-label="Grid 1"></button>
+
     <button data-target="#sec-sistema" aria-label="Sistema de Conteúdo"></button>
+
     <button data-target="#sec-aulas" aria-label="Aulas"></button>
+
     <button data-target="#sec-prints" aria-label="Prints"></button>
+
     <button data-target="#sec-who-group" aria-label="Para quem é / Não é"></button>
+
     <button data-target="#sec-faq-footer" aria-label="FAQ + Rodapé"></button>
+
   </nav>
 
-    <script>
+
+
+  <!-- Scripts (inalterados na lógica) -->
+
+  <script>
+
     (function(){
+
       const bar = document.getElementById('progressBar');
+
       let ticking = false;
+
       const onScroll = () => {
+
         if (ticking) return;
+
         ticking = true;
+
         requestAnimationFrame(() => {
+
           const st = document.documentElement.scrollTop || document.body.scrollTop;
+
           const h  = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
           bar.style.width = (h ? (st/h)*100 : 0) + '%';
+
           ticking = false;
+
         });
+
       };
+
       window.addEventListener('scroll', onScroll, { passive:true });
+
       onScroll();
+
     })();
 
+
+
     (function(){
+
       const dots = Array.from(document.querySelectorAll('.scroll-dots button'));
+
       const targets = dots.map(btn => document.querySelector(btn.dataset.target)).filter(Boolean);
+
       dots.forEach((btn) => {
+
         btn.addEventListener('click', () => {
+
           const el = document.querySelector(btn.dataset.target);
+
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
         });
+
       });
+
       if ('IntersectionObserver' in window){
+
         const io = new IntersectionObserver((entries) => {
+
           entries.forEach(entry => {
+
             if (entry.isIntersecting){
+
               const idx = targets.indexOf(entry.target);
+
               if (idx > -1){
+
                 dots.forEach(d => d.setAttribute('aria-current', 'false'));
+
                 dots[idx].setAttribute('aria-current', 'true');
+
               }
+
             }
+
           });
+
         }, { root: null, rootMargin: '0px 0px -55% 0px', threshold: 0 });
+
         targets.forEach(t => io.observe(t));
+
       }
+
     })();
 
+
+
     (function(){
+
       const els = document.querySelectorAll('.reveal');
+
       if (!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('in')); return; }
+
       const io = new IntersectionObserver((entries)=>{
+
         entries.forEach(({isIntersecting, target})=>{
+
           if(isIntersecting){ target.classList.add('in'); io.unobserve(target); }
+
         });
+
       }, {threshold: .1});
+
       els.forEach(e=>io.observe(e));
+
     })();
 
+
+
     (function(){
+
       const rows = [
+
         document.getElementById('row-funcionarios-1'),
+
         document.getElementById('row-aulas'),
+
         document.getElementById('row-prints')
+
       ].filter(Boolean);
+
       const mq = window.matchMedia('(max-width: 639px)');
+
       rows.forEach((el)=>{
+
         let timer = null;
+
         const step = () => {
+
           const max = el.scrollWidth - el.clientWidth;
+
           const next = el.scrollLeft + el.clientWidth * 0.5;
+
           if (next >= max - 2) el.scrollTo({ left: 0, behavior: 'auto' });
+
           else el.scrollTo({ left: next, behavior: 'smooth' });
+
         };
+
         const start = () => { if (timer || !mq.matches) return; timer = setInterval(step, 2500); };
+
         const stop  = () => { if (!timer) return; clearInterval(timer); timer = null; };
+
         el.addEventListener('pointerenter', stop);
+
         el.addEventListener('pointerdown', stop);
+
         el.addEventListener('touchstart', stop, {passive:true});
+
         el.addEventListener('touchend', () => mq.matches && start(), {passive:true});
+
         const handle = () => mq.matches ? start() : stop();
+
         mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
+
         handle();
+
       });
+
     })();
+
   </script>
+
 </body>
+
 </html>
