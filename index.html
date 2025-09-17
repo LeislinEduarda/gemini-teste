@@ -670,6 +670,21 @@
     margin: 10px 0 !important;   /* espaço em cima/baixo quando empilha */
   }
 }
+    /* ===== Espaço garantido entre os dois cards (Para quem é / Não é) ===== */
+#sec-who-group .who-wrap{
+  display: grid !important;
+  grid-template-columns: 1fr 42px 1fr !important; /* card | espaçador | card */
+  column-gap: 0 !important;
+  row-gap: 16px !important;
+  align-items: start;
+}
+#sec-who-group .who-col{ margin: 0 !important; } /* remove margens que possam colar os cards */
+#sec-who-group .who-spacer{ width: 42px; }
+
+@media (max-width: 860px){
+  #sec-who-group .who-wrap{ grid-template-columns: 1fr !important; }
+  #sec-who-group .who-spacer{ display: none; } /* mobile empilha e esconde o espaçador */
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -870,41 +885,40 @@
 </section>
 
     <!-- 8 — Para quem é / Não é -->
-    <section class="section theme-8" id="sec-who-group">
-      <div class="container who-wrap">
-        <div class="who-col reveal">
-          <div class="who-title">
-            <div class="who-badge" aria-hidden="true">✓</div>
-            <h2>PARA QUEM É</h2>
-          </div>
-          <ul class="who-list">
-            <li class="who-item">✅ Você já posta alguma coisa ou tem vontade de começar</li>
-            <li class="who-item">✅ Você quer que mais gente se interesse pelo que você posta</li>
-            <li class="who-item">✅ Você tá cansado de postar igual a todo mundo</li>
-            <li class="who-item">✅ Você gostaria que postar fosse mais leve</li>
-            <li class="who-item">✅ Você vê a IA como parte da solução</li>
-
-          </ul>
-           <div
-          </div>
-        </div>
-
-          
-        <div class="who-col reveal">
-          <div class="who-title">
-            <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
-            <h3>E NÃO É PARA QUEM…</h3>
-          </div>
-          <ul class="whonot-list">
-            <li class="whonot-item">❌ Você tá procurando solução mágica</li>
-            <li class="whonot-item">❌ Você acha que o problema é o algoritmo</li>
-            <li class="whonot-item">❌ Você não gosta de testar coisas novas</li>
-            <li class="whonot-item">❌ Você prefere aula longa</li>
-            <li class="whonot-item">❌ Você tem medo de novidade</li>
-          </ul>
-        </div>
+<section class="section theme-8" id="sec-who-group">
+  <div class="container who-wrap">
+    <div class="who-col reveal">
+      <div class="who-title">
+        <div class="who-badge" aria-hidden="true">✓</div>
+        <h2>PARA QUEM É</h2>
       </div>
-    </section>
+      <ul class="who-list">
+        <li class="who-item">✅ Você já posta alguma coisa ou tem vontade de começar</li>
+        <li class="who-item">✅ Você quer que mais gente se interesse pelo que você posta</li>
+        <li class="who-item">✅ Você tá cansado de postar igual a todo mundo</li>
+        <li class="who-item">✅ Você gostaria que postar fosse mais leve</li>
+        <li class="who-item">✅ Você vê a IA como parte da solução</li>
+      </ul>
+    </div>
+
+    <!-- espaçador entre os cards -->
+    <div class="who-spacer" aria-hidden="true"></div>
+
+    <div class="who-col reveal">
+      <div class="who-title">
+        <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
+        <h3>E NÃO É PARA QUEM…</h3>
+      </div>
+      <ul class="whonot-list">
+        <li class="whonot-item">❌ Você tá procurando solução mágica</li>
+        <li class="whonot-item">❌ Você acha que o problema é o algoritmo</li>
+        <li class="whonot-item">❌ Você não gosta de testar coisas novas</li>
+        <li class="whonot-item">❌ Você prefere aula longa</li>
+        <li class="whonot-item">❌ Você tem medo de novidade</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
     <!-- 9 — FAQ + rodapé -->
     <section class="section theme-9" id="sec-faq-footer">
