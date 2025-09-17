@@ -86,11 +86,12 @@
     .hero-title{ margin-top:0; }
 
     /* >>> AJUSTE SOLICITADO: título mais compacto e linha animada */
-    .hero-title{
-      line-height: 1.06 !important;      /* ocupa menos altura */
-      letter-spacing: -0.01em;
-      margin-bottom: 10px !important;     /* aproxima do preço */
-      text-wrap: balance;
+   .hero-title {
+  font-size: 2rem;       /* diminui um pouco a letra (pode testar 1.9rem, 1.8rem, etc.) */
+  line-height: 1.2;      /* deixa mais compacto, menos espaçado */
+  font-weight: 800;
+  margin-bottom: 0.8rem; /* aproxima do preço */
+}
     }
     @media (max-width:768px){
       .hero-title{ line-height: 1.07 !important; margin-bottom: 8px !important; }
