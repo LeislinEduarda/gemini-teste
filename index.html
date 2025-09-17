@@ -84,39 +84,42 @@
     .hero-grid{ display:grid; gap:14px; grid-template-columns:1fr; align-items:center; }
     @media (min-width:1024px){ .hero-grid{ grid-template-columns: 1.05fr 1fr; } }
     .hero-title{ margin-top:0; }
+
+    /* >>> AJUSTE SOLICITADO: título mais compacto e linha animada */
+    .hero-title{
+      line-height: 1.06 !important;      /* ocupa menos altura */
+      letter-spacing: -0.01em;
+      margin-bottom: 10px !important;     /* aproxima do preço */
+      text-wrap: balance;
+    }
+    @media (max-width:768px){
+      .hero-title{ line-height: 1.07 !important; margin-bottom: 8px !important; }
+    }
+    .hero-price{
+      font-size: calc(var(--step-0) * 1.05);
+      color:#5c4033;                      /* marrom, já usado antes */
+      text-align:center;
+      margin-inline:auto;
+      margin-bottom: 6px;                 /* perto da linha */
+    }
+    .hero-underline{
+      height: 3px; width: 120px;
+      margin: 0 auto 12px auto;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #7B2FFF, #B266FF, #7B2FFF);
+      background-size: 200% 100%;
+      animation: heroMove 3s linear infinite;
+    }
+    @keyframes heroMove{
+      0%{ background-position: 0% 50%; }
+      100%{ background-position: 200% 50%; }
+    }
+    /* --------------------------------------- */
+
     .hero-subtitle{ font-size: calc(var(--step-0) * 1.1); color:var(--ink-strong); max-width:66ch; text-wrap:balance; margin-top:4px; line-height:1.45; }
     .hero-media{ border-radius:18px; overflow:hidden; margin-top:6px; }
     .hero-img{ display:block; width:100%; height:auto; border-radius:18px; }
-    /* >>> Removido o espaço extra no mobile (override) */
     @media (max-width:768px){ #sec-hero{ padding-bottom:34px !important; } }
-
-    /* ==== AJUSTES DO HERO (pedido) ==== */
-    .hero-grid .stack{ align-items:center; text-align:center; }
-    .hero-title{ 
-      font-size: calc(var(--step-3) * 1.08) !important;  /* +8% */
-      color: var(--brand-primary) !important;            /* roxo único */
-      text-transform:none;
-    }
-    .hero-price{
-      display:inline-block;
-      margin-top: -6px;            /* sobe o texto ~25% do bloco de respiro */
-      font-size: calc(var(--step-0) * 1.0);
-      font-weight: 800;
-      color: var(--c2);            /* marrom */
-      padding-bottom: 4px;
-      border-bottom: 2px solid var(--brand-primary); /* linha ~35% mais fina */
-      animation: heroPulse 2.4s ease-in-out infinite;
-    }
-    @keyframes heroPulse{
-      0%{ transform: scaleX(1); opacity:1;}
-      50%{ transform: scaleX(1.04); opacity:.9;}
-      100%{ transform: scaleX(1); opacity:1;}
-    }
-    /* sobe a imagem */
-    .hero-media{ margin-top: -10vh !important; }
-    @media (max-width:768px){
-      .hero-media{ margin-top: -12vh !important; }
-    }
 
     .footer-min{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
                  font-size:var(--step--1); padding-top:12px; margin-top:22px;
@@ -249,115 +252,31 @@
     .funcionarios h2, .funcionarios p{ text-align:left; margin-left:0; margin-right:0; padding-left:0; padding-right:0; max-width:100%; }
 
     /* ===== AJUSTES QUE VOCÊ PEDIU PARA "AULAS" ===== */
-    /* Mais espaço NO INÍCIO da seção (antes do título) e MENOS espaço no fim */
     #sec-aulas.section{ padding-top: 64px !important; padding-bottom: 28px !important; }
-    /* Subtítulo colado nas imagens continua enxuto */
     #sec-aulas .grid-title{ margin-bottom: 15px; }
     #sec-aulas .grid-note{ margin-bottom: 10px; }
 
-    /* Título maior em “COMO FUNCIONA NA PRÁTICA” (mantido) */
     #sec-sistema .grid-title{
       font-size: clamp(30px, 2.2vw + 20px, 46px);
       line-height:1.1; font-weight:800; margin-bottom:16px; text-align:left;
     }
 
-    /* Menos espaço entre subtítulo e cards dos funcionários */
     #sec-cards-funcionarios .funcionarios{ margin:0 0 8px 0; padding-bottom:4px; }
     #sec-cards-funcionarios #row-funcionarios-1{ margin-top:0; padding-top:6px; }
-    /* ===== Seções: espaçamento controlado por variáveis ===== */
-.section {
-  --pt: 68px;   /* padding-top padrão */
-  --pb: 68px;   /* padding-bottom padrão */
-  padding-top: var(--pt);
-  padding-bottom: var(--pb);
-}
-/* === SEÇÃO AULAS AJUSTADA === */
-#sec-aulas {
-  --pt: 52px;   /* espaço no topo da seção */
-  --pb: 14px;   /* espaço no fim da seção */
-}
 
-#sec-aulas .container {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
+.section { --pt: 68px; --pb: 68px; padding-top: var(--pt); padding-bottom: var(--pb); }
+#sec-aulas { --pt: 52px; --pb: 14px; }
+#sec-aulas .container { padding-top: 0 !important; padding-bottom: 0 !important; }
+#sec-aulas .grid-title { margin-bottom: 10px; }
+#sec-aulas .grid-note { margin-top: 6px; margin-bottom: 12px; }
+#sec-aulas .scroll-row { padding: 6px 8px 10px !important; }
 
-#sec-aulas .grid-title {
-  margin-bottom: 10px; /* aproxima título do subtítulo */
-}
+#row-aulas .plain { width: 340px; aspect-ratio: 16/9; overflow: hidden; border: 2px dashed #FFD700; border-radius: 18px; }
+#row-aulas .plain img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 480px) { #row-aulas .plain { width: calc(100vw - 48px); } }
 
-#sec-aulas .grid-note {
-  margin-top: 6px;
-  margin-bottom: 12px; /* aproxima do carrossel */
-}
-
-#sec-aulas .scroll-row {
-  padding: 6px 8px 10px !important; /* menos espaço dentro */
-}
-
-/* === IMAGENS MAIORES === */
-#row-aulas .plain {
-  width: 340px;         /* aumenta largura padrão */
-  aspect-ratio: 16/9;   /* altura fixa e proporcional */
-  overflow: hidden;
-  border: 2px dashed #FFD700; /* contorno pontilhado amarelo (ajuste cor se quiser) */
-  border-radius: 18px;
-}
-
-#row-aulas .plain img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* preenche bem */
-  display: block;
-}
-
-@media (max-width: 480px) {
-  #row-aulas .plain {
-    width: calc(100vw - 48px); /* aproveita largura no celular */
-  }
-}
-/* === SEÇÃO DEPOIMENTOS === */
-#row-depoimentos .plain {
-  width: 280px;                /* largura de cada depoimento */
-  aspect-ratio: 3/4;           /* formato de cartaz (ajusta se quiser mais largo ou mais quadrado) */
-  border: 2px dashed #FF6600;  /* pontilhado laranja */
-  border-radius: 16px;         /* cantos arredondados */
-  overflow: hidden;
-  background: #fff;
-  flex-shrink: 0;              /* impede que fiquem achatados no carrossel */
-}
-
-#row-depoimentos .plain img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;           /* a imagem cobre toda a área */
-  display: block;
-}
-    .hero-title {
-  font-size: 2.2rem;       /* mantém grande, mas menos exagerado */
-  line-height: 1.15;       /* menos espaçado verticalmente */
-  margin-bottom: 0.8rem;   /* aproxima o título do preço */
-}
-
-.hero-price {
-  font-size: 1.1rem;
-  color: #5c4033;          /* marrom */
-  margin-bottom: 0.3rem;
-}
-
-.hero-line {
-  height: 3px;
-  width: 100px;
-  margin: 0 auto 1.2rem auto;
-  background: linear-gradient(90deg, #7B2FFF, #B266FF, #7B2FFF);
-  border-radius: 2px;
-  animation: moveLine 3s linear infinite;
-}
-
-@keyframes moveLine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
+#row-depoimentos .plain { width: 280px; aspect-ratio: 3/4; border: 2px dashed #FF6600; border-radius: 16px; overflow: hidden; background: #fff; flex-shrink: 0; }
+#row-depoimentos .plain img { width: 100%; height: 100%; object-fit: cover; display: block; }
   </style>
 </head>
 <body>
@@ -367,23 +286,29 @@
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- ================= HERO ================= -->
-  <section class="hero" style="padding: 40px 20px; text-align: center; background: #f0ffe8;">
-  div class="hero">
-  <h1 class="hero-title">
-    aprenda a criar o seu post 100% com ia<br>
-    sem cara de ia com a<br>
-    minha equipe não humana
-  </h1>
-  <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
-  <div class="hero-line"></div>
-</div>
+  <header class="section theme-1" id="sec-hero">
+    <div class="container hero-grid">
+      <div class="stack" aria-label="Texto do hero" style="text-align:center">
+        <h1 class="hero-title">O SEU POST 100% COM IA SEM CARA DE IA</h1>
 
-  <!-- Imagem com espaçamento melhorado -->
-  <div style="margin-top: -10px; margin-bottom: 20px;">
-    <img src="assets/moockup.webp" alt="hero" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
-  </div>
-    
-</section>
+        <!-- Se o seu HTML já tem o preço + linha, eles continuarão funcionando.
+             Estes elementos abaixo existem aqui só para garantir compatibilidade -->
+        <p class="hero-price">apenas R$38,80/mês (plano anual)</p>
+        <div class="hero-underline" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-media">
+        <img
+          src="/gemini-teste/assets/moockup.webp"
+          width="800" height="900"
+          alt="Mockup mostrando reels, carrosséis e stories feitos com IA"
+          decoding="async" fetchpriority="high"
+          class="hero-img"
+        >
+      </div>
+    </div>
+  </header>
+
   <main id="conteudo" tabindex="-1">
     <!-- 2 -->
     <section class="section theme-2" id="sec-destaques">
@@ -484,39 +409,39 @@
       </div>
     </section>
 
-    <!-- 7 — Prints/Depoimentos -->
+    <!-- 7 — Prints -->
     <section class="section theme-7" id="sec-depoimentos">
-      <div class="container">
-        <h2 class="grid-title">O QUE ESTÃO FALANDO DA COMUNIDADE:</h2>
+  <div class="container">
+    <h2 class="grid-title">O QUE ESTÃO FALANDO DA COMUNIDADE:</h2>
 
-        <div class="scroll-row" id="row-depoimentos">
-          <div class="plain reveal">
-            <img src="assets/depoimento1.webp" alt="Depoimento 1" loading="lazy">
-          </div>
-          <div class="plain reveal">
-            <img src="assets/depoimento2.webp" alt="Depoimento 2" loading="lazy">
-          </div>
-          <div class="plain reveal">
-            <img src="assets/depoimento3.webp" alt="Depoimento 3" loading="lazy">
-          </div>
-          <div class="plain reveal">
-            <img src="assets/depoimento4.webp" alt="Depoimento 4" loading="lazy">
-          </div>
-          <div class="plain reveal">
-            <img src="assets/depoimento5.webp" alt="Depoimento 5" loading="lazy">
-          </div>
-          <div class="plain reveal">
-            <img src="assets/depoimento6.webp" alt="Depoimento 6" loading="lazy">
-          </div>
-          <div class="plain reveal">
-            <img src="assets/depoimento7.webp" alt="Depoimento 7" loading="lazy">
-          </div>
-          <div class="plain reveal">
-            <img src="assets/depoimento8.webp" alt="Depoimento 8" loading="lazy">
-          </div>
-        </div>
+    <div class="scroll-row" id="row-depoimentos">
+      <div class="plain reveal">
+        <img src="assets/depoimento1.webp" alt="Depoimento 1" loading="lazy">
       </div>
-    </section>
+      <div class="plain reveal">
+        <img src="assets/depoimento2.webp" alt="Depoimento 2" loading="lazy">
+      </div>
+      <div class="plain reveal">
+        <img src="assets/depoimento3.webp" alt="Depoimento 3" loading="lazy">
+      </div>
+      <div class="plain reveal">
+        <img src="assets/depoimento4.webp" alt="Depoimento 4" loading="lazy">
+      </div>
+      <div class="plain reveal">
+        <img src="assets/depoimento5.webp" alt="Depoimento 5" loading="lazy">
+      </div>
+      <div class="plain reveal">
+        <img src="assets/depoimento6.webp" alt="Depoimento 6" loading="lazy">
+      </div>
+      <div class="plain reveal">
+        <img src="assets/depoimento7.webp" alt="Depoimento 7" loading="lazy">
+      </div>
+      <div class="plain reveal">
+        <img src="assets/depoimento8.webp" alt="Depoimento 8" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- 8 — Para quem é / Não é -->
     <section class="section theme-8" id="sec-who-group">
@@ -532,9 +457,13 @@
             <li class="who-item">✅ Você tá cansado de postar igual a todo mundo</li>
             <li class="who-item">✅ Você gostaria que postar fosse mais leve</li>
             <li class="who-item">✅ Você vê a IA como parte da solução</li>
+
           </ul>
+           <div
+          </div>
         </div>
 
+          
         <div class="who-col reveal">
           <div class="who-title">
             <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
@@ -578,7 +507,8 @@
 
         <div class="footer-min">
           <div class="footer-copy">© 2025 @leislineduarda - Comunidade Conteúdo Infinito com IA</div>
-          <div class="footer-links"></div>
+          <div class="footer-links">
+          </div>
         </div>
       </div>
     </section>
