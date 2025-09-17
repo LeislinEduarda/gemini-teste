@@ -16,7 +16,7 @@
 
     /* ===== Tokens ===== */
     :root{
-      --brand-primary:#6769FF;   --brand-accent:#FEF700;
+      --brand-primary: #6769FF;   --brand-accent:#FEF700;
       --ink-strong:#111111; --ink:#2A2A2A; --muted:#6B6B6B;
       --radius:14px; --radius-lg:18px;
       --shadow:0 6px 24px rgba(0,0,0,.06); --shadow-lg:0 14px 34px rgba(0,0,0,.12);
@@ -36,7 +36,15 @@
           color: var(--ink); line-height: 1.5; background:#FFF; }
 
     .container{ max-width: var(--container); margin-inline:auto; padding:24px; }
+
+    /* ===== Espaçamento global das seções (mais “grudado”) ===== */
     .section{ position:relative; z-index:0; --theme-border: rgba(103,105,255,.45); }
+    .section {
+      --pt: 46px;   /* antes 68px */
+      --pb: 46px;   /* antes 68px */
+      padding-top: var(--pt);
+      padding-bottom: var(--pb);
+    }
 
     /* Temas */
     .theme-1{ background: linear-gradient(0deg, rgba(208,250,140,.25), rgba(208,250,140,.25)); --theme-border: var(--c1); }
@@ -63,15 +71,12 @@
            transition: transform .18s ease, box-shadow .18s ease; }
     .card:hover{ transform: translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,.14); }
 
-    /* Tipografia */
-    h1{ font-size: var(--step-3); font-weight:800; color:var(--brand-primary); letter-spacing:-.02em; line-height:1.1; text-align:center; text-transform:lowercase; }
+    /* Tipografia — centralizar todos os títulos */
+    h1{ font-size: var(--step-3); font-weight:800; color:var(--brand-primary); letter-spacing:-.02em; line-height:1.1; text-align:center; }
     h2{ font-size: var(--step-2); font-weight:800; color:var(--brand-primary); letter-spacing:-.01em; text-align:center; }
     h3{ font-size: var(--step-1); font-weight:700; color:var(--ink); text-align:center; }
-    .lead{ font-size: clamp(18px, 1.5vw + 12px, 22px); color: var(--ink-strong); text-align:center; }
+    .lead{ font-size: calc(var(--step-0) * 1.15); color: var(--ink-strong); }
     .muted{ color:var(--muted); font-size: var(--step--1); }
-
-    .brand-duo span.p1{ color: var(--brand-primary); }
-    .brand-duo span.p2{ color: var(--brand-accent); }
 
     .img-slot{ background: linear-gradient(135deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
                border:2px dashed var(--theme-border); border-radius:var(--radius); min-height:220px;
@@ -82,19 +87,32 @@
                              linear-gradient(135deg, rgba(103,105,255,.15), rgba(254,247,0,.15));
                  border:2px dashed var(--theme-border); display:grid; place-items:center; color:var(--muted); padding:16px; }
 
-    /* ===== Ritmo de espaçamento geral ===== */
-    .section{ --pt:44px; --pb:44px; padding-top:var(--pt); padding-bottom:var(--pb); }
-    @media (min-width:1024px){ .section{ --pt:50px; --pb:50px; } }
-
-    /* ===== HERO ===== */
-    #sec-hero{ --pt:56px; --pb:56px; }
+    /* ===== HERO (mais respiro + título 2 cores) ===== */
+    #sec-hero{ padding-top:64px; padding-bottom:48px; }
     .hero-grid{ display:grid; gap:18px; grid-template-columns:1fr; align-items:center; }
     @media (min-width:1024px){ .hero-grid{ grid-template-columns: 1.05fr 1fr; } }
-    .hero-title{ margin-top:0; }
     .hero-media{ border-radius:18px; overflow:hidden; margin-top:6px; }
     .hero-img{ display:block; width:100%; height:auto; border-radius:18px; }
-    .hero-price{ font-weight:900; background: linear-gradient(90deg, #111, #333); -webkit-background-clip:text; background-clip:text; color:transparent; text-align:center; }
-    .hero-price .accent{ color: var(--brand-accent); background:none; }
+
+    .hero-title{ margin-top:0; text-transform:lowercase; line-height:1.06; }
+    .hero-title .primary{ color: var(--brand-primary); }
+    .hero-title .accent{ color: var(--brand-accent); }
+    .hero-price{
+      margin: 10px auto 0;
+      text-align:center;
+      font-size: clamp(18px, 2.2vw + 14px, 28px);
+      font-weight: 900;
+      letter-spacing: .2px;
+      color: #111;
+      background: linear-gradient(90deg, #FFF6A0, #FEF700);
+      border: 2px solid #00000014;
+      border-radius: 14px;
+      padding: 10px 16px;
+      display: inline-block;
+    }
+
+    /* >>> Removido o espaço extra no mobile (override) */
+    @media (max-width:768px){ #sec-hero{ padding-bottom:40px !important; } }
 
     .footer-min{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
                  font-size:var(--step--1); padding-top:12px; margin-top:22px;
@@ -109,12 +127,14 @@
                       color:var(--ink-strong); padding:10px 14px; border-radius:8px; z-index:1000; outline:3px solid #000; }
 
     .grid-title{ margin-bottom:6px; }
+    /* Subtítulo mais legível (seções) */
     .grid-note{
       margin-top:8px; margin-bottom:14px; color:var(--ink);
-      font-size: clamp(16px, 1.6vw + 10px, 22px);   /* maior e legível */
-      border-left:6px solid var(--theme-border); padding-left:10px;
+      font-size: clamp(16px, 1.6vw + 10px, 20px);
+      border-left:6px solid var(--theme-border); padding:12px;
       background: color-mix(in srgb, var(--theme-border) 15%, #fff0);
-      border-radius:8px; text-align:center; border-left:none; padding-left:0;
+      border-radius:8px;
+      text-align:center;
     }
 
     .sticky-cta{ position:fixed; left:16px; right:16px;
@@ -146,7 +166,7 @@
     /* ===== Carrosséis ===== */
     .scroll-row{ display:flex; gap:16px; overflow-x:auto; -webkit-overflow-scrolling:touch;
                  scroll-snap-type:x mandatory; scroll-padding-inline:16px;
-                 padding:6px 8px 16px; margin-inline:-8px; overscroll-behavior-x:contain; }
+                 padding:6px 8px 20px; margin-inline:-8px; overscroll-behavior-x:contain; }
     .scroll-row::-webkit-scrollbar{ display:none; }
 
     .scroll-row .card{ flex:0 0 auto; scroll-snap-align:start; width:260px; background:#fff; border:1px solid rgba(0,0,0,.06);
@@ -155,21 +175,30 @@
     /* Funcionários */
     #row-funcionarios-1 .img-slot{ aspect-ratio:1 / 1; padding:0; }
     #row-funcionarios-1 .img-slot img{ width:100%; height:100%; object-fit:cover; border-radius:inherit; }
-    .scroll-row .card-title{ margin-top:12px; font-weight:700; font-size:var(--step-0); min-height:1.6em; text-align:center; }
+    .scroll-row .card-title{ margin-top:12px; font-weight:700; font-size:var(--step-0); min-height:1.6em; }
     .scroll-row .card-sub{ margin-top:6px; color:var(--muted); font-size:var(--step--1); min-height:2.6em; text-align:center; }
 
-    /* Aulas */
-    #row-aulas .plain{ flex:0 0 auto; scroll-snap-align:start; width:340px; aspect-ratio:16/9; overflow:hidden;
-                       border-radius:18px; background:transparent; box-shadow:none; border:none; }
-    #row-aulas .plain img{ width:100%; height:100%; object-fit:cover; display:block; }
-    @media (max-width:480px){ #row-aulas .plain{ width: calc(100vw - 48px); } }
+    /* ===== Aulas (sem borda pontilhada extra) ===== */
+    #sec-aulas { --pt: 40px; --pb: 12px; }
+    #sec-aulas .grid-title{ margin-bottom: 10px; }
+    #sec-aulas .grid-note{ margin-top: 6px; margin-bottom: 12px; }
+    #sec-aulas .scroll-row{ padding: 6px 8px 10px !important; }
+    #row-aulas .plain{ width: 340px; aspect-ratio: 16/9; overflow: hidden; border: none; border-radius: 18px; }
+    #row-aulas .plain img{ width:100%; height:100%; object-fit: cover; display:block; }
+    @media (max-width: 480px){ #row-aulas .plain{ width: calc(100vw - 48px); } }
 
-    /* Depoimentos */
-    #row-depoimentos .plain{ flex:0 0 auto; width:300px; aspect-ratio:3/4; border-radius:16px; overflow:hidden; background:#fff; border:1px solid rgba(0,0,0,.06); }
-    #row-depoimentos .plain img{ width:100%; height:100%; object-fit:contain; background:#fff; }
+    /* ===== Depoimentos (alinhados e sem corte) ===== */
+    #row-depoimentos .plain{
+      width: 280px; aspect-ratio: 4/5; border: 2px dashed #FF6600;
+      border-radius: 16px; overflow: hidden; background: #fff; flex-shrink: 0;
+      display: grid; place-items: center; padding: 6px;
+    }
+    #row-depoimentos .plain img{
+      width: 100%; height: 100%; object-fit: contain; display:block; background:#fff;
+    }
 
-    /* Para quem é */
-    .who-wrap{ display:grid; gap:28px; } /* + espaço entre blocos */
+    /* ===== Para quem é / não é (mais espaço entre blocos) ===== */
+    .who-wrap{ display:grid; gap:28px; } /* antes 20px */
     @media (min-width:860px){ .who-wrap{ grid-template-columns:1fr 1fr; } }
     .who-col{ position:relative; border-radius:18px; padding:18px;
               background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
@@ -179,10 +208,12 @@
                       background: radial-gradient(120% 80% at 10% 10%, color-mix(in srgb, var(--theme-border) 45%, #0000), transparent 60%),
                                   radial-gradient(110% 80% at 85% 15%, rgba(70,71,241,.12), transparent 60%); z-index:0; }
     .who-col > *{ position:relative; z-index:1; }
+
     .who-title{ display:flex; align-items:center; gap:12px; margin-bottom:12px; justify-content:center; }
     .who-badge{ width:34px; height:34px; border-radius:10px; display:grid; place-items:center; font-weight:900; color:#fff;
                 background: linear-gradient(135deg, #33C66E, #89E3B5); box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(51,198,110,.25); }
     .whonot-badge{ background: linear-gradient(135deg, #E24B6A, #F5A5B5); box-shadow: inset 0 0 0 2px #ffffff33, 0 6px 18px rgba(226,75,106,.25); }
+
     .who-list, .whonot-list{ list-style:none; padding-left:0; display:grid; gap:12px; }
     .who-item, .whonot-item{ position:relative; border-radius:12px; padding:12px 14px; background:#fff; border:1px solid rgba(0,0,0,.06);
                               transition: transform .18s ease, box-shadow .18s ease, background .18s ease; text-align:left; }
@@ -194,6 +225,7 @@
     .section-bridge{ padding:26px 0; background: linear-gradient(90deg, rgba(103,105,255,.10), rgba(254,247,0,.10)); }
     .bridge-band{ height:8px; border-radius:999px; background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent)); box-shadow:0 8px 22px rgba(0,0,0,.08); }
 
+    /* ===== FAQ (já alinhado ao visual dos cards) ===== */
     .faq-grid{ display:grid; gap:16px; grid-template-columns:1fr; }
     @media (min-width:860px){ .faq-grid{ grid-template-columns:1fr 1fr; } }
     details{ position:relative; border-radius:18px; background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.95));
@@ -203,32 +235,28 @@
     details > *{ position:relative; z-index:1; }
     summary{ cursor:pointer; font-weight:700; color:var(--ink); min-height:60px; display:flex; align-items:center; gap:12px; padding:16px 18px; list-style:none; }
     summary::-webkit-details-marker{ display:none; }
-    .summary-h3{ font-size: var(--step-1); font-weight:700; color:var(--ink); }
+    .summary-h3{ font-size: var(--step-1); font-weight:700; color:var(--ink); text-align:left; width:100%; }
     .chev{ margin-left:auto; transition: transform .25s ease; color:var(--brand-primary); font-weight:900; }
     details[open] .chev{ transform: rotate(90deg) scale(1.05); }
     details[open]{ box-shadow:0 18px 44px rgba(0,0,0,.12); }
     details p{ padding:0 18px 16px 18px; color:var(--ink); }
 
-    /* Bullets quadrados (lista da comunidade) */
-    .lista-destaque{ list-style:none; padding-left:0; margin-top:18px; display:grid; gap:16px; }
-    .lista-destaque li{ position:relative; padding-left:18px; line-height:1.55; font-size:var(--step-0); }
-    .lista-destaque li::before{ content:""; width:10px; height:10px; border-radius:2px; background:var(--brand-primary);
-                                 position:absolute; left:0; top:.6em; box-shadow:0 0 0 3px rgba(103,105,255,.15); }
+    .flow-img{ display:block; width:100%; height:auto; border-radius:18px; box-shadow:var(--shadow-lg); border:2px solid rgba(124,73,42,.15); }
 
-    /* Nova seção: Gêmeas & Design */
-    #row-gemeas .plain{ flex:0 0 auto; scroll-snap-align:start; width:300px; aspect-ratio:9/16; overflow:hidden;
-                        border-radius:18px; background:#fff; border:1px dashed rgba(0,0,0,.1); }
-    #row-gemeas .plain img{ width:100%; height:100%; object-fit:cover; display:block; }
+    /* Bullets quadrados na lista da comunidade */
+    .lista-destaque{ list-style:none; padding-left:0; margin-top:18px; }
+    .lista-destaque li{
+      margin-bottom:18px; line-height:1.55; font-size:var(--step-0); position:relative; padding-left:28px;
+    }
+    .lista-destaque li::before{
+      content:""; width:14px; height:14px; border-radius:4px; background:linear-gradient(135deg,#FFD84D,#FEF700);
+      position:absolute; left:0; top:.45em; box-shadow:0 2px 0 rgba(0,0,0,.06), inset 0 0 0 2px #00000010;
+    }
 
-    /* Footer */
-    footer{ background:#0E0F2B; color:#EDEDED; }
-    .footer-top{ display:grid; gap:16px; grid-template-columns:1fr; align-items:center; }
-    @media (min-width:720px){ .footer-top{ grid-template-columns:auto 1fr auto; } }
-    .brand-logo{ display:flex; align-items:center; gap:10px; font-weight:900; }
-    .brand-badge{ width:36px; height:36px; border-radius:8px; background:var(--brand-primary); display:grid; place-items:center; color:#fff; }
-    .social{ display:flex; gap:12px; flex-wrap:wrap; }
-    .icon{ width:36px; height:36px; border-radius:999px; background: var(--brand-primary); color:#FFF; font-weight:900; display:grid; place-items:center; }
-    .footer-legal{ margin-top:8px; font-size:var(--step--1); color:#CFCFCF; text-align:center; }
+    .img-slot--video{ padding:0; aspect-ratio:4 / 5; overflow:hidden; }
+    .img-slot--video .slot-video{ display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+    .video-gif{ width:100%; height:auto; max-width:600px; display:block; margin:0 auto; border-radius:12px; }
+    .seu-gif{ display:block; width:100%; height:auto; margin:0; padding:0; border:none; background:none; }
   </style>
 </head>
 <body>
@@ -240,14 +268,14 @@
   <!-- ================= HERO ================= -->
   <header class="section theme-1" id="sec-hero">
     <div class="container hero-grid">
-      <div class="stack" aria-label="Texto do hero" style="grid-column:1 / -1;">
-        <h1 class="hero-title brand-duo">
-          <span class="p1">aprenda a criar o seu post 100% com ia sem cara de ia</span> <br>
-          <span class="p2">com a minha equipe não humana</span>
+      <div class="stack" aria-label="Texto do hero">
+        <h1 class="hero-title">
+          <span class="primary">aprenda a criar o seu post 100% com ia</span><br/>
+          <span class="accent">sem cara de ia com a minha equipe não humana</span>
         </h1>
-        <p class="lead hero-price">Apenas por <span class="accent">R$ 38,8 / mês</span> <span style="opacity:.9">(plano anual)</span></p>
+        <div class="hero-price">Apenas por R$ 38,8 por mês (plano anual)</div>
       </div>
-      <div class="hero-media" style="grid-column:1 / -1;">
+      <div class="hero-media">
         <img
           src="/gemini-teste/assets/moockup.webp"
           width="800" height="900"
@@ -263,9 +291,9 @@
     <!-- 2 -->
     <section class="section theme-2" id="sec-destaques">
       <div class="container grid grid--3">
-        <div class="card stack reveal"><h3>⚡️ 10 MIL POSTS</h3><p class="muted" style="text-align:center;">entregues pela minha equipe de social media não humana</p></div>
-        <div class="card stack reveal"><h3>♾️ A PRIMEIRA</h3><p class="muted" style="text-align:center;">comunidade focada em criação de conteúdo com IA</p></div>
-        <div class="card stack reveal"><h3>🤬 PARA QUEM</h3><p class="muted" style="text-align:center;">cansou de calendários e templates de conteúdo </p></div>
+        <div class="card stack reveal"><h3>⚡️ 10 MIL POSTS</h3><p class="muted" style="text-align:center">entregues pela minha equipe de social media não humana</p></div>
+        <div class="card stack reveal"><h3>♾️ A PRIMEIRA</h3><p class="muted" style="text-align:center">comunidade focada em criação de conteúdo com IA</p></div>
+        <div class="card stack reveal"><h3>🤬 PARA QUEM</h3><p class="muted" style="text-align:center">cansou de calendários e templates de conteúdo </p></div>
       </div>
     </section>
 
@@ -273,14 +301,15 @@
     <section class="section theme-3" id="sec-conteudo">
       <div class="container grid grid--2">
         <div class="stack reveal">
-          <h2>eu separei um “visu” rápido da comunidade pra você 👀</h2>
-          <p class="lead" style="font-weight:600;">assim que você entrar, tudo isso já está liberado:</p>
+          <h2>Eu separei um “visu” rápido da comunidade pra você 👀</h2>
+          <p style="text-align:center">Aqui não é só “um curso e fim”. É uma comunidade viva, que todo mês recebe aulas novas e materiais que eu mesma uso na prática. Tudo passa por uma curadoria — só entra o que realmente deu certo comigo. 
+          Assim que você comprar a comunidade, já pode usar tudo isso:</p>
           <ul class="lista-destaque">
-            <li>🤖 <strong>Equipe de Social Media Não Humana</strong> — 10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.</li>
-            <li>🎥 <strong>Aulas práticas e express de conteúdo + IA</strong> — direto ao ponto, para aplicar no mesmo dia.</li>
-            <li>🧶 <strong>Material de apoio exclusivo</strong> — checklists e prompts prontos para facilitar sua vida.</li>
-            <li>🔑 <strong>Segredos e hacks testados</strong> — o que já funcionou na prática comigo.</li>
-            <li>💬 <strong>Chat com a comunidade (e comigo)</strong> — ajuda quando precisar.</li>
+            <li>🤖 <strong>Equipe de Social Media Não Humana</strong><br>10 funcionários não humanos para te ajudar a criar carrosséis, roteiros de vídeos, stories, bios, ganchos e até o seu branding.</li>
+            <li>🎥 <strong>Aulas práticas e express de conteúdo + IA</strong><br>Direto ao ponto, sem enrolação, para aplicar no mesmo dia.</li>
+            <li>🧶 <strong>Material de apoio exclusivo</strong><br>Checklists e prompts prontos para facilitar sua vida.</li>
+            <li>🔑 <strong>Segredos e hacks testados</strong><br>Ganchos, insights e estratégias que já funcionaram para mim na prática.</li>
+            <li>💬 <strong>Chat com todos os membros (inclusive comigo)</strong><br>Para pedir ajuda sempre que precisar.</li>
           </ul>
         </div>
 
@@ -295,21 +324,21 @@
     <section class="section theme-4" id="sec-cards-funcionarios">
       <div class="container">
         <section class="funcionarios">
-          <h2>os seus novos funcionários não humanos</h2>
-          <p class="muted" style="text-align:center;">conheça o que cada um dos 10 resolve por você 👇</p>
+          <h2>OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
+          <p style="text-align:center">Conheça o que cada um dos 10 resolvem por você 👇</p>
         </section>
 
         <div class="scroll-row" id="row-funcionarios-1">
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario1.webp" alt="Funcionário 1" loading="lazy"></div><h3 class="card-title">João dos Ganchos</h3><p class="card-sub">Cria frases iniciais que prendem</p></div>
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario2.webp" alt="Funcionário 2" loading="lazy"></div><h3 class="card-title">Maria das Ideias</h3><p class="card-sub">Gera ideias infinitas</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Carlos dos Carrosséis</h3><p class="card-sub">Textos que fazem deslizar</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Leonardo da Viralização</h3><p class="card-sub">Avalia e dá nota de viralização</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario3.webp" alt="Funcionário 3" loading="lazy"></div><h3 class="card-title">Carlos dos Carrosséis</h3><p class="card-sub">Cria textos que te fazem deslizar para o lado</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario4.webp" alt="Funcionário 4" loading="lazy"></div><h3 class="card-title">Leonardo da Viralização</h3><p class="card-sub">Avalia o seu conteúdo e dá uma nota de viralização</p></div>
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario5.webp" alt="Funcionário 5" loading="lazy"></div><h3 class="card-title">José dos Stories</h3><p class="card-sub">Sequências que prendem e vendem</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Laura das Legendas</h3><p class="card-sub">Legendas impossíveis de ignorar</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Larissa dos Roteiros</h3><p class="card-sub">Roteiros de vídeos que funcionam</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario6.webp" alt="Funcionário 6" loading="lazy"></div><h3 class="card-title">Laura das Legendas</h3><p class="card-sub">Cria legendas impossíveis de ignorar</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario7.webp" alt="Funcionário 7" loading="lazy"></div><h3 class="card-title">Larissa dos Roteiros</h3><p class="card-sub">Monta roteiros de vídeos que funcionam</p></div>
           <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario8.webp" alt="Funcionário 8" loading="lazy"></div><h3 class="card-title">Bruno do Branding</h3><p class="card-sub">Deixa sua marca memorável</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Bia do Público</h3><p class="card-sub">Descobre o que o público quer</p></div>
-          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Dudu da Bio</h3><p class="card-sub">Escreve bios que convertem</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario9.webp" alt="Funcionário 9" loading="lazy"></div><h3 class="card-title">Bia do Público</h3><p class="card-sub">Descobre o que seu público nunca te conta</p></div>
+          <div class="card reveal"><div class="img-slot"><img src="assets/cards/funcionario10.webp" alt="Funcionário 10" loading="lazy"></div><h3 class="card-title">Dudu da Bio</h3><p class="card-sub">Escreve bios que gera seguidores</p></div>
         </div>
       </div>
     </section>
@@ -317,7 +346,8 @@
     <!-- 5 — Sistema -->
     <section class="section theme-8" id="sec-sistema">
       <div class="container" style="max-width: 1280px;">
-        <h2 class="grid-title">como funciona na prática 👇</h2>
+        <h2 class="grid-title">COMO FUNCIONA NA PRÁTICA 👇</h2>
+
         <picture class="reveal">
           <source srcset="https://leislineduarda.github.io/gemini-teste/assets/30.webp?v=1" type="image/webp">
           <img
@@ -330,25 +360,12 @@
       </div>
     </section>
 
-    <!-- Nova seção — Gêmeas & Design -->
-    <section class="section theme-6" id="sec-gemeas">
-      <div class="container">
-        <h2 class="grid-title">gêmeas & design (visual que prende)</h2>
-        <p class="grid-note">crie fotos e vídeos com sua gêmea digital + designs originais em poucos minutos</p>
-        <div class="scroll-row" id="row-gemeas">
-          <div class="plain reveal"><img src="assets/gemeas/01.webp" alt="Gêmea Digital 01" loading="lazy"></div>
-          <div class="plain reveal"><img src="assets/gemeas/02.webp" alt="Gêmea Digital 02" loading="lazy"></div>
-          <div class="plain reveal"><img src="assets/gemeas/03.webp" alt="Gêmea Digital 03" loading="lazy"></div>
-          <div class="plain reveal"><img src="assets/gemeas/04.webp" alt="Gêmea Digital 04" loading="lazy"></div>
-        </div>
-      </div>
-    </section>
-
     <!-- 6 — Aulas -->
     <section class="section theme-6" id="sec-aulas">
       <div class="container">
-        <h2 class="grid-title">aulas pra qualquer situação</h2>
-        <p class="grid-note">rápidas, práticas e diretas: entrou, aprendeu, aplicou 🌟</p>
+        <h2 class="grid-title">AULAS PRA QUALQUER SITUAÇÃO</h2>
+        <p class="grid-note">Rápidas, práticas e diretas: entrou, aprendeu, aplicou 🌟🤝🏻</p>
+
         <div class="scroll-row" id="row-aulas">
           <div class="plain reveal"><img src="11.webp" alt="Aula 11" loading="lazy" decoding="async"></div>
           <div class="plain reveal"><img src="12.webp" alt="Aula 12" loading="lazy" decoding="async"></div>
@@ -369,10 +386,24 @@
       </div>
     </section>
 
+    <!-- 6.1 — Gêmeas & Design (novo carrossel com slots) -->
+    <section class="section theme-4" id="sec-gemeas-design">
+      <div class="container">
+        <h2 class="grid-title">GÊMEAS DIGITAIS & DESIGN</h2>
+        <p class="grid-note">Crie imagens e visuais que parecem “reais” usando IA, de um jeito rápido.</p>
+        <div class="scroll-row" id="row-gemeas-design">
+          <div class="card reveal"><div class="img-slot">Slot de imagem</div><h3 class="card-title">Gêmea: Fotos</h3><p class="card-sub">Sequências realistas</p></div>
+          <div class="card reveal"><div class="img-slot">Slot de imagem</div><h3 class="card-title">Gêmea: Vídeos</h3><p class="card-sub">Movimento natural</p></div>
+          <div class="card reveal"><div class="img-slot">Slot de imagem</div><h3 class="card-title">Design com IA</h3><p class="card-sub">Capas e thumbs</p></div>
+          <div class="card reveal"><div class="img-slot">Slot de imagem</div><h3 class="card-title">Visuais de Prova</h3><p class="card-sub">Antes & depois</p></div>
+        </div>
+      </div>
+    </section>
+
     <!-- 7 — Depoimentos -->
     <section class="section theme-7" id="sec-depoimentos">
       <div class="container">
-        <h2 class="grid-title">o que estão falando da comunidade</h2>
+        <h2 class="grid-title">O QUE ESTÃO FALANDO DA COMUNIDADE:</h2>
         <div class="scroll-row" id="row-depoimentos">
           <div class="plain reveal"><img src="assets/depoimento1.webp" alt="Depoimento 1" loading="lazy"></div>
           <div class="plain reveal"><img src="assets/depoimento2.webp" alt="Depoimento 2" loading="lazy"></div>
@@ -392,43 +423,49 @@
         <div class="who-col reveal">
           <div class="who-title">
             <div class="who-badge" aria-hidden="true">✓</div>
-            <h2>para quem é</h2>
+            <h2>PARA QUEM É</h2>
           </div>
           <ul class="who-list">
-            <li class="who-item">✅ Você já posta alguma coisa ou quer começar</li>
-            <li class="who-item">✅ Quer que mais gente se interesse pelo que você posta</li>
-            <li class="who-item">✅ Tá cansado de postar igual a todo mundo</li>
-            <li class="who-item">✅ Quer postar de forma mais leve</li>
-            <li class="who-item">✅ Enxerga a IA como parte da solução</li>
+            <li class="who-item">✅ Você já posta alguma coisa ou tem vontade de começar</li>
+            <li class="who-item">✅ Você quer que mais gente se interesse pelo que você posta</li>
+            <li class="who-item">✅ Você tá cansado de postar igual a todo mundo</li>
+            <li class="who-item">✅ Você gostaria que postar fosse mais leve</li>
+            <li class="who-item">✅ Você vê a IA como parte da solução</li>
           </ul>
         </div>
 
         <div class="who-col reveal">
           <div class="who-title">
             <div class="who-badge whonot-badge" aria-hidden="true">⊘</div>
-            <h3>e não é para quem…</h3>
+            <h3>E NÃO É PARA QUEM…</h3>
           </div>
           <ul class="whonot-list">
-            <li class="whonot-item">❌ Procura solução mágica</li>
-            <li class="whonot-item">❌ Acha que o problema é o algoritmo</li>
-            <li class="whonot-item">❌ Não gosta de testar coisas novas</li>
-            <li class="whonot-item">❌ Prefere aula longa</li>
-            <li class="whonot-item">❌ Tem medo de novidade</li>
+            <li class="whonot-item">❌ Você tá procurando solução mágica</li>
+            <li class="whonot-item">❌ Você acha que o problema é o algoritmo</li>
+            <li class="whonot-item">❌ Você não gosta de testar coisas novas</li>
+            <li class="whonot-item">❌ Você prefere aula longa</li>
+            <li class="whonot-item">❌ Você tem medo de novidade</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- 8.1 — Oferta -->
+    <!-- 8.1 — OFERTA (depois do Para quem é) -->
     <section class="section theme-9" id="sec-oferta">
       <div class="container">
-        <h2 class="grid-title">pronto para entrar?</h2>
-        <p class="grid-note">acesso imediato • suporte na comunidade • aulas novas todo mês</p>
-        <div class="card" style="max-width:860px; margin:0 auto; text-align:center;">
-          <h3 style="font-size: clamp(22px, 2vw + 12px, 30px);">Apenas <span style="color:var(--brand-accent); font-weight:900;">R$ 38,8/mês</span> <span class="muted">(plano anual)</span></h3>
-          <p class="muted" style="margin-top:8px;">7 dias de garantia • Cancela quando quiser</p>
-          <div class="stack" style="margin-top:16px;">
-            <a href="/checkout" class="sticky-cta cta" style="position:static; display:inline-flex; width:auto;">Quero fazer parte</a>
+        <h2 class="grid-title">PRONTO PRA ENTRAR?</h2>
+        <p class="grid-note">Acesso imediato à comunidade + equipe não humana + aulas novas todo mês.</p>
+        <div class="grid grid--3">
+          <div class="card"><h3>O que você leva</h3><ul class="lista-destaque">
+            <li>Equipe de Social Media Não Humana</li>
+            <li>Aulas express (conteúdo + IA)</li>
+            <li>Materiais & prompts prontos</li>
+            <li>Segredos testados por mim</li>
+          </ul></div>
+          <div class="card"><h3>Investimento</h3><p class="lead" style="text-align:center; margin-top:8px;">R$ 38,8 / mês</p><p class="muted" style="text-align:center">(plano anual)</p></div>
+          <div class="card" style="align-items:center; justify-content:center;">
+            <a href="/checkout" class="sticky-cta cta" aria-label="Ir para o checkout" style="position:static; box-shadow:none; width:auto;">Quero fazer parte</a>
+            <p class="muted" style="margin-top:10px; text-align:center;">Garantia simples: entrou, não curtiu? Me chama.</p>
           </div>
         </div>
       </div>
@@ -438,53 +475,43 @@
     <section class="section theme-9" id="sec-faq-footer">
       <div class="container">
         <div class="bridge-band" style="margin-bottom:18px;"></div>
-        <h2 class="grid-title">perguntas que sempre me fazem</h2>
+
+        <h2 class="grid-title">PERGUNTAS QUE SEMPRE ME FAZEM:</h2>
         <div class="faq-grid">
           <details class="reveal">
             <summary class="summary-h3">“Posso usar com ChatGPT gratuito?”<span class="chev">›</span></summary>
-            <p>Sim. Os funcionários não humanos e os prompts funcionam no plano gratuito.</p>
+            <p>Você pode usar os funcionários não humanos com o ChatGPT gratuito sem problema. As aulas e os prompts que você recebe também funcionam no gratuito.</p>
           </details>
           <details class="reveal">
             <summary class="summary-h3">“Preciso pagar pelas ferramentas de IA à parte?”<span class="chev">›</span></summary>
-            <p>Sim. Mas lá dentro eu mostro quais valem a pena — nada de assinar 10 e não usar.</p>
+            <p>Sim.Mas você não precisa se preocupar: já tem um caminho pronto lá dentro mostrando quais ferramentas realmente valem a pena (nada de pagar por 10 que você nunca vai abrir).</p>
           </details>
           <details class="reveal">
             <summary class="summary-h3">“Isso é um curso?”<span class="chev">›</span></summary>
-            <p>Não. É um sistema vivo: aulas express + equipe não humana + comunidade.</p>
+            <p>Não. Cursos acabam. Aqui é um sistema vivo. Você vai receber aulas express + Minha Equipe Não Humana + Uma Comunidade Ativa</p>
           </details>
           <details class="reveal">
-            <summary class="summary-h3">“Preciso saber de IA antes?”<span class="chev">›</span></summary>
-            <p>Não. Você precisa saber do seu negócio; o resto a comunidade resolve.</p>
+            <summary class="summary-h3">“Eu preciso saber de IA e CONTEÚDO antes?”<span class="chev">›</span></summary>
+            <p>Não. O que importa é entender do seu negócio. O restante a comunidade resolve.</p>
           </details>
+        </div>
+
+        <!-- Rodapé expandido -->
+        <div class="footer-min" style="align-items:center; gap:16px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,var(--brand-primary),var(--brand-accent)); box-shadow:0 4px 10px rgba(0,0,0,.12);"></div>
+            <strong>@leislineduarda</strong>
+          </div>
+          <div class="footer-links">
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="YouTube">YouTube</a>
+            <a href="#" aria-label="TikTok">TikTok</a>
+          </div>
+          <div class="footer-copy">CNPJ: 00.000.000/0000-00 • © 2025 Comunidade Conteúdo Infinito com IA</div>
         </div>
       </div>
     </section>
   </main>
-
-  <!-- Footer -->
-  <footer class="section">
-    <div class="container">
-      <div class="footer-top">
-        <div class="brand-logo">
-          <div class="brand-badge">♾️</div>
-          <div>Conteúdo Infinito com IA</div>
-        </div>
-        <div style="text-align:center;">
-          <div class="social">
-            <a class="icon" href="#" aria-label="Instagram">IG</a>
-            <a class="icon" href="#" aria-label="YouTube">YT</a>
-            <a class="icon" href="#" aria-label="TikTok">TT</a>
-            <a class="icon" href="#" aria-label="Spotify">SP</a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <a href="#">Política de Privacidade</a>
-          <a href="#">Termos de Uso</a>
-        </div>
-      </div>
-      <div class="footer-legal">CNPJ: 00.000.000/0000-00 • © 2025 @leislineduarda</div>
-    </div>
-  </footer>
 
   <!-- Sticky CTA Mobile -->
   <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
@@ -498,15 +525,15 @@
     <button data-target="#sec-conteudo" aria-label="O que tem dentro"></button>
     <button data-target="#sec-cards-funcionarios" aria-label="Grid 1"></button>
     <button data-target="#sec-sistema" aria-label="Sistema de Conteúdo"></button>
-    <button data-target="#sec-gemeas" aria-label="Gêmeas & Design"></button>
     <button data-target="#sec-aulas" aria-label="Aulas"></button>
+    <button data-target="#sec-gemeas-design" aria-label="Gêmeas & Design"></button>
     <button data-target="#sec-depoimentos" aria-label="Depoimentos"></button>
     <button data-target="#sec-who-group" aria-label="Para quem é / Não é"></button>
     <button data-target="#sec-oferta" aria-label="Oferta"></button>
     <button data-target="#sec-faq-footer" aria-label="FAQ + Rodapé"></button>
   </nav>
 
-  <!-- Scripts -->
+  <!-- Scripts (inalterados na lógica, apenas ids atualizados) -->
   <script>
     (function(){
       const bar = document.getElementById('progressBar');
@@ -551,10 +578,21 @@
     })();
 
     (function(){
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('in')); return; }
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(({isIntersecting, target})=>{
+          if(isIntersecting){ target.classList.add('in'); io.unobserve(target); }
+        });
+      }, {threshold: .1});
+      els.forEach(e=>io.observe(e));
+    })();
+
+    (function(){
       const rows = [
         document.getElementById('row-funcionarios-1'),
-        document.getElementById('row-gemeas'),
         document.getElementById('row-aulas'),
+        document.getElementById('row-gemeas-design'),
         document.getElementById('row-depoimentos')
       ].filter(Boolean);
       const mq = window.matchMedia('(max-width: 639px)');
