@@ -685,6 +685,99 @@
   #sec-who-group .who-wrap{ grid-template-columns: 1fr !important; }
   #sec-who-group .who-spacer{ display: none; } /* mobile empilha e esconde o espaçador */
 }
+    /* zera QUALQUER moldura/pseudo que ainda esteja sobrando no carrossel */
+#sec-aulas .scroll-row,
+#sec-aulas .scroll-row::before,
+#sec-aulas .scroll-row::after,
+#sec-aulas .container::before,
+#sec-aulas .container::after {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  content: none !important;
+}
+
+/* mantém apenas o pontilhado colado na imagem */
+#row-aulas .plain{
+  position: relative;
+  border: 2px dashed #F4B400 !important; /* o único pontilhado */
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent !important;
+}
+#row-aulas .plain::before,
+#row-aulas .plain::after{
+  content: none !important;
+}
+#row-aulas .plain img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+}
+    /* mantém todos os prints 100% visíveis e alinhados */
+#row-depoimentos .plain{
+  width: 300px;              /* um pouco maior melhora leitura */
+  aspect-ratio: 3 / 4;
+  border: 2px dashed #FF6600;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+#row-depoimentos .plain img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important; /* não corta */
+  background: #fff;               /* sem bordas escuras */
+}
+@media (max-width: 480px){
+  #row-depoimentos .plain{ width: 78vw; }
+}
+    /* grid simples com gap controlado */
+#sec-who-group .who-wrap{
+  display: grid !important;
+  grid-template-columns: 1fr !important;  /* mobile empilha */
+  row-gap: 16px !important;               /* espaço entre os cards no mobile */
+  column-gap: 0 !important;
+}
+
+@media (min-width: 860px){
+  #sec-who-group .who-wrap{
+    grid-template-columns: 1fr 1fr !important; /* lado a lado no desktop */
+    column-gap: 28px !important;               /* espaço entre eles no desktop */
+    row-gap: 0 !important;
+  }
+}
+
+/* remove qualquer margem herdada que possa “colar” os cards */
+#sec-who-group .who-col{ margin: 0 !important; }
+    /* título mais compacto (sem mexer em paths ou estrutura) */
+#sec-hero .hero-title{
+  font-size: clamp(22px, 5.8vw, 30px);
+  line-height: 1.06 !important;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px !important;
+  text-wrap: balance;
+}
+
+/* linha mais fina e sutil (≈-35%) */
+#sec-hero .hero-underline{
+  height: 2px !important;          /* antes 3–4px */
+  width: 130px !important;         /* mantém elegante no mobile */
+  background: linear-gradient(90deg,#6769FF,#8a6eff,#6769FF);
+  background-size: 200% 100%;
+  animation: heroMove 2.8s linear infinite;
+  margin: 0 auto 10px auto;
+}
+
+/* opcional: sobe a imagem ~10px para reduzir respiro vazio */
+#sec-hero .hero-media{ margin-top: -10px; }
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
