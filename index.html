@@ -1025,6 +1025,41 @@
 #sec-galeria{ --pt: 40px; --pb: 28px; }
 #sec-oferta{ --pt: 40px; --pb: 36px; }
 
+    #sec-destaques .grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+    .oferta-list {
+  list-style:none;
+  padding:0;
+  margin:20px 0;
+  display:grid;
+  gap:18px;
+}
+.oferta-item {
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+  background:#fff;
+  padding:16px 18px;
+  border-radius:14px;
+  box-shadow:0 8px 22px rgba(0,0,0,.06);
+  border:1px solid rgba(0,0,0,.05);
+}
+.oferta-ico {
+  font-size:28px;
+  flex-shrink:0;
+}
+.oferta-item strong {
+  display:block;
+  font-weight:800;
+  color:var(--ink-strong);
+  margin-bottom:2px;
+}
+.oferta-item p {
+  margin:0;
+  font-size:var(--step-0);
+  line-height:1.45;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1197,8 +1232,6 @@
     <ul class="gallery-pills">
       <li>Designs com IA</li>
       <li>Gêmea Digital</li>
-      <li>Estética de marca</li>
-      <li>Posts que não parecem IA</li>
     </ul>
 
     <div class="scroll-row" id="row-galeria">
@@ -1293,49 +1326,40 @@
     </div>
   </div>
 </section>
-    <!-- 8.1 — Oferta: O que você leva -->
-<section class="section section-oferta" id="sec-oferta">
-  <div class="container offer-wrap">
-    <h2 class="section-title-heroish">O QUE VOCÊ LEVA</h2>
+    <section class="section theme-9" id="sec-oferta">
+  <div class="container">
+    <h2 class="grid-title section-title-heroish">
+      TUDO O QUE VOCÊ VAI LEVAR<br>
+      <span class="no-break">ENTRANDO HOJE 👇</span>
+    </h2>
 
-    <div class="offer-steps">
-      <article class="offer-step reveal">
-        <div class="offer-ico">🤖</div>
-        <div class="offer-txt">
-          <h3>Equipe de Social Media Não Humana</h3>
-          <p>10 funcionários não humanos treinados por mim para ideias, ganchos, roteiros, carrosséis, stories, bio e branding.</p>
+    <ul class="oferta-list">
+      <li class="oferta-item">
+        <span class="oferta-ico">🤖</span>
+        <div>
+          <strong>Equipe de Social Media Não Humana</strong>
+          <p>10 cérebros artificiais treinados para trabalhar no seu conteúdo.</p>
         </div>
-      </article>
-
-      <article class="offer-step reveal">
-        <div class="offer-ico">🎥</div>
-        <div class="offer-txt">
-          <h3>Aulas express, práticas e atualizadas</h3>
-          <p>Direto ao ponto, sem enrolação, pra você aplicar no mesmo dia (IA, conteúdo, produto e design).</p>
+      </li>
+      <li class="oferta-item">
+        <span class="oferta-ico">🎥</span>
+        <div>
+          <strong>Aulas novas todo mês</strong>
+          <p>Sempre atualizadas com o que eu mesma aplico.</p>
         </div>
-      </article>
-
-      <article class="offer-step reveal">
-        <div class="offer-ico">🧶</div>
-        <div class="offer-txt">
-          <h3>Materiais prontos que poupam tempo</h3>
-          <p>Checklists, prompts e referências validadas. Só copiar, ajustar e postar.</p>
+      </li>
+      <li class="oferta-item">
+        <span class="oferta-ico">💬</span>
+        <div>
+          <strong>Comunidade ativa</strong>
+          <p>Você nunca fica sozinho — troca com membros e comigo.</p>
         </div>
-      </article>
+      </li>
+      <!-- adicione outros bullets -->
+    </ul>
 
-      <article class="offer-step reveal">
-        <div class="offer-ico">💬</div>
-        <div class="offer-txt">
-          <h3>Comunidade viva (comigo dentro)</h3>
-          <p>Espaço pra pedir ajuda, validar posts, trocar ideia e destravar quando travar.</p>
-        </div>
-      </article>
-    </div>
-
-    <div class="offer-summary reveal">
-      <p class="offer-price">apenas <strong>R$ 38,80/mês</strong> <span>(plano anual)</span></p>
-      <a href="/checkout" class="btn-offer-cta" aria-label="Ir para o checkout">Quero fazer parte</a>
-      <p class="offer-note">Acesso imediato • Atualizações mensais • IA sem cara de IA</p>
+    <div style="text-align:center; margin-top:24px;">
+      <a href="/checkout" class="cta">Quero fazer parte agora</a>
     </div>
   </div>
 </section>
