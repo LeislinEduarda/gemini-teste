@@ -885,6 +885,43 @@
   color: var(--muted);
   margin-top: 8px;
 }
+    /* ===== Ajustes MOBILE: Galeria ===== */
+@media (max-width: 480px){
+  #sec-galeria { --pt: 36px; --pb: 24px; }
+  #sec-galeria .gal-sub{
+    margin: 8px 6px 8px;
+    font-size: 15.5px;
+  }
+  #sec-galeria .gallery-row{
+    gap: 14px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  #sec-galeria .gallery-item{
+    width: 76vw;           /* ocupa quase a largura da tela */
+    aspect-ratio: 4 / 5;
+    border-radius: 16px;
+  }
+}
+
+/* ===== Ajustes MOBILE: Oferta ===== */
+@media (max-width: 480px){
+  #sec-oferta { --pt: 34px; --pb: 24px; }
+  #sec-oferta .offer-wrap{
+    padding: 14px 12px 18px;
+    border-radius: 16px;
+  }
+  #sec-oferta .offer-card{
+    padding: 12px;
+  }
+  #sec-oferta .btn-cta{
+    width: 100%;           /* botão full-width no mobile */
+    margin-top: 4px;
+  }
+  #sec-oferta .offer-price{
+    margin-bottom: 8px;
+  }
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
