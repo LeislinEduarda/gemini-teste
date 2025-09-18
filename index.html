@@ -1587,6 +1587,126 @@
   color: #666;
   letter-spacing: .01em;
 }
+    /* ====== 1) Travar o site para não “andar” lateralmente ====== */
+html, body{
+  max-width: 100%;
+  overflow-x: hidden;         /* impede puxar para os lados */
+}
+.container{ overflow-x: clip; } /* corta eventuais transbordos internos */
+img, .scroll-row{ max-width: 100%; }
+
+/* ====== 2) HERO — re-harmonia da primeira dobra ====== */
+/* Garante que o título, preço + linha e imagem fiquem na mesma dobra,
+   alinhados e com respiro certo. Não mexe em caminhos de imagem. */
+#sec-hero{
+  padding-top: 12px !important;
+  padding-bottom: 28px !important;
+}
+#sec-hero .hero-grid{
+  align-items: center;
+  gap: 12px;
+}
+#sec-hero .hero-title{
+  margin-top: 0;
+  line-height: 1.06 !important;
+  text-wrap: balance;
+}
+#sec-hero .hero-price{
+  font-size: clamp(16px, 1.4vw + 11px, 20px);
+  font-weight: 800;
+  color: #5c4033;
+  margin: 6px auto 8px auto !important;
+  text-align: center;
+  white-space: nowrap; /* não quebra “(plano anual)” */
+}
+#sec-hero .hero-underline{
+  height: 3px;
+  width: 140px;
+  margin: 0 auto 8px auto;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#7B2FFF,#B266FF,#7B2FFF);
+  background-size: 200% 100%;
+  animation: heroMove 2.8s linear infinite;
+}
+#sec-hero .hero-media{
+  margin-top: 4px;            /* encosta um pouco mais no preço */
+}
+@keyframes heroMove{
+  0%{   background-position: 0% 50%; }
+  100%{ background-position: 200% 50%; }
+}
+
+/* ====== 3) VISU DA COMUNIDADE — botão de oferta (variante) ====== */
+#sec-conteudo .oferta-inline{
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  margin: 18px auto 6px auto;
+}
+#sec-conteudo .btn-oferta-variant{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: #fff;
+  background: linear-gradient(135deg,#FF9A3E,#FF5BC2);
+  border: 2px solid #ffffff40;
+  box-shadow: 0 14px 36px rgba(255,105,180,.22),
+              0 0 0 4px rgba(255,105,180,.12);
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+}
+#sec-conteudo .btn-oferta-variant:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 18px 42px rgba(255,105,180,.28),
+              0 0 0 4px rgba(255,105,180,.18);
+}
+#sec-conteudo .preco-mini{
+  font-weight: 800;
+  color: #5c4033;
+  white-space: nowrap;     /* não quebra “(plano anual)” */
+}
+
+/* ====== 4) Funcionários — apertar espaçamentos ====== */
+.section-funcionarios{ padding-top: 36px; padding-bottom: 34px; }
+.section-funcionarios .func-title{ margin-bottom: 8px; }
+.section-funcionarios .func-subtitle{ margin-bottom: 16px; }
+#row-funcionarios-1{ gap: 14px; padding-top: 4px !important; }
+
+/* ====== 5) Aulas — remover TODOS os pontilhados extras ====== */
+#sec-aulas .scroll-row,
+#sec-aulas .scroll-row::before,
+#sec-aulas .scroll-row::after,
+#row-aulas::before,
+#row-aulas::after{
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+#row-aulas .plain{
+  border: none !important;         /* remove o pontilhado */
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+#row-aulas .plain::before,
+#row-aulas .plain::after{ content: none !important; }
+
+/* ====== 6) O que estão falando — reduzir a altura geral ====== */
+#sec-depoimentos{ padding-top: 42px !important; padding-bottom: 28px !important; }
+#row-depoimentos .plain{ width: 260px; } /* levemente mais compacto */
+
+/* ====== 7) FAQ — segue a alternância de cores (usará theme-6 no HTML) ====== */
+
+/* ====== 8) Ajustes finos de scroll horizontal de carrossel ====== */
+.scroll-row{ overscroll-behavior-x: contain; }
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1676,6 +1796,10 @@
           <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
           Seu navegador não suporta vídeos.
         </video>
+        <div class="oferta-inline">
+  <a href="/checkout" class="btn-oferta-variant">quero fazer parte</a>
+  <div class="preco-mini">apenas R$38,80/mês (plano anual)</div>
+</div>
       </div>
     </section>
 
@@ -1930,7 +2054,8 @@
   </div>
 </section>
     <!-- 9 — FAQ + rodapé -->
-    <section class="section theme-9" id="sec-faq-footer">
+    <!-- depois (lilás, mantendo a sequência de alternância) -->
+<section class="section theme-6" id="sec-faq-footer">
       <div class="container">
         <div class="bridge-band" style="margin-bottom:18px;"></div>
 
