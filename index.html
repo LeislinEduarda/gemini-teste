@@ -12,9 +12,6 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "tctxip36f8");
 </script>
-
-<link rel="dns-prefetch" href="//payfast.greenn.com.br">
-<link rel="preconnect" href="https://payfast.greenn.com.br" crossorigin>
   
 <head>
   <link rel="preload" as="image" href="https://leislineduarda.github.io/gemini-teste/assets/30-900.webp" imagesrcset="https://leislineduarda.github.io/gemini-teste/assets/30-600.webp 600w, https://leislineduarda.github.io/gemini-teste/assets/30-900.webp 900w, https://leislineduarda.github.io/gemini-teste/assets/30.webp 1200w" imagesizes="(max-width:480px) 92vw, 900px">
@@ -1961,64 +1958,6 @@ img, .scroll-row{ max-width: 100%; }
   box-shadow: none !important;
   background: none !important;
 }
-    /* ===== CTA VISU (alinhado, sem card atrás) ===== */
-#sec-conteudo .visu-cta{
-  margin: 16px auto 8px;
-  text-align: center;
-}
-
-#sec-conteudo .cta-big{
-  display:inline-flex; align-items:center; justify-content:center;
-  min-height:56px; padding:0 26px; border-radius:999px;
-  font-weight:900; letter-spacing:.02em; color:#fff;
-  background: linear-gradient(135deg,#FFB347,#FF5C8A);
-  box-shadow: 0 10px 28px rgba(255,92,138,.25);
-  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
-}
-#sec-conteudo .cta-big:hover{ transform: translateY(-1px); filter:saturate(1.05); }
-
-#sec-conteudo .visu-price{
-  margin: 10px 0 6px; font-weight:900; color:#5c4033;
-  background:none !important; border:0 !important; box-shadow:none !important;
-}
-#sec-conteudo .visu-price span{ font-weight:700; opacity:.9; }
-
-#sec-conteudo .visu-bullets{
-  display:flex; gap:18px; flex-wrap:wrap; justify-content:center;
-  font-weight:600; color:#3b2b24;
-}
-#sec-conteudo .visu-bullets span{ white-space:nowrap; }
-    /* ===== REMOVER QUALQUER PONTILHADO no carrossel de gêmeas/design (row-aulas) ===== */
-#row-aulas,
-#row-aulas::before,
-#row-aulas::after,
-#row-aulas .plain,
-#row-aulas .plain::before,
-#row-aulas .plain::after {
-  border: 0 !important;
-  outline: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  background-image: none !important;
-}
-#row-aulas .plain img{
-  border:0 !important; outline:0 !important; box-shadow:none !important;
-}
-    /* ===== FAQ como seção inteira colorida + cards nos <details> ===== */
-#sec-faq-footer.section{
-  background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15)); /* mesma lógica da theme-9 */
-  padding-top: 40px; padding-bottom: 40px;
-}
-#sec-faq-footer .container{ padding-top:0 !important; padding-bottom:0 !important; }
-
-#sec-faq-footer details{
-  position:relative; border-radius:18px;
-  background:#fff; border:1px solid rgba(0,0,0,.06);
-  box-shadow: 0 14px 32px rgba(0,0,0,.08);
-  overflow:hidden;
-}
-#sec-faq-footer summary{ min-height:60px; font-weight:800; color:#262626; }
-#sec-faq-footer details[open]{ box-shadow:0 18px 44px rgba(0,0,0,.12); }
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -2108,18 +2047,19 @@ img, .scroll-row{ max-width: 100%; }
           <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
           Seu navegador não suporta vídeos.
         </video>
-<!-- CTA VISU (substituir o bloco atual por este) -->
-<div class="visu-cta">
-  <a class="cta-big btn-checkout" href="https://payfast.greenn.com.br/84555/offer/2xGrf9?ch_id=16275&utm=PRINCIPAL">
-    QUERO FAZER PARTE
-  </a>
-  <p class="visu-price">apenas R$38,80/mês <span>(plano anual)</span></p>
+        <div class="visu-offer">
+  <a class="cta visu-cta btn-cta-gradient"
+     href="https://payfast.greenn.com.br/84555/offer/2xGrf9?ch_id=16275&utm=PRINCIPAL"
+     rel="noopener">QUERO FAZER PARTE</a>
 
-  <div class="visu-bullets" aria-label="benefícios rápidos">
-    <span>* sem burocracia</span>
-    <span>* funciona no ChatGPT gratuito</span>
-    <span>* aulas novas todo mês</span>
-  </div>
+  <p class="visu-price">apenas R$38,80/mês (plano anual)</p>
+
+  <ul class="visu-bullets">
+    <li>sem burocracia</li>
+    <li>funciona no ChatGPT gratuito</li>
+    <li>aulas novas todo mês</li>
+    <li>acesso imediato</li>
+  </ul>
 </div>
       </div>
     </section>
