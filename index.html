@@ -1288,6 +1288,89 @@
   border-radius: 6px;
   display: inline-block;
 }
+    /* ===== CTA FINAL — PRONTO PARA CRIAR ===== */
+#sec-pronto {
+  padding: 40px 0;
+  background: linear-gradient(180deg, rgba(103,105,255,.08), rgba(254,247,0,.08));
+}
+
+#sec-pronto .cta-wrap {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 22px;
+  padding: 22px 18px;
+  box-shadow: 0 18px 44px rgba(0,0,0,.12);
+}
+
+/* Moldura gradiente “acabada” (não é borda, é um ring) */
+#sec-pronto .cta-wrap::before{
+  content:"";
+  position:absolute; inset:-2px;
+  border-radius:24px;
+  padding:2px;
+  background: linear-gradient(135deg, #7B61FF, #F9C74F, #7B61FF);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events:none;
+}
+
+#sec-pronto .cta-head {
+  font-size: clamp(18px, 2.2vw + 10px, 26px);
+  font-weight: 700;
+  color: #1f1f1f;
+  text-align: center;
+  /* não quebra em duas linhas */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 18px;
+}
+
+/* Botão com identidade diferente do CTA flutuante */
+#sec-pronto .cta-btn-big{
+  display:block;
+  width:100%;
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 66px;
+  border-radius: 18px;
+  border: none;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .02em;
+  text-align:center;
+  font-size: clamp(20px, 2.4vw + 10px, 28px);
+  background: linear-gradient(135deg, #F9C74F, #FF8EA2, #7A6BFF);
+  background-size: 180% 180%;
+  box-shadow: 0 16px 40px rgba(122,107,255,.32);
+  transition: transform .18s ease, box-shadow .18s ease, background-position .4s ease;
+}
+#sec-pronto .cta-btn-big:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(122,107,255,.4);
+  background-position: 20% 80%;
+}
+
+/* Preço destacado logo abaixo */
+#sec-pronto .preco-mini{
+  margin-top: 14px;
+  font-size: clamp(14px, 1.6vw + 10px, 20px);
+  font-weight: 800;
+  color: #5c4033;                 /* marrom do hero */
+  text-align: center;
+  background: rgba(92,64,51,.07);
+  padding: 8px 14px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+/* Mobile: garante que o ring e o botão fiquem elegantes */
+@media (max-width: 480px){
+  #sec-pronto .cta-wrap{ padding: 20px 14px; }
+  #sec-pronto .cta-btn-big{ min-height: 64px; }
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1613,10 +1696,16 @@
       </div>
     </div>
 
-    <div class="oferta-cta">
-      <div class="obs">Pronto para criar com leveza e parar de parecer igual a todo mundo?</div>
-      <a href="/checkout" class="cta">Quero fazer parte</a>
-      <small class="preco-mini">apenas R$38,80/mês (plano anual)</small>
+    <section class="section" id="sec-pronto">
+  <div class="container">
+    <div class="cta-wrap">
+      <p class="cta-head">Pronto pra criar sem cara de IA e parar de parecer igual a todo mundo?</p>
+
+      <a href="/checkout" class="cta-btn-big" aria-label="Ir para o checkout">
+        QUERO FAZER PARTE
+      </a>
+
+      <div class="preco-mini">apenas R$38,80/mês (plano anual)</div>
     </div>
   </div>
 </section>
