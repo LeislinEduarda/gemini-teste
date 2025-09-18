@@ -922,6 +922,108 @@
     margin-bottom: 8px;
   }
 }
+    /* ======================
+   GALERIA (Designs + Gêmea)
+   ====================== */
+.section-galeria{
+  background: linear-gradient(0deg, rgba(103,105,255,.10), rgba(254,247,0,.10));
+  padding-top: 46px;
+  padding-bottom: 34px;
+}
+#sec-galeria .gallery-title{
+  position: relative;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+#sec-galeria .gallery-title::after{
+  content:"";
+  position:absolute; inset: -6px auto auto 50%;
+  width: 180px; height: 40px; transform: translateX(-50%) rotate(-2deg);
+  background: radial-gradient(80% 140% at 50% 50%, rgba(103,105,255,.18), transparent 72%),
+              radial-gradient(120% 100% at 60% 60%, rgba(254,247,0,.20), transparent 70%);
+  filter: blur(4px);
+  pointer-events:none;
+  z-index:-1;
+}
+
+#sec-galeria .gallery-pills{
+  list-style:none; padding:0; margin: 8px auto 14px auto;
+  display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
+}
+#sec-galeria .gallery-pills li{
+  padding: 8px 12px; border-radius:999px; font-size: 14px; font-weight:700;
+  background: #fff; color: var(--brand-primary);
+  border:1.5px solid color-mix(in srgb, var(--brand-primary) 30%, #0000);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+
+#row-galeria.scroll-row{ padding: 8px 8px 16px; }
+#row-galeria .g-card{
+  flex: 0 0 auto; width: 280px; border-radius: 16px; overflow:hidden;
+  border: 2px dashed color-mix(in srgb, var(--brand-primary) 60%, #FFFFFF);
+  background: #fff;
+}
+#row-galeria .g-card img{
+  display:block; width:100%; height:100%; object-fit: cover;
+}
+
+/* ======================
+   OFERTA (Resumo em sequência)
+   ====================== */
+.section-oferta{
+  background: linear-gradient(0deg, rgba(208,250,140,.18), rgba(208,250,140,.18));
+  padding-top: 42px; padding-bottom: 40px;
+}
+#sec-oferta .offer-wrap{ max-width: 920px; margin-inline:auto; }
+#sec-oferta .offer-steps{ display:grid; gap:14px; margin: 10px 0 18px 0; }
+
+#sec-oferta .offer-step{
+  display:grid; grid-template-columns: 64px 1fr; gap:12px; align-items: start;
+  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:16px; padding:14px 16px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.06);
+}
+#sec-oferta .offer-ico{
+  width:64px; height:64px; border-radius:14px; display:grid; place-items:center; font-size:28px;
+  background:
+    radial-gradient(120% 120% at 20% 20%, rgba(103,105,255,.14), transparent 64%),
+    linear-gradient(180deg, #ffffff, #F7F8FF);
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 24%, #ffffff);
+  box-shadow: inset 0 0 0 2px #ffffff66, 0 8px 18px rgba(103,105,255,.12);
+}
+#sec-oferta .offer-txt h3{
+  font-size: clamp(18px, 1.4vw + 12px, 22px); font-weight:800; color:#2b2b2b; margin:2px 0 4px 0;
+}
+#sec-oferta .offer-txt p{
+  font-size: var(--step--1); color:#4a4a4a; line-height:1.55; margin:0;
+}
+
+#sec-oferta .offer-summary{
+  background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:16px; padding:16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.08); text-align:center;
+}
+#sec-oferta .offer-price{
+  font-weight:800; color: var(--brand-primary); margin:0 0 10px 0;
+  font-size: clamp(18px, 1.6vw + 10px, 22px);
+}
+#sec-oferta .offer-price span{ color:#5c4033; font-weight:700; opacity:.9; }
+
+#sec-oferta .btn-offer-cta{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:48px; padding:0 22px; border-radius:999px;
+  background: var(--brand-primary); color:#fff; font-weight:900; text-transform:uppercase;
+  letter-spacing:.02em; border:2px solid transparent;
+  box-shadow: 0 10px 26px rgba(103,105,255,.35);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#sec-oferta .btn-offer-cta:hover{ transform: translateY(-1px); box-shadow: 0 16px 34px rgba(103,105,255,.45); }
+
+#sec-oferta .offer-note{
+  margin-top:8px; font-size: 13px; color:#5d5d5d;
+}
+
+/* pequeno ajuste de respiro com as vizinhas (mantém fluidez) */
+#sec-galeria{ --pt: 40px; --pb: 28px; }
+#sec-oferta{ --pt: 40px; --pb: 36px; }
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1083,34 +1185,37 @@
     </div>
   </div>
 </section>
-    <!-- 6.5 — Galeria: Designs + Gêmeas Digitais -->
-<section class="section theme-4" id="sec-galeria">
+    <!-- 7.1 — Galeria: O que a gente cria de verdade -->
+<section class="section section-galeria" id="sec-galeria">
   <div class="container">
-    <h2 class="grid-title section-title-heroish">
-      O QUE A GENTE CRIA<br>
-      <span class="no-break">DE VERDADE</span>
+    <h2 class="section-title-heroish gallery-title">
+      O QUE A GENTE<br>
+      <span class="no-break">CRIA DE VERDADE</span>
     </h2>
 
-    <!-- Carrossel: Designs criados com IA -->
-    <h3 class="gal-sub">Designs criados com IA (por mim e pelos membros) ✨</h3>
-    <div class="scroll-row gallery-row" id="row-designs">
-      <!-- Substitua os src pelas suas imagens -->
-      <div class="gallery-item reveal"><img src="assets/galeria/design1.webp" alt="Design 1"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/design2.webp" alt="Design 2"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/design3.webp" alt="Design 3"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/design4.webp" alt="Design 4"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/design5.webp" alt="Design 5"></div>
-    </div>
+    <ul class="gallery-pills">
+      <li>Designs com IA</li>
+      <li>Gêmea Digital</li>
+      <li>Estética de marca</li>
+      <li>Posts que não parecem IA</li>
+    </ul>
 
-    <!-- Carrossel: Gêmeas Digitais -->
-    <h3 class="gal-sub" style="margin-top:18px;">Gêmeas Digitais em ação 🧬</h3>
-    <div class="scroll-row gallery-row" id="row-gemeas">
-      <!-- Substitua os src pelas suas imagens -->
-      <div class="gallery-item reveal"><img src="assets/galeria/gemea1.webp" alt="Gêmea 1"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/gemea2.webp" alt="Gêmea 2"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/gemea3.webp" alt="Gêmea 3"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/gemea4.webp" alt="Gêmea 4"></div>
-      <div class="gallery-item reveal"><img src="assets/galeria/gemea5.webp" alt="Gêmea 5"></div>
+    <div class="scroll-row" id="row-galeria">
+      <div class="g-card reveal">
+        <img src="assets/galeria1.webp" alt="Design criado na comunidade">
+      </div>
+      <div class="g-card reveal">
+        <img src="assets/galeria2.webp" alt="Gêmea digital aplicada em post">
+      </div>
+      <div class="g-card reveal">
+        <img src="assets/galeria3.webp" alt="Reels com estética original">
+      </div>
+      <div class="g-card reveal">
+        <img src="assets/galeria4.webp" alt="Carrossel com IA sem cara de IA">
+      </div>
+      <div class="g-card reveal">
+        <img src="assets/galeria5.webp" alt="Design da comunidade">
+      </div>
     </div>
   </div>
 </section>
@@ -1187,44 +1292,49 @@
     </div>
   </div>
 </section>
-    <!-- 8.5 — Oferta Resumo -->
-<section class="section theme-1" id="sec-oferta">
+    <!-- 8.1 — Oferta: O que você leva -->
+<section class="section section-oferta" id="sec-oferta">
   <div class="container offer-wrap">
-    <h2 class="grid-title section-title-heroish">
-      O QUE VOCÊ LEVA<br>
-      <span class="no-break">SEM ENROLAÇÃO</span>
-    </h2>
+    <h2 class="section-title-heroish">O QUE VOCÊ LEVA</h2>
 
-    <div class="offer-grid">
-      <div class="offer-card">
-        <div class="oc-ico">🤖</div>
-        <h3>Equipe Não Humana</h3>
-        <p>10 “funcionários” treinados por mim pra te ajudar a criar roteiros, carrosséis, stories, bios e ganchos — do seu jeito, sem cara de IA.</p>
-      </div>
+    <div class="offer-steps">
+      <article class="offer-step reveal">
+        <div class="offer-ico">🤖</div>
+        <div class="offer-txt">
+          <h3>Equipe de Social Media Não Humana</h3>
+          <p>10 funcionários não humanos treinados por mim para ideias, ganchos, roteiros, carrosséis, stories, bio e branding.</p>
+        </div>
+      </article>
 
-      <div class="offer-card">
-        <div class="oc-ico">🎥</div>
-        <h3>Aulas Express</h3>
-        <p>Diretas, práticas e atualizadas todo mês. Entrou, aprendeu, aplicou. Sem enrolação e sem ficar perdido.</p>
-      </div>
+      <article class="offer-step reveal">
+        <div class="offer-ico">🎥</div>
+        <div class="offer-txt">
+          <h3>Aulas express, práticas e atualizadas</h3>
+          <p>Direto ao ponto, sem enrolação, pra você aplicar no mesmo dia (IA, conteúdo, produto e design).</p>
+        </div>
+      </article>
 
-      <div class="offer-card">
-        <div class="oc-ico">🧶</div>
-        <h3>Materiais Prontos</h3>
-        <p>Checklists, prompts e templates que eu uso de verdade. É copiar, adaptar e postar.</p>
-      </div>
+      <article class="offer-step reveal">
+        <div class="offer-ico">🧶</div>
+        <div class="offer-txt">
+          <h3>Materiais prontos que poupam tempo</h3>
+          <p>Checklists, prompts e referências validadas. Só copiar, ajustar e postar.</p>
+        </div>
+      </article>
 
-      <div class="offer-card">
-        <div class="oc-ico">💬</div>
-        <h3>Comunidade Viva</h3>
-        <p>Gente criando junto, tirando dúvidas e validando ideias. Você não fica sozinho.</p>
-      </div>
+      <article class="offer-step reveal">
+        <div class="offer-ico">💬</div>
+        <div class="offer-txt">
+          <h3>Comunidade viva (comigo dentro)</h3>
+          <p>Espaço pra pedir ajuda, validar posts, trocar ideia e destravar quando travar.</p>
+        </div>
+      </article>
     </div>
 
-    <div class="offer-cta">
-      <p class="offer-price">apenas <strong>R$38,80/mês</strong> <span>(plano anual)</span></p>
-      <a href="/checkout" class="btn-cta" aria-label="Ir para o checkout agora">Quero fazer parte</a>
-      <p class="offer-note">Sem burocracia • Acesso imediato • Funciona com ChatGPT gratuito</p>
+    <div class="offer-summary reveal">
+      <p class="offer-price">apenas <strong>R$ 38,80/mês</strong> <span>(plano anual)</span></p>
+      <a href="/checkout" class="btn-offer-cta" aria-label="Ir para o checkout">Quero fazer parte</a>
+      <p class="offer-note">Acesso imediato • Atualizações mensais • IA sem cara de IA</p>
     </div>
   </div>
 </section>
