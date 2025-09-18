@@ -1707,6 +1707,58 @@ img, .scroll-row{ max-width: 100%; }
 
 /* ====== 8) Ajustes finos de scroll horizontal de carrossel ====== */
 .scroll-row{ overscroll-behavior-x: contain; }
+    /************** AJUSTES FINAIS — DOBRA, FUNCIONÁRIOS E DEPOIMENTOS ************/
+
+/* 1) HERO ainda mais alinhado e compacto (título → preço → linha → imagem) */
+#sec-hero{
+  padding-top: 6px !important;
+  padding-bottom: 18px !important;           /* dobra mais justa */
+}
+#sec-hero .hero-price{
+  margin: 4px auto 4px !important;           /* aproxima do título e da linha */
+}
+#sec-hero .hero-underline{
+  height: 3px;
+  width: 132px;
+  margin: 0 auto 6px !important;             /* menos ar antes da imagem */
+}
+#sec-hero .hero-media{
+  margin-top: -8px !important;               /* sobe levemente a imagem */
+}
+@media (min-width: 1024px){
+  #sec-hero .hero-media{ margin-top: -10px !important; }
+}
+
+/* 2) Funcionários — remover “espaço vazio” da seção */
+.section-funcionarios{
+  padding-top: 24px !important;
+  padding-bottom: 18px !important;           /* reduz altura da seção */
+}
+.section-funcionarios .func-title{ margin-bottom: 6px !important; }
+.section-funcionarios .func-subtitle{ margin-bottom: 12px !important; }
+#row-funcionarios-1{
+  gap: 12px !important;                      /* cards mais próximos */
+  padding: 4px 8px 12px !important;
+  margin-top: 0 !important;
+}
+
+/* 3) “O que estão falando” — menor e com menos ar */
+#sec-depoimentos{
+  padding-top: 28px !important;
+  padding-bottom: 18px !important;
+}
+#sec-depoimentos .container{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;              /* remove respiro interno extra */
+}
+#sec-depoimentos .grid-title{ margin-bottom: 8px !important; }
+#row-depoimentos{
+  gap: 14px !important;
+  padding: 6px 8px 10px !important;
+}
+#row-depoimentos .plain{
+  width: 236px !important;                   /* um pouquinho menor */
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1799,9 +1851,9 @@ img, .scroll-row{ max-width: 100%; }
         <div class="oferta-inline">
   <a href="/checkout" class="btn-oferta-variant">quero fazer parte</a>
   <div class="preco-mini">apenas R$38,80/mês (plano anual)</div>
-           <p class="cta-notes">
+  <p class="cta-notes">
       * sem burocracia&nbsp;&nbsp;* funciona no ChatGPT gratuito&nbsp;&nbsp;* aulas novas todo mês
-    </p>
+  </p>
 </div>
       </div>
     </section>
