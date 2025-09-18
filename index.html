@@ -1024,6 +1024,67 @@
 /* pequeno ajuste de respiro com as vizinhas (mantém fluidez) */
 #sec-galeria{ --pt: 40px; --pb: 28px; }
 #sec-oferta{ --pt: 40px; --pb: 36px; }
+    /* ===== GALERIA – Pílulas interativas ===== */
+.section-galeria-tabs{
+  background: linear-gradient(0deg, rgba(103,105,255,.10), rgba(254,247,0,.10));
+  padding-top: 42px; padding-bottom: 32px;
+}
+#sec-galeria .gallery-title{
+  position: relative; text-align:center; margin: 0 0 8px 0;
+}
+#sec-galeria .gallery-title::after{
+  content:""; position:absolute; inset:-6px auto auto 50%; transform:translateX(-50%) rotate(-2deg);
+  width:180px; height:40px;
+  background: radial-gradient(80% 140% at 50% 50%, rgba(103,105,255,.18), transparent 72%),
+              radial-gradient(120% 100% at 60% 60%, rgba(254,247,0,.20), transparent 70%);
+  filter: blur(4px); z-index:-1; pointer-events:none;
+}
+
+#sec-galeria .pill-row{
+  display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
+  margin: 8px auto 12px auto; padding: 0 8px;
+}
+#sec-galeria .pill{
+  --bg:#fff; --bd: color-mix(in srgb, var(--brand-primary) 30%, #0000); --fg: var(--brand-primary);
+  padding: 8px 14px; border-radius:999px; border:1.5px solid var(--bd);
+  background: var(--bg); color: var(--fg); font-weight:800; font-size:14px; cursor:pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,.06);
+  transition: transform .12s ease, box-shadow .12s ease, background .15s ease;
+}
+#sec-galeria .pill:hover{ transform: translateY(-1px); box-shadow: 0 12px 24px rgba(0,0,0,.10); }
+#sec-galeria .pill[data-variant="design"]{ --bg:#6f5cff; --fg:#fff; --bd:#6f5cff; }
+#sec-galeria .pill[data-variant="gemea"]{ --bg:#fef700; --fg:#2a2a2a; --bd:#e9df00; }
+#sec-galeria .pill[aria-pressed="true"]{ outline: 3px solid rgba(0,0,0,.07); }
+
+#sec-galeria .loader{
+  height: 4px; width: 160px; margin: 6px auto 12px auto; border-radius:999px; overflow:hidden;
+  background: #eee; display:none;
+}
+#sec-galeria .loader.in{ display:block; }
+#sec-galeria .loader .bar{
+  height:100%; width:40%; background: linear-gradient(90deg, var(--brand-primary), #8a6eff, var(--brand-primary));
+  animation: galBar 1.2s ease-in-out infinite;
+}
+@keyframes galBar{
+  0%{ transform: translateX(-40%); }
+  100%{ transform: translateX(260%); }
+}
+
+#sec-galeria .gal-content{ position:relative; min-height: 220px; }
+#sec-galeria .gal-panel{ display:none; }
+#sec-galeria .gal-panel.active{ display:block; }
+
+/* Cards do carrossel (usa o mesmo padrão de scroll-row) */
+#row-galeria-design .g-card,
+#row-galeria-gemea .g-card{
+  flex: 0 0 auto; width: 280px; border-radius: 16px; overflow:hidden;
+  border: 2px dashed color-mix(in srgb, var(--brand-primary) 58%, #FFFFFF);
+  background: #fff;
+}
+#row-galeria-design .g-card img,
+#row-galeria-gemea .g-card img{
+  display:block; width:100%; height:100%; object-fit: cover;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1185,36 +1246,46 @@
     </div>
   </div>
 </section>
-    <!-- 7.1 — Galeria: O que a gente cria de verdade -->
-<section class="section section-galeria" id="sec-galeria">
+    <!-- 7.1 — Galeria: O que a gente cria de verdade (com pílulas) -->
+<section class="section section-galeria-tabs" id="sec-galeria">
   <div class="container">
     <h2 class="section-title-heroish gallery-title">
-      O QUE A GENTE<br>
-      <span class="no-break">CRIA DE VERDADE</span>
+      O QUE A GENTE<br><span class="no-break">CRIA DE VERDADE</span>
     </h2>
 
-    <ul class="gallery-pills">
-      <li>Designs com IA</li>
-      <li>Gêmea Digital</li>
-      <li>Estética de marca</li>
-      <li>Posts que não parecem IA</li>
-    </ul>
+    <!-- Pílulas -->
+    <div class="pill-row" role="tablist" aria-label="Categorias de galeria">
+      <button class="pill" data-variant="design" role="tab" aria-selected="true" aria-pressed="true">Design com IA</button>
+      <button class="pill" data-variant="gemea" role="tab" aria-selected="false" aria-pressed="false">Gêmea Digital</button>
+    </div>
 
-    <div class="scroll-row" id="row-galeria">
-      <div class="g-card reveal">
-        <img src="assets/galeria1.webp" alt="Design criado na comunidade">
+    <!-- Loader -->
+    <div class="loader" id="gal-loader" aria-hidden="true">
+      <div class="bar"></div>
+    </div>
+
+    <!-- Painéis -->
+    <div class="gal-content">
+      <!-- Painel: Design com IA -->
+      <div class="gal-panel active" id="panel-design" role="tabpanel" aria-label="Design com IA">
+        <div class="scroll-row" id="row-galeria-design">
+          <div class="g-card reveal"><img src="assets/galeria-design-1.webp" alt="Design criado com IA 1"></div>
+          <div class="g-card reveal"><img src="assets/galeria-design-2.webp" alt="Design criado com IA 2"></div>
+          <div class="g-card reveal"><img src="assets/galeria-design-3.webp" alt="Design criado com IA 3"></div>
+          <div class="g-card reveal"><img src="assets/galeria-design-4.webp" alt="Design criado com IA 4"></div>
+          <div class="g-card reveal"><img src="assets/galeria-design-5.webp" alt="Design criado com IA 5"></div>
+        </div>
       </div>
-      <div class="g-card reveal">
-        <img src="assets/galeria2.webp" alt="Gêmea digital aplicada em post">
-      </div>
-      <div class="g-card reveal">
-        <img src="assets/galeria3.webp" alt="Reels com estética original">
-      </div>
-      <div class="g-card reveal">
-        <img src="assets/galeria4.webp" alt="Carrossel com IA sem cara de IA">
-      </div>
-      <div class="g-card reveal">
-        <img src="assets/galeria5.webp" alt="Design da comunidade">
+
+      <!-- Painel: Gêmea Digital -->
+      <div class="gal-panel" id="panel-gemea" role="tabpanel" aria-label="Gêmea Digital">
+        <div class="scroll-row" id="row-galeria-gemea">
+          <div class="g-card reveal"><img src="assets/galeria-gemea-1.webp" alt="Gêmea digital 1"></div>
+          <div class="g-card reveal"><img src="assets/galeria-gemea-2.webp" alt="Gêmea digital 2"></div>
+          <div class="g-card reveal"><img src="assets/galeria-gemea-3.webp" alt="Gêmea digital 3"></div>
+          <div class="g-card reveal"><img src="assets/galeria-gemea-4.webp" alt="Gêmea digital 4"></div>
+          <div class="g-card reveal"><img src="assets/galeria-gemea-5.webp" alt="Gêmea digital 5"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1292,41 +1363,67 @@
     </div>
   </div>
 </section>
-    <!-- 8.1 — Oferta: O que você leva -->
-<section class="section section-oferta" id="sec-oferta">
+    <!-- 8.1 — OFERTA COMPLETA (ilustrada) -->
+<section class="section section-oferta-full" id="sec-oferta-full">
   <div class="container offer-wrap">
     <h2 class="section-title-heroish">O QUE VOCÊ LEVA</h2>
 
-    <div class="offer-steps">
-      <article class="offer-step reveal">
-        <div class="offer-ico">🤖</div>
-        <div class="offer-txt">
-          <h3>Equipe de Social Media Não Humana</h3>
-          <p>10 funcionários não humanos treinados por mim para ideias, ganchos, roteiros, carrosséis, stories, bio e branding.</p>
+    <div class="offer-grid">
+      <!-- 1) Equipe Não Humana -->
+      <article class="offer-card reveal">
+        <h3>Equipe de Social Media Não Humana</h3>
+        <p class="offer-desc">10 funcionários não humanos treinados por mim para ideias, ganchos, roteiros, carrosséis, stories, bio e branding.</p>
+        <div class="mini-row" aria-label="Funcionários não humanos">
+          <div class="mini"><img src="assets/cards/funcionario1.webp" alt="João dos Ganchos"></div>
+          <div class="mini"><img src="assets/cards/funcionario2.webp" alt="Maria das Ideias"></div>
+          <div class="mini"><img src="assets/cards/funcionario3.webp" alt="Carlos dos Carrosséis"></div>
+          <div class="mini"><img src="assets/cards/funcionario4.webp" alt="Leonardo da Viralização"></div>
+          <div class="mini"><img src="assets/cards/funcionario5.webp" alt="José dos Stories"></div>
+          <div class="mini"><img src="assets/cards/funcionario6.webp" alt="Laura das Legendas"></div>
+          <div class="mini"><img src="assets/cards/funcionario7.webp" alt="Larissa dos Roteiros"></div>
+          <div class="mini"><img src="assets/cards/funcionario8.webp" alt="Bruno do Branding"></div>
+          <div class="mini"><img src="assets/cards/funcionario9.webp" alt="Bia do Público"></div>
+          <div class="mini"><img src="assets/cards/funcionario10.webp" alt="Dudu da Bio"></div>
         </div>
       </article>
 
-      <article class="offer-step reveal">
-        <div class="offer-ico">🎥</div>
-        <div class="offer-txt">
-          <h3>Aulas express, práticas e atualizadas</h3>
-          <p>Direto ao ponto, sem enrolação, pra você aplicar no mesmo dia (IA, conteúdo, produto e design).</p>
+      <!-- 2) Aulas express -->
+      <article class="offer-card reveal">
+        <h3>Aulas express, práticas e atualizadas</h3>
+        <p class="offer-desc">Direto ao ponto, sem enrolação — IA, conteúdo, produto e design pra aplicar no mesmo dia.</p>
+        <div class="mini-row" aria-label="Aulas recentes">
+          <div class="mini-wide"><img src="11.webp" alt="Aula 11"></div>
+          <div class="mini-wide"><img src="12.webp" alt="Aula 12"></div>
+          <div class="mini-wide"><img src="13.webp" alt="Aula 13"></div>
+          <div class="mini-wide"><img src="14.webp" alt="Aula 14"></div>
+          <div class="mini-wide"><img src="15.webp" alt="Aula 15"></div>
+        </div>
+        <div class="count-chips">
+          <span class="chip">+50 aulas</span>
+          <span class="chip alt">Novas todo mês</span>
         </div>
       </article>
 
-      <article class="offer-step reveal">
-        <div class="offer-ico">🧶</div>
-        <div class="offer-txt">
-          <h3>Materiais prontos que poupam tempo</h3>
-          <p>Checklists, prompts e referências validadas. Só copiar, ajustar e postar.</p>
+      <!-- 3) Materiais prontos -->
+      <article class="offer-card reveal">
+        <h3>Materiais prontos que poupam tempo</h3>
+        <p class="offer-desc">Checklists, prompts, frameworks e referências validadas. Só copiar, ajustar e postar.</p>
+        <div class="count-chips">
+          <span class="chip">Prompts prontos</span>
+          <span class="chip">Checklists</span>
+          <span class="chip alt">Segredos & Hacks</span>
+          <span class="chip">Exemplos reais</span>
         </div>
       </article>
 
-      <article class="offer-step reveal">
-        <div class="offer-ico">💬</div>
-        <div class="offer-txt">
-          <h3>Comunidade viva (comigo dentro)</h3>
-          <p>Espaço pra pedir ajuda, validar posts, trocar ideia e destravar quando travar.</p>
+      <!-- 4) Comunidade viva -->
+      <article class="offer-card reveal">
+        <h3>Comunidade viva (comigo dentro)</h3>
+        <p class="offer-desc">Espaço pra pedir ajuda, validar posts, trocar ideia e destravar quando travar.</p>
+        <div class="count-chips">
+          <span class="chip">Feedbacks rápidos</span>
+          <span class="chip alt">Respostas minhas</span>
+          <span class="chip">Bastidores</span>
         </div>
       </article>
     </div>
