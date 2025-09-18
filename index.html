@@ -1777,6 +1777,22 @@ img, .scroll-row{ max-width: 100%; }
 #row-depoimentos .plain{
   width: 236px !important;                   /* um pouquinho menor */
 }
+    /* FAQ sem bordas nem cartões internos, mantendo a cor da seção inteira */
+#sec-faq-footer details{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+#sec-faq-footer details::after{
+  content: none !important;
+}
+#sec-faq-footer summary{
+  background: transparent !important;
+}
+#sec-faq-footer details p{
+  background: transparent !important;
+  border: none !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1879,7 +1895,10 @@ img, .scroll-row{ max-width: 100%; }
     <!-- 4 — GRID 1: funcionários -->
     <section class="section-funcionarios">
   <h2 class="func-title">OS SEUS NOVOS FUNCIONÁRIOS NÃO HUMANOS</h2>
-  <p class="func-subtitle">Conheça o que cada um dos 10 resolvem por você&nbsp;👇</p>
+  <p class="func-subtitle">
+  Conheça o que cada um dos 10 resolvem<br>
+  por você 👇
+</p>
   
   <!-- aqui continuam os cards já existentes -->
 </section>
@@ -2168,7 +2187,7 @@ img, .scroll-row{ max-width: 100%; }
 
   <!-- Sticky CTA Mobile -->
   <div class="sticky-cta" id="stickyCta" role="region" aria-label="Ação rápida">
-    <a href="/checkout" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
+    <a href="https://payfast.greenn.com.br/84555/offer/2xGrf9?ch_id=16275&utm=PRINCIPAL" class="cta" aria-label="Ir para o checkout">Quero fazer parte</a>
   </div>
 
   <!-- Dots laterais -->
@@ -2266,5 +2285,11 @@ img, .scroll-row{ max-width: 100%; }
       });
     })();
   </script>
+  <script>
+  (function(){
+    const url = "https://payfast.greenn.com.br/84555/offer/2xGrf9?ch_id=16275&utm=PRINCIPAL";
+    document.querySelectorAll('a.cta').forEach(a => a.setAttribute('href', url));
+  })();
+</script>
 </body>
 </html>
