@@ -1853,6 +1853,111 @@ img, .scroll-row{ max-width: 100%; }
   50%{ transform: translateX(0%);    opacity:.75; }
   100%{transform: translateX(120%);  opacity:.55; }
 }
+    /* FAQ como seção de verdade, cor no bloco inteiro */
+.theme-faq#sec-faq{
+  background: linear-gradient(0deg, rgba(115,116,241,.15), rgba(115,116,241,.15)) !important;
+  padding-top: 46px; padding-bottom: 46px;
+}
+#sec-faq .container{ padding-top:0 !important; padding-bottom:0 !important; }
+
+/* Cards nas perguntas */
+#sec-faq details{
+  position:relative; border-radius:18px; background:#fff;
+  box-shadow:0 12px 32px rgba(0,0,0,.09);
+  border:1px solid rgba(0,0,0,.06); overflow:hidden;
+}
+#sec-faq details::after{
+  content:""; position:absolute; inset:10px; border-radius:22px;
+  background: radial-gradient(130% 90% at 15% 15%, color-mix(in srgb, var(--theme-border) 35%, #0000), transparent 60%);
+  z-index:0;
+}
+#sec-faq details > *{ position:relative; z-index:1; }
+#sec-faq summary{ min-height:60px; padding:16px 18px; list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px; }
+#sec-faq .summary-h3{ font-size: var(--step-1); font-weight:700; color:#222; }
+#sec-faq .chev{ margin-left:auto; transition: transform .22s ease; color:var(--brand-primary); font-weight:900; }
+#sec-faq details[open] .chev{ transform: rotate(90deg) scale(1.05); }
+#sec-faq details p{ padding:0 18px 16px 18px; }
+
+/* CTA do FAQ */
+#sec-faq .faq-cta-wrap{ display:flex; justify-content:center; margin-top:18px; }
+#sec-faq .cta-solid{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:48px; padding:0 24px; border-radius:999px; text-transform:uppercase;
+  font-weight:800; color:#fff; background:var(--brand-primary);
+  box-shadow:0 10px 22px rgba(103,105,255,.25);
+}
+#sec-faq .cta-solid:hover{ box-shadow:0 12px 28px rgba(103,105,255,.35); transform:translateY(-1px); }
+    /* VISU: bloco da oferta centralizado e casado em largura */
+.visu-offer{ 
+  --w: min(560px, 92vw);
+  display:grid; place-items:center; gap:10px; margin-top:10px;
+}
+.visu-offer .visu-cta,
+.visu-offer .visu-price,
+.visu-offer .visu-bullets{ width:var(--w); }
+
+/* Botão com brilho sutil */
+.visu-cta{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:54px; border-radius:999px; text-transform:uppercase;
+  font-weight:900; color:#fff; background:linear-gradient(90deg,#FFB347,#FF5AA5);
+  box-shadow:0 12px 28px rgba(255,100,160,.25); letter-spacing:.02em;
+}
+.visu-cta.btn-cta-gradient{ position:relative; overflow:hidden; }
+.visu-cta.btn-cta-gradient::after{
+  content:""; position:absolute; inset:-2px;
+  background: radial-gradient(50% 50% at -10% 50%, rgba(255,255,255,.35), transparent 60%);
+  animation: shineMove 3s linear infinite; mix-blend-mode: screen;
+}
+@keyframes shineMove{
+  0%{ transform: translateX(-120%); }
+  50%{ transform: translateX(-10%); }
+  100%{ transform: translateX(120%); }
+}
+
+/* Preço alinhado à largura do botão */
+.visu-price{
+  text-align:center; font-weight:900; color:#5c4033;
+  font-size:clamp(16px, 4.2vw, 20px);
+  background: linear-gradient(180deg,#fff,#f6f6f6);
+  border-radius:16px; padding:10px 14px; box-shadow:0 6px 16px rgba(0,0,0,.06);
+}
+
+/* Asteriscos: grade 2x2 */
+.visu-bullets{
+  list-style:none; padding:0; margin:0;
+  display:grid; grid-template-columns: repeat(2, 1fr);
+  gap:6px 18px; text-align:center; font-weight:600; color:#3c2a20;
+}
+.visu-bullets li::before{ content:"* "; font-weight:900; }
+@media (max-width:480px){
+  .visu-bullets{ gap:6px 12px; }
+}
+    /* Remove qualquer pontilhado da seção Gêmeas/Designs */
+#sec-galeria .scroll-row,
+#sec-galeria .scroll-row::before,
+#sec-galeria .scroll-row::after,
+#sec-galeria .plain,
+#sec-galeria .plain::before,
+#sec-galeria .plain::after{
+  border:none !important;
+  outline:none !important;
+  box-shadow:none !important;
+  background-image:none !important;
+}
+/* imagem limpa */
+#sec-galeria .plain img{
+  border:0 !important; outline:0 !important; box-shadow:none !important;
+}
+    /* Remove bordas/pontilhados só na seção de Aulas */
+#row-aulas,
+#row-aulas .plain,
+#row-aulas img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1942,14 +2047,19 @@ img, .scroll-row{ max-width: 100%; }
           <source src="https://leislineduarda.github.io/gemini-teste/assets/gifcomunidade2.webm" type="video/webm">
           Seu navegador não suporta vídeos.
         </video>
-        <div class="oferta-inline">
-  <a href="/checkout" class="btn-oferta-variant">quero fazer parte</a>
-  <div class="preco-mini">apenas R$38,80/mês (plano anual)</div>
-  <p class="offer-notes" role="note">
-  <span>* sem burocracia</span>
-  <span>* funciona no ChatGPT gratuito</span>
-  <span>* aulas novas todo mês</span>
-</p>
+        <div class="visu-offer">
+  <a class="cta visu-cta btn-cta-gradient"
+     href="https://payfast.greenn.com.br/84555/offer/2xGrf9?ch_id=16275&utm=PRINCIPAL"
+     rel="noopener">QUERO FAZER PARTE</a>
+
+  <p class="visu-price">apenas R$38,80/mês (plano anual)</p>
+
+  <ul class="visu-bullets">
+    <li>sem burocracia</li>
+    <li>funciona no ChatGPT gratuito</li>
+    <li>aulas novas todo mês</li>
+    <li>acesso imediato</li>
+  </ul>
 </div>
       </div>
     </section>
@@ -2209,42 +2319,44 @@ img, .scroll-row{ max-width: 100%; }
     </p>
   </div>
 </section>
-    <!-- 9 — FAQ + rodapé -->
-<section class="section theme-7" id="sec-faq-footer">
-      <div class="container">
-        <div class="bridge-band" style="margin-bottom:18px;"></div>
+    <!-- 9 — FAQ -->
+<section class="section theme-faq" id="sec-faq">
+  <div class="container">
+    <h2 class="grid-title section-title-heroish">
+      PERGUNTAS QUE<br>
+      <span class="no-break">SEMPRE ME FAZEM</span>
+    </h2>
 
-        <h2 class="grid-title section-title-heroish">
-  PERGUNTAS QUE<br>
-  <span class="no-break">SEMPRE ME FAZEM</span>
-</h2>
-</h2>
-        <div class="faq-grid">
-          <details class="reveal">
-            <summary class="summary-h3">“Posso usar com ChatGPT gratuito?”<span class="chev">›</span></summary>
-            <p>Você pode usar os funcionários não humanos com o ChatGPT gratuito sem problema. As aulas e os prompts que você recebe também funcionam no gratuito.</p>
-          </details>
-          <details class="reveal">
-            <summary class="summary-h3">“Preciso pagar pelas ferramentas de IA à parte?”<span class="chev">›</span></summary>
-            <p>Sim. Mas você não precisa se preocupar: já tem um caminho pronto lá dentro mostrando quais ferramentas realmente valem a pena (nada de pagar por 10 que você nunca vai abrir).</p>
-          </details>
-          <details class="reveal">
-            <summary class="summary-h3">“Isso é um curso?”<span class="chev">›</span></summary>
-            <p>Não. Cursos acabam. Aqui é um sistema vivo. Você vai receber aulas express + Minha Equipe Não Humana + Uma Comunidade Ativa</p>
-          </details>
-          <details class="reveal">
-            <summary class="summary-h3">“Eu preciso saber de IA e CONTEÚDO antes?”<span class="chev">›</span></summary>
-            <p>Não. O que importa é entender do seu negócio. O restante a comunidade resolve.</p>
-          </details>
-        </div>
+    <div class="faq-grid">
+      <details class="reveal">
+        <summary class="summary-h3">“Posso usar com ChatGPT gratuito?”<span class="chev">›</span></summary>
+        <p>Você pode usar os funcionários não humanos com o ChatGPT gratuito sem problema. As aulas e os prompts que você recebe também funcionam no gratuito.</p>
+      </details>
 
-        <div class="footer-min">
-          <div class="footer-copy">© 2025 @leislineduarda - Comunidade Conteúdo Infinito com IA</div>
-          <div class="footer-links">
-          </div>
-        </div>
-      </div>
-    </section>
+      <details class="reveal">
+        <summary class="summary-h3">“Preciso pagar pelas ferramentas de IA à parte?”<span class="chev">›</span></summary>
+        <p>Sim. Mas você não precisa se preocupar: já tem um caminho pronto lá dentro mostrando quais ferramentas realmente valem a pena (nada de pagar por 10 que você nunca vai abrir).</p>
+      </details>
+
+      <details class="reveal">
+        <summary class="summary-h3">“Isso é um curso?”<span class="chev">›</span></summary>
+        <p>Não. Cursos acabam. Aqui é um sistema vivo. Você vai receber aulas express + Minha Equipe Não Humana + Uma Comunidade Ativa.</p>
+      </details>
+
+      <details class="reveal">
+        <summary class="summary-h3">“Eu preciso saber de IA e CONTEÚDO antes?”<span class="chev">›</span></summary>
+        <p>Não. O que importa é entender do seu negócio. O restante a comunidade resolve.</p>
+      </details>
+    </div>
+
+    <!-- CTA do FAQ (já apontando pro checkout) -->
+    <div class="faq-cta-wrap">
+      <a class="cta cta-solid" href="https://payfast.greenn.com.br/84555/offer/2xGrf9?ch_id=16275&utm=PRINCIPAL" rel="noopener">
+        QUERO FAZER PARTE
+      </a>
+    </div>
+  </div>
+</section>
   </main>
 
   <!-- Sticky CTA Mobile -->
