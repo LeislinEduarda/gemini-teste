@@ -1443,13 +1443,64 @@
   100% { background-position: 0% 50%; }
 }
 
-/* Preço – texto simples, sem chip, alinhado ao centro e com peso */
+/* ===== CTA FINAL SOLO (sem card) ===== */
+#sec-pronto{
+  padding: 32px 0 74px;               /* respiro e espaço para não colidir com o CTA flutuante */
+  background: transparent;            /* sem card, direto na página */
+}
+
+#sec-pronto .container{
+  text-align: center;
+}
+
+/* Título provocativo – texto simples */
+#sec-pronto .cta-head{
+  font-size: clamp(18px, 2.2vw + 10px, 26px);
+  font-weight: 800;
+  color: #2B2B2B;
+  margin: 0 0 16px 0;
+  text-wrap: balance;                 /* quebra bonita em telas menores */
+}
+
+/* Botão grande, com gradiente animado, diferente do CTA flutuante */
+#sec-pronto .cta-btn-standalone{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 680px;
+  min-height: 68px;
+  padding: 0 22px;
+  border-radius: 18px;
+  border: none;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .02em;
+  text-align: center;
+  font-size: clamp(20px, 2.4vw + 10px, 28px);
+  background: linear-gradient(135deg, #F9C74F, #FF8EA2, #7A6BFF);
+  background-size: 220% 220%;
+  animation: prontoGradient 7s ease infinite; /* animação contínua */
+  box-shadow: 0 16px 40px rgba(122,107,255,.32);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+#sec-pronto .cta-btn-standalone:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 22px 52px rgba(122,107,255,.42);
+}
+
+@keyframes prontoGradient{
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Preço – texto simples, sem chip */
 #sec-pronto .preco-mini{
-  margin-top: 14px;
+  margin: 14px 0 0 0;
   font-size: clamp(15px, 1.6vw + 10px, 20px);
   font-weight: 800;
-  color: #5c4033;                   /* marrom do hero */
-  text-align: center;
+  color: #5c4033;                     /* mesmo marrom do hero */
 }
   </style>
 <header class="section theme-1" id="sec-hero">
@@ -1778,15 +1829,15 @@
 
     <section class="section" id="sec-pronto">
   <div class="container">
-    <div class="cta-wrap">
-      <p class="cta-head">Pronto pra criar sem cara de IA e parar de parecer igual a todo mundo?</p>
+    <p class="cta-head">
+      Pronto pra criar sem cara de IA e parar de parecer igual a todo mundo?
+    </p>
 
-      <a href="/checkout" class="cta-btn-big" aria-label="Ir para o checkout">
-        QUERO FAZER PARTE
-      </a>
+    <a href="/checkout" class="cta-btn-standalone" aria-label="Ir para o checkout">
+      QUERO FAZER PARTE
+    </a>
 
-      <div class="preco-mini">apenas R$38,80/mês (plano anual)</div>
-    </div>
+    <div class="preco-mini">apenas R$38,80/mês (plano anual)</div>
   </div>
 </section>
     <!-- 9 — FAQ + rodapé -->
