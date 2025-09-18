@@ -1060,6 +1060,129 @@
   font-size:var(--step-0);
   line-height:1.45;
 }
+    /* ====== SEÇÃO OFERTA (VIBRANTE) ====== */
+#sec-oferta {
+  --pt: 40px; --pb: 34px;
+  padding-top: var(--pt); padding-bottom: var(--pb);
+  background:
+    linear-gradient(0deg, rgba(115,116,241,.14), rgba(115,116,241,.14)),
+    #fff;
+}
+
+#sec-oferta .section-title-heroish{
+  font-size: clamp(28px, 4.8vw, 44px);
+  font-weight: 800;
+  color: var(--brand-primary);
+  line-height: 1.05;
+  text-align: center;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+#sec-oferta .section-sub{
+  text-align:center;
+  max-width: 68ch;
+  margin: 6px auto 18px auto;
+  color: #222;
+  font-size: clamp(15px, 1.2vw + 10px, 18px);
+}
+
+/* Lista “épica”: cartões com borda gradiente e brilho sutil */
+.oferta-grid{
+  display:grid;
+  gap:16px;
+  grid-template-columns: 1fr;
+  max-width: 980px;
+  margin: 0 auto;
+}
+@media (min-width: 900px){
+  .oferta-grid{ grid-template-columns: 1fr 1fr; }
+}
+
+/* Truque: fundo duplo p/ borda gradiente “viva” */
+.oferta-card{
+  position:relative;
+  border-radius:16px;
+  padding:16px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, #7B2FFF, #B266FF, #FEEF55, #7B2FFF) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 12px 28px rgba(0,0,0,.10);
+  display:flex; gap:14px; align-items:flex-start;
+  transition: transform .15s ease, box-shadow .15s ease, filter .2s ease;
+  overflow:hidden;
+}
+.oferta-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+/* filete animado à esquerda (sensação de “energia”) */
+.oferta-card::before{
+  content:"";
+  position:absolute; left:0; top:0; bottom:0; width:6px;
+  background: linear-gradient(180deg, #7B2FFF, #FEEF55, #7B2FFF);
+  background-size: 100% 180%;
+  animation: ofertaPulse 3.6s linear infinite;
+  filter: saturate(1.1);
+}
+@keyframes ofertaPulse{
+  0%{ background-position: 0% 0%; }
+  100%{ background-position: 0% 180%; }
+}
+
+/* bolha de ícone */
+.oferta-ico{
+  flex-shrink:0;
+  width:56px; height:56px; border-radius:14px;
+  display:grid; place-items:center; font-size:28px;
+  background:
+    radial-gradient(120% 120% at 20% 20%, rgba(103,105,255,.14), transparent 60%),
+    linear-gradient(180deg, #ffffff, #F7F8FF);
+  border: 1px solid color-mix(in srgb, var(--brand-primary) 22%, #ffffff);
+  box-shadow: inset 0 0 0 2px #ffffff66, 0 8px 18px rgba(103,105,255,.12);
+}
+
+/* textos */
+.oferta-body strong{
+  display:block; font-weight: 800; color: var(--ink-strong);
+  margin-top:3px; margin-bottom:3px; font-size: clamp(16px, 1.2vw + 12px, 18px);
+}
+.oferta-body p{
+  margin:0; color:#2A2A2A; font-size: var(--step-0); line-height:1.5;
+}
+
+/* bloco final com CTA destacado */
+.oferta-cta{
+  margin-top: 18px;
+  border-radius:18px;
+  padding:18px;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(90deg, #7B2FFF, #B266FF, #FEEF55) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 14px 34px rgba(0,0,0,.10);
+  text-align:center;
+}
+.oferta-cta .obs{
+  font-size: clamp(14px, 1vw + 10px, 16px);
+  color:#333; margin-bottom:10px;
+}
+.oferta-cta .cta{
+  display:inline-flex; min-height:48px; padding:0 24px;
+  border-radius:999px; background: var(--brand-primary); color:#fff;
+  font-weight: 800; letter-spacing:.02em; text-transform: uppercase;
+  border:2px solid transparent;
+  box-shadow: 0 10px 26px rgba(103,105,255,.28);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.oferta-cta .cta:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(103,105,255,.32);
+}
+.oferta-cta .preco-mini{
+  display:block; margin-top:8px; color:#5c4033; font-weight:700;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -1326,40 +1449,69 @@
     </div>
   </div>
 </section>
-    <section class="section theme-9" id="sec-oferta">
+    <!-- 8.5 — OFERTA (VIBRANTE) -->
+<section class="section theme-9" id="sec-oferta">
   <div class="container">
     <h2 class="grid-title section-title-heroish">
-      TUDO O QUE VOCÊ VAI LEVAR<br>
+      TUDO O QUE VOCÊ LEVA<br>
       <span class="no-break">ENTRANDO HOJE 👇</span>
     </h2>
+    <p class="section-sub">Um pacote prático, vivo e direto ao ponto — pensado para você criar <strong>reels, carrosséis e stories</strong> do zero, com IA, sem parecer IA.</p>
 
-    <ul class="oferta-list">
-      <li class="oferta-item">
-        <span class="oferta-ico">🤖</span>
-        <div>
+    <div class="oferta-grid">
+      <div class="oferta-card">
+        <div class="oferta-ico" aria-hidden="true">🤖</div>
+        <div class="oferta-body">
           <strong>Equipe de Social Media Não Humana</strong>
-          <p>10 cérebros artificiais treinados para trabalhar no seu conteúdo.</p>
+          <p>10 “funcionários” treinados por mim para ideias, ganchos, roteiros, carrosséis, legendas, stories, bio e branding.</p>
         </div>
-      </li>
-      <li class="oferta-item">
-        <span class="oferta-ico">🎥</span>
-        <div>
-          <strong>Aulas novas todo mês</strong>
-          <p>Sempre atualizadas com o que eu mesma aplico.</p>
-        </div>
-      </li>
-      <li class="oferta-item">
-        <span class="oferta-ico">💬</span>
-        <div>
-          <strong>Comunidade ativa</strong>
-          <p>Você nunca fica sozinho — troca com membros e comigo.</p>
-        </div>
-      </li>
-      <!-- adicione outros bullets -->
-    </ul>
+      </div>
 
-    <div style="text-align:center; margin-top:24px;">
-      <a href="/checkout" class="cta">Quero fazer parte agora</a>
+      <div class="oferta-card">
+        <div class="oferta-ico" aria-hidden="true">🎥</div>
+        <div class="oferta-body">
+          <strong>Aulas express (conteúdo + IA)</strong>
+          <p>Aulas rápidas, atualizadas e aplicáveis no mesmo dia, com o que eu realmente uso e funciona.</p>
+        </div>
+      </div>
+
+      <div class="oferta-card">
+        <div class="oferta-ico" aria-hidden="true">🧵</div>
+        <div class="oferta-body">
+          <strong>Material de apoio inteligente</strong>
+          <p>Checklists e prompts prontos para acelerar sua execução (sem ficar perdida).</p>
+        </div>
+      </div>
+
+      <div class="oferta-card">
+        <div class="oferta-ico" aria-hidden="true">🧠</div>
+        <div class="oferta-body">
+          <strong>Segredos testados + curadoria</strong>
+          <p>Hacks, ganchos e estratégias validadas por mim (sem teoria solta).</p>
+        </div>
+      </div>
+
+      <div class="oferta-card">
+        <div class="oferta-ico" aria-hidden="true">👯‍♀️</div>
+        <div class="oferta-body">
+          <strong>Gêmea Digital (passo a passo)</strong>
+          <p>Guia prático para criar sua gêmea e usar em imagens, vídeos e carrosséis.</p>
+        </div>
+      </div>
+
+      <div class="oferta-card">
+        <div class="oferta-ico" aria-hidden="true">💬</div>
+        <div class="oferta-body">
+          <strong>Comunidade ativa</strong>
+          <p>Espaço para pedir ajuda, trocar feedbacks e acelerar com quem está no mesmo jogo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="oferta-cta">
+      <div class="obs">Pronto para criar com leveza e parar de parecer igual a todo mundo?</div>
+      <a href="/checkout" class="cta">Quero fazer parte</a>
+      <small class="preco-mini">apenas R$38,80/mês (plano anual)</small>
     </div>
   </div>
 </section>
