@@ -1183,6 +1183,71 @@
 .oferta-cta .preco-mini{
   display:block; margin-top:8px; color:#5c4033; font-weight:700;
 }
+    /* ====== MINI AJUSTES - OFERTA (PACOTE SUTIL) ====== */
+/* 1) Compacta altura da seção (menos vazio, mais impacto visual) */
+#sec-oferta {
+  --pt: 28px;               /* antes 40px */
+  --pb: 24px;               /* antes 34px */
+  padding-top: var(--pt) !important;
+  padding-bottom: var(--pb) !important;
+}
+
+/* 2) Cards mais “clean”: menos sombra, leve squeeze no padding */
+.oferta-card{
+  padding: 14px !important;                  /* antes 16px */
+  box-shadow: 0 10px 24px rgba(0,0,0,.08) !important;
+}
+.oferta-card:hover{
+  box-shadow: 0 14px 30px rgba(0,0,0,.10) !important;
+}
+
+/* 3) Filete animado mais fino e suave (mantém o efeito, menos gritante) */
+.oferta-card::before{
+  width: 4px !important;                     /* antes 6px */
+  opacity: .9;                               /* suaviza */
+  animation-duration: 4.8s !important;       /* antes 3.6s */
+}
+
+/* 4) Ícone um pouco menor (foco no texto/ganho) */
+.oferta-ico{
+  width: 48px !important;
+  height: 48px !important;
+  font-size: 24px !important;
+}
+
+/* 5) Título do item ligeiramente mais forte, corpo mais legível */
+.oferta-body strong{
+  font-size: clamp(16px, 1.1vw + 12px, 19px) !important;
+  margin-bottom: 2px !important;
+}
+.oferta-body p{
+  font-size: calc(var(--step-0) * 0.98) !important;
+  line-height: 1.55 !important;
+}
+
+/* 6) Grid entra em 2 colunas mais cedo (preenche melhor tablets) */
+@media (min-width: 780px){
+  .oferta-grid{ grid-template-columns: 1fr 1fr !important; }
+}
+
+/* 7) CTA mais próximo dos cards e mais compacto */
+.oferta-cta{
+  margin-top: 14px !important;               /* antes 18px */
+  padding: 14px !important;                  /* antes 18px */
+  box-shadow: 0 10px 26px rgba(0,0,0,.10) !important;
+}
+.oferta-cta .preco-mini{
+  font-size: 0.95rem !important;
+  opacity: .92;
+}
+
+/* 8) Mobile: menos gap e respiro ainda mais justo */
+@media (max-width: 480px){
+  #sec-oferta .section-sub{ margin-bottom: 14px !important; }
+  .oferta-grid{ gap: 12px !important; }
+  .oferta-card{ padding: 12px !important; }
+  .oferta-cta{ margin-top: 12px !important; padding: 12px !important; }
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
