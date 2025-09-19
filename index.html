@@ -2008,10 +2008,18 @@ img, .scroll-row{ max-width: 100%; }
   position:absolute; left:0; top:0;
   color:#6a40f7; font-weight:900;
 }
-/* Garante que qualquer borda pontilhada ou tracejada seja substituída por uma sólida. */
-* {
-    border-style: solid !important;
-}    
+/* Remove SOMENTE bordas pontilhadas e tracejadas */
+*,
+*::before,
+*::after {
+  border-style: none !important;
+}
+
+/* Segurança extra: se em algum inline style tiver dotted/dashed */
+*[style*="dotted"],
+*[style*="dashed"] {
+  border: none !important;
+} 
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
