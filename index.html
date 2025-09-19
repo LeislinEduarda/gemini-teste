@@ -1992,6 +1992,50 @@ img, .scroll-row{ max-width: 100%; }
 *[style*="dashed"] {
   border: none !important;
 }
+/* ===== FAQ: deixar sem cartão por trás e com cor única ===== */
+#sec-faq-footer.section.theme-9{
+  background: #E9E4FF !important; /* sua cor de fundo única do FAQ */
+}
+
+/* remove qualquer “painel” atrás das perguntas */
+#sec-faq-footer .container,
+#sec-faq-footer .container::before,
+#sec-faq-footer .container::after{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+/* remove wrappers extras que viram cartão dentro do FAQ */
+#sec-faq-footer .container > *:not(h2):not(.grid-title):not(.section-title-heroish):not(.faq-grid):not(.footer-min):not(.bridge-band){
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* garante que somente os DETAILS (as perguntas) apareçam como cards */
+#sec-faq-footer .faq-grid details{
+  position: relative;
+  z-index: 1;
+  background: #fff;                /* mantém suas “cartinhas” */
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.09);
+  border: 0;
+}
+
+/* se houver qualquer faixa decorativa no título, elimina */
+#sec-faq-footer .grid-title::before,
+#sec-faq-footer .section-title-heroish::before{
+  content: none !important;
+  display: none !important;
+}
+
+/* respira um pouco melhor */
+#sec-faq-footer .container { padding-top: 8px !important; }
+#sec-faq-footer .grid-title.section-title-heroish { margin-bottom: 12px !important; }
 
   </style>
 <header class="section theme-1" id="sec-hero">
@@ -2350,7 +2394,7 @@ img, .scroll-row{ max-width: 100%; }
   </div>
 </section>
     <!-- 9 — FAQ -->
-<section class="section theme-1 faq-plain" id="sec-faq-footer">
+<section class="section theme-9 faq-plain" id="sec-faq-footer">
   <div class="container">
     <h2 class="grid-title section-title-heroish">
       PERGUNTAS QUE<br>
