@@ -2042,6 +2042,23 @@ img, .scroll-row{ max-width: 100%; }
   box-shadow: none !important;
   border: 0 !important;
 }
+#hero {
+  padding-top: 120px; /* pode ajustar entre 100px e 150px */
+}
+/* Remove borda/fundo branco dos cards das gêmeas */
+.section-gemeas .plain,
+.section-design .plain {
+  background: none !important;   /* elimina fundo branco */
+  border: none !important;       /* garante que não tem borda */
+  padding: 0 !important;         /* remove espaço extra */
+  box-shadow: none !important;   /* remove qualquer sombra antiga */
+}
+    .section-gemeas .plain img,
+.section-design .plain img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
