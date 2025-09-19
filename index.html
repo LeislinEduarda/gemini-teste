@@ -2033,6 +2033,49 @@ img, .scroll-row{ max-width: 100%; }
 #sec-faq-footer a[href*="checkout"] {
   display: none !important;
 }
+    /* ===== FAQ sem “card” — cor única na seção inteira ===== */
+#sec-faq-footer.faq-plain{
+  --faq-bg: #EAE4FF;                 /* escolha a cor única aqui */
+  background: var(--faq-bg) !important;
+  position: relative;
+}
+
+/* novo container “limpo” (substitui o .container só nesta seção) */
+#sec-faq-footer .faq-container{
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: 24px;
+  background: transparent !important;   /* nunca vira “card” */
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+/* mata qualquer pseudo-elemento que possa estar pintando moldura */
+#sec-faq-footer.faq-plain::before,
+#sec-faq-footer.faq-plain::after,
+#sec-faq-footer .faq-container::before,
+#sec-faq-footer .faq-container::after{
+  content: none !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+/* mantém os CARDS das perguntas bonitos (brancos) */
+#sec-faq-footer details{
+  background: #fff !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(0,0,0,.06) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.10) !important;
+}
+
+/* tira qualquer “efeito de fundo” que alguns details usavam */
+#sec-faq-footer details::after{
+  content: none !important;
+}
 
   </style>
 <header class="section theme-1" id="sec-hero">
@@ -2391,7 +2434,14 @@ img, .scroll-row{ max-width: 100%; }
   </div>
 </section>
     <!-- 9 — FAQ -->
-<section class="section theme-faq" id="sec-faq">
+<section class="section theme-9 faq-plain" id="sec-faq-footer">
+  <div class="faq-container">
+    <div class="bridge-band" style="margin-bottom:18px;"></div>
+    <h2 class="grid-title section-title-heroish">...</h2>
+    <div class="faq-grid">...</div>
+    <div class="footer-min">...</div>
+  </div>
+</section>
   <div class="container">
     <h2 class="grid-title section-title-heroish">
       PERGUNTAS QUE<br>
@@ -2419,7 +2469,6 @@ img, .scroll-row{ max-width: 100%; }
         <p>Não. O que importa é entender do seu negócio. O restante a comunidade resolve.</p>
       </details>
     </div>
-    
 </section>
   </main>
 
