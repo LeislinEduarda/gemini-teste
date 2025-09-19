@@ -1958,6 +1958,35 @@ img, .scroll-row{ max-width: 100%; }
   box-shadow: none !important;
   background: none !important;
 }
+    /* === Asteriscos do CTA (VISU) iguais aos da Oferta === */
+:root{ --cta-meta-color: #5c4033; } /* marrom usado no preço */
+
+.cta-offer-meta{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;              /* quebra bonito em telas muito pequenas */
+  gap: 14px;                    /* espaço consistente */
+  color: var(--cta-meta-color);
+  font-weight: 700;
+  font-size: clamp(15px, 1.1vw + 12px, 18px);
+  line-height: 1.2;
+  margin-top: 8px;              /* fica colado no preço */
+}
+
+.cta-offer-meta li{
+  list-style: none;
+  position: relative;
+  padding-left: 0;
+}
+
+/* Insere o asterisco somente entre os itens (como na oferta) */
+.cta-offer-meta li + li::before{
+  content: "*";
+  color: var(--cta-meta-color);
+  font-weight: 800;
+  margin-right: 14px;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -2054,12 +2083,11 @@ img, .scroll-row{ max-width: 100%; }
 
   <p class="visu-price">apenas R$38,80/mês (plano anual)</p>
 
-  <ul class="visu-bullets">
-    <li>sem burocracia</li>
-    <li>funciona no ChatGPT gratuito</li>
-    <li>aulas novas todo mês</li>
-    <li>acesso imediato</li>
-  </ul>
+  <ul class="cta-offer-meta">
+  <li>sem burocracia</li>
+  <li>funciona no ChatGPT gratuito</li>
+  <li>aulas novas todo mês</li>
+</ul>
 </div>
       </div>
     </section>
