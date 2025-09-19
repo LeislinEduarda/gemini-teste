@@ -1992,118 +1992,33 @@ img, .scroll-row{ max-width: 100%; }
 *[style*="dashed"] {
   border: none !important;
 }
-/* ==================== FAQ SEM CARD ==================== */
-/* 1) Define uma única cor para a seção inteira */
-#sec-faq-footer {
-  --faq-bg: #EAE4FF;            /* ajuste a cor aqui se quiser */
-  background: var(--faq-bg) !important;
+/* FAQ com cor única */
+#sec-faq-footer.section.theme-9 {
+  background: #E9E4FF !important;      /* ajuste se quiser outra cor */
 }
 
-/* 2) Pinta o container com a MESMA cor e zera qualquer card/sombra */
-#sec-faq-footer > .container {
-  background: var(--faq-bg) !important;   /* fica idêntico à seção = some o “card” */
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  outline: 0 !important;
-}
-
-/* 3) Elimina qualquer pseudo-elemento que crie moldura/fundo */
-#sec-faq-footer::before,
-#sec-faq-footer::after,
-#sec-faq-footer > .container::before,
-#sec-faq-footer > .container::after {
-  content: none !important;
-  background: none !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: 0 !important;
-}
-
-/* 4) Mantém os cartões das perguntas bonitos */
-#sec-faq-footer details {
-  background: #fff !important;
-  border-radius: 18px !important;
-  border: 1px solid rgba(0,0,0,.06) !important;
-  box-shadow: 0 12px 28px rgba(0,0,0,.10) !important;
-}
-
-/* 5) Remove qualquer CTA dentro do FAQ, caso volte por cache */
-#sec-faq-footer .cta,
-#sec-faq-footer a[href*="checkout"] {
-  display: none !important;
-}
-    /* ===== FAQ sem “card” — cor única na seção inteira ===== */
-#sec-faq-footer.faq-plain{
-  --faq-bg: #EAE4FF;                 /* escolha a cor única aqui */
-  background: var(--faq-bg) !important;
-  position: relative;
-}
-
-/* novo container “limpo” (substitui o .container só nesta seção) */
-#sec-faq-footer .faq-container{
-  max-width: var(--container);
-  margin-inline: auto;
-  padding: 24px;
-  background: transparent !important;   /* nunca vira “card” */
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  outline: 0 !important;
-}
-
-/* mata qualquer pseudo-elemento que possa estar pintando moldura */
-#sec-faq-footer.faq-plain::before,
-#sec-faq-footer.faq-plain::after,
-#sec-faq-footer .faq-container::before,
-#sec-faq-footer .faq-container::after{
-  content: none !important;
-  background: none !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  outline: 0 !important;
-}
-
-/* mantém os CARDS das perguntas bonitos (brancos) */
-#sec-faq-footer details{
-  background: #fff !important;
-  border-radius: 18px !important;
-  border: 1px solid rgba(0,0,0,.06) !important;
-  box-shadow: 0 12px 28px rgba(0,0,0,.10) !important;
-}
-
-/* ===== FAQ – limpa tudo que aparece antes do título ===== */
-
-/* 1) Mata a banda/decoração e qualquer placeholder */
-#sec-faq-footer .bridge-band,
-#sec-faq-footer .decor,
-#sec-faq-footer .decor-line,
-#sec-faq-footer .top-decor,
-#sec-faq-footer .container > p {
-  display: none !important;
-}
-
-/* 2) Alguns títulos têm uma "faixa" via ::before – removemos só no FAQ */
+/* remove QUALQUER faixa/pseudo no título do FAQ */
 #sec-faq-footer .grid-title::before,
 #sec-faq-footer .section-title-heroish::before {
   content: none !important;
   display: none !important;
 }
 
-/* 3) Kill-switch: dentro do container do FAQ,
-      deixe apenas o título (h2), o grid de perguntas e o rodapé.
-      Todo o resto some. */
-#sec-faq-footer .container > :not(.grid-title):not(.section-title-heroish):not(.faq-grid):not(.footer-min) {
+/* reforço: não deixe bandas decorativas ou placeholders no FAQ */
+#sec-faq-footer .bridge-band,
+#sec-faq-footer .decor,
+#sec-faq-footer .decor-line,
+#sec-faq-footer .top-decor {
   display: none !important;
 }
 
-/* 4) Ajustes finos de respiro */
+/* títulos e respiro */
 #sec-faq-footer .container {
   padding-top: 10px !important;
 }
 #sec-faq-footer .grid-title.section-title-heroish {
-  margin-top: 4px !important;
-  margin-bottom: 14px !important;
+  margin-top: 6px !important;
+  margin-bottom: 12px !important;
 }
   </style>
 <header class="section theme-1" id="sec-hero">
@@ -2631,6 +2546,36 @@ img, .scroll-row{ max-width: 100%; }
 
     document.head.append(link1, link2, link3);
   })();
+</script>
+<script>
+(function(){
+  const sec = document.getElementById('sec-faq-footer');
+  if (!sec) return;
+
+  const cont  = sec.querySelector('.container');
+  if (!cont) return;
+
+  // procura o título do FAQ
+  const title = cont.querySelector('.grid-title, .section-title-heroish, h2');
+  if (!title) return;
+
+  // Remove QUALQUER elemento que venha ANTES do título
+  let prev = title.previousElementSibling;
+  while (prev) {
+    prev.style.display = 'none';
+    prev = prev.previousElementSibling;
+  }
+
+  // Garante que a pseudo-faixa do título não reapareça
+  const st = document.createElement('style');
+  st.textContent = `
+    #sec-faq-footer .grid-title::before,
+    #sec-faq-footer .section-title-heroish::before {
+      content: none !important; display: none !important;
+    }
+  `;
+  document.head.appendChild(st);
+})();
 </script>
 </body>
 </html>
