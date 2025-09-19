@@ -2008,6 +2008,45 @@ img, .scroll-row{ max-width: 100%; }
   position:absolute; left:0; top:0;
   color:#6a40f7; font-weight:900;
 }
+/* ===== Remover TODOS os pontilhados só na seção "O QUE A GENTE CRIA DE VERDADE" ===== */
+#sec-gemea-design .plain,
+#sec-gemea-design .plain::before,
+#sec-gemea-design .plain::after,
+#sec-gemea-design .img-slot,
+#sec-gemea-design .img-slot::before,
+#sec-gemea-design .img-slot::after,
+#sec-gemea-design .scroll-row,
+#sec-gemea-design .scroll-row::before,
+#sec-gemea-design .scroll-row::after {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+  content: none !important;
+}
+
+/* Garante que nenhuma imagem da seção “carregue” borda ou outline */
+#sec-gemea-design img {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* Se algum card herdou radius/borda, zera tudo só aqui */
+#sec-gemea-design .card,
+#sec-gemea-design .card::before,
+#sec-gemea-design .card::after {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Se a grade estiver usando "plain" com radius + dashed, isso garante o visual plano */
+#sec-gemea-design .plain {
+  border-radius: 0 !important;
+  background: transparent !important;
+}    
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -2184,14 +2223,10 @@ img, .scroll-row{ max-width: 100%; }
   </div>
 </section>
 <!-- 7.1 — Galeria: O que a gente cria de verdade -->
+<section class="section theme-..." id="sec-gemea-design">
+  <!-- ... tudo que já está dentro permanece igual ... -->
+</section>    
 <section class="section section-galeria" id="sec-galeria">
-  <style>
-  /* Remove qualquer borda tracejada (dashed) só na seção "O QUE A GENTE CRIA DE VERDADE" */
-  section#cria-de-verdade * {
-    border-style: none !important;
-    border: none !important;
-  }
-</style>
   <div class="container">
     <h2 class="section-title-heroish gallery-title">
       O QUE A GENTE<br>
