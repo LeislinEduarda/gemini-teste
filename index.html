@@ -2072,11 +2072,39 @@ img, .scroll-row{ max-width: 100%; }
   box-shadow: 0 12px 28px rgba(0,0,0,.10) !important;
 }
 
-/* tira qualquer “efeito de fundo” que alguns details usavam */
-#sec-faq-footer details::after{
-  content: none !important;
+/* ===== FAQ – limpa tudo que aparece antes do título ===== */
+
+/* 1) Mata a banda/decoração e qualquer placeholder */
+#sec-faq-footer .bridge-band,
+#sec-faq-footer .decor,
+#sec-faq-footer .decor-line,
+#sec-faq-footer .top-decor,
+#sec-faq-footer .container > p {
+  display: none !important;
 }
 
+/* 2) Alguns títulos têm uma "faixa" via ::before – removemos só no FAQ */
+#sec-faq-footer .grid-title::before,
+#sec-faq-footer .section-title-heroish::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* 3) Kill-switch: dentro do container do FAQ,
+      deixe apenas o título (h2), o grid de perguntas e o rodapé.
+      Todo o resto some. */
+#sec-faq-footer .container > :not(.grid-title):not(.section-title-heroish):not(.faq-grid):not(.footer-min) {
+  display: none !important;
+}
+
+/* 4) Ajustes finos de respiro */
+#sec-faq-footer .container {
+  padding-top: 10px !important;
+}
+#sec-faq-footer .grid-title.section-title-heroish {
+  margin-top: 4px !important;
+  margin-bottom: 14px !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
