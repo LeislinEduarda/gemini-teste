@@ -2020,19 +2020,16 @@ img, .scroll-row{ max-width: 100%; }
 *[style*="dashed"] {
   border: none !important;
 }
-/* Remove qualquer borda/resquício branco que esteja sobrando */
-*,
-*::before,
-*::after {
-  border: none !important;
-  outline: none !important;
+/* FAQ com cor única */
+#sec-faq {
+  background: #f9f7ff;   /* escolha a cor que mantém a sequência das seções */
+  padding: 60px 20px;
 }
 
-/* Caso tenha vindo de imagens */
-img {
+#sec-faq .faq-grid {
+  background: transparent !important; /* tira card branco */
+  box-shadow: none !important;
   border: none !important;
-  outline: none !important;
-  background: transparent !important;
 }
   </style>
 <header class="section theme-1" id="sec-hero">
@@ -2419,14 +2416,7 @@ img {
         <p>Não. O que importa é entender do seu negócio. O restante a comunidade resolve.</p>
       </details>
     </div>
-
-    <!-- CTA do FAQ (já apontando pro checkout) -->
-    <div class="faq-cta-wrap">
-      <a class="cta cta-solid" href="https://payfast.greenn.com.br/84555/offer/2xGrf9?ch_id=16275&utm=PRINCIPAL" rel="noopener">
-        QUERO FAZER PARTE
-      </a>
-    </div>
-  </div>
+    
 </section>
   </main>
 
