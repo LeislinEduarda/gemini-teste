@@ -2009,19 +2009,16 @@ img, .scroll-row{ max-width: 100%; }
   color:#6a40f7; font-weight:900;
 }
 /* REMOVE 100% DOS PONTILHADOS DO SITE */
-
-/* Remove qualquer borda pontilhada ou tracejada em todos elementos */
 *,
 *::before,
 *::after {
-  border-style: solid !important;   /* força borda sólida (sem dashed/dotted) */
-  border-width: 0 !important;       /* zera a largura */
+  border-style: solid !important;
+  border-width: 0 !important;
   outline: none !important;
   box-shadow: none !important;
   background-image: none !important;
 }
 
-/* Segurança extra: se algum inline usa dashed/dotted */
 *[style*="dashed"],
 *[style*="dotted"] {
   border: none !important;
