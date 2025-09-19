@@ -2149,6 +2149,38 @@ img, .scroll-row{ max-width: 100%; }
 @media (min-width:1024px){
   #sec-hero .hero-media{ margin-top: -6px !important; }
 }
+/* estado escondido do CTA flutuante */
+.sticky-cta.is-hidden{
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .22s ease, transform .22s ease;
+}
+/* quando visível (fora do hero) */
+.sticky-cta:not(.is-hidden){
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+    /* HERO – compacta botão, preço e asteriscos 4% */
+#sec-hero .hero-offer{
+  margin-top: 4px !important;
+}
+
+#sec-hero .hero-offer .btn-offer{
+  min-height: 58px !important;     /* era 60 */
+  border-radius: 16px !important;   /* mais “acabado” */
+}
+
+#sec-hero .hero-offer .offer-price{
+  margin-top: 8px !important;       /* era 10 */
+  margin-bottom: 2px !important;    /* era 4 */
+}
+
+#sec-hero .hero-offer .offer-notes{
+  gap: 8px 16px !important;         /* era 10 x 18 */
+  font-size: clamp(12.5px, 1.1vw + 10px, 14px) !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
@@ -2722,6 +2754,30 @@ img, .scroll-row{ max-width: 100%; }
   `;
   document.head.appendChild(st);
 })();
+</script>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hero  = document.getElementById('sec-hero');
+  const sticky = document.querySelector('.sticky-cta');
+  if (!hero || !sticky) return;
+
+  // começa escondido quando o HERO está visível
+  sticky.classList.add('is-hidden');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // HERO na tela → esconde CTA flutuante
+        sticky.classList.add('is-hidden');
+      } else {
+        // saiu do HERO → mostra CTA flutuante
+        sticky.classList.remove('is-hidden');
+      }
+    });
+  }, { rootMargin: '-10% 0px 0px 0px', threshold: 0 });
+
+  io.observe(hero);
+});
 </script>
 </body>
 </html>
