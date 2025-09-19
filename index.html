@@ -1992,6 +1992,47 @@ img, .scroll-row{ max-width: 100%; }
 *[style*="dashed"] {
   border: none !important;
 }
+/* ==================== FAQ SEM CARD ==================== */
+/* 1) Define uma única cor para a seção inteira */
+#sec-faq-footer {
+  --faq-bg: #EAE4FF;            /* ajuste a cor aqui se quiser */
+  background: var(--faq-bg) !important;
+}
+
+/* 2) Pinta o container com a MESMA cor e zera qualquer card/sombra */
+#sec-faq-footer > .container {
+  background: var(--faq-bg) !important;   /* fica idêntico à seção = some o “card” */
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+/* 3) Elimina qualquer pseudo-elemento que crie moldura/fundo */
+#sec-faq-footer::before,
+#sec-faq-footer::after,
+#sec-faq-footer > .container::before,
+#sec-faq-footer > .container::after {
+  content: none !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+/* 4) Mantém os cartões das perguntas bonitos */
+#sec-faq-footer details {
+  background: #fff !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(0,0,0,.06) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.10) !important;
+}
+
+/* 5) Remove qualquer CTA dentro do FAQ, caso volte por cache */
+#sec-faq-footer .cta,
+#sec-faq-footer a[href*="checkout"] {
+  display: none !important;
+}
 
   </style>
 <header class="section theme-1" id="sec-hero">
