@@ -2181,6 +2181,65 @@ img, .scroll-row{ max-width: 100%; }
   gap: 8px 16px !important;         /* era 10 x 18 */
   font-size: clamp(12.5px, 1.1vw + 10px, 14px) !important;
 }
+/* ===== HERO – modo compacto mobile para caber tudo na dobra ===== */
+@media (max-width: 480px){
+
+  /* menos respiro geral da seção */
+  #sec-hero{
+    padding-top: 6px !important;
+    padding-bottom: 10px !important;
+  }
+
+  /* título ligeiramente menor e mais compacto */
+  #sec-hero .hero-title{
+    font-size: clamp(20px, 5.2vw, 28px) !important;
+    line-height: 1.05 !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* preço + linha bem juntinhos */
+  #sec-hero .hero-price{
+    font-size: 16px !important;
+    margin: 2px auto 4px auto !important;
+    white-space: nowrap;
+  }
+  #sec-hero .hero-underline{
+    width: 120px !important;
+    height: 2px !important;
+    margin: 0 auto 6px auto !important;
+  }
+
+  /* mockup: reduz ~8% e aproxima do resumo */
+  #sec-hero .hero-media{
+    margin-top: -6px !important;
+    transform: scale(.92);             /* ~8% menor */
+    transform-origin: center top;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,.10));
+  }
+
+  /* RESUMO DA OFERTA dentro do HERO */
+  #sec-hero .hero-offer{
+    margin-top: -2px !important;
+  }
+
+  /* botão + preço + asteriscos mais compactos */
+  #sec-hero .hero-offer .btn-offer{
+    min-height: 54px !important;        /* era 58–60px */
+    border-radius: 16px !important;
+    font-size: clamp(16px, 4.2vw, 18px) !important;
+    letter-spacing: .3px !important;
+  }
+  #sec-hero .hero-offer .offer-price{
+    margin-top: 8px !important;
+    margin-bottom: 2px !important;
+    font-size: 16px !important;
+  }
+  #sec-hero .hero-offer .offer-notes{
+    gap: 6px 14px !important;
+    font-size: 12.5px !important;
+    line-height: 1.35 !important;
+  }
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
