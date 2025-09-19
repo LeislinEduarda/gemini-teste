@@ -2019,7 +2019,21 @@ img, .scroll-row{ max-width: 100%; }
 *[style*="dotted"],
 *[style*="dashed"] {
   border: none !important;
-} 
+}
+/* Remove qualquer borda/resquício branco que esteja sobrando */
+*,
+*::before,
+*::after {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Caso tenha vindo de imagens */
+img {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
