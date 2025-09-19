@@ -2020,51 +2020,57 @@ img, .scroll-row{ max-width: 100%; }
 *[style*="dashed"] {
   border: none !important;
 }
-/* ================================
-   FAQ – seção inteira com uma única cor
-   e SEM o “cardzão” de fundo
-   (mantém os cards das perguntas)
-   ================================ */
+/* ================= FAQ sem "cardzão" e com cor única ================= */
 
-#sec-faq-footer{
-  /* escolha a cor única da seção */
-  --faq-bg: #EAE6FF;  /* roxo claro; ajuste se quiser */
-  background: var(--faq-bg) !important;
-  padding-top: 48px !important;
-  padding-bottom: 48px !important;
+/* 1) Cor única para a seção inteira (ajuste a cor se quiser) */
+#sec-faq-footer.theme-9{
+  background: #E9E4FF !important;  /* roxo claro sólido */
 }
 
-/* Zera qualquer “painel” interno que esteja criando o card grande */
-#sec-faq-footer > .container,
+/* 2) Remove QUALQUER painel/pseudo-elemento que crie cartão por trás */
+#sec-faq-footer::before,
+#sec-faq-footer::after,
+#sec-faq-footer .container::before,
+#sec-faq-footer .container::after{
+  content: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+/* 3) Garante que o container do FAQ não tenha “cara de card” */
+#sec-faq-footer .container{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* 4) Se houver algum wrapper interno extra, zera o visual de card */
 #sec-faq-footer .faq-wrap,
 #sec-faq-footer .faq-panel,
-#sec-faq-footer .faq-box {
+#sec-faq-footer .faq-box,
+#sec-faq-footer .panel,
+#sec-faq-footer .box {
   background: transparent !important;
   border: none !important;
+  border-radius: 0 !important;
   box-shadow: none !important;
   outline: none !important;
-  border-radius: 0 !important;
 }
 
-/* Segurança extra: se houver algum wrapper com fundo dentro do container,
-   removemos o visual de card, mas sem afetar os <details> das perguntas */
-#sec-faq-footer .container > div:not(.faq-grid):not(.bridge-band):not(.grid-title) {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
-/* Mantém os cards de cada pergunta bonitos */
+/* 5) Mantém os CARDS das perguntas (details) com visual de cartão */
 #sec-faq-footer details{
-  background:#fff !important;
-  border-radius:18px !important;
-  border:1px solid rgba(0,0,0,.06) !important;
-  box-shadow:0 12px 28px rgba(0,0,0,.10) !important;
+  background: #fff !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(0,0,0,.06) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.10) !important;
 }
 
-/* (Se ainda existir um CTA dentro do FAQ, garante que suma) */
-#sec-faq-footer .faq-cta { display:none !important; }
+/* (se algum CTA ainda aparecer dentro do FAQ, esconde) */
+#sec-faq-footer .faq-cta,
+#sec-faq-footer a.cta { display: none !important; }
   </style>
 <header class="section theme-1" id="sec-hero">
   <div class="container hero-grid">
