@@ -6,410 +6,398 @@
 <!-- (Opcional, mas recomendado) Vercel Web Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
 <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "tctxip36f8");
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "tctxip36f8");
 </script>
-  
+   
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Reabertura — Estúdio Infinito™</title>
-<meta name="description" content="A comunidade está de portas fechadas. Ela não acabou. Ela está se transformando. Reabre dia 1º de novembro com uma nova forma de criar: Estúdio Infinito™." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reabertura — Estúdio Infinito™</title>
+  <meta name="description" content="A comunidade está de portas fechadas. Ela não acabou. Ela está se transformando. Reabre dia 1º de novembro com uma nova forma de criar: Estúdio Infinito™." />
 
-<!-- Tipografia (mantendo a identidade) -->
-<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com/)" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Tipografia (mantendo a identidade) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-<style>
-:root{
---bg-offwhite:#F8F7F3;     /* fundo off-white */
---text-main:#1A1A1A;       /* texto principal */
---text-muted:#666666;      /* texto secundário */
---green-title:#0B7D5E;     /* títulos */
---wine:#7A003C;            /* blocos/CTA */
---pink:#E6007E;            /* detalhes sutis (linha) */
---card-bg:#FFFFFF;         /* fundo dos cards do contador */
---card-border:#E9E6E0;     /* borda suave dos cards */
---shadow:0 6px 22px rgba(0,0,0,.06);
-}
+  <style>
+    :root{
+      --bg-offwhite:#F8F7F3;     /* fundo off-white */
+      --text-main:#1A1A1A;       /* texto principal */
+      --text-muted:#666666;      /* texto secundário */
+      --green-title:#0B7D5E;     /* títulos */
+      --wine:#7A003C;            /* blocos/CTA */
+      --pink:#E6007E;            /* detalhes sutis (linha) */
+      --card-bg:#FFFFFF;         /* fundo dos cards do contador */
+      --card-border:#E9E6E0;     /* borda suave dos cards */
+      --shadow:0 6px 22px rgba(0,0,0,.06);
+    }
 
-```
-html,body{
-  background:var(--bg-offwhite);
-  color:var(--text-main);
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  margin:0; padding:0;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height: 100%;
-}
+    html,body{
+      background:var(--bg-offwhite);
+      color:var(--text-main);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      margin:0; padding:0;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      height: 100%;
+    }
 
-/* ===== Dobra única, centralizada verticalmente ===== */
-.viewport{
-  min-height: 100svh; /* melhor em mobile */
-  display: flex;
-  align-items: center; /* centraliza verticalmente */
-  justify-content: center;
-  padding: 48px 20px 28px;
-}
+    /* ===== Dobra única, centralizada verticalmente ===== */
+    .viewport{
+      min-height: 100svh; /* melhor em mobile */
+      display: flex;
+      align-items: center; /* centraliza verticalmente */
+      justify-content: center;
+      padding: 48px 20px 28px;
+    }
 
-.wrapper{
-  width: 100%;
-  max-width: 940px;
-  margin: 0 auto;
-  text-align:center;
-}
+    .wrapper{
+      width: 100%;
+      max-width: 940px;
+      margin: 0 auto;
+      text-align:center;
+    }
 
-/* ===== Countdown em blocos ===== */
-.countdown{
-  display:grid;
-  grid-template-columns: repeat(4, minmax(84px, 1fr));
-  gap: 16px;
-  justify-items:center;
-  align-items:stretch;
-  margin: 0 auto 14px;
-  max-width: 720px;
-}
-.cd-card{
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--shadow);
-  border-radius: 14px;
-  padding: 14px 10px 12px;
-  width: 100%;
-  max-width: 160px;
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-}
-.cd-number{
-  font-size: clamp(28px, 4.6vw, 42px);
-  line-height:1.05;
-  font-weight:800;
-  color:#111;
-  letter-spacing:-.02em;
-}
-.cd-label{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--text-muted);
-}
+    /* ===== Countdown em blocos ===== */
+    .countdown{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(84px, 1fr));
+      gap: 16px;
+      justify-items:center;
+      align-items:stretch;
+      margin: 0 auto 14px;
+      max-width: 720px;
+    }
+    .cd-card{
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      border-radius: 14px;
+      padding: 14px 10px 12px;
+      width: 100%;
+      max-width: 160px;
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+    }
+    .cd-number{
+      font-size: clamp(28px, 4.6vw, 42px);
+      line-height:1.05;
+      font-weight:800;
+      color:#111;
+      letter-spacing:-.02em;
+    }
+    .cd-label{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--text-muted);
+    }
 
-/* ===== Linha rosa sob o contador ===== */
-.pink-line{
-  width: min(720px, 90%);
-  height: 3px;
-  margin: 10px auto 22px;
-  background: linear-gradient(90deg, transparent, var(--pink), transparent);
-  border-radius: 999px;
-}
+    /* ===== Linha rosa sob o contador ===== */
+    .pink-line{
+      width: min(720px, 90%);
+      height: 3px;
+      margin: 10px auto 22px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      border-radius: 999px;
+    }
 
-/* ===== Eyebrow + Títulos ===== */
-.eyebrow{
-  font-size:12.5px;
-  font-weight:700;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--text-muted);
-  margin: 0 0 10px 0;
-}
-h1{
-  color:var(--green-title);
-  font-size: clamp(32px, 4.2vw, 48px);
-  line-height:1.15;
-  font-weight:800;
-  margin: 0 0 12px 0;
-}
+    /* ===== Eyebrow + Títulos ===== */
+    .eyebrow{
+      font-size:12.5px; 
+      font-weight:700; 
+      letter-spacing:.08em; 
+      text-transform:uppercase; 
+      color:var(--text-muted);
+      margin: 0 0 10px 0;
+    }
+    h1{
+      color:var(--green-title);
+      font-size: clamp(32px, 4.2vw, 48px);
+      line-height:1.15;
+      font-weight:800;
+      margin: 0 0 12px 0;
+    }
 
-/* ===== Texto ===== */
-.lead{
-  font-size: clamp(18px, 2.2vw, 20px);
-  line-height:1.6;
-  font-weight: 450;
-  margin: 0 0 8px 0;
-}
-.subtime{
-  font-size: 16px;
-  line-height:1.5;
-  color:var(--text-muted);
-  margin: 14px 0 18px 0;
-}
+    /* ===== Texto ===== */
+    .lead{
+      font-size: clamp(18px, 2.2vw, 20px);
+      line-height:1.6;
+      font-weight: 450;
+      margin: 0 0 8px 0;
+    }
+    .subtime{
+      font-size: 16px;
+      line-height:1.5;
+      color:var(--text-muted);
+      margin: 14px 0 18px 0;
+    }
 
-/* ===== CTA em bloco colorido (vinho) ===== */
-.cta-block{
-  display:inline-block;
-  background: var(--wine);
-  color: #fff;
-  font-weight:700;
-  font-size: clamp(16px, 2vw, 18px);
-  line-height:1.3;
-  text-decoration:none;
-  padding: 14px 18px;
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
-}
-.cta-block:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.05);
-  box-shadow: 0 8px 28px rgba(0,0,0,.10);
-}
-.cta-block:active{
-  transform: translateY(0);
-  box-shadow: var(--shadow);
-}
+    /* ===== CTA em bloco colorido (vinho) ===== */
+    .cta-block{
+      display:inline-block;
+      background: var(--wine);
+      color: #fff;
+      font-weight:700;
+      font-size: clamp(16px, 2vw, 18px);
+      line-height:1.3;
+      text-decoration:none;
+      padding: 14px 18px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .cta-block:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 8px 28px rgba(0,0,0,.10);
+    }
+    .cta-block:active{
+      transform: translateY(0);
+      box-shadow: var(--shadow);
+    }
 
-/* ===== Rodapé minimalista ===== */
-footer{
-  margin-top: 26px;
-  padding: 10px 0 6px;
-  font-size:12.5px;
-  color:#777;
-}
+    /* ===== Rodapé minimalista ===== */
+    footer{
+      margin-top: 26px;
+      padding: 10px 0 6px;
+      font-size:12.5px;
+      color:#777;
+    }
 
-/* ===== Responsivo ===== */
-@media (max-width: 640px){
-  .viewport{ padding: 36px 16px 20px; }
-  .countdown{ gap:12px; }
-  .cd-card{ padding: 12px 8px 10px; }
-}
-/* RESET mínimo e contenção de largura */
-
-```
-
-- ,
+    /* ===== Responsivo ===== */
+    @media (max-width: 640px){
+      .viewport{ padding: 36px 16px 20px; }
+      .countdown{ gap:12px; }
+      .cd-card{ padding: 12px 8px 10px; }
+    }
+    /* RESET mínimo e contenção de largura */
+*,
 *::before,
 *::after {
-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
-height: 100%;
-margin: 0;                 /* evita empurrar pro lado por margem padrão */
-overflow: hidden;          /* trava rolagem vertical e horizontal */
-overscroll-behavior: none; /* remove bounce */
-scrollbar-gutter: stable both-edges; /* evita “pulo” por desaparecimento da barra */
+  height: 100%;
+  margin: 0;                 /* evita empurrar pro lado por margem padrão */
+  overflow: hidden;          /* trava rolagem vertical e horizontal */
+  overscroll-behavior: none; /* remove bounce */
+  scrollbar-gutter: stable both-edges; /* evita “pulo” por desaparecimento da barra */
 }
 
 /* Body vira o centro do palco */
 body {
-display: grid;
-place-items: center;       /* centraliza tudo no meio da tela */
-background: var(--bg, #F7F7F5); /* off-white que você definiu */
+  display: grid;
+  place-items: center;       /* centraliza tudo no meio da tela */
+  background: var(--bg, #F7F7F5); /* off-white que você definiu */
 }
 
 /* Contêiner principal da sua dobra (ajuste o seletor se o seu for outro) */
 .hero, .wrapper, .container, main {
-width: min(960px, 92vw);   /* impede estourar a largura */
-max-width: 100%;
-margin: 0 auto;
-text-align: center;
+  width: min(960px, 92vw);   /* impede estourar a largura */
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Garante que imagens e mídias não “estourem” lateralmente */
 img, video, svg, canvas {
-max-width: 100%;
-height: auto;
-display: inline-block;
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
 }
 
 /* Espaçamentos agradáveis no hero */
 .hero {
-display: grid;
-gap: 20px;
-align-items: center;
-justify-items: center;
-padding: clamp(16px, 3vw, 32px);
+  display: grid;
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+  padding: clamp(16px, 3vw, 32px);
 }
 
 /* Títulos e parágrafos — mantém sua tipografia */
 h1, h2, h3, p {
-margin: 0;
+  margin: 0;
 }
 
 h1 {
-font-weight: 800;
-line-height: 1.1;
+  font-weight: 800;
+  line-height: 1.1;
 }
 
 p {
-line-height: 1.6;
+  line-height: 1.6;
 }
 
 /* Countdown: garante bloco compacto e sem quebrar linha inesperadamente */
 .countdown {
-display: grid;
-grid-auto-flow: column;
-gap: 12px;
-align-items: center;
-justify-content: center;
-white-space: nowrap;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 /* Blocos do contador (se você usa) */
 .count-item {
-display: grid;
-place-items: center;
-padding: 10px 12px;
-border-radius: 10px;
-min-width: 70px;
-box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  display: grid;
+  place-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  min-width: 70px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
 }
 
 /* Linha rosa sob o contador, se existir */
 .count-sep {
-width: min(560px, 80%);
-height: 3px;
-background: var(--accent, #E6007E); /* seu rosa-detalhe */
-border-radius: 999px;
+  width: min(560px, 80%);
+  height: 3px;
+  background: var(--accent, #E6007E); /* seu rosa-detalhe */
+  border-radius: 999px;
 }
 
 /* CTA em destaque sem ser “botão” (bloco colorido inline) */
 .inline-cta {
-display: inline-block;
-padding: 10px 14px;
-border-radius: 10px;
-font-weight: 700;
-text-decoration: none;
-line-height: 1.2;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.2;
 }
 
 /* Evita qualquer “scroll fantasmas” dentro de elementos */
 [style*="overflow"] {
-overscroll-behavior: contain;
+  overscroll-behavior: contain;
 }
 
 /* iOS: usa unidade segura de viewport pra não cortar nada com a barra */
 @supports (-webkit-touch-callout: none) {
-body { min-height: 100svh; }
+  body { min-height: 100svh; }
 }
-</style>
+  </style>
 </head>
 <body>
-<main class="viewport">
-<div class="wrapper">
-<!-- Countdown em blocos -->
-<section class="countdown" aria-label="Contagem regressiva para a reabertura">
-<div class="cd-card" aria-label="Dias restantes">
-<div class="cd-number" id="cd-days">00</div>
-<div class="cd-label">dias</div>
-</div>
-<div class="cd-card" aria-label="Horas restantes">
-<div class="cd-number" id="cd-hours">00</div>
-<div class="cd-label">horas</div>
-</div>
-<div class="cd-card" aria-label="Minutos restantes">
-<div class="cd-number" id="cd-min">00</div>
-<div class="cd-label">min</div>
-</div>
-<div class="cd-card" aria-label="Segundos restantes">
-<div class="cd-number" id="cd-sec">00</div>
-<div class="cd-label">seg</div>
-</div>
-</section>
+  <main class="viewport">
+    <div class="wrapper">
+      <!-- Countdown em blocos -->
+      <section class="countdown" aria-label="Contagem regressiva para a reabertura">
+        <div class="cd-card" aria-label="Dias restantes">
+          <div class="cd-number" id="cd-days">00</div>
+          <div class="cd-label">dias</div>
+        </div>
+        <div class="cd-card" aria-label="Horas restantes">
+          <div class="cd-number" id="cd-hours">00</div>
+          <div class="cd-label">horas</div>
+        </div>
+        <div class="cd-card" aria-label="Minutos restantes">
+          <div class="cd-number" id="cd-min">00</div>
+          <div class="cd-label">min</div>
+        </div>
+        <div class="cd-card" aria-label="Segundos restantes">
+          <div class="cd-number" id="cd-sec">00</div>
+          <div class="cd-label">seg</div>
+        </div>
+      </section>
 
-```
-  <!-- Linha rosa sob o contador -->
-  <div class="pink-line" role="presentation"></div>
+      <!-- Linha rosa sob o contador -->
+      <div class="pink-line" role="presentation"></div>
 
-  <!-- Hierarquia textual -->
-  <div class="eyebrow" id="eyebrow">Comunidade — Portas Fechadas</div>
-  <h1 id="headline">Reabertura dia 1º de novembro</h1>
+      <!-- Hierarquia textual -->
+      <div class="eyebrow" id="eyebrow">Comunidade — Portas Fechadas</div>
+      <h1 id="headline">Reabertura dia 1º de novembro</h1>
 
-  <p class="lead">Ela não acabou.</p>
-  <p class="lead">Ela está se transformando.</p>
-  <p class="lead">O que vem aí é muito maior — e vai mudar completamente o jeito de criar.</p>
+      <p class="lead">Ela não acabou.</p>
+      <p class="lead">Ela está se transformando.</p>
+      <p class="lead">O que vem aí é muito maior — e vai mudar completamente o jeito de criar.</p>
 
-  <p class="subtime" id="dateLine">
-    🕒 <strong>Dia 1º de novembro</strong>, ela reabre com um novo nome, um novo formato e uma nova forma de criar.
-  </p>
+      <p class="subtime" id="dateLine">
+        🕒 <strong>Dia 1º de novembro</strong>, ela reabre com um novo nome, um novo formato e uma nova forma de criar.
+      </p>
 
-  <!-- CTA em bloco colorido (sem “botão” tradicional) -->
-  <a class="cta-block" href="#" aria-label="Acompanhe meus stories no dia da reabertura">
-    Entra nos meus stories nesse dia — é lá que o novo Estúdio vai aparecer primeiro.
-  </a>
+      <!-- CTA em bloco colorido (sem “botão” tradicional) -->
+      <a class="cta-block" href="#" aria-label="Acompanhe meus stories no dia da reabertura">
+        Entra nos meus stories nesse dia — é lá que o novo Estúdio vai aparecer primeiro.
+      </a>
 
-  <footer>© 2025 — Estúdio Infinito™. Todos os direitos reservados.</footer>
-</div>
+      <footer>© 2025 — Estúdio Infinito™. Todos os direitos reservados.</footer>
+    </div>
+  </main>
 
-```
+  <script>
+    // ===== Countdown para 01/11/2025 00:00:00 America/Sao_Paulo (UTC-03:00) =====
+    const target = new Date('2025-11-01T00:00:00-03:00').getTime();
 
-</main>
+    const elDays  = document.getElementById('cd-days');
+    const elHours = document.getElementById('cd-hours');
+    const elMin   = document.getElementById('cd-min');
+    const elSec   = document.getElementById('cd-sec');
 
-<script>
-// ===== Countdown para 01/11/2025 00:00:00 America/Sao_Paulo (UTC-03:00) =====
-const target = new Date('2025-11-01T00:00:00-03:00').getTime();
+    const eyebrow  = document.getElementById('eyebrow');
+    const headline = document.getElementById('headline');
+    const dateLine = document.getElementById('dateLine');
 
-```
-const elDays  = document.getElementById('cd-days');
-const elHours = document.getElementById('cd-hours');
-const elMin   = document.getElementById('cd-min');
-const elSec   = document.getElementById('cd-sec');
+    function pad2(n){ return String(n).padStart(2,'0'); }
 
-const eyebrow  = document.getElementById('eyebrow');
-const headline = document.getElementById('headline');
-const dateLine = document.getElementById('dateLine');
+    function tick(){
+      const now = Date.now();
+      let diff = target - now;
 
-function pad2(n){ return String(n).padStart(2,'0'); }
+      if (diff <= 0){
+        elDays.textContent  = '00';
+        elHours.textContent = '00';
+        elMin.textContent   = '00';
+        elSec.textContent   = '00';
 
-function tick(){
-  const now = Date.now();
-  let diff = target - now;
+        eyebrow.textContent  = 'Comunidade — Reaberta';
+        headline.textContent = 'Hoje: o novo Estúdio Infinito™';
+        dateLine.innerHTML   = '🕒 Já está no ar — entra nos stories para ver primeiro.';
 
-  if (diff <= 0){
-    elDays.textContent  = '00';
-    elHours.textContent = '00';
-    elMin.textContent   = '00';
-    elSec.textContent   = '00';
+        clearInterval(timer);
+        return;
+      }
 
-    eyebrow.textContent  = 'Comunidade — Reaberta';
-    headline.textContent = 'Hoje: o novo Estúdio Infinito™';
-    dateLine.innerHTML   = '🕒 Já está no ar — entra nos stories para ver primeiro.';
+      const d = Math.floor(diff / (1000*60*60*24));
+      diff -= d*(1000*60*60*24);
+      const h = Math.floor(diff / (1000*60*60));
+      diff -= h*(1000*60*60);
+      const m = Math.floor(diff / (1000*60));
+      diff -= m*(1000*60);
+      const s = Math.floor(diff / 1000);
 
-    clearInterval(timer);
-    return;
-  }
+      elDays.textContent  = pad2(d);
+      elHours.textContent = pad2(h);
+      elMin.textContent   = pad2(m);
+      elSec.textContent   = pad2(s);
+    }
 
-  const d = Math.floor(diff / (1000*60*60*24));
-  diff -= d*(1000*60*60*24);
-  const h = Math.floor(diff / (1000*60*60));
-  diff -= h*(1000*60*60);
-  const m = Math.floor(diff / (1000*60));
-  diff -= m*(1000*60);
-  const s = Math.floor(diff / 1000);
+    tick();
+    const timer = setInterval(tick, 1000);
+  </script>
+  <script>
+  // Bloqueia rolagem por mouse/touch/teclado sem “empurrar” layout
+  const stopWheel = (e) => e.preventDefault();
+  const stopTouch = (e) => e.preventDefault();
+  const stopKeys = (e) => {
+    const keys = [
+      'Space', 'PageUp', 'PageDown',
+      'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+      'Home', 'End'
+    ];
+    if (keys.includes(e.code)) e.preventDefault();
+  };
 
-  elDays.textContent  = pad2(d);
-  elHours.textContent = pad2(h);
-  elMin.textContent   = pad2(m);
-  elSec.textContent   = pad2(s);
-}
-
-tick();
-const timer = setInterval(tick, 1000);
-
-```
-
-</script>
-<script>
-// Bloqueia rolagem por mouse/touch/teclado sem “empurrar” layout
-const stopWheel = (e) => e.preventDefault();
-const stopTouch = (e) => e.preventDefault();
-const stopKeys = (e) => {
-const keys = [
-'Space', 'PageUp', 'PageDown',
-'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
-'Home', 'End'
-];
-if (keys.includes(e.code)) e.preventDefault();
-};
-
-// Aplica no documento todo
-document.addEventListener('wheel', stopWheel, { passive: false });
-document.addEventListener('touchmove', stopTouch, { passive: false });
-document.addEventListener('keydown', stopKeys, { passive: false });
+  // Aplica no documento todo
+  document.addEventListener('wheel', stopWheel, { passive: false });
+  document.addEventListener('touchmove', stopTouch, { passive: false });
+  document.addEventListener('keydown', stopKeys, { passive: false });
 </script>
 </body>
 </html>
