@@ -328,8 +328,9 @@ body { min-height: 100svh; }
 
 <script>
 // ===== Countdown para 01/11/2025 00:00:00 America/Sao_Paulo (UTC-03:00) =====
-const target = Date.now() + (1000 * 60 * 5); // Agora + 5 minutos
-```
+// Use data absoluta com offset do fuso de SP:
+const TARGET_TS = Date.parse('2025-11-01T00:00:00-03:00');
+
 const elDays  = document.getElementById('cd-days');
 const elHours = document.getElementById('cd-hours');
 const elMin   = document.getElementById('cd-min');
@@ -339,32 +340,36 @@ const eyebrow  = document.getElementById('eyebrow');
 const headline = document.getElementById('headline');
 const dateLine = document.getElementById('dateLine');
 
-function pad2(n){ return String(n).padStart(2,'0'); }
+function pad2(n){ return String(n).padStart(2, '0'); }
+
+let timer = null; // garante que exista antes de tick()
 
 function tick(){
   const now = Date.now();
-  let diff = target - now;
+  let diff = TARGET_TS - now;
 
   if (diff <= 0){
+    // Zera visualmente
     elDays.textContent  = '00';
     elHours.textContent = '00';
     elMin.textContent   = '00';
     elSec.textContent   = '00';
 
+    // Troca mensagens
     eyebrow.textContent  = 'Comunidade — Reaberta';
     headline.textContent = 'Hoje: o novo Estúdio Infinito™';
     dateLine.innerHTML   = '🕒 Já está no ar — entra nos stories para ver primeiro.';
 
-    clearInterval(timer);
+    if (timer) clearInterval(timer); // só limpa se já existe
     return;
   }
 
-  const d = Math.floor(diff / (1000*60*60*24));
-  diff -= d*(1000*60*60*24);
-  const h = Math.floor(diff / (1000*60*60));
-  diff -= h*(1000*60*60);
-  const m = Math.floor(diff / (1000*60));
-  diff -= m*(1000*60);
+  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+  diff -= d * (1000 * 60 * 60 * 24);
+  const h = Math.floor(diff / (1000 * 60 * 60));
+  diff -= h * (1000 * 60 * 60);
+  const m = Math.floor(diff / (1000 * 60));
+  diff -= m * (1000 * 60);
   const s = Math.floor(diff / 1000);
 
   elDays.textContent  = pad2(d);
@@ -373,11 +378,14 @@ function tick(){
   elSec.textContent   = pad2(s);
 }
 
-tick();
-const timer = setInterval(tick, 1000);
+// Inicializa
+tick(); // desenha imediatamente
+timer = setInterval(tick, 1000);
 
-```
-
+// (Opcional) Recalcula ao voltar do background para manter sincronizado
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') tick();
+});
 </script>
 <script>
 // Bloqueia rolagem por mouse/touch/teclado sem “empurrar” layout
