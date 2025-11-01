@@ -6,40 +6,43 @@
 <title>Reabertura — Estúdio Infinito™</title>
 <meta name="description" content="A comunidade está de portas fechadas. Ela não acabou. Ela está se transformando. Reabre dia 1º de novembro com uma nova forma de criar: Estúdio Infinito™." />
 
-<!-- Tipografia (mantendo a identidade) -->
-<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com/)" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
 :root{
---bg-offwhite:#F8F7F3;     /* fundo off-white */
---text-main:#1A1A1A;       /* texto principal */
---text-muted:#666666;      /* texto secundário */
---green-title:#0B7D5E;     /* títulos */
---wine:#7A003C;            /* blocos/CTA */
---pink:#E6007E;            /* detalhes sutis (linha) */
---card-bg:#FFFFFF;         /* fundo dos cards do contador */
---card-border:#E9E6E0;     /* borda suave dos cards */
---shadow:0 6px 22px rgba(0,0,0,.06);
+  --bg-offwhite:#F8F7F3;
+  --text-main:#1A1A1A;
+  --text-muted:#666666;
+  --green-title:#0B7D5E;
+  --wine:#7A003C;
+  --pink:#E6007E;
+  --card-bg:#FFFFFF;
+  --card-border:#E9E6E0;
+  --shadow:0 6px 22px rgba(0,0,0,.06);
 }
 
-```
-html,body{
+/* RESET mínimo e contenção de largura */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; overscroll-behavior: none; scrollbar-gutter: stable both-edges; }
+
+/* Body vira o centro do palco */
+body{
   background:var(--bg-offwhite);
   color:var(--text-main);
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  margin:0; padding:0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
+  display: grid;
+  place-items: center;
 }
 
-/* ===== Dobra única, centralizada verticalmente ===== */
+/* Dobra única */
 .viewport{
-  min-height: 100svh; /* melhor em mobile */
+  min-height: 100svh;
   display: flex;
-  align-items: center; /* centraliza verticalmente */
+  align-items: center;
   justify-content: center;
   padding: 48px 20px 28px;
 }
@@ -51,41 +54,7 @@ html,body{
   text-align:center;
 }
 
-/* ===== Countdown em blocos ===== */
-.countdown{
-  display:grid;
-  grid-template-columns: repeat(4, minmax(84px, 1fr));
-  gap: 16px;
-  justify-items:center;
-  align-items:stretch;
-  margin: 0 auto 14px;
-  max-width: 720px;
-}
-.cd-card{
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--shadow);
-  border-radius: 14px;
-  padding: 14px 10px 12px;
-  width: 100%;
-  max-width: 160px;
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-}
-.cd-number{
-  font-size: clamp(28px, 4.6vw, 42px);
-  line-height:1.05;
-  font-weight:800;
-  color:#111;
-  letter-spacing:-.02em;
-}
-.cd-label{
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--text-muted);
-}
-
-/* ===== Linha rosa sob o contador ===== */
+/* Linha rosa sutil */
 .pink-line{
   width: min(720px, 90%);
   height: 3px;
@@ -94,7 +63,7 @@ html,body{
   border-radius: 999px;
 }
 
-/* ===== Eyebrow + Títulos ===== */
+/* Eyebrow + Títulos */
 .eyebrow{
   font-size:12.5px;
   font-weight:700;
@@ -103,6 +72,7 @@ html,body{
   color:var(--text-muted);
   margin: 0 0 10px 0;
 }
+
 h1{
   color:var(--green-title);
   font-size: clamp(32px, 4.2vw, 48px);
@@ -111,7 +81,22 @@ h1{
   margin: 0 0 12px 0;
 }
 
-/* ===== Texto ===== */
+/* Destaque “HOJE” */
+.today-badge{
+  display:inline-block;
+  background: var(--wine);
+  color: #fff;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  font-size: clamp(12px, 1.6vw, 13px);
+}
+
+/* Texto */
 .lead{
   font-size: clamp(18px, 2.2vw, 20px);
   line-height:1.6;
@@ -125,7 +110,7 @@ h1{
   margin: 14px 0 18px 0;
 }
 
-/* ===== CTA em bloco colorido (vinho) ===== */
+/* CTA em bloco colorido */
 .cta-block{
   display:inline-block;
   background: var(--wine);
@@ -139,17 +124,10 @@ h1{
   box-shadow: var(--shadow);
   transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
 }
-.cta-block:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.05);
-  box-shadow: 0 8px 28px rgba(0,0,0,.10);
-}
-.cta-block:active{
-  transform: translateY(0);
-  box-shadow: var(--shadow);
-}
+.cta-block:hover{ transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 8px 28px rgba(0,0,0,.10); }
+.cta-block:active{ transform: translateY(0); box-shadow: var(--shadow); }
 
-/* ===== Rodapé minimalista ===== */
+/* Rodapé */
 footer{
   margin-top: 26px;
   padding: 10px 0 6px;
@@ -157,255 +135,54 @@ footer{
   color:#777;
 }
 
-/* ===== Responsivo ===== */
+/* Responsivo */
 @media (max-width: 640px){
   .viewport{ padding: 36px 16px 20px; }
-  .countdown{ gap:12px; }
-  .cd-card{ padding: 12px 8px 10px; }
-}
-/* RESET mínimo e contenção de largura */
-
-```
-
-- ,
-*::before,
-*::after {
-box-sizing: border-box;
-}
-
-html, body {
-height: 100%;
-margin: 0;                 /* evita empurrar pro lado por margem padrão */
-overflow: hidden;          /* trava rolagem vertical e horizontal */
-overscroll-behavior: none; /* remove bounce */
-scrollbar-gutter: stable both-edges; /* evita “pulo” por desaparecimento da barra */
-}
-
-/* Body vira o centro do palco */
-body {
-display: grid;
-place-items: center;       /* centraliza tudo no meio da tela */
-background: var(--bg, #F7F7F5); /* off-white que você definiu */
-}
-
-/* Contêiner principal da sua dobra (ajuste o seletor se o seu for outro) */
-.hero, .wrapper, .container, main {
-width: min(960px, 92vw);   /* impede estourar a largura */
-max-width: 100%;
-margin: 0 auto;
-text-align: center;
-}
-
-/* Garante que imagens e mídias não “estourem” lateralmente */
-img, video, svg, canvas {
-max-width: 100%;
-height: auto;
-display: inline-block;
-}
-
-/* Espaçamentos agradáveis no hero */
-.hero {
-display: grid;
-gap: 20px;
-align-items: center;
-justify-items: center;
-padding: clamp(16px, 3vw, 32px);
-}
-
-/* Títulos e parágrafos — mantém sua tipografia */
-h1, h2, h3, p {
-margin: 0;
-}
-
-h1 {
-font-weight: 800;
-line-height: 1.1;
-}
-
-p {
-line-height: 1.6;
-}
-
-/* Countdown: garante bloco compacto e sem quebrar linha inesperadamente */
-.countdown {
-display: grid;
-grid-auto-flow: column;
-gap: 12px;
-align-items: center;
-justify-content: center;
-white-space: nowrap;
-}
-
-/* Blocos do contador (se você usa) */
-.count-item {
-display: grid;
-place-items: center;
-padding: 10px 12px;
-border-radius: 10px;
-min-width: 70px;
-box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-}
-
-/* Linha rosa sob o contador, se existir */
-.count-sep {
-width: min(560px, 80%);
-height: 3px;
-background: var(--accent, #E6007E); /* seu rosa-detalhe */
-border-radius: 999px;
-}
-
-/* CTA em destaque sem ser “botão” (bloco colorido inline) */
-.inline-cta {
-display: inline-block;
-padding: 10px 14px;
-border-radius: 10px;
-font-weight: 700;
-text-decoration: none;
-line-height: 1.2;
-}
-
-/* Evita qualquer “scroll fantasmas” dentro de elementos */
-[style*="overflow"] {
-overscroll-behavior: contain;
-}
-
-/* iOS: usa unidade segura de viewport pra não cortar nada com a barra */
-@supports (-webkit-touch-callout: none) {
-body { min-height: 100svh; }
 }
 </style>
 </head>
 <body>
 <main class="viewport">
-<div class="wrapper">
-<!-- Countdown em blocos -->
-<section class="countdown" aria-label="Contagem regressiva para a reabertura">
-<div class="cd-card" aria-label="Dias restantes">
-<div class="cd-number" id="cd-days">00</div>
-<div class="cd-label">dias</div>
-</div>
-<div class="cd-card" aria-label="Horas restantes">
-<div class="cd-number" id="cd-hours">00</div>
-<div class="cd-label">horas</div>
-</div>
-<div class="cd-card" aria-label="Minutos restantes">
-<div class="cd-number" id="cd-min">00</div>
-<div class="cd-label">min</div>
-</div>
-<div class="cd-card" aria-label="Segundos restantes">
-<div class="cd-number" id="cd-sec">00</div>
-<div class="cd-label">seg</div>
-</div>
-</section>
+  <div class="wrapper">
 
-```
-  <!-- Linha rosa sob o contador -->
-  <div class="pink-line" role="presentation"></div>
+    <!-- Linha rosa -->
+    <div class="pink-line" role="presentation"></div>
 
-  <!-- Hierarquia textual -->
-  <div class="eyebrow" id="eyebrow">Comunidade — Portas Fechadas</div>
-  <h1 id="headline">Reabertura dia 1º de novembro</h1>
+    <!-- Eyebrow -->
+    <div class="eyebrow">Comunidade — Reaberta</div>
 
-  <p class="lead">Ela não acabou.</p>
-  <p class="lead">Ela está se transformando.</p>
-  <p class="lead">O que vem aí é muito maior — e vai mudar completamente o jeito de criar.</p>
+    <!-- Destaque HOJE -->
+    <div class="today-badge" aria-label="É hoje">É HOJE</div>
 
-  <p class="subtime" id="dateLine">
-    🕒 <strong>Dia 1º de novembro</strong>, ela reabre com um novo nome, um novo formato e uma nova forma de criar.
-  </p>
+    <!-- Headline pedida -->
+    <h1>Se liga nos meus stories</h1>
 
-  <!-- CTA em bloco colorido (sem “botão” tradicional) -->
-  <a class="cta-block" href="#" aria-label="Acompanhe meus stories no dia da reabertura">
-    Entra nos meus stories nesse dia — é lá que o novo Estúdio vai aparecer primeiro.
-  </a>
+    <!-- Subfrase pedida -->
+    <p class="lead">O que era rápido, leve e fácil — agora ficou <strong>infinito</strong>!</p>
 
-  <footer>© 2025 — Estúdio Infinito™. Todos os direitos reservados.</footer>
-</div>
+    <!-- Mensagem de esclarecimento -->
+    <p class="subtime">O Estúdio Infinito™ já está no ar. Acompanhe pelos stories para ver primeiro.</p>
 
-```
+    <!-- CTA -->
+    <a class="cta-block" href="#" aria-label="Acompanhe meus stories hoje">
+      Entra nos meus stories — é lá que o novo Estúdio aparece primeiro.
+    </a>
 
+    <footer>© 2025 — Estúdio Infinito™. Todos os direitos reservados.</footer>
+  </div>
 </main>
 
+<!-- Bloqueio de rolagem (mantido) -->
 <script>
-// ===== Countdown para 01/11/2025 00:00:00 America/Sao_Paulo (UTC-03:00) =====
-// Use data absoluta com offset do fuso de SP:
-const TARGET_TS = Date.parse('2025-11-01T00:00:00-03:00');
-
-const elDays  = document.getElementById('cd-days');
-const elHours = document.getElementById('cd-hours');
-const elMin   = document.getElementById('cd-min');
-const elSec   = document.getElementById('cd-sec');
-
-const eyebrow  = document.getElementById('eyebrow');
-const headline = document.getElementById('headline');
-const dateLine = document.getElementById('dateLine');
-
-function pad2(n){ return String(n).padStart(2, '0'); }
-
-let timer = null; // garante que exista antes de tick()
-
-function tick(){
-  const now = Date.now();
-  let diff = TARGET_TS - now;
-
-  if (diff <= 0){
-    // Zera visualmente
-    elDays.textContent  = '00';
-    elHours.textContent = '00';
-    elMin.textContent   = '00';
-    elSec.textContent   = '00';
-
-    // Troca mensagens
-    eyebrow.textContent  = 'Comunidade — Reaberta';
-    headline.textContent = 'Hoje: o novo Estúdio Infinito™';
-    dateLine.innerHTML   = '🕒 Já está no ar — entra nos stories para ver primeiro.';
-
-    if (timer) clearInterval(timer); // só limpa se já existe
-    return;
-  }
-
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  diff -= d * (1000 * 60 * 60 * 24);
-  const h = Math.floor(diff / (1000 * 60 * 60));
-  diff -= h * (1000 * 60 * 60);
-  const m = Math.floor(diff / (1000 * 60));
-  diff -= m * (1000 * 60);
-  const s = Math.floor(diff / 1000);
-
-  elDays.textContent  = pad2(d);
-  elHours.textContent = pad2(h);
-  elMin.textContent   = pad2(m);
-  elSec.textContent   = pad2(s);
-}
-
-// Inicializa
-tick(); // desenha imediatamente
-timer = setInterval(tick, 1000);
-
-// (Opcional) Recalcula ao voltar do background para manter sincronizado
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') tick();
-});
-</script>
-<script>
-// Bloqueia rolagem por mouse/touch/teclado sem “empurrar” layout
-const stopWheel = (e) => e.preventDefault();
-const stopTouch = (e) => e.preventDefault();
-const stopKeys = (e) => {
-const keys = [
-'Space', 'PageUp', 'PageDown',
-'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
-'Home', 'End'
-];
-if (keys.includes(e.code)) e.preventDefault();
-};
-
-// Aplica no documento todo
-document.addEventListener('wheel', stopWheel, { passive: false });
-document.addEventListener('touchmove', stopTouch, { passive: false });
-document.addEventListener('keydown', stopKeys, { passive: false });
+  const stopWheel = (e) => e.preventDefault();
+  const stopTouch = (e) => e.preventDefault();
+  const stopKeys = (e) => {
+    const keys = ['Space','PageUp','PageDown','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Home','End'];
+    if (keys.includes(e.code)) e.preventDefault();
+  };
+  document.addEventListener('wheel', stopWheel, { passive: false });
+  document.addEventListener('touchmove', stopTouch, { passive: false });
+  document.addEventListener('keydown', stopKeys, { passive: false });
 </script>
 </body>
 </html>
-
-</aside>
